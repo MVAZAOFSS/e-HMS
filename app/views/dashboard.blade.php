@@ -235,6 +235,9 @@
     @if(Auth::user()->role == 7)
      <div class="well well-sm">Welcome Restaurant!</div>
     @endif
+    @if(Auth::user()->role == 8)
+     <div class="well well-sm">Welcome Point of Sales(Pos)!</div>
+    @endif
     @if(Auth::user()->role == 6)
      <div class="well well-sm">Welcome Bar manager!</div>
     @endif

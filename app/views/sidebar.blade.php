@@ -40,7 +40,16 @@
         <li><a href="{{url("password")}}"><span class="glyphicon glyphicon-lock"></span> Password</a></li>
         <li><a href="{{url("logout")}}"><span class="glyphicon glyphicon-off"></span> Logout</a></li>
     </ul>
-    @endif   
+    @endif 
+    @if(Auth::user()->role == 8)
+    <ul class="nav navbar-nav side-nav" id="side">
+        <li><a href="{{url("home")}}"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+        <li><a href="{{url("bill/add")}}"><span class="glyphicon glyphicon-book"></span> Guests Bills</a></li>
+        <li><a href="{{url("bill/sales/add")}}"><span class="glyphicon glyphicon-cutlery"></span> Sales</a></li>
+        <li><a href="{{url("password")}}"><span class="glyphicon glyphicon-lock"></span> Password</a></li>
+        <li><a href="{{url("logout")}}"><span class="glyphicon glyphicon-off"></span> Logout</a></li>
+    </ul>
+    @endif 
     @if(Auth::user()->role == 6)
     <ul class="nav navbar-nav side-nav" id="side">
         <li><a href="{{url("home")}}"><span class="glyphicon glyphicon-home"></span> Home</a></li>

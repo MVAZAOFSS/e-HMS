@@ -1,5 +1,4 @@
 <?php
-
 class StoresController extends BaseController{
 
 	public function create(){
