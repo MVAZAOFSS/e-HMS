@@ -88,6 +88,9 @@
                       <td> {{ Guest::find($b->guestid)->departure_date }}</td>
                       <td id="{{$b->id}}"> 
                         <button type="button" data-toggle="modal" data-target="#myModal"  class="btn btn-xs btn-success bll"><span class="glyphicon glyphicon-file"></span> View Bill info</button>
+                        @if($b->date==date('Y-m-d'))
+                        <a href="{{url('bills/print/'.$b->id)}}" class="btn btn-xs btn-warning"><span class="glyphicon glyphicon-barcode"></span> print</a>
+                      @endif
                       </td>
                     </tr>  
                   @endforeach

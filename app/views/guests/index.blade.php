@@ -65,6 +65,30 @@
                          <td>{{ $m->departure_date }}</td>
                          <td id="{{ $m->id }}">
                               <a href="{{url("guest/edit/{$m->id}")}}"><button type="button" class="btn btn-success btn-xs"><span class="glyphicon glyphicon-edit"></span> Edit </button></a>
+                              @if(($m->arrival_date)>=(date('Y-m-d'))&& $m->cancelled=='no')
+                              <div class="btn-group btn-group-xs"><button class="btn btn-info btn-xs" data-toggle="dropdown">Extra <span class="caret"></span></button>
+                                  <ul class="dropdown-menu" role="menu">
+                                      <li><a href="#" onclick="SquezeOrder('{{$m->id}}')" data-target="#squeez" data-toggle="modal">Squeze order</a></li>
+                                      <li><a href="#" data-target="#cancel" data-toggle="modal">Cancel order</a></li>
+                                  </ul>
+                              </div>
+                              <div class="modal fade" id="cancel" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-sm">
+                                <div class="modal-content">
+                                <div class="modal-body">
+                                    <div class="contz">
+                                      <p class="alert alert-danger">Are sure you want to cancel this order</p> 
+                                    </div>
+                                </div>
+                                 <div class="modal-footer">
+                                 <button type="button" class="btn btn-danger btn-sm" onclick="CancelOrder('{{$m->room_number}}')">Yes</button>
+                                 <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Cancel</button></div>
+                                </div>
+                                </div>
+                                </div>
+                              @elseif($m->cancelled =='yes')
+                              <button class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove-circle"></span> canceled</button>
+                              @endif
                          </td>
                     </tr>
                     @endforeach
@@ -74,14 +98,26 @@
 </div>
 </div>   
 </div> 
-<!-------------------------- -->
+<div class="modal fade" id="squeez" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Guest Details</h4>
+      </div>
+      <div class="modal-body" style="height: 320px; overflow:scroll">
+        
+        <div class="main">
 
-
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 <script>
-
-
-
-/////////////////////////////////////
 $(document).ready(function (){
     $("#stafftale").dataTable({
             "bJQueryUI": true,
@@ -113,9 +149,27 @@ $(document).ready(function (){
        });
     $('input[type="text"]').addClass("form-control");
     $('select').addClass("form-control");
-    
-    
 });
-</script> 
+</script>
+<script>
+    function SquezeOrder(id){
+      var url="<?php echo url('view_cancel');?>";
+      var url2=url+'/'+id;
+      $.get(url2,function(data){
+          $('.main').html(data);
+      });
+   }
+   function CancelOrder(id){
+       $('.contz').html('<label class="label label-info"> Please wait...</label>');
+      var url="<?php echo url('view_danger');?>";
+      var url2=url+'/'+id;
+      $.get(url2,function(data){
+          setTimeout(function(){
+          $('.contz').html(data);
+          location.reload();
+          },2000);
+      });
+   }
+</script>
 
 @stop

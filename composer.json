@@ -6,7 +6,8 @@
 	"require": {
 		"laravel/framework": "4.1.*",
 		"laravelbook/ardent": "dev-master",
-		"way/generators": "dev-master"
+		"way/generators": "dev-master",
+		"barryvdh/laravel-dompdf": "*"
 	},
 	"autoload": {
 		"classmap": [

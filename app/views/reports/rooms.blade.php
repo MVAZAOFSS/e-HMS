@@ -18,6 +18,7 @@
 <ol class="breadcrumb">
             <li><a href="{{ url('home') }}">Home</a></li>
             <li class="active">Rooms reports </li>
+            <li><a href="{{url('canceled_rooms')}}">Canceled rooms report </a></li>
                            
 </ol>
 <hr/>

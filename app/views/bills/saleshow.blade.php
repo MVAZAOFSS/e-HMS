@@ -1,4 +1,4 @@
-@if(Auth::user()->role == 7)
+@if(Auth::user()->role == 7||Auth::user()->role == 8)
 <?php
 
 $fs = array();

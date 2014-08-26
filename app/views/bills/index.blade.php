@@ -66,6 +66,19 @@
   </td>  
 </tr>  
 </table>
+@elseif(Auth::user()->role == 8)
+<table class="table table-bordered">
+<tr>
+  <td style="background-color: #f5f5f5">  
+  Enter Food: 
+  </td>
+</tr>
+<tr>
+  <td>
+    <input class="form-control" type="text" id="food" />
+  </td>  
+</tr>  
+</table>
 @endif
 
 @if(Auth::user()->role == 6)

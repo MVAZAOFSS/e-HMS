@@ -1,5 +1,4 @@
 @extends('layout.master')
-
 @section('content')
 <div id="wrapper">
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -20,7 +19,7 @@
 <ol class="breadcrumb">
             <li><a href="{{ url('home') }}">Home</a></li>
             <li class="active">sales</li>
-            @if(Auth::user()->role == 7)
+            @if(Auth::user()->role == 7||Auth::user()->role == 8)
             <li><a href="{{ url("bill/sales/add") }}">add restaurant sale </a></li>
             @else
           <li><a href="{{ url("bill/sales/add") }}">add bar sale </a></li>
@@ -33,7 +32,7 @@
               <thead>
                   <tr class="">
                       <th> # </th>
-                        @if(Auth::user()->role == 7)
+                        @if(Auth::user()->role == 7||Auth::user()->role == 8)
                         <th>  Food</th>
                         @else
                         <th> Drink</th>
@@ -46,7 +45,7 @@
                   </tr>
               </thead>
               <tbody>
-                  @if(Auth::user()->role == 7)
+                  @if(Auth::user()->role == 7||Auth::user()->role == 8)
                   <?php $i = 1; $sales = FoodSales::all();?>
                   @else
                   <?php $i = 1; $sales = DrinkSales::all();?>
@@ -56,7 +55,7 @@
                       <tr>
                         <td>{{$i}} <?php $i++; ?></td>
                         
-                        @if(Auth::user()->role == 7)
+                        @if(Auth::user()->role == 7||Auth::user()->role == 8)
                         <td>{{$s->food}}</td>
                          <td>{{Restaurant::where('name',$s->food)->first()->cost}}</td>
                         @else
@@ -66,7 +65,11 @@
                        
                         <td>{{Bill::tm($s->service)}}</td>
                         <td>{{User::find($s->added_by)->firstname}} {{User::find($s->added_by)->lastname}}</td>
-                        <td>{{$s->date}}</td>
+                        <td>{{$s->date}}
+                        @if($s->date==date('Y-m-d'))
+                        <a href="{{url('sells/print/'.$s->id)}}" class="btn btn-xs btn-warning"><span class="glyphicon glyphicon-barcode"></span> print</a>
+                        @endif
+                        </td>
                       </tr>  
                   @endforeach
               </tbody>

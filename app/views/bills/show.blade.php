@@ -1,4 +1,4 @@
-@if(Auth::user()->role == 7)
+@if(Auth::user()->role == 7||Auth::user()->role== 8)
 <?php
 
 $foods  = explode("," , $bi->foods);
@@ -87,7 +87,7 @@ $l      = count($unique);
 		<th>Total cost</th>
 		<th>
 			<select class="form-control active" id="tserv">
-				<option value="{{$bi->servicetime}}">{{Bill::tm($bi->servicetime)}}</option>
+		<option value="{{$bi->servicetime}}">{{Bill::tm($bi->servicetime)}}</option>
 		    <select>  
 		</th>
 	</tr>	

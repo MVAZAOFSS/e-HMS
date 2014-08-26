@@ -97,17 +97,46 @@ class RestaurantsController extends BaseController {
 				return View::make('restaurants.edit', compact('rest'))->with('msg', 'Successfully updated');
 		}
 	}
-
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function destroy($id)
+        public function destroy($id)
 	{
 		$f = Restaurant::find($id);
 		$f->delete();
 	}
+        function update_resta($id){
+            $data['viewID']=$id;
+            $input=Input::all();
+            $roles=array(
+                'amount'=>'required|numeric'
+            );
+            $validator=Validator::make($input,$roles);
+            if($validator->fails()){
+                return View::make('guests.restDetails',$data)->withError($validator);
+            }  else {
+                $remain=  Restaurant::where('id',$id)->first();
+                $cost=$remain->remain;
+                if(Input::get('amount') < $cost){
+                    $costz=$cost-Input::get('amount');
+                    $table_up=array(
+                    'amount'=>Input::get('amount'),
+                    'remain'=>$costz 
+                ); 
+                DB::table('foodbills')->where('id',$id)->update($table_up);
+                $data['sms']='<p class="alert alert-success">Successifully updated</p>';
+                return View::make('guests.restDetails',$data);
+                }  else {
+                 $costz=$cost-Input::get('amount');
+                    $table_up=array(
+                    'amount'=>Input::get('amount'),
+                    'remain'=>$costz, 
+                    'cleared'=>'yes'
+                ); 
+                DB::table('foodbills')->where('id',$id)->update($table_up);
+                $data['sms']='<p class="alert alert-success">Successifully updated</p>';
+                return View::make('guests.restDetails',$data);
+                }
+            } 
+                
+            }
+        }
 
-}
+

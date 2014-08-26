@@ -75,6 +75,7 @@ Route::get('restaurant', array('as'=>'listrestaurants', 'uses'=>'RestaurantsCont
 Route::post('restaurant/delete/{id}', array('as'=>'listrestaurants', 'uses'=>'RestaurantsController@destroy'));
 Route::get('restaurant/edit/{id}', array('as'=>'editrestaurant', 'uses'=>'RestaurantsController@edit'));
 Route::post('restaurant/edit/{id}', array('as'=>'editrestaurant1', 'uses'=>'RestaurantsController@update'));
+Route::post('restaurant_update/{id}', 'RestaurantsController@update_resta');
 //laundry codes
 Route::get('laundry/add', array('as'=>'addlaundry', 'uses'=>'LaundriesController@create'));
 Route::post('laundry/add', array('as'=>'addlaundry1', 'uses'=>'LaundriesController@store'));
@@ -103,6 +104,11 @@ Route::post('guest/edit/{id}/moredays', array('as'=>'editguest1', 'uses'=>'Guest
 Route::get('guest/messages', array('as'=>'messages', 'uses'=>'GuestsController@messages'));
 Route::post('guest/messages/{id}', array('as'=>'messages1', 'uses'=>'GuestsController@confirm'));
 Route::get('guest/checkouts', array('as'=>'checkouts', 'uses'=>'GuestsController@checkouts'));
+Route::get('view_cancel/{id}', 'GuestsController@cancel_id');
+Route::post('cancel_edit/{id}', 'GuestsController@cancel_edit_id');
+Route::get('view_danger/{id}', 'GuestsController@cancel_danger');
+Route::get('canceled_rooms', 'GuestsController@report_canceled');
+//Route::get('canceled_rooms', 'GuestsController@report_order');
 //notification 
 Route::get('notifications', array('as'=>'notifications', 'uses'=>'NotificationsController@index'));
 Route::post('notifications/solved/{id}', array('as'=>'notificationssolved', 'uses'=>'NotificationsController@solving'));
@@ -120,6 +126,8 @@ Route::post('bill/servicetime', 'BillsController@servicetime');
 Route::get('bill/sales/add', 'BillsController@sales');
 Route::post('bill/sales/submitsale', 'BillsController@submitsale');
 Route::get('bill/sales/all','BillsController@allsale');
+Route::get('bills/print/{id}','BillsController@billsprint');
+Route::get('sells/print/{id}','BillsController@sellsprint');
 // Storekeeper codes
 Route::get('good/set', 'StoresController@create');
 Route::post('good/set', 'StoresController@store');
@@ -160,3 +168,6 @@ Route::get('daily_display/{guest}/{rest}/{serv}/{date}','ReportsController@repor
 Route::get('weekly_display/{guest}/{rest}/{serv}/{start_date}/{end_date}','ReportsController@report_weekly_display');
 Route::get('monthly_display/{guest}/{rest}/{serv}/{month}/{year}','ReportsController@report_monthly_display');
 Route::get('yearly_display/{guest}/{rest}/{serv}/{year}','ReportsController@report_year_display');
+Route::get('pdf', 'PrintController@index');
+Route::get('pdfz', 'PrintController@pdfz');
+Route::get('temedet', 'PrintController@temedet');

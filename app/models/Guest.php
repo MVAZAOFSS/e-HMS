@@ -11,7 +11,7 @@ class Guest extends Eloquent {
 	}
 
 	public static function checkRest($gid){
-		$bill  = Bill::whereRaw('guestid = ? and cleared = "yes"', array($gid))->count();
+		$bill  = Bill::whereRaw('id = ? and cleared = "yes"', array($gid))->count();
 		return $bill;
 	}
 

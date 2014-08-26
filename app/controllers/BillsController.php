@@ -85,25 +85,13 @@ class BillsController extends BaseController {
 				if($mode == "cash"){
 
 
-
-					/*
-					$gbill->paymentmode = $mode;
-					$gbill->amount      = $amount;
-					if($amount > $total){
-						$gbill->overpay = (double)($amount - $total);
-					}else{
-						$gbill->remain = (double)($total - $amount);
-					}
-					$gbill->save();
-					return "ok";	
-					*/
-
-					if($amount > $total){
+				if($amount > $total){
 						return "no";
 					}else{
-						$gbill->paymentmode = $mode;
+				            $gbill->paymentmode = $mode;
 					    $gbill->amount      = $amount;
 					    $gbill->remain = (double)($total - $amount);
+                                            $gbill->cleared='yes';
 					    $gbill->save();
 						return "ok";
 					}
@@ -113,7 +101,36 @@ class BillsController extends BaseController {
 					$gbill->save();
 					return "ok";
 				}
-		}else{
+		}elseif (Auth::user()->role == 8) {
+                         $inputs   = Input::all();
+				$mode     = $inputs['c'];
+				$guestid  = $inputs['gid'];
+				$amount   = $inputs['a'];
+				$stime    = $inputs['s'];
+				$total    = $inputs['t'];
+
+				$gbill    = Bill::whereRaw('guestid = ? and servicetime = ? and date = ?', array($guestid, $stime, date('Y-m-d')))->first();
+
+				if($mode == "cash"){
+
+
+				if($amount > $total){
+						return "no";
+					}else{
+				            $gbill->paymentmode = $mode;
+					    $gbill->amount      = $amount;
+					    $gbill->remain = (double)($total - $amount);
+                                            $gbill->cleared='yes';
+					    $gbill->save();
+						return "ok";
+					}
+
+				}else{
+					$gbill->paymentmode = $mode;
+					$gbill->save();
+					return "ok";
+				}
+                       }else{
 				$inputs   = Input::all();
 				$mode     = $inputs['c'];
 				$guestid  = $inputs['gid'];
@@ -127,24 +144,13 @@ class BillsController extends BaseController {
 
 
 
-					/*
-					$gbill->paymentmode = $mode;
-					$gbill->amount      = $amount;
-					if($amount > $total){
-						$gbill->overpay = (double)($amount - $total);
-					}else{
-						$gbill->remain = (double)($total - $amount);
-					}
-					$gbill->save();
-					return "ok";	
-					*/
-
 					if($amount > $total){
 						return "no";
 					}else{
 						$gbill->paymentmode = $mode;
 					    $gbill->amount      = $amount;
 					    $gbill->remain = (double)($total - $amount);
+                                            $gbill->cleared='yes';
 					    $gbill->save();
 						return "ok";
 					}
@@ -193,7 +199,7 @@ class BillsController extends BaseController {
 
 	public function loadbill(){
 			$bid = Input::get('id');
-			if(Auth::user()->role == 7){
+			if(Auth::user()->role == 7||Auth::user()->role == 8){
 				$bi = 	Bill::find($bid);
 			}else{
 				$bi = 	Bil::find($bid);
@@ -255,15 +261,50 @@ class BillsController extends BaseController {
 					$bi           = Bill::find($id);
 					return View::make('bills.create', compact('bi'));
 
-				}else{
-
-					$bill->amount = $newamount;
-					$bill->remain = (double)($total - $newamount);
+				}else if($total==$newamount){
+                                        $bill->amount = $newamount;
+                                        $bill->cleared='yes';
+                                        $bill->remain = (double)($total - $newamount);
 					$bill->save();
 					$bi           = Bill::find($id);
 					return View::make('bills.create', compact('bi'));
-				}
-		}else{
+                                }else{
+                                    $bill->amount = $newamount;
+                                    $bill->remain = (double)($total - $newamount);
+                                    $bill->save();
+					$bi           = Bill::find($id);
+					return View::make('bills.create', compact('bi'));
+                                }
+		}elseif (Auth::user()->role == 8) {
+                 $id     	  = Input::get('g');
+				$amount  	  = Input::get('a');
+				$total   	  = Input::get('t');
+				$stime   	  = Input::get('s');
+
+				$bill   	  = Bill::find($id);
+				$amo          = $bill->amount;
+				$newamount    = $amount + $amo;
+
+				if($total < $newamount){
+					$bi           = Bill::find($id);
+					return View::make('bills.create', compact('bi'));
+
+				}else if($total==$newamount){
+                                        $bill->amount = $newamount;
+                                        $bill->cleared='yes';
+                                        $bill->remain = (double)($total - $newamount);
+					$bill->save();
+					$bi           = Bill::find($id);
+					return View::make('bills.create', compact('bi'));
+                                }else{
+                                    $bill->amount = $newamount;
+                                    $bill->remain = (double)($total - $newamount);
+                                    $bill->save();
+					$bi           = Bill::find($id);
+					return View::make('bills.create', compact('bi'));
+                                }
+              }
+                else{
 				$id     	  = Input::get('g');
 				$amount  	  = Input::get('a');
 				$total   	  = Input::get('t');
@@ -277,7 +318,14 @@ class BillsController extends BaseController {
 					$bi           = Bil::find($id);
 					return View::make('bills.create', compact('bi'));
 
-				}else{
+				}else if($total==$newamount){
+                                        $bill->amount = $newamount;
+                                        $bill->cleared='yes';
+                                        $bill->remain = (double)($total - $newamount);
+					$bill->save();
+					$bi           = Bill::find($id);
+					return View::make('bills.create', compact('bi'));
+                                }else{
 
 					$bill->amount = $newamount;
 					$bill->remain = (double)($total - $newamount);
@@ -307,9 +355,10 @@ class BillsController extends BaseController {
 				$g       = $inputs['g'];
 				$f       = $inputs['f'];
 				$t       = $inputs['t'];
+			     $cost=Restaurant::where('name',$f)->first()->cost;
 				
-				$food    = $f . ",";
-
+                                $food    = $f . ",";
+                            
 				$start   = strpos($g, "(") + 1;
 				$end     = -1;	
 				$room    = substr($g, $start, $end);
@@ -326,12 +375,13 @@ class BillsController extends BaseController {
 				if($b == 0){
 
 					$bill    = Bill::create(array(
-										"guestid"=>$gid,
-										"foods"=>$food,
-										"servicetime"=>$t,
-										"added_by"=>$lg,
-										"date"=>date('Y-m-d')
-							   )); 
+                                        "guestid"=>$gid,
+                                        "foods"=>$food,
+                                        "servicetime"=>$t,
+                                        "added_by"=>$lg,
+                                        "date"=>date('Y-m-d'),
+                                        "remain"=>$cost
+				 )); 
 					
 
 				}else{
@@ -340,6 +390,7 @@ class BillsController extends BaseController {
 					$foods      = $bil->foods;
 					$newfoods   = $foods . $food ;
 					$bil->foods = $newfoods;
+                                        $bil->remain=$bil->remain+$cost;
 					$bil->save();
 
 					
@@ -349,8 +400,60 @@ class BillsController extends BaseController {
 				$bi = Bill::whereRaw('guestid=? and servicetime=?', array($gid, $t))->first();
 
 				return View::make('bills.show', compact('bi'));
+                                
 
-		}else{
+		}elseif (Auth::user()->role == 8) {
+                   $g       = $inputs['g'];
+				$f       = $inputs['f'];
+				$t       = $inputs['t'];
+			     $cost=Restaurant::where('name',$f)->first()->cost;
+				
+                                $food    = $f . ",";
+                            
+				$start   = strpos($g, "(") + 1;
+				$end     = -1;	
+				$room    = substr($g, $start, $end);
+				
+				$roomid  = Room::where('name', $room)->first()->id;
+				$guest   = Guest::whereRaw('room_number = ? and checked = "no" ', array($roomid))->first();
+				
+				$gid     = $guest->id;
+				
+				$b       = Bill::whereRaw('guestid=? and servicetime=? and date = ?', array($gid, $t, date('Y-m-d')))->count();
+				
+				$lg      = Auth::user()->id;
+
+				if($b == 0){
+
+					$bill    = Bill::create(array(
+                                        "guestid"=>$gid,
+                                        "foods"=>$food,
+                                        "servicetime"=>$t,
+                                        "added_by"=>$lg,
+                                        "date"=>date('Y-m-d'),
+                                        "remain"=>$cost
+				 )); 
+					
+
+				}else{
+
+					$bil        = Bill::whereRaw('guestid=? and servicetime=? and date =? ', array($gid, $t, date('Y-m-d')))->first();
+					$foods      = $bil->foods;
+					$newfoods   = $foods . $food ;
+					$bil->foods = $newfoods;
+                                        $bil->remain=$bil->remain+$cost;
+					$bil->save();
+
+					
+
+				}
+
+				$bi = Bill::whereRaw('guestid=? and servicetime=?', array($gid, $t))->first();
+
+				return View::make('bills.show', compact('bi'));
+                 
+                    
+                }else{
 
 				$g       = $inputs['g'];
 				$d       = $inputs['d'];
@@ -400,5 +503,16 @@ class BillsController extends BaseController {
 
 		}
 	}	
-
+        function billsprint($id){
+           $res=DB::table('foodbills')->where('id',$id)->get();
+           $pdf = PDF::loadView('bills.print_view',compact('res'));
+           return $pdf->stream();
+        }
+        function sellsprint($id){
+            $res=DB::table('foodsales')
+                    ->join('restaurants','restaurants.name','=','foodsales.food')
+                    ->where('foodsales.id',$id)->get();
+            $pdf=PDF::loadView('bills.print_sells',  compact('res'));
+            return $pdf->stream();
+        }
 }

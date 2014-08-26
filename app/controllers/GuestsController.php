@@ -1,5 +1,4 @@
 <?php
-
 class GuestsController extends BaseController {
 
 
@@ -51,11 +50,13 @@ class GuestsController extends BaseController {
 		$guest          = Guest::find($inputs['gid']);
 
 		$checkout      = $room->checkout;
+                $cost=$room->cost;
 
 		$arrival       = $guest->arrival_date;
 		$departure     = $guest->departure_date;
 		
 		$checkin       = $room->checkin;
+                $room->totalcost=$cost*(substr($checkout,8,6)-  substr($checkin, 8,6));
 
 		$arr1         = strtotime($checkout);
 		$arr2         = strtotime($departure);
@@ -140,14 +141,17 @@ class GuestsController extends BaseController {
 		$room      = Room::find($rmid);
 		$arrival   = $room->checkin;
 		$departure = $room->checkout;
+                $cost=$room->cost;
 		$dates     = Guest::generateDays($arrival, $departure);
 
 		if($inputs['reservation_number'] == ""){
 			$room->status = "occupied";
+                        $room->totalcost=$cost*(substr($departure,8,6)-  substr($arrival, 8,6));
 			$room->save();
 			$reserved = "no";
 		}else{
 			$room->status = "reserved";
+                        $room->totalcost=$cost*(substr($departure,8,6)-  substr($arrival, 8,6));
 			$room->save();
 			$reserved = "yes";
 		}
@@ -266,11 +270,72 @@ class GuestsController extends BaseController {
              $data['id']=$id;
               return View::make('guests.details',$data);
                 }
-                function view_restaurant($id){
-                    $data['viewID']=$id;
-                    return View::make('guests.restDetails',$data);
-                }
-            }
+       function view_restaurant($id){
+        $res=DB::table('foodbills')->select('*')
+        ->join('guests','foodbills.guestid','=','guests.id')
+        ->where('cleared','no')->where('guests.id',$id)
+        ->get();
+        foreach ($res as $row){
+            $data=array(
+                'foods'=>$row->foods,
+                'payment'=>$row->paymentmode,
+                'datez'=>$row->date,
+                'remain'=>$row->remain
+            );
+        }
+        $data['viewID']=$id;
+        return View::make('guests.restDetails',$data);            
+        }
+        function cancel_id($id){
+          $data['id']=$id;
+          return View::make('guests.view_form',$data);
+        }
+        function cancel_edit_id($id){
+          $data['id']=$id;
+          $input=Input::all();
+          $rules=array(
+              'start'=>'required',
+              'end'=>'required'
+          );
+          $validator=Validator::make($input,$rules);
+          if($validator->fails()){
+              return View::make('guests.view_form',$data)->withErrors($validator);
+          }  else {
+              $data_array=array(
+                  'arrival_date'=>Input::get('start'),
+                  'departure_date'=>Input::get('end')
+              );
+              $data_array2=array(
+                  'checkin'=>Input::get('start'),
+                  'checkout'=>Input::get('end')
+              );
+             DB::table('guests')->where('id',$id)->update($data_array);
+             DB::table('rooms')->join('guests','guests.room_number','=','rooms.id')
+                     ->where('guests.id',$id)->update($data_array2);
+             $data['sms']='<p class="alert alert-success">Date squeezed</p>';
+             return View::make('guests.view_form',$data);
+             
+          }
+        }
+        function cancel_danger($id){
+            $data_array=array(
+                'checkin'=>'',
+                'checkout'=>'',
+                'status'=>'available',
+                'totalcost'=>''
+            );
+            $date=  Room::first($id)->checkin;
+            Room::find($id)->update($data_array);
+            DB::table('guests')->where('room_number',$id)
+                    ->where('arrival_date',$date)->update(array('cancelled'=>'yes'));
+          echo '<p class="alert alert-success">The order has been canceled</p>';  
+        }
+        function report_canceled(){
+            $res=DB::table('guests')->where('cancelled','yes')->get();
+            $data['order']=$res;
+            return View::make('reports.canceled_order',$data);
+        }
+        }
         
         
 
