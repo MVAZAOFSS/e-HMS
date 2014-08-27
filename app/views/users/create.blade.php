@@ -69,6 +69,7 @@
                         <option value="11">Director</option>
                         <option value="3">Accountant</option>
                         <option value="8">Point of sales</option>
+                        <option value="12">Bar point of sales</option>
                         <option value="2">Secretary / Receptionist</option>
                         <option value="7">Restaurant - Waiter/Waitres</option>                        
                         <option value="4">Store Keeper</option>

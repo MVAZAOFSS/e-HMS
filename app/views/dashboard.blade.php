@@ -1,5 +1,4 @@
 @extends('layout.master')
-
 @section('content')
 <div id="wrapper">
 <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -231,24 +230,227 @@
     @endif
     @if(Auth::user()->role == 10)
      <div class="well well-sm">Welcome Room controller!</div>
+     <div class="col-lg-12">
+         <div class="panel panel-warning">
+             <div class="panel-heading">
+                 <h5>Important task to be performed <b class="caret"></b><span class="glyphicon glyphicon-align-center pull-right"></span></h5>
+                 
+             </div>
+             <div class="panel-body">
+                 <div class="col-lg-4">
+                   <a class="quick-btn" href="{{url("rooms/release")}}">
+                         <i class="icon icon-home icon-5x"></i>
+                          <span>Room release</span>
+                       </a>
+                     
+                 </div>
+                 <div class="col-lg-4">
+                     <a class="quick-btn" href="{{url("rooms/repair")}}">
+                         <i class="glyphicon glyphicon-wrench icon-5x"></i>
+                          <span>Room repair</span>
+                       </a>
+                 </div>
+                 <div class="col-lg-4">
+                     <a class="quick-btn" href="{{url("password")}}">
+                         <i class="icon icon-cogs icon-5x"></i>
+                          <span>Settings</span>
+                       </a>
+                 </div>
+             </div>
+         </div>
+     </div>
     @endif
     @if(Auth::user()->role == 7)
      <div class="well well-sm">Welcome Restaurant!</div>
+     <div class="col-lg-12">
+         <div class="panel panel-warning">
+             <div class="panel-heading">
+                 <h5>Important task to be performed <b class="caret"></b><span class="glyphicon glyphicon-align-center pull-right"></span></h5>
+                 
+             </div>
+             <div class="panel-body">
+                 <div class="col-lg-4">
+                   <a class="quick-btn" href="{{url("bill/add")}}">
+                         <i class="icon icon-archive icon-5x"></i>
+                          <span>Add guests bills</span>
+                       </a>
+                     
+                 </div>
+                 <div class="col-lg-4">
+                     <a class="quick-btn" href="{{url("bill/sales/add")}}">
+                         <i class="icon icon-shopping-cart icon-5x"></i>
+                          <span>Add sales</span>
+                       </a>
+                 </div>
+                 <div class="col-lg-4">
+                     <a class="quick-btn" href="{{url("password")}}">
+                         <i class="icon icon-cogs icon-5x"></i>
+                          <span>Settings</span>
+                       </a>
+                 </div>
+             </div>
+         </div>
+     </div>
     @endif
     @if(Auth::user()->role == 8)
      <div class="well well-sm">Welcome Point of Sales(Pos)!</div>
+     <div class="col-lg-12">
+         <div class="panel panel-warning">
+             <div class="panel-heading">
+                 <h5>Important task to be performed <b class="caret"></b><span class="glyphicon glyphicon-align-center pull-right"></span></h5>
+                 
+             </div>
+             <div class="panel-body">
+                 <div class="col-lg-4">
+                   <a class="quick-btn" href="{{url("bill/add")}}">
+                         <i class="icon icon-archive icon-5x"></i>
+                          <span>Add guests bills</span>
+                       </a>
+                     
+                 </div>
+                 <div class="col-lg-4">
+                     <a class="quick-btn" href="{{url("bill/sales/add")}}">
+                         <i class="icon icon-shopping-cart icon-5x"></i>
+                          <span>Add sales</span>
+                       </a>
+                 </div>
+                 <div class="col-lg-4">
+                     <a class="quick-btn" href="{{url("password")}}">
+                         <i class="icon icon-cogs icon-5x"></i>
+                          <span>Settings</span>
+                       </a>
+                 </div>
+             </div>
+         </div>
+     </div>
     @endif
     @if(Auth::user()->role == 6)
      <div class="well well-sm">Welcome Bar manager!</div>
+     <div class="col-lg-12">
+         <div class="panel panel-warning">
+             <div class="panel-heading">
+                 <h5>Important task to be performed <b class="caret"></b><span class="glyphicon glyphicon-align-center pull-right"></span></h5>
+                 
+             </div>
+             <div class="panel-body">
+                 <div class="col-lg-4">
+                   <a class="quick-btn" href="{{url("bill/add")}}">
+                         <i class="icon icon-archive icon-5x"></i>
+                          <span>Add guests bills</span>
+                       </a>
+                     
+                 </div>
+                 <div class="col-lg-4">
+                     <a class="quick-btn" href="{{url("bill/sales/add")}}">
+                         <i class="icon icon-shopping-cart icon-5x"></i>
+                          <span>Add sales</span>
+                       </a>
+                 </div>
+                 <div class="col-lg-4">
+                     <a class="quick-btn" href="{{url("password")}}">
+                         <i class="icon icon-cogs icon-5x"></i>
+                          <span>Settings</span>
+                       </a>
+                 </div>
+             </div>
+         </div>
+     </div>
     @endif
     @if(Auth::user()->role == 5)
      <div class="well well-sm">Welcome Laundry manager!</div>
+     <div class="col-lg-12">
+     <div class="panel panel-warning">
+             <div class="panel-heading">
+                 <h5>Important task to be performed <b class="caret"></b><span class="glyphicon glyphicon-align-center pull-right"></span></h5>
+                 
+             </div>
+             <div class="col-lg-4">
+                     <a class="quick-btn" href="">
+                         <i class="icon icon-dashboard icon-5x"></i>
+                          <span>Home</span>
+                       </a>
+                 </div>
+             <div class="panel-body">
+                 <div class="col-lg-4">
+                   <a class="quick-btn" href="{{url("laundry/list")}}">
+                         <i class="icon icon-dollar icon-5x"></i>
+                          <span>Guests Laundry List</span>
+                        </a>
+                     
+                 </div>
+                 <div class="col-lg-4">
+                     <a class="quick-btn" href="{{url("password")}}">
+                         <i class="icon icon-cogs icon-5x"></i>
+                          <span>Settings</span>
+                       </a>
+                 </div>
+             </div>
+         </div>
+</div>
     @endif
     @if(Auth::user()->role == 3)
      <div class="well well-sm">Welcome Accountant!</div>
+     <div class="col-lg-12">
+     <div class="panel panel-warning">
+             <div class="panel-heading">
+                 <h5>Important task to be performed <b class="caret"></b><span class="glyphicon glyphicon-align-center pull-right"></span></h5>
+                 
+             </div>
+             <div class="panel-body">
+                 <div class="col-lg-4">
+                   <a class="quick-btn" href="{{url("accountant/income")}}">
+                         <i class="icon icon-dollar icon-5x"></i>
+                          <span>Income</span>
+                        </a>
+                     
+                 </div>
+                 <div class="col-lg-4">
+                     <a class="quick-btn" href="{{url("accountant/expenditure")}}">
+                         <i class="icon icon-file-alt icon-5x"></i>
+                          <span>Expenditure</span>
+                       </a>
+                 </div>
+                 <div class="col-lg-4">
+                     <a class="quick-btn" href="{{url("accountant/report")}}">
+                         <i class="icon icon-file-text icon-5x"></i>
+                          <span>Reports</span>
+                       </a>
+                 </div>
+             </div>
+         </div>
+     </div>
     @endif    
     @if(Auth::user()->role == 4)
      <div class="well well-sm">Welcome Store Keeper!</div>
+     <div class="col-lg-12">
+         <div class="panel panel-warning">
+             <div class="panel-heading">
+                 <h5>Important task to be performed <b class="caret"></b><span class="glyphicon glyphicon-align-center pull-right"></span></h5>
+                 
+             </div>
+             <div class="panel-body">
+                 <div class="col-lg-4">
+                   <a class="quick-btn" href="{{url("goods/manage")}}">
+                         <i class="icon icon-archive icon-5x"></i>
+                          <span>Manage goods</span>
+                        </a>
+                     
+                 </div>
+                 <div class="col-lg-4">
+                     <a class="quick-btn" href="{{url("goods/report")}}">
+                         <i class="icon icon-bookmark icon-5x"></i>
+                          <span>To day report</span>
+                       </a>
+                 </div>
+                 <div class="col-lg-4">
+                     <a class="quick-btn" href="{{url("password")}}">
+                         <i class="icon icon-cogs icon-5x"></i>
+                          <span>Settings</span>
+                       </a>
+                 </div>
+             </div>
+         </div>
+     </div>
     @endif
     @if(Auth::user()->role == 9)
      <div class="well well-sm">Welcome Manager!</div>
@@ -400,7 +602,40 @@
     });
 });
     });
-    @endif   
+</script>
+    @endif
+    @if(Auth::user()->role == 12)
+     <div class="well well-sm">Welcome Bar point of sales!</div>
+     <div class="col-lg-12">
+         <div class="panel panel-warning">
+             <div class="panel-heading">
+                 <h5>Important task to be performed <b class="caret"></b><span class="glyphicon glyphicon-align-center pull-right"></span></h5>
+                 
+             </div>
+             <div class="panel-body">
+                 <div class="col-lg-4">
+                   <a class="quick-btn" href="{{url("bill/add")}}">
+                         <i class="icon icon-archive icon-5x"></i>
+                          <span>Add guests bills</span>
+                       </a>
+                     
+                 </div>
+                 <div class="col-lg-4">
+                     <a class="quick-btn" href="{{url("bill/sales/add")}}">
+                         <i class="icon icon-shopping-cart icon-5x"></i>
+                          <span>Add sales</span>
+                       </a>
+                 </div>
+                 <div class="col-lg-4">
+                     <a class="quick-btn" href="{{url("password")}}">
+                         <i class="icon icon-cogs icon-5x"></i>
+                          <span>Settings</span>
+                       </a>
+                 </div>
+             </div>
+         </div>
+     </div>
+    @endif
 </div>   
 </div> 
 @stop
