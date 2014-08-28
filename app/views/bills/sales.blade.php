@@ -34,7 +34,9 @@
 <ol class="breadcrumb">
             <li><a href="{{ url('home') }}">Home</a></li>
             <li><a href="{{ url("bill/sales/all") }}">sales </a></li>
-             @if(Auth::user()->role == 7||Auth::user()->role == 8)
+             @if(Auth::user()->role == 7)
+            <li class="active">add restaurant sale </li>
+            @elseif(Auth::user()->role == 8)
             <li class="active">add restaurant sale </li>
             @else
             <li class="active">add bar sale </li>
@@ -45,7 +47,20 @@
 
 <img src="{{url("img/load.gif")}}" id="ajax" style="width: 56px; display:none;z-index:3000;position:absolute;margin-left: 120px; margin-top:100px">
 
-@if(Auth::user()->role ==7||Auth::user()->role == 8)
+@if(Auth::user()->role ==7)
+<table class="table table-bordered">
+<tr>
+  <td style="background-color: #f5f5f5">  
+  Enter Food: 
+  </td>
+</tr>
+<tr>
+  <td>
+    <input class="form-control" type="text" id="food" />
+  </td>  
+</tr>  
+</table>
+@elseif(Auth::user()->role == 8)
 <table class="table table-bordered">
 <tr>
   <td style="background-color: #f5f5f5">  
@@ -105,9 +120,12 @@
     <table class="table table-bordered" >
       <tr>
         <td style="background-color: #f5f5f5">
-        @if(Auth::user()->role == 7||Auth::user()->role == 8)  
+        @if(Auth::user()->role == 7)  
           Today sales
+        @elseif(Auth::user()->role == 8)
+        Today sales
         @else
+        
           Today sales
         @endif  
         </td>
@@ -127,8 +145,17 @@
 </div>   
 </div>  
 <?php 
-  if(Auth::user()->role == 7||Auth::user()->role == 8){
+  if(Auth::user()->role == 7){
     $foods = Restaurant::all();
+    $data2 = array();
+    foreach($foods as $f){
+        $data2[] = $f->name;
+    }  
+
+     $json2 = json_encode($data2);
+     
+  }elseif(Auth::user()->role == 8){ 
+      $foods = Restaurant::all();
     $data2 = array();
     foreach($foods as $f){
         $data2[] = $f->name;
@@ -169,8 +196,32 @@ $(document).ready(function(){
 <script type="text/javascript">
 $(document).ready(function(){
 
-@if(Auth::user()->role == 7||Auth::user()->role == 8)
+@if(Auth::user()->role == 7)
 $('#addbill').on('click', function(){
+    
+    var food      = $('#food').val();
+    var t         = $('#time').val();
+    
+    if(food == "" || t==""){
+          alert("Please fill the fields");
+    }else{
+      $("#billform").css('opacity', '0.4');
+      $('#ajax, #ajax2').show();
+
+      $.post('submitsale', {f:food, t:t}, function(data){
+
+           $("#billform").css('opacity', '1');
+           $('#ajax, #ajax2').hide('fast', function(){$('#food').val('');$('#time').val('');});
+           $('#infobill').html(data);
+      });
+    }
+    
+});
+  $('#food').autocomplete({
+    source:  {{ $json2 }}
+  });
+ @elseif(Auth::user()->role == 8)
+ $('#addbill').on('click', function(){
     
     var food      = $('#food').val();
     var t         = $('#time').val();

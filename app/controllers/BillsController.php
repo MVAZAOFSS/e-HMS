@@ -28,6 +28,17 @@ class BillsController extends BaseController {
 
 			$sales = FoodSales::whereRaw('date = ? and service = ?', array(date('Y-m-d'), $inputs['t']))->get();
 			return View::make('bills.saleshow', compact('sales'));
+                }elseif(Auth::user()->role ==8){
+                    $inputs = Input::all();
+			FoodSales::create(array(
+				"food"=>$inputs['f'],
+				"service"=>$inputs['t'],
+				"date"=>date('Y-m-d'),
+				"added_by"=>Auth::user()->id
+			));
+
+			$sales = FoodSales::whereRaw('date = ? and service = ?', array(date('Y-m-d'), $inputs['t']))->get();
+			return View::make('bills.saleshow', compact('sales'));
 		}else{
 			$inputs = Input::all();
 			DrinkSales::create(array(
@@ -199,8 +210,10 @@ class BillsController extends BaseController {
 
 	public function loadbill(){
 			$bid = Input::get('id');
-			if(Auth::user()->role == 7||Auth::user()->role == 8){
+			if(Auth::user()->role == 7){
 				$bi = 	Bill::find($bid);
+                        }elseif(Auth::user()->role == 8){
+                            $bi = 	Bill::find($bid);
 			}else{
 				$bi = 	Bil::find($bid);
 			}
@@ -212,6 +225,22 @@ class BillsController extends BaseController {
 		
 		if(Auth::user()->role == 7){
 			$s   = Input::get('s');
+			$id  = Input::get('g');
+
+			if($s != "all"){
+				$bn = Bill::whereRaw('guestid=? and servicetime = ?', array($id, $s))->count();
+				if($bn == 0){
+					return View::make('bills.create')->with('error', 'No result found ')->with('stime', Bill::tm($s))->with('g', $id);
+				}else{
+					$bi = Bill::whereRaw('guestid=? and servicetime = ?', array($id, $s))->first();
+					return View::make('bills.create', compact('bi'));
+				}	
+			}else{
+				$bi = Bill::whereRaw('guestid=?', array($id))->get();
+				return View::make('bills.history', compact('bi'));
+			}
+                }elseif(Auth::user()->role ==8){
+                    $s   = Input::get('s');
 			$id  = Input::get('g');
 
 			if($s != "all"){
@@ -351,8 +380,7 @@ class BillsController extends BaseController {
 		$inputs  = Input::all();
 		
 		if(Auth::user()->role == 7){
-
-				$g       = $inputs['g'];
+                                $g       = $inputs['g'];
 				$f       = $inputs['f'];
 				$t       = $inputs['t'];
 			     $cost=Restaurant::where('name',$f)->first()->cost;
@@ -403,7 +431,7 @@ class BillsController extends BaseController {
                                 
 
 		}elseif (Auth::user()->role == 8) {
-                   $g       = $inputs['g'];
+                                $g       = $inputs['g'];
 				$f       = $inputs['f'];
 				$t       = $inputs['t'];
 			     $cost=Restaurant::where('name',$f)->first()->cost;
@@ -458,7 +486,7 @@ class BillsController extends BaseController {
 				$g       = $inputs['g'];
 				$d       = $inputs['d'];
 				$t       = $inputs['t'];
-				
+				$cost= Bill::where('name',$d)->first()->cost;
 				$drink    = $d . ",";
 
 				$start   = strpos($g, "(") + 1;
@@ -481,7 +509,8 @@ class BillsController extends BaseController {
 										"drinks"=>$drink,
 										"servicetime"=>$t,
 										"added_by"=>$lg,
-										"date"=>date('Y-m-d')
+										"date"=>date('Y-m-d'),
+                                                                                 "remain"=>$cost
 							   )); 
 					
 
@@ -491,6 +520,7 @@ class BillsController extends BaseController {
 					$drinks      = $bil->drinks;
 					$newdrinks   = $drinks . $drink ;
 					$bil->drinks = $newdrinks;
+                                        $bil->remain=  $bil->remain+$cost;
 					$bil->save();
 
 					
@@ -513,6 +543,18 @@ class BillsController extends BaseController {
                     ->join('restaurants','restaurants.name','=','foodsales.food')
                     ->where('foodsales.id',$id)->get();
             $pdf=PDF::loadView('bills.print_sells',  compact('res'));
+            return $pdf->stream();
+        }
+        function billsprintbar($id){
+           $res=DB::table('barbills')->where('id',$id)->get();
+           $pdf = PDF::loadView('bills.print_viewbar',compact('res'));
+           return $pdf->stream();
+        }
+        function sellsprintbarz($id){
+            $res=DB::table('drinksales')
+                    ->join('bars','bars.name','=','drinksales.drink')
+                    ->where('drinksales.id',$id)->get();
+            $pdf=PDF::loadView('bills.print_sellsbarz',  compact('res'));
             return $pdf->stream();
         }
 }

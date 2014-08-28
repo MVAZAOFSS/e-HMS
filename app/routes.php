@@ -76,6 +76,7 @@ Route::post('restaurant/delete/{id}', array('as'=>'listrestaurants', 'uses'=>'Re
 Route::get('restaurant/edit/{id}', array('as'=>'editrestaurant', 'uses'=>'RestaurantsController@edit'));
 Route::post('restaurant/edit/{id}', array('as'=>'editrestaurant1', 'uses'=>'RestaurantsController@update'));
 Route::post('restaurant_update/{id}', 'RestaurantsController@update_resta');
+Route::post('barbills_update/{id}', 'GuestsController@update_barbills');
 //laundry codes
 Route::get('laundry/add', array('as'=>'addlaundry', 'uses'=>'LaundriesController@create'));
 Route::post('laundry/add', array('as'=>'addlaundry1', 'uses'=>'LaundriesController@store'));
@@ -128,6 +129,8 @@ Route::post('bill/sales/submitsale', 'BillsController@submitsale');
 Route::get('bill/sales/all','BillsController@allsale');
 Route::get('bills/print/{id}','BillsController@billsprint');
 Route::get('sells/print/{id}','BillsController@sellsprint');
+Route::get('bills/printbar/{id}','BillsController@billsprintbar');
+Route::get('sells/printbarz/{id}','BillsController@sellsprintbarz');
 // Storekeeper codes
 Route::get('good/set', 'StoresController@create');
 Route::post('good/set', 'StoresController@store');
@@ -153,7 +156,7 @@ Route::get('month_laundry/{guest}/{laud}/{month}/{year}','ReportsController@laun
 Route::get('year_laundry/{guest}/{laud}/{year}','ReportsController@laundry_year');
 Route::get('reports/notify', array('as'=>'notify', 'uses'=>'NotificationsController@notify'));
 //Accountant
-Route::get('accountant/income', 'AccountantController@income');
+Route::get('accountant/income/{date}', 'AccountantController@income');
 Route::get('accountant/expenditure', 'AccountantController@expenditure');
 Route::get('accountant/report', 'AccountantController@report');
 Route::get('accountant_report/{income}/{date}', 'AccountantController@report_display');

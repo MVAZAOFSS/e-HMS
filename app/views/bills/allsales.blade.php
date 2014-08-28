@@ -19,7 +19,9 @@
 <ol class="breadcrumb">
             <li><a href="{{ url('home') }}">Home</a></li>
             <li class="active">sales</li>
-            @if(Auth::user()->role == 7||Auth::user()->role == 8)
+            @if(Auth::user()->role == 7)
+            <li><a href="{{ url("bill/sales/add") }}">add restaurant sale </a></li>
+            @elseif(Auth::user()->role == 8)
             <li><a href="{{ url("bill/sales/add") }}">add restaurant sale </a></li>
             @else
           <li><a href="{{ url("bill/sales/add") }}">add bar sale </a></li>
@@ -45,7 +47,9 @@
                   </tr>
               </thead>
               <tbody>
-                  @if(Auth::user()->role == 7||Auth::user()->role == 8)
+                  @if(Auth::user()->role == 7)
+                  <?php $i = 1; $sales = FoodSales::all();?>
+                  @elseif(Auth::user()->role == 8)
                   <?php $i = 1; $sales = FoodSales::all();?>
                   @else
                   <?php $i = 1; $sales = DrinkSales::all();?>
@@ -55,8 +59,11 @@
                       <tr>
                         <td>{{$i}} <?php $i++; ?></td>
                         
-                        @if(Auth::user()->role == 7||Auth::user()->role == 8)
+                        @if(Auth::user()->role == 7)
                         <td>{{$s->food}}</td>
+                         <td>{{Restaurant::where('name',$s->food)->first()->cost}}</td>
+                         @elseif(Auth::user()->role == 8)
+                         <td>{{$s->food}}</td>
                          <td>{{Restaurant::where('name',$s->food)->first()->cost}}</td>
                         @else
                         <td>{{$s->drink}}</td>
@@ -67,7 +74,13 @@
                         <td>{{User::find($s->added_by)->firstname}} {{User::find($s->added_by)->lastname}}</td>
                         <td>{{$s->date}}
                         @if($s->date==date('Y-m-d'))
+                        @if(Auth::user()->role == 7)
                         <a href="{{url('sells/print/'.$s->id)}}" class="btn btn-xs btn-warning"><span class="glyphicon glyphicon-barcode"></span> print</a>
+                        @elseif(Auth::user()->role == 8)
+                        <a href="{{url('sells/print/'.$s->id)}}" class="btn btn-xs btn-warning"><span class="glyphicon glyphicon-barcode"></span> print</a>
+                        @else
+                        <a href="{{url('sells/printbarz/'.$s->id)}}" class="btn btn-xs btn-warning"><span class="glyphicon glyphicon-cloud"></span> print</a>
+                        @endif
                         @endif
                         </td>
                       </tr>  

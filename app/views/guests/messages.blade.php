@@ -52,7 +52,7 @@
                   </tr>
               </thead>
               <tbody>
-                  <?php $i = 1;  $guests = Guest::whereRaw('reserved != ? and confirm = ? and arrival_date <= ? and cancelled = ?' , array('no',  'no','no', date("Y-m-d", strtotime("+1 day"))))->get(); ?>
+                  <?php $i = 1;  $guests = Guest::whereRaw('reserved != ? and confirm = ? and arrival_date <= ? and cancelled = ?' , array('no',  'no', date("Y-m-d", strtotime("+1 day")),'no'))->get(); ?>
                     @foreach($guests as $m)
                     <tr>
                         <td>{{ $i++ }}</td>

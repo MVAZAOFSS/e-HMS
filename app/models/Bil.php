@@ -1,5 +1,4 @@
 <?php
-
 class Bil extends Eloquent{
 	
 	protected $table = "barbills";

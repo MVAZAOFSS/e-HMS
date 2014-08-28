@@ -2,6 +2,9 @@
     @if(isset($sms))
     {{$sms}}
     @endif
+    @if(isset($smz))
+    {{$smz}}
+    @endif
 <div class="col-lg-12">
     <table class="table table-striped table-hover">
         <tr>

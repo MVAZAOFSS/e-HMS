@@ -20,38 +20,28 @@
   <div class="well well-sm">  <b>CASH BALANCE</b> B/F </div>
   <div class="well well-sm">  <center><b>CASH  COLLECTION OF {{date('d/m/Y')}}</b> </center> </div>
   <div class="well well-sm"> 
-    <p><b>ROOMS .......................................................................................................... <span class="">Tsh {{HotelLogs::getIncome(date('Y-m-d'))}} /= </span></b></p>
-    <p><b>BAR ...............................................................................................................Tsh {{Bil::getAlIncome(date('Y-m-d')) + DrinkSales::getIncome(date('Y-m-d'))}} /=
+    <p><b>ROOMS .......................................................................................................... <span class="">Tsh {{$roomcost}} /= </span></b></p>
+    <p><b>BAR ...............................................................................................................Tsh {{$barcost+$barbillscost}} /=
      
     </b></p>
-    <p><b>RESTAURANT ..................................................................................................Tsh {{Bill::getAlIncome(date('Y-m-d')) + FoodSales::getIncome(date('Y-m-d'))}} /=
+    <p><b>RESTAURANT ..................................................................................................Tsh {{$msosicost+$bilscost}} /=
 <span class=""> </span>   
     </b></p>
     <p><b>LAUNDRY .......................................................................................................
-      <span class="">Tsh {{Llist::getIncome(date('Y-m-d'))}} /=</b></p>
+      <span class=""> Tsh {{$laundrycost}} /=</b></p>
     <p><b>CONFERENCE ..........................................................................................................</b></p>
     <p><b>FUNCTION ................................................................................................................</b></p>
   </div>
   <div class="well well-sm"> 
-    <p><b>ADVANCE PAYMENT FOR ROOMS ....................................................................... <span class="">Tsh {{HotelLogs::getIncome(date('Y-m-d'))}} /= </span></b></p>
+    <p><b>ADVANCE PAYMENT FOR ROOMS ....................................................................... <span class="">Tsh {{$roomcost}} /= </span></b></p>
     <p><b>ADVANCE PAYMENT FOOD & DRINKS ...................................................................
-      <span class="">Tsh {{Bil::getIncome(date('Y-m-d')) + DrinkSales::getIncome(date('Y-m-d')) + Bill::getIncome(date('Y-m-d')) + FoodSales::getIncome(date('Y-m-d'))}} /= </span> 
+      <span class="">Tsh {{$barcost+$bilscost+$barbillscost+$msosicost}}  /= </span> 
     </b></p>
     <p><b>ADVANCE PAYMENT FOR FUNCTIONS ...........................................................................</b></p>
     <p><b>ADVANCE PAYMENT FOR CONFERENCE ...........................................................................</b></p>
   </div>
   <div class="well well-sm"> 
-    <p><b>DEBTORS PAID BILLS ...........................................................................</b></p>
-    <p><b>ROOMS .........................................................................................Tsh {{HotelLogs::getIncome(date('Y-m-d')) - HotelLogs::getIncome(date('Y-m-d'))}} /= </b></p>
-    <p><b>FOOD & BEVERAGE ...............................................................................................Tsh 
-      {{(Bil::getAlIncome(date('Y-m-d')) + DrinkSales::getIncome(date('Y-m-d')) + Bill::getAlIncome(date('Y-m-d')) + FoodSales::getIncome(date('Y-m-d'))) - Bil::getIncome(date('Y-m-d')) + DrinkSales::getIncome(date('Y-m-d')) + Bill::getIncome(date('Y-m-d')) + FoodSales::getIncome(date('Y-m-d'))}} /=
-    </b></p>
-    <p><b>LAUNDRY.........................................................................</b></p>
-    <p><b>FUNCTIONS.........................................................................</b></p>
-  </div>
-
-  <div class="well well-sm"> 
-    <p><b>TOTAL INCOME........................................................................... Tsh {{(HotelLogs::getIncome(date('Y-m-d')) + Bil::getAlIncome(date('Y-m-d')) + DrinkSales::getIncome(date('Y-m-d')) + Bill::getAlIncome(date('Y-m-d')) + FoodSales::getIncome(date('Y-m-d')) + Llist::getIncome(date('Y-m-d'))) }}</b></p>
+    <p><b>TOTAL INCOME........................................................................... Tsh {{$roomcost+$barcost+$bilscost+$barbillscost+$laundrycost+$msosicost}} /= </b></p>
   </div>
 
 </div>   

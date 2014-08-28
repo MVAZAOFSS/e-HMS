@@ -177,7 +177,7 @@
 				<th>Each cost</th>
 				<th>Total cost</th>
 				<th>
-					<select class="form-control" id="time">
+			<select class="form-control" id="time">
 			<option value="{{$bi->servicetime}}">{{Bill::tm($bi->servicetime)}}</option>
 				        <option value=""></option>
 				        <option value="1">Break fast</option>
@@ -302,7 +302,7 @@
 				<th>Total cost</th>
 				<th>
 					<select class="form-control" id="time">
-						<option value="{{$bi->servicetime}}">{{Bill::tm($bi->servicetime)}}</option>
+					<option value="{{$bi->servicetime}}">{{Bill::tm($bi->servicetime)}}</option>
 				        <option value=""></option>
 				        <option value="1">Break fast</option>
 				        <option value="2">Lunch</option>
@@ -431,7 +431,7 @@ $(document).ready(function(){
 		}else{
 			$('#gt').css('opacity', '0.2');
 			$('#ajax5').show();
-			$.post('updatebill', {a:a,g:g,t:t,s:s}, function(data){
+			$.post('bill/updatebill', {a:a,g:g,t:t,s:s}, function(data){
 				$('#main').html(data);
 			});
 		}

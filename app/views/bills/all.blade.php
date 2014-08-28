@@ -1,5 +1,4 @@
 @extends('layout.master')
-
 @section('content')
 <div id="wrapper">
 <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -73,6 +72,8 @@
               <tbody>
                   @if(Auth::user()->role == 7)
                       <?php $bills = Bill::all(); ?>
+                  @elseif(Auth::user()->role ==8)
+                  <?php $bills = Bill::all(); ?>
                   @else 
                       <?php $bills = Bil::all(); ?>
                   @endif
@@ -89,8 +90,14 @@
                       <td id="{{$b->id}}"> 
                         <button type="button" data-toggle="modal" data-target="#myModal"  class="btn btn-xs btn-success bll"><span class="glyphicon glyphicon-file"></span> View Bill info</button>
                         @if($b->date==date('Y-m-d'))
+                        @if(Auth::user()->role == 7)
                         <a href="{{url('bills/print/'.$b->id)}}" class="btn btn-xs btn-warning"><span class="glyphicon glyphicon-barcode"></span> print</a>
-                      @endif
+                        @elseif(Auth::user()->role == 8)
+                        <a href="{{url('bills/print/'.$b->id)}}" class="btn btn-xs btn-warning"><span class="glyphicon glyphicon-barcode"></span> print</a>
+                        @else
+                        <a href="{{url('bills/printbar/'.$b->id)}}" class="btn btn-xs btn-warning"><span class="glyphicon glyphicon-cloud-upload"></span> print</a>
+                        @endif
+                        @endif
                       </td>
                     </tr>  
                   @endforeach

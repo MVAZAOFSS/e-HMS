@@ -1,5 +1,4 @@
 @extends('layout.master')
-
 @section('content')
 <div id="wrapper">
 <nav class="navbar navbar-default navbar-fixed-top" role="navigation">

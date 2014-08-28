@@ -1,5 +1,4 @@
 @extends('layout.master')
-
 @section('content')
 <div id="wrapper">
 <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -35,7 +34,9 @@
                       <option class="opt">OTHERS</option>
                 </select>
                </td></tr>
-          <tr><td> <textarea  name="other" class="form-control other" placeholder="specify"></textarea></td></tr>
+          <tr><td> 
+              {{$errors->first('other','<span class="error">:message</span>')}}    
+         <textarea  name="other" class="form-control other" placeholder="specify"></textarea></td></tr>
   	<tr><td>Amount 
             {{$errors->first('amount','<span class="error">:message</span>')}}
             </td></tr>
@@ -88,16 +89,16 @@
             $('.other').show();
         });
         $('.empty').click(function(){
-            $('.other').hide();
+            $('.other').show();
         });
         $('.bar').click(function(){
-            $('.other').hide();
+            $('.other').show();
         });
         $('.rest').click(function(){
-            $('.other').hide();
+            $('.other').show();
         });
         $('.rooms').click(function(){
-            $('.other').hide();
+            $('.other').show();
         });
         
     $("#tablez").dataTable({

@@ -1,5 +1,4 @@
 <?php
-
 class Bill extends Eloquent {
 
 	protected $table = "foodbills";

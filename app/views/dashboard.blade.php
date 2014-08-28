@@ -398,7 +398,7 @@
              </div>
              <div class="panel-body">
                  <div class="col-lg-4">
-                   <a class="quick-btn" href="{{url("accountant/income")}}">
+                   <a class="quick-btn" href="{{url("accountant/income/".date('Y-m-d'))}}">
                          <i class="icon icon-dollar icon-5x"></i>
                           <span>Income</span>
                         </a>

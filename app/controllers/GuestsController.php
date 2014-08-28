@@ -269,12 +269,13 @@ class GuestsController extends BaseController {
         function view_history($id){
              $data['id']=$id;
               return View::make('guests.details',$data);
-                }
+        }
        function view_restaurant($id){
         $res=DB::table('foodbills')->select('*')
         ->join('guests','foodbills.guestid','=','guests.id')
         ->where('cleared','no')->where('guests.id',$id)
         ->get();
+        if($res){
         foreach ($res as $row){
             $data=array(
                 'foods'=>$row->foods,
@@ -284,7 +285,11 @@ class GuestsController extends BaseController {
             );
         }
         $data['viewID']=$id;
-        return View::make('guests.restDetails',$data);            
+        return View::make('guests.restDetails',$data);
+        }  else {
+         $data['smz']='<p class="alert alert-warning"><blink><span class="glyphicon glyphicon-warning-sign"></span></blink>No food taken by this guest</p>';
+         return View::make('guests.restDetails',$data);
+        }
         }
         function cancel_id($id){
           $data['id']=$id;
@@ -335,6 +340,41 @@ class GuestsController extends BaseController {
             $data['order']=$res;
             return View::make('reports.canceled_order',$data);
         }
+        function update_barbills($id){
+            $data['id']=$id;
+            $input=Input::all();
+            $roles=array(
+                'amount'=>'required|numeric'
+            );
+            $validator=Validator::make($input,$roles);
+            if($validator->fails()){
+                return View::make('guests.details',$data)->withError($validator);
+            }  else {
+                $remain= Bil::where('id',$id)->first();
+                $cost=$remain->remain;
+                if(Input::get('amount') < $cost){
+                    $costz=$cost-Input::get('amount');
+                    $table_up=array(
+                    'amount'=>Input::get('amount'),
+                    'remain'=>$costz 
+                ); 
+                DB::table('barbills')->where('id',$id)->update($table_up);
+                $data['sms']='<p class="alert alert-success">Successifully updated</p>';
+                return View::make('guests.details',$data);
+                }  else {
+                 $costz=$cost-Input::get('amount');
+                    $table_up=array(
+                    'amount'=>Input::get('amount'),
+                    'remain'=>$costz, 
+                    'cleared'=>'yes'
+                ); 
+                DB::table('barbills')->where('id',$id)->update($table_up);
+                $data['sms']='<p class="alert alert-success">Successifully updated</p>';
+                return View::make('guests.details',$data);
+                }
+            } 
+                
+            }
         }
         
         

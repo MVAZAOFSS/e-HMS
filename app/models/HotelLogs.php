@@ -9,8 +9,8 @@ class HotelLogs extends Eloquent{
 		$logs = HotelLogs::where('date', $today)->get();
 		$total = 0;
 		foreach ($logs as $log) {
-			$rid       = Guest::find($log->guestid)->room_number;
-			$room_cost = Room::find($rid)->cost;
+	            $rid= Guest::find($log->guestid)->room_number;
+			$room_cost = Room::find($rid)->totalcost;
 			$total = $room_cost + $total;
 		}
 		return $total;

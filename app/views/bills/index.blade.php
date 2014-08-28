@@ -1,5 +1,4 @@
 @extends('layout.master')
-
 @section('content')
 <div id="wrapper">
 <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -94,6 +93,19 @@
   </td>  
 </tr>  
 </table>
+@elseif(Auth::user()->role == 12)
+<table class="table table-bordered">
+<tr>
+  <td style="background-color: #f5f5f5">  
+  Enter Drink: 
+  </td>
+</tr>
+<tr>
+  <td>
+    <input class="form-control" type="text" id="drink" />
+  </td>  
+</tr>  
+</table>
 @endif
 
 
@@ -134,8 +146,6 @@
       </tr>
       <tr>
       <td valign="top">
-          <!--<p id="ajax2" style="display: none"><img src="{{url("img/load.gif")}}"  style="width: 26px;"> Loading bill info . . . </p>
-          -->
           <div id="infobill">
 
           </div>
@@ -163,6 +173,15 @@
         }  
 
         $json2 = json_encode($data2);
+  }elseif (Auth::user()->role == 8) {
+    $foods = Restaurant::all();
+        $data2 = array();
+        foreach($foods as $f){
+            $data2[] = $f->name;
+        }  
+
+        $json2 = json_encode($data2);
+  
   }else{
         $drinks = Bar::all();
         $data3  = array();
@@ -172,16 +191,34 @@
 
         $json3 = json_encode($data3);
   }
-
-
-
-
 ?>
 <script type="text/javascript">
 $(document).ready(function(){
 
 @if(Auth::user()->role == 7)
 
+$('#addbill').on('click', function(){
+    var guestname = $('#guestname').val();
+    var food      = $('#food').val();
+    var t         = $('#time').val();
+    
+    if(guestname=="" || food == "" || t==""){
+          alert("Please fill the fields");
+    }else{
+      $("#billform").css('opacity', '0.4');
+      $('#ajax, #ajax2').show();
+
+      $.post('submit', {g:guestname,f:food, t:t}, function(data){
+           $("#billform").css('opacity', '1');
+           $('#ajax, #ajax2').hide('fast', function(){
+              $('#food, #time').val('');
+            });
+           $('#infobill').html(data);
+      });
+    } 
+});
+
+@elseif(Auth::user()->role == 8)
 $('#addbill').on('click', function(){
     var guestname = $('#guestname').val();
     var food      = $('#food').val();
@@ -226,10 +263,11 @@ $('#addbill').on('click', function(){
 @endif
 
 /////////////////////////////////////////////////////
-  @if(Auth::user()->role == 7)
+ @if(Auth::user()->role == 7)
     $('#food').autocomplete({
       source:  {{ $json2 }}
     });
+ @elseif(Auth::user()->role ==8)
   @else
   
     $('#drink').autocomplete({

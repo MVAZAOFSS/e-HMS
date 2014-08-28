@@ -1,4 +1,4 @@
-@if(Auth::user()->role == 7||Auth::user()->role== 8)
+@if(Auth::user()->role == 7)
 <?php
 
 $foods  = explode("," , $bi->foods);
@@ -63,7 +63,71 @@ $l      = count($unique);
 			<button type="button" id="sv" class="btn btn-success">Save bill </button></td>	
 	</tr>	
 </table>
+@elseif(Auth::user()->role== 8)
+  <?php
 
+$foods  = explode("," , $bi->foods);
+$fds    = array_pop($foods);
+
+$unique = array_keys(array_count_values($foods));
+$l      = count($unique);
+
+?>
+<img src="{{url("img/loader.gif")}}" id="ajax5" style="display:none;z-index:3000;position:absolute;margin-left: 230px; margin-top:50px">
+          <div id="alrt" class="alert alert-success alert-dismissable" style="display:none;z-index:3000;position:absolute;margin-left: 160px; margin-top:50px">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <strong>Successfully added! redirecting ....</strong> 
+          </div>
+<table class="table table-bordered" id="gt">
+	<tr style="background-color: #f5f5f5">
+		<th>Food</th>
+		<th>Times</th>
+		<th>Each cost</th>
+		<th>Total cost</th>
+		<th>
+			<select class="form-control active" id="tserv">
+				<option value="{{$bi->servicetime}}">{{Bill::tm($bi->servicetime)}}</option>
+		    <select>  
+		</th>
+	</tr>	
+	<?php $total = 0; ?>
+	@for($i=0; $i<$l; $i++)
+		<tr>
+			<td>{{$unique[$i]}}</td>
+			<td>{{Bill::appears($unique[$i], $foods)}}</td>
+			<td>{{Restaurant::where('name', $unique[$i])->first()->cost}} /=</td>
+			<td>{{(Bill::appears($unique[$i], $foods))*(Restaurant::where('name', $unique[$i])->first()->cost)}} /=</td>
+		</tr>
+	<?php $total = $total + ((Bill::appears($unique[$i], $foods))*(Restaurant::where('name', $unique[$i])->first()->cost)); ?>		
+	@endfor	
+	<tr style="background-color: #f5f5f5">
+		<td ></td>
+		<td></td>
+		<td><b>Total</b></td>
+		<td id="ttl">
+			{{$total}} /=
+		</td>
+	</tr>
+	<tr>
+		<td>Payment</td>
+		<td>
+			<select id="md" class="form-control">
+				<option value=""></option>
+				<option value="cash">Cash</option>
+				<option value="mkopo">Credit</option>
+			</select>
+		</td>
+			<td id="a" style="display:none">Amount</td>
+			<td id="ai" style="display:none">
+				<p><input type="text" class="form-control" id="amount" /></p>
+			</td>
+		<td>
+			<input id="guestid" value="{{$bi->guestid}}" type="hidden" />
+			<input id="total" value="{{$total}}" type="hidden" />
+			<input id="servt" value="{{$bi->servicetime}}" type="hidden" /> 
+			<button type="button" id="sv" class="btn btn-success">Save bill </button></td>	
+	</tr>	
+</table>
 @else
 <?php
 
