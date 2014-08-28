@@ -486,7 +486,7 @@ class BillsController extends BaseController {
 				$g       = $inputs['g'];
 				$d       = $inputs['d'];
 				$t       = $inputs['t'];
-				$cost= Bill::where('name',$d)->first()->cost;
+				$cost= Bar::where('name',$d)->first()->cost;
 				$drink    = $d . ",";
 
 				$start   = strpos($g, "(") + 1;
