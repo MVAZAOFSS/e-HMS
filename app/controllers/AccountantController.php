@@ -30,6 +30,45 @@ class AccountantController extends BaseController{
             return View::make('accountant.reportexpt',$data);
         }
         }
+        function report_weekly($income='',$start_date='',$end_date=''){
+            if($income=='income'){
+            $data1=  $this->foodTotal1($income, $start_date,$end_date);
+            $data2=  $this->foodSales1($income, $start_date,$end_date);
+            $data3=  $this->guestsold1($income, $start_date,$end_date);
+            $data4=  $this->drinksales1($income, $start_date,$end_date);
+            $data=$data1+$data2+$data3+$data4;
+            return View::make('accountant.reportincome',$data);
+        }elseif ($income=='expenditure') {
+            $data=  $this->Total_expenditure1($income, $start_date,$end_date);
+            return View::make('accountant.reportexpt',$data);
+        }
+        }
+        function report_monthly($income='',$month='',$year=''){
+            if($income=='income'){
+            $data1=  $this->foodTotal2($income, $month,$year);
+            $data2=  $this->foodSales2($income, $month,$year);
+            $data3=  $this->guestsold2($income, $month,$year);
+            $data4=  $this->drinksales2($income, $month,$year);
+            $data=$data1+$data2+$data3+$data4;
+            return View::make('accountant.reportincome',$data);
+        }elseif ($income=='expenditure') {
+            $data=  $this->Total_expenditure2($income, $month,$year);
+            return View::make('accountant.reportexpt',$data);
+        }
+        }
+        function report_yearly($income='',$year=''){
+            if($income=='income'){
+            $data1=  $this->foodTotal3($income,$year);
+            $data2=  $this->foodSales3($income,$year);
+            $data3=  $this->guestsold3($income,$year);
+            $data4=  $this->drinksales3($income,$year);
+            $data=$data1+$data2+$data3+$data4;
+            return View::make('accountant.reportincome',$data);
+        }elseif ($income=='expenditure') {
+            $data=  $this->Total_expenditure3($income,$year);
+            return View::make('accountant.reportexpt',$data);
+        }
+        }
         function foodTotal($income,$date){
             if($income=='income'){
             $table=DB::table('foodbills')
@@ -97,6 +136,211 @@ class AccountantController extends BaseController{
                         return $data_array;
             }
         }
+        function foodTotal1($income,$start_date,$end_date){
+            if($income=='income'){
+            $table=DB::table('foodbills')
+                    ->whereBetween('date',array($start_date,$end_date))
+                     ->get(array(
+                         'amount',
+                         DB::raw('SUM(foodbills.amount) AS amount')
+                     ));
+                     foreach ($table as $row){
+                         $data_check=array(
+                             'amount'=>$row->amount
+                         );
+                     }
+                   return $data_check;
+        }
+        }
+        function foodSales1($income,$start_date,$end_date){
+            if($income=='income'){
+                $table=DB::table('foodsales')
+                        ->join('restaurants','restaurants.name','=','foodsales.food')
+                        ->whereBetween('date',array($start_date,$end_date))
+                        ->get(array(
+                            'cost',
+                            DB::raw('SUM(restaurants.cost) AS cost')
+                        ));
+                        foreach ($table as $row){
+                            $data_array=array(
+                                'salescost'=>$row->cost    
+                            );
+                        }
+                        return $data_array;
+            }
+        }
+        function guestsold1($income,$start_date,$end_date){
+            if($income=='income'){
+               $table=DB::table('guests')
+                     ->join('rooms','rooms.id','=','guests.room_number')
+                     ->whereBetween('checkin',array($start_date,$end_date))
+                    ->get(array(
+                        'cost',
+                        DB::raw('SUM(rooms.cost) AS cost')
+                    ));
+                    foreach ($table as $row){
+                        $data_array=array(
+                            'roomscost'=>$row->cost
+                        );
+                    }
+                    return $data_array;
+            }
+        }
+        function drinksales1($income,$start_date,$end_date){
+            if($income=='income'){
+                $table=DB::table('drinksales')
+                        ->join('bars','bars.name','=','drinksales.drink')
+                        ->whereBetween('date',array($start_date,$end_date))
+                        ->get(array(
+                            'cost',
+                            DB::raw('SUM(bars.cost) AS cost')
+                        ));
+                        foreach ($table as $row){
+                            $data_array=array(
+                                'barcost'=>$row->cost
+                            );
+                        }
+                        return $data_array;
+            }
+        }
+        function foodTotal2($income,$month,$year){
+            if($income=='income'){
+            $table=DB::table('foodbills')
+                    ->where('date','LIKE','%'.$month.'%')
+                     ->where('date','LIKE','%'.$year.'%')
+                     ->get(array(
+                         'amount',
+                         DB::raw('SUM(foodbills.amount) AS amount')
+                     ));
+                     foreach ($table as $row){
+                         $data_check=array(
+                             'amount'=>$row->amount
+                         );
+                     }
+                   return $data_check;
+        }
+        }
+        function foodSales2($income,$month,$year){
+            if($income=='income'){
+                $table=DB::table('foodsales')
+                        ->join('restaurants','restaurants.name','=','foodsales.food')
+                        ->where('date','LIKE','%'.$month.'%')
+                        ->where('date','LIKE','%'.$year.'%')
+                        ->get(array(
+                            'cost',
+                            DB::raw('SUM(restaurants.cost) AS cost')
+                        ));
+                        foreach ($table as $row){
+                            $data_array=array(
+                                'salescost'=>$row->cost    
+                            );
+                        }
+                        return $data_array;
+            }
+        }
+        function guestsold2($income,$month,$year){
+            if($income=='income'){
+               $table=DB::table('guests')
+                     ->join('rooms','rooms.id','=','guests.room_number')
+                     ->where('checkin','LIKE','%'.$month.'%')
+                     ->where('checkin','LIKE','%'.$year.'%')
+                    ->get(array(
+                        'cost',
+                        DB::raw('SUM(rooms.cost) AS cost')
+                    ));
+                    foreach ($table as $row){
+                        $data_array=array(
+                            'roomscost'=>$row->cost
+                        );
+                    }
+                    return $data_array;
+            }
+        }
+        function drinksales2($income,$month,$year){
+            if($income=='income'){
+                $table=DB::table('drinksales')
+                        ->join('bars','bars.name','=','drinksales.drink')
+                        ->where('date','LIKE','%'.$month.'%')
+                        ->where('date','LIKE','%'.$year.'%')
+                        ->get(array(
+                            'cost',
+                            DB::raw('SUM(bars.cost) AS cost')
+                        ));
+                        foreach ($table as $row){
+                            $data_array=array(
+                                'barcost'=>$row->cost
+                            );
+                        }
+                        return $data_array;
+            }
+        }
+        function foodTotal3($income,$year){
+            if($income=='income'){
+            $table=DB::table('foodbills')
+                   ->where('date','LIKE','%'.$year.'%')
+                     ->get(array(
+                         'amount',
+                         DB::raw('SUM(foodbills.amount) AS amount')
+                     ));
+                     foreach ($table as $row){
+                         $data_check=array(
+                             'amount'=>$row->amount
+                         );
+                     }
+                   return $data_check;
+        }
+        }
+        function foodSales3($income,$year){
+            if($income=='income'){
+                $table=DB::table('foodsales')
+                        ->join('restaurants','restaurants.name','=','foodsales.food')
+                        ->where('date','LIKE','%'.$year.'%')
+                        ->get(array(
+                            'cost',
+                            DB::raw('SUM(restaurants.cost) AS cost')
+                        ));
+                        foreach ($table as $row){
+                            $data_array=array(
+                                'salescost'=>$row->cost    
+                            );
+                        }
+                        return $data_array;
+            }
+        }
+        function guestsold3($income,$year){
+            if($income=='income'){
+               $table=DB::table('guests')
+                     ->join('rooms','rooms.id','=','guests.room_number')
+                     ->where('checkin','LIKE','%'.$year.'%')
+                    ->get(array(
+                        'cost',
+                        DB::raw('SUM(rooms.cost) AS cost')
+                    ));
+                    foreach ($table as $row){
+                        $data_array=array(
+                            'roomscost'=>$row->cost
+                        );
+                    }
+                    return $data_array;
+            }
+        }
+        function drinksales3($income,$year){
+            if($income=='income'){
+                $table=DB::table('drinksales')
+                        ->join('bars','bars.name','=','drinksales.drink')
+                        ->where('date','LIKE','%'.$year.'%')
+                        ->get(array(
+                            'cost',
+                            DB::raw('SUM(bars.cost) AS cost')
+                        ));
+                        foreach ($table as $row){
+                            $data_array=array(
+                                'barcost'=>$row->cost
+                            );
+                        }
+                        return $data_array;
+            }
+        }
         function expenditure_insert(){
             $inputs=Input::all();
             $rules=array(
@@ -131,6 +375,55 @@ class AccountantController extends BaseController{
         if($income=='expenditure'){
             $res=DB::table('expenditures')
                      ->where('date',$date)
+                    ->get(array(
+                        'cost',
+                        DB::raw('SUM(cost) AS cost')
+                    ));
+                    foreach ($res as $row){
+                        $data_array=array(
+                            'expcost'=>$row->cost
+                        );
+                    }
+                    return $data_array;
+        }
+    }
+    function Total_expenditure1($income,$start_date,$end_date){
+        if($income=='expenditure'){
+            $res=DB::table('expenditures')
+                     ->whereBetween('date',array($start_date,$end_date))
+                    ->get(array(
+                        'cost',
+                        DB::raw('SUM(cost) AS cost')
+                    ));
+                    foreach ($res as $row){
+                        $data_array=array(
+                            'expcost'=>$row->cost
+                        );
+                    }
+                    return $data_array;
+        }
+    }
+    function Total_expenditure2($income,$month,$year){
+        if($income=='expenditure'){
+            $res=DB::table('expenditures')
+                     ->where('date','LIKE','%'.$month.'%')
+                     ->where('date','LIKE','%'.$year.'%')
+                    ->get(array(
+                        'cost',
+                        DB::raw('SUM(cost) AS cost')
+                    ));
+                    foreach ($res as $row){
+                        $data_array=array(
+                            'expcost'=>$row->cost
+                        );
+                    }
+                    return $data_array;
+        }
+    }
+    function Total_expenditure3($income,$year){
+        if($income=='expenditure'){
+            $res=DB::table('expenditures')
+                     ->where('date','LIKE','%'.$year.'%')
                     ->get(array(
                         'cost',
                         DB::raw('SUM(cost) AS cost')
