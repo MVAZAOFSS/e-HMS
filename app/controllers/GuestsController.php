@@ -5,11 +5,6 @@ class GuestsController extends BaseController {
 	public function __construct(){
 		$this->beforeFilter('auth', array('*'));
 	}
-	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return Response
-	 */
 	public function index()
 	{
 		$guests = Guest::all();
@@ -111,18 +106,10 @@ class GuestsController extends BaseController {
 
 	public function create()
 	{
-		//$rooms = DB::table('rooms', '!=', 'occupied')->get();
         $rooms   = Room::where('status', '!=', 'occupied')->get();
         return View::make('guests.create', compact('rooms'));
 	}
-
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @return Response
-	 */
-
-	public function rno(){
+       public function rno(){
 		$rno = Input::get('t');
 		$rn  = Guest::where('reservation_number', $rno)->count();
 		if($rn == 0){
@@ -180,6 +167,7 @@ class GuestsController extends BaseController {
 						"discount"=>$inputs['discount'],
 						"reservation_number"=>$inputs['reservation_number'],
 						"mode"=>$inputs['mode'],
+                                                "totalcost"=>$cost*(substr($departure,8,6)-  substr($arrival, 8,6)),
 						"allegy"=>$inputs['allegy'],
 						"reserved"=>$reserved
 					));
@@ -270,12 +258,11 @@ class GuestsController extends BaseController {
              $data['id']=$id;
               return View::make('guests.details',$data);
         }
+        
        function view_restaurant($id){
         $res=DB::table('foodbills')->select('*')
-        ->join('guests','foodbills.guestid','=','guests.id')
-        ->where('cleared','no')->where('guests.id',$id)
+        ->where('cleared','no')->where('id',$id)
         ->get();
-        if($res){
         foreach ($res as $row){
             $data=array(
                 'foods'=>$row->foods,
@@ -286,10 +273,6 @@ class GuestsController extends BaseController {
         }
         $data['viewID']=$id;
         return View::make('guests.restDetails',$data);
-        }  else {
-         $data['smz']='<p class="alert alert-warning"><blink><span class="glyphicon glyphicon-warning-sign"></span></blink>No food taken by this guest</p>';
-         return View::make('guests.restDetails',$data);
-        }
         }
         function cancel_id($id){
           $data['id']=$id;
@@ -374,6 +357,12 @@ class GuestsController extends BaseController {
                 }
             } 
                 
+            }
+            function view_customer($id){
+                $data['id']=$id;
+                $res=DB::table('foodbills')->where('guestid',$id)->get();
+                $data['res']=$res;
+                return View::make('guests.view_customer',$data);
             }
         }
         

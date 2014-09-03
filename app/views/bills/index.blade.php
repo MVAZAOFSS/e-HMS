@@ -157,7 +157,8 @@
 </div>   
 </div>  
 <?php 
-  $guests = Guest::where('checked', '!=', 'yes')->get();
+  $guests = Guest::where('released', '!=', 'yes')
+          ->where('cancelled','no')->get();
   $data   = array();
   foreach($guests as $g){
       $data[] = $g->firstname . " " . $g->lastname . " (".Room::find($g->room_number)->name.")" ;

@@ -46,9 +46,6 @@
                       <th>  Arrival date</th>
                       <th>  Departure date</th>
                       <th>  Days spent</th>
-                      <th>  Bar  </th>
-                      <th>  Restaurant  </th>
-                      <th>  Laundry  </th>
                       <th>  Operations  </th>
                   </tr>
               </thead>
@@ -64,70 +61,15 @@
                          <td>{{ $m->arrival_date }}</td>
                          <td>{{ $m->departure_date }}</td>
                          <td>{{Guest::daysSpent($m->arrival_date, $m->departure_date)}}</td>
-                         <td>
-                          @if(Guest::checkBar($m->id) == 0)
-                          <button class="btn btn-danger btn-xs" onclick="incompleteDetails({{$m->id}})" data-toggle="modal" data-target="#myinco">
-                                  incomplete
-                          </button>
-                          @else
-                              <label class="label label-success">
-                                completed
-                              </label>
-                          @endif 
-                         </td>
-                         <td>
-                          @if(Guest::checkRest($m->id) == 0)
-                          <button class="btn btn-danger btn-xs" onclick="incompleteRestaurant({{$m->id}})" data-toggle="modal" data-target="#myinco">
-                                  incomplete
-                          </button>
-                          @else
-                              <label class="label label-success">
-                                completed
-                              </label>
-                          @endif 
-                         </td>
-                         <td>
-                            @if(Llist::getRemain($m->id) == 0)
-                                <label class="label label-success">
-                                  completed
-                                </label>
-                            @else
-                            <button class="btn btn-danger btn-xs">
-                                  incomplete
-                            </button>
-                            @endif
-                         </td>
-                         <td id="{{ $m->id }}">
-                            <a href="#" class="deletedrink"><button type="button" class="btn btn-primary btn-xs "><span class="glyphicon glyphicon-check"></span> Checkout </button></a>
-                         </td>
+                         <td><a class="btn btn-success btn-xs" href="{{url('view_den/'.$m->id)}}"><span class="glyphicon glyphicon-share-alt"></span> Details</a></td>
                     </tr>
                     @endforeach
                
               </tbody>
  </table>   
 </div>
- <div class="modal fade" id="myinco" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title" id="myModalLabel">Guest bill information</h4>
-      </div>
-      <div class="modal-body" style="height: 320px; overflow:scroll">
-        
-        <div class="main">
-
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
 </div>   
 </div> 
-
 <script>
 $(document).ready(function (){
    $("#stafftale").dataTable({
@@ -167,12 +109,6 @@ $(document).ready(function (){
         $('.main').html(data);
     });
 }
-function incompleteRestaurant(id){
-    var urla="<?php echo url('restaurants');?>";
-    var urla2=urla+'/'+id;
-    $.get(urla2,function(data){
-        $('.main').html(data);
-    });
-}
+
 </script>
 @stop

@@ -285,7 +285,7 @@ class RoomsController extends BaseController {
                    ->where('rooms.created_at','LIKE','%'.$date.'%')
                    ->get(array(
                         '*',
-                        DB::raw('SUM(rooms.totalcost) AS totalcost')
+                        DB::raw('SUM(guests.totalcost) AS totalcost')
                     ));
             foreach ($res as $money){
                 if($money->mode=='Cash'){
@@ -317,7 +317,7 @@ class RoomsController extends BaseController {
                     ->where('cancelled','no')
                    ->get(array(
                         '*',
-                        DB::raw('SUM(rooms.totalcost) AS totalcost')
+                        DB::raw('SUM(guests.totalcost) AS totalcost')
                     ));
             foreach ($res as $money){
                 if($money->mode=='Cash'){
@@ -348,7 +348,7 @@ class RoomsController extends BaseController {
                     ->where('cancelled','no')
                    ->get(array(
                         '*',
-                        DB::raw('SUM(rooms.totalcost) AS totalcost')
+                        DB::raw('SUM(guests.totalcost) AS totalcost')
                     ));
             foreach ($res as $money){
                 if($money->mode=='Cash'){
@@ -409,7 +409,7 @@ class RoomsController extends BaseController {
                     ->where('cancelled','no')
                    ->get(array(
                         '*',
-                        DB::raw('SUM(rooms.totalcost) AS totalcost')
+                        DB::raw('SUM(guests.totalcost) AS totalcost')
                     ));
             foreach ($res as $money){
                 if($money->mode=='Cash'){
@@ -441,7 +441,7 @@ class RoomsController extends BaseController {
                     ->where('cancelled','no')
                    ->get(array(
                         '*',
-                        DB::raw('SUM(rooms.totalcost) AS totalcost')
+                        DB::raw('SUM(guests.totalcost) AS totalcost')
                     ));
             foreach ($res as $money){
                 if($money->mode=='Cash'){
@@ -472,7 +472,7 @@ class RoomsController extends BaseController {
                     ->where('cancelled','no')
                    ->get(array(
                         '*',
-                        DB::raw('SUM(rooms.totalcost) AS totalcost')
+                        DB::raw('SUM(guests.totalcost) AS totalcost')
                     ));
             foreach ($res as $money){
                 if($money->mode=='Cash'){
@@ -535,7 +535,7 @@ class RoomsController extends BaseController {
                     ->where('cancelled','no')
                    ->get(array(
                         '*',
-                        DB::raw('SUM(rooms.totalcost) AS totalcost')
+                        DB::raw('SUM(guests.totalcost) AS totalcost')
                     ));
             foreach ($res as $money){
                 if($money->mode=='Cash'){
@@ -568,7 +568,7 @@ class RoomsController extends BaseController {
                     ->where('cancelled','no')
                    ->get(array(
                         '*',
-                        DB::raw('SUM(rooms.totalcost) AS totalcost')
+                        DB::raw('SUM(guests.totalcost) AS totalcost')
                     ));
             foreach ($res as $money){
                 if($money->mode=='Cash'){
@@ -600,7 +600,7 @@ class RoomsController extends BaseController {
                     ->where('cancelled','no')
                    ->get(array(
                         '*',
-                        DB::raw('SUM(rooms.totalcost) AS totalcost')
+                        DB::raw('SUM(guests.totalcost) AS totalcost')
                     ));
             foreach ($res as $money){
                 if($money->mode=='Cash'){
@@ -659,7 +659,7 @@ class RoomsController extends BaseController {
                     ->where('cancelled','no')
                    ->get(array(
                         '*',
-                        DB::raw('SUM(rooms.totalcost) AS totalcost')
+                        DB::raw('SUM(guests.totalcost) AS totalcost')
                     ));
             foreach ($res as $money){
                 if($money->mode=='Cash'){
@@ -690,7 +690,7 @@ class RoomsController extends BaseController {
                     ->where('cancelled','no')
                    ->get(array(
                         '*',
-                        DB::raw('SUM(rooms.totalcost) AS totalcost')
+                        DB::raw('SUM(guests.totalcost) AS totalcost')
                     ));
             foreach ($res as $money){
                 if($money->mode=='Cash'){
@@ -721,7 +721,7 @@ class RoomsController extends BaseController {
                     ->where('cancelled','no')
                    ->get(array(
                         '*',
-                        DB::raw('SUM(rooms.totalcost) AS totalcost')
+                        DB::raw('SUM(guests.totalcost) AS totalcost')
                     ));
             foreach ($res as $money){
                 if($money->mode=='Cash'){

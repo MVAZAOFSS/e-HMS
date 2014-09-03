@@ -431,7 +431,7 @@ $(document).ready(function(){
 		}else{
 			$('#gt').css('opacity', '0.2');
 			$('#ajax5').show();
-			$.post('bill/updatebill', {a:a,g:g,t:t,s:s}, function(data){
+			$.post('updatebill', {a:a,g:g,t:t,s:s}, function(data){
 				$('#main').html(data);
 			});
 		}

@@ -112,7 +112,7 @@ class RestaurantsController extends BaseController {
             if($validator->fails()){
                 return View::make('guests.restDetails',$data)->withError($validator);
             }  else {
-                $remain=  Restaurant::where('id',$id)->first();
+                $remain=  Bill::find($id)->first();
                 $cost=$remain->remain;
                 if(Input::get('amount') < $cost){
                     $costz=$cost-Input::get('amount');
@@ -120,6 +120,7 @@ class RestaurantsController extends BaseController {
                     'amount'=>Input::get('amount'),
                     'remain'=>$costz 
                 ); 
+                
                 DB::table('foodbills')->where('id',$id)->update($table_up);
                 $data['sms']='<p class="alert alert-success">Successifully updated</p>';
                 return View::make('guests.restDetails',$data);
