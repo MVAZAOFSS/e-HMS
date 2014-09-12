@@ -120,6 +120,7 @@ class RestaurantsController extends BaseController {
                     'amount'=>Input::get('amount'),
                     'remain'=>$costz 
                 ); 
+                
                 DB::table('foodbills')->where('id',$id)->update($table_up);
                 $data['sms']='<p class="alert alert-success">Successifully updated</p>';
                 return View::make('guests.restDetails',$data);

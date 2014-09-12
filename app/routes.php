@@ -107,6 +107,7 @@ Route::get('guest/messages', array('as'=>'messages', 'uses'=>'GuestsController@m
 Route::post('guest/messages/{id}', array('as'=>'messages1', 'uses'=>'GuestsController@confirm'));
 Route::get('guest/checkouts', array('as'=>'checkouts', 'uses'=>'GuestsController@checkouts'));
 Route::get('view_cancel/{id}', 'GuestsController@cancel_id');
+Route::get('view_den/{id}', 'GuestsController@view_customer');
 Route::post('cancel_edit/{id}', 'GuestsController@cancel_edit_id');
 Route::get('view_danger/{id}', 'GuestsController@cancel_danger');
 Route::get('canceled_rooms', 'GuestsController@report_canceled');
