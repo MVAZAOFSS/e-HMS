@@ -27,7 +27,7 @@
         <option value="income">Income</option>
         <option value="expenditure">Expenditure</option>
     </select>
-    Report for: 
+    Report for:
     <select id="reportfor" style="border: 1px solid #002;padding:2px">
         <option></option>
         <option value="daily">daily</option>
@@ -37,13 +37,13 @@
     </select>   
     <span id="daily" style="display:none">
      Date:   
-    <input id="date" style="width: 90px;border: 1px solid #002;padding:2px" type="text" />  
+     <input id="date" style="width: 90px;border: 1px solid #002;padding:2px" type="text" />
     </span>
     <span id="weekly" style="display:none">
-     start   
-    <input id="start" style="width: 90px;border: 1px solid #002;padding:2px" type="text" /> 
-     end   
-    <input id="end" style="width: 90px;border: 1px solid #002;padding:2px" type="text" />  
+     start
+    <input id="start" style="width: 90px;border: 1px solid #002;padding:2px" type="text"  />
+     end
+    <input id="end" style="width: 90px;border: 1px solid #002;padding:2px" type="text" />
     </span>
     <span id="monthly" style="display:none">
     <select id="month" style="border: 1px solid #002;padding:2px">
@@ -61,14 +61,13 @@
         <option value="11">november</option>
         <option value="12">december</option>
     </select>
-    <input type="text" placeholder="Year" value="{{date('Y')}}" id="mYear" style="width: 90px;border: 1px solid #002;padding:2px" />  
+    <input type="text" placeholder="Year" value="{{date('Y')}}" id="mYear" style="width: 90px;border: 1px solid #002;padding:2px" />
     </span>
     <span id="yearly" style="display:none">
-     <input id="year" style="width: 90px;border: 1px solid #002;padding:2px" value="{{date('Y')}}"  type="text" />  
+     <input id="year" style="width: 90px;border: 1px solid #002;padding:2px" value="{{date('Y')}}"  type="text" />
     </span>
-    Report in: 
+    Report in:
     <select id="reportin" style="border: 1px solid #002;padding:2px">
-        <option></option>
         <option value="Table">Table</option>
     </select>
     <button id="go">Go</button>

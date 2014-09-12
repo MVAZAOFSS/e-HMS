@@ -1,27 +1,12 @@
-<?php
-$res=DB::table('guests')->select('*')
-        ->join('barbills','barbills.guestid','=','guests.id')
-        ->where('cleared','no')->where('guestid',$id)->get();
-if($res){
-foreach ($res as $row){
-?>
 <form id="rep">
 <div class="col-lg-12">
     <table class="table table-striped table-hover">
         <tr>
             <td>
-                Full Name: 
-            </td>
-            <td class="alert-success">
-                {{ucfirst($row->firstname)}} {{ucfirst($row->lastname)}}
-            </td>
-        </tr>
-        <tr>
-            <td>
                 Drinks Taken
             </td>
             <td class="alert-success">
-                {{$row->drinks}}
+                {{Bil::find($id)->drinks}}
             </td>
         </tr>
         <tr>
@@ -29,7 +14,7 @@ foreach ($res as $row){
                 Payment mode
             </td>
             <td class="alert-success">
-                {{$row->paymentmode}}
+                {{Bil::find($id)->paymentmode}}
             </td>
         </tr>
         <tr>
@@ -37,7 +22,7 @@ foreach ($res as $row){
                Cost Payed 
             </td>
             <td class="alert-success">
-                {{$row->amount}}
+                {{Bil::find($id)->amount}}
             </td>
         </tr>
         <tr>
@@ -45,7 +30,7 @@ foreach ($res as $row){
                Date  
             </td>
             <td class="alert-success">
-                {{$row->date}}
+                {{Bil::find($id)->date}}
             </td>
         </tr>
         <tr>
@@ -63,24 +48,20 @@ foreach ($res as $row){
     </table>
 </div>
 </form>
-<?php
-}
-}else{
-?>
-<?php
-echo '<p class="alert alert-warning"><blink><span class="glyphicon glyphicon-warning-sign"></blink> No drinks taken by this guests</span></p>';
-}
-?>
 <script>
     $('#rep').submit(function(e){
         e.preventDefault();
+        $('.main').html('<label class="label label-info">Loading..</label>');
         var formz=$(this).serializeArray();
         var url="<?php echo url('barbills_update');?>";
         var url2="<?php echo $id;?>";
         var url3=url+'/'+url2;
         formz.push({"name": "save","value": ""});
         $.post(url3,formz,function(data){
+            setTimeout(function(){
             $('.main').html(data);
+            location.reload();
+            },2000);
         });
     });
 </script>

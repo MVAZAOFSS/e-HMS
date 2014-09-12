@@ -21,6 +21,7 @@
             <li><a href="{{ url("guest") }}"> Guests</a></li> 
             <li><a href="{{ url("guest/add") }}"> Guest register</a></li>                    
         </ol>
+    <div class=" col-lg-7">
  <!--response messages-->
          @if(isset($emsg))
          <div class="alert alert-danger alert-dismissable" >
@@ -38,96 +39,40 @@
 <div style="">         
 <table class='table table-striped table-responsive table-bordered' id='stafftale' >
               <thead>
-                  <tr class="">
-                      <th> # </th>
+                  <tr>
                       <th>  Full name   </th>
                       <th>  Mobile      </th>
                       <th>  Room        </th>
                       <th>  Arrival date</th>
                       <th>  Departure date</th>
-                      <th>  Days spent</th>
-                      <th>  Bar  </th>
-                      <th>  Restaurant  </th>
-                      <th>  Laundry  </th>
                       <th>  Operations  </th>
                   </tr>
               </thead>
               <tbody>
-                  <?php $i = 1;  
+                  <?php   
                    $guests = Guest::where('departure_date', date("Y-m-d"))->get(); ?>
                     @foreach($guests as $m)
                     <tr>
-                        <td>{{ $i++ }}</td>
                          <td>{{$m->firstname}} {{$m->middlename}} {{$m->lastname}}</td>
                          <td>{{ $m->mobile }}</td>
                          <td>{{ Room::find($m->room_number)->name }}</td>
                          <td>{{ $m->arrival_date }}</td>
                          <td>{{ $m->departure_date }}</td>
-                         <td>{{Guest::daysSpent($m->arrival_date, $m->departure_date)}}</td>
-                         <td>
-                          @if(Guest::checkBar($m->id) == 0)
-                          <button class="btn btn-danger btn-xs" onclick="incompleteDetails({{$m->id}})" data-toggle="modal" data-target="#myinco">
-                                  incomplete
-                          </button>
-                          @else
-                              <label class="label label-success">
-                                completed
-                              </label>
-                          @endif 
-                         </td>
-                         <td>
-                          @if(Guest::checkRest($m->id) == 0)
-                          <button class="btn btn-danger btn-xs" onclick="incompleteRestaurant({{$m->id}})" data-toggle="modal" data-target="#myinco">
-                                  incomplete
-                          </button>
-                          @else
-                              <label class="label label-success">
-                                completed
-                              </label>
-                          @endif 
-                         </td>
-                         <td>
-                            @if(Llist::getRemain($m->id) == 0)
-                                <label class="label label-success">
-                                  completed
-                                </label>
-                            @else
-                            <button class="btn btn-danger btn-xs">
-                                  incomplete
-                            </button>
-                            @endif
-                         </td>
-                         <td id="{{ $m->id }}">
-                            <a href="#" class="deletedrink"><button type="button" class="btn btn-primary btn-xs "><span class="glyphicon glyphicon-check"></span> Checkout </button></a>
-                         </td>
+                         <td><a class="btn btn-success btn-xs" onclick="ViewList('{{$m->id}}')"><span class="glyphicon glyphicon-check"></span> Details</a></td>
                     </tr>
                     @endforeach
                
               </tbody>
  </table>   
 </div>
- <div class="modal fade" id="myinco" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title" id="myModalLabel">Guest bill information</h4>
-      </div>
-      <div class="modal-body" style="height: 320px; overflow:scroll">
-        
-        <div class="main">
-
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
 </div>
+    <div class="col-lg-5">
+        <div class="list">
+            
+        </div>
+    </div>
 </div>   
 </div> 
-
 <script>
 $(document).ready(function (){
    $("#stafftale").dataTable({
@@ -172,6 +117,13 @@ function incompleteRestaurant(id){
     var urla2=urla+'/'+id;
     $.get(urla2,function(data){
         $('.main').html(data);
+    });
+}
+function ViewList(id){
+    var url="<?php echo url('view_den');?>";
+    var url2=url+'/'+id;
+    $.get(url2,function(data){
+        $('.list').html(data);
     });
 }
 </script>

@@ -112,7 +112,7 @@ class RestaurantsController extends BaseController {
             if($validator->fails()){
                 return View::make('guests.restDetails',$data)->withError($validator);
             }  else {
-                $remain=  Restaurant::where('id',$id)->first();
+                $remain=  Bill::where('id',$id)->first();
                 $cost=$remain->remain;
                 if(Input::get('amount') < $cost){
                     $costz=$cost-Input::get('amount');
@@ -136,6 +136,10 @@ class RestaurantsController extends BaseController {
                 }
             } 
                 
+            }
+            function customer_list($id){
+                $data['id']=$id;
+                return View::make('guests.view_customer',$data);
             }
         }
 

@@ -97,10 +97,7 @@
     <select id="reportin" style="border: 1px solid #002;padding:2px">
         <option></option>
         <option value="Table">Table</option>
-        <option class="chart" style="display:none" value="Line">Line</option>
-        <option class="chart" style="display:none" value="Pie">Pie</option>
-        <option class="chart" style="display:none" value="Column">Column</option>            
-    </select>
+     </select>
     <button id="go">Go</button>
 </p>
         </form>
@@ -127,27 +124,27 @@ $(document).ready(function(){
 
     $('#reportfor').on('change', function(){
         var rf = $(this).val();
-        if(rf == "daily"){
+        if(rf ==="daily"){
             $(".chart").hide();
             $('#reportin').val('');
             $('#weekly').hide();
             $('#monthly').hide();
             $('#yearly').hide();
             $('#daily').fadeIn(1000);
-        }else if(rf == "weekly"){
+        }else if(rf ==="weekly"){
             $(".chart").show();
             $('#daily').hide();
             $('#monthly').hide();
             $('#yearly').hide();
             $('#weekly').fadeIn(1000);
-        }else if(rf == "yearly"){
+        }else if(rf ==="yearly"){
             $(".chart").show();
             $('#reportin').val('');
             $('#daily').hide();
             $('#weekly').hide();
             $('#monthly').hide();
             $('#yearly').fadeIn(1000);
-        }else if(rf == "monthly"){
+        }else if(rf ==="monthly"){
             $(".chart").show();
             $('#reportin').val('');
             $('#daily').hide();

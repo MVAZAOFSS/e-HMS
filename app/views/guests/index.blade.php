@@ -64,7 +64,7 @@
                          <td>{{ $m->departure_date }}</td>
                          <td id="{{ $m->id }}">
                               <a href="{{url("guest/edit/{$m->id}")}}"><button type="button" class="btn btn-success btn-xs"><span class="glyphicon glyphicon-edit"></span> Edit </button></a>
-                              @if(($m->arrival_date)>=(date('Y-m-d'))&& $m->cancelled=='no')
+                              @if(($m->arrival_date)>=(date('Y-m-d'))&& $m->cancelled=='no'&& $m->released=='no')
                               <div class="btn-group btn-group-xs"><button class="btn btn-info btn-xs" data-toggle="dropdown">Extra <span class="caret"></span></button>
                                   <ul class="dropdown-menu" role="menu">
                                       <li><a href="#" onclick="SquezeOrder('{{$m->id}}')" data-target="#squeez" data-toggle="modal">Squeze order</a></li>
@@ -80,7 +80,7 @@
                                     </div>
                                 </div>
                                  <div class="modal-footer">
-                                 <button type="button" class="btn btn-danger btn-sm" onclick="CancelOrder('{{$m->room_number}}')">Yes</button>
+                                 <button type="button" class="btn btn-danger btn-sm" onclick="CancelOrder('{{$m->id}}')">Yes</button>
                                  <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Cancel</button></div>
                                 </div>
                                 </div>
@@ -170,5 +170,4 @@ $(document).ready(function (){
       });
    }
 </script>
-
 @stop

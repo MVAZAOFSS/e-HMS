@@ -76,6 +76,7 @@ Route::post('restaurant/delete/{id}', array('as'=>'listrestaurants', 'uses'=>'Re
 Route::get('restaurant/edit/{id}', array('as'=>'editrestaurant', 'uses'=>'RestaurantsController@edit'));
 Route::post('restaurant/edit/{id}', array('as'=>'editrestaurant1', 'uses'=>'RestaurantsController@update'));
 Route::post('restaurant_update/{id}', 'RestaurantsController@update_resta');
+Route::get('view_den/{id}', 'RestaurantsController@customer_list');
 Route::post('barbills_update/{id}', 'GuestsController@update_barbills');
 //laundry codes
 Route::get('laundry/add', array('as'=>'addlaundry', 'uses'=>'LaundriesController@create'));
@@ -109,8 +110,6 @@ Route::get('view_cancel/{id}', 'GuestsController@cancel_id');
 Route::post('cancel_edit/{id}', 'GuestsController@cancel_edit_id');
 Route::get('view_danger/{id}', 'GuestsController@cancel_danger');
 Route::get('canceled_rooms', 'GuestsController@report_canceled');
-//Route::get('canceled_rooms', 'GuestsController@report_order');
-//notification 
 Route::get('notifications', array('as'=>'notifications', 'uses'=>'NotificationsController@index'));
 Route::post('notifications/solved/{id}', array('as'=>'notificationssolved', 'uses'=>'NotificationsController@solving'));
 Route::get('notify', array('as'=>'notify', 'uses'=>'NotificationsController@notify'));
@@ -157,6 +156,12 @@ Route::get('year_laundry/{guest}/{laud}/{year}','ReportsController@laundry_year'
 Route::get('reports/notify', array('as'=>'notify', 'uses'=>'NotificationsController@notify'));
 //Accountant
 Route::get('accountant/income/{date}', 'AccountantController@income');
+Route::get('conferences', 'GuestsController@conferencesHome');
+Route::get('tableContents/{id}', 'GuestsController@getTableContents');
+Route::post('payBillContents/{id}', 'GuestsController@payBillTableContents');
+Route::post('submitConferences', 'GuestsController@conferencesSubmitAction');
+Route::get('create', 'AccountantController@createBf');
+Route::post('submitBf', 'AccountantController@submitBalanceAndRemain');
 Route::get('accountant/expenditure', 'AccountantController@expenditure');
 Route::get('accountant/report', 'AccountantController@report');
 Route::get('accountant_report/{income}/{date}', 'AccountantController@report_display');

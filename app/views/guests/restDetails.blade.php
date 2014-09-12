@@ -12,7 +12,7 @@
                Food Taken
             </td>
             <td class="alert-success">
-                {{$foods}}
+                {{Bill::find($viewID)->foods}}
             </td>
         </tr>
         <tr>
@@ -20,15 +20,23 @@
                 Payment mode
             </td>
             <td class="alert-success">
-                {{$payment}}
+                {{Bill::find($viewID)->paymentmode}}
             </td>
         </tr>
         <tr>
             <td>
-               Cost To be Payed 
+               Amount To be Payed 
             </td>
             <td class="alert-success">
-                {{$remain}}
+                {{Bill::find($viewID)->remain}}
+            </td>
+        </tr>
+        <tr>
+            <td>
+               Amount Payed 
+            </td>
+            <td class="alert-success">
+                {{Bill::find($viewID)->amount}}
             </td>
         </tr>
         <tr>
@@ -36,7 +44,7 @@
                Date  
             </td>
             <td class="alert-success">
-                {{$datez}}
+                {{Bill::find($viewID)->date}}
             </td>
         </tr>
         <tr>
@@ -57,13 +65,17 @@
 <script>
     $('#sub').submit(function(e){
         e.preventDefault();
+        $('.main').html('<label class="label label-info">Loading..</label>');
         var formz=$(this).serializeArray();
         var url="<?php echo url('restaurant_update');?>";
         var url2="<?php echo $viewID;?>";
         var url3=url+'/'+url2;
         formz.push({"name": "save","value": ""});
         $.post(url3,formz,function(data){
+            setTimeout(function(){
             $('.main').html(data);
+            location.reload();
+            },2000);
         });
     });
 </script>

@@ -104,7 +104,7 @@
     $("#tablez").dataTable({
             "bJQueryUI": true,
             "sPaginationType": "full_numbers"
-       });
+      });
 });
 </script>
 @stop

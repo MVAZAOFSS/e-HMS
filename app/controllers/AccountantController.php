@@ -8,7 +8,12 @@ class AccountantController extends BaseController{
             $data4=  $this->bils($date);
             $data5=  $this->bills($date);
             $data6=  $this->food_sells($date);
-            $data=$data1+$data2+$data3+$data4+$data5+$data6;
+            $data7=$this->balanceCheck($date);
+           $data8=$this->advancedConferencePayed($date);
+           $data9=$this->advancedFunctionPayed($date);
+           $data10=$this->conferencePayed($date);
+           $data11=$this->getFunctionPayed($date);
+            $data=$data1+$data2+$data3+$data4+$data5+$data6+$data7+$data8+$data9+$data10+$data11;
 	    return View::make('accountant.income',$data);
 	}
 	public function expenditure(){
@@ -564,6 +569,145 @@ class AccountantController extends BaseController{
         }  else {
             $data_array=array(
                 'msosicost'=>''
+            );
+            return $data_array;
+        }
+    }
+    function createBf(){
+        return View::make('accountant.create_view');
+    }
+    function submitBalanceAndRemain(){
+        $input=Input::all();
+        $rules=array(
+            'benk'=>'required|numeric',
+            'bak'=>'required|numeric'
+        );
+        $validator=Validator::make($input,$rules);
+          if($validator->fails()){
+          return View::make('accountant.create_view')->withErrors($validator);
+          }else{
+             $data=array(
+                 'bank'=>Input::get('benk'),
+                 'balance'=>Input::get('bak'),
+                 'date'=>date('Y-m-d')
+             );
+              $res=DB::table('banks')->where('date',date('Y-m-d'))->get();
+              if($res){
+                  DB::table('banks')->where('date',date('Y-m-d'))->update($data);
+                  $sms['rg1']='Successifully updated';
+                  return View::make('accountant.create_view',$sms);
+              }else{
+                  DB::table('banks')->insert($data);
+                  $sms['rg']='Successifully insert';
+                  return View::make('accountant.create_view',$sms);
+              }
+          }
+    }
+    function balanceCheck($date){
+        $res=DB::table('banks')->select('*')
+               ->where('date',$date)
+               ->get(array(
+                     'balance',
+                 DB::raw('SUM(balance) AS balance')
+            ));
+        if($res){
+           foreach($res as $row){
+               $data_array=array(
+                   'balance'=>$row->balance
+               );
+           }
+            return $data_array;
+       }else{
+            $data_array=array(
+                'balance'=>''
+            );
+           return $data_array;
+    }
+}
+    function advancedConferencePayed($date){
+        $res=DB::table('conferes')->select('*')
+            ->where('date',$date)
+            ->where('type_conferes','Conference')
+            ->get(array(
+                'amount',
+                DB::raw('SUM(amount) AS amount')
+            ));
+        if($res){
+            foreach($res as $row){
+                $data_array=array(
+                    'amount'=>$row->amount
+                );
+            }
+            return $data_array;
+        }else{
+            $data_array=array(
+                'amount'=>''
+            );
+            return $data_array;
+        }
+    }
+    function advancedFunctionPayed($date){
+        $res=DB::table('conferes')->select('*')
+            ->where('date',$date)
+            ->where('type_conferes','Function')
+            ->get(array(
+                'amount',
+                DB::raw('SUM(amount) AS amount')
+            ));
+        if($res){
+            foreach($res as $row){
+                $data_array=array(
+                    'amount1'=>$row->amount
+                );
+            }
+            return $data_array;
+        }else{
+            $data_array=array(
+                'amount1'=>''
+            );
+            return $data_array;
+        }
+    }
+    function conferencePayed($date){
+        $res=DB::table('conferes')->select('*')
+            ->where('date',$date)
+            ->where('type_conferes','Conference')
+            ->get(array(
+                'remain',
+                DB::raw('SUM(remain) AS remain')
+            ));
+        if($res){
+            foreach($res as $row){
+                $data_array=array(
+                    'remain'=>$row->remain
+                );
+            }
+            return $data_array;
+        }else{
+            $data_array=array(
+                'remain'=>''
+            );
+            return $data_array;
+        }
+    }
+    function getFunctionPayed($date){
+        $res=DB::table('conferes')->select('*')
+            ->where('date',$date)
+            ->where('type_conferes','Function')
+            ->get(array(
+                'remain',
+                DB::raw('SUM(remain) AS remain')
+            ));
+        if($res){
+            foreach($res as $row){
+                $data_array=array(
+                    'remain1'=>$row->remain
+                );
+            }
+            return $data_array;
+        }else{
+            $data_array=array(
+                'remain1'=>''
             );
             return $data_array;
         }

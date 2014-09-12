@@ -5,11 +5,6 @@ class GuestsController extends BaseController {
 	public function __construct(){
 		$this->beforeFilter('auth', array('*'));
 	}
-	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return Response
-	 */
 	public function index()
 	{
 		$guests = Guest::all();
@@ -111,18 +106,10 @@ class GuestsController extends BaseController {
 
 	public function create()
 	{
-		//$rooms = DB::table('rooms', '!=', 'occupied')->get();
         $rooms   = Room::where('status', '!=', 'occupied')->get();
         return View::make('guests.create', compact('rooms'));
 	}
-
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @return Response
-	 */
-
-	public function rno(){
+       public function rno(){
 		$rno = Input::get('t');
 		$rn  = Guest::where('reservation_number', $rno)->count();
 		if($rn == 0){
@@ -180,6 +167,7 @@ class GuestsController extends BaseController {
 						"discount"=>$inputs['discount'],
 						"reservation_number"=>$inputs['reservation_number'],
 						"mode"=>$inputs['mode'],
+                                                "totalcost"=>$cost*(substr($departure,8,6)-  substr($arrival, 8,6)),
 						"allegy"=>$inputs['allegy'],
 						"reserved"=>$reserved
 					));
@@ -270,27 +258,12 @@ class GuestsController extends BaseController {
              $data['id']=$id;
               return View::make('guests.details',$data);
         }
+        
        function view_restaurant($id){
-        $res=DB::table('foodbills')->select('*')
-        ->join('guests','foodbills.guestid','=','guests.id')
-        ->where('cleared','no')->where('guests.id',$id)
-        ->get();
-        if($res){
-        foreach ($res as $row){
-            $data=array(
-                'foods'=>$row->foods,
-                'payment'=>$row->paymentmode,
-                'datez'=>$row->date,
-                'remain'=>$row->remain
-            );
-        }
         $data['viewID']=$id;
         return View::make('guests.restDetails',$data);
-        }  else {
-         $data['smz']='<p class="alert alert-warning"><blink><span class="glyphicon glyphicon-warning-sign"></span></blink>No food taken by this guest</p>';
-         return View::make('guests.restDetails',$data);
-        }
-        }
+          
+  }
         function cancel_id($id){
           $data['id']=$id;
           return View::make('guests.view_form',$data);
@@ -323,16 +296,16 @@ class GuestsController extends BaseController {
           }
         }
         function cancel_danger($id){
+            $idz=Guest::find($id)->room_number;
             $data_array=array(
                 'checkin'=>'',
                 'checkout'=>'',
                 'status'=>'available',
                 'totalcost'=>''
             );
-            $date=  Room::first($id)->checkin;
-            Room::find($id)->update($data_array);
-            DB::table('guests')->where('room_number',$id)
-                    ->where('arrival_date',$date)->update(array('cancelled'=>'yes'));
+            Room::find($idz)->update($data_array);
+            DB::table('guests')->where('id',$id)
+                     ->update(array('cancelled'=>'yes'));
           echo '<p class="alert alert-success">The order has been canceled</p>';  
         }
         function report_canceled(){
@@ -373,9 +346,106 @@ class GuestsController extends BaseController {
                 return View::make('guests.details',$data);
                 }
             } 
-                
             }
+        function conferencesHome(){
+            $data['ro']=$this->conferenceType();
+            return View::make('guests.conferencesView',$data);
         }
+       function conferencesSubmitAction(){
+           $data['ro']=$this->conferenceType();
+           $input=Input::all();
+           $rules=array(
+               'sec'=>'required',
+               'amount'=>'required|numeric'
+           );
+           $validator=Validator::make($input,$rules);
+           if($validator->fails()){
+               return View::make('guests.conferencesView',$data)->withErrors($validator);
+           }else{
+           $data_array=array(
+               'type_conferes'=>Input::get('sec'),
+               'amount'=>Input::get('amount'),
+               'mode'=>Input::get('mode'),
+               'remain'=>Input::get('remain'),
+               'date'=>date('Y-m-d'),
+               'status'=>'paid'
+           );
+               $data_array1=array(
+                   'type_conferes'=>Input::get('sec'),
+                   'amount'=>Input::get('amount'),
+                   'mode'=>Input::get('mode'),
+                   'remain'=>Input::get('remain'),
+                   'date'=>date('Y-m-d')
+               );
+           $res=DB::table('conferes')->get();
+           if($res){
+           if(Input::get('mode')=='Cash'){
+               DB::table('conferes')->where('type_conferes',Input::get('sec'))
+                   ->where('date',date('Y-m-d'))->update($data_array);
+               $data['sms']= "<p>Successifully upded</p>";
+               return View::make('guests.conferencesView',$data);
+           }elseif(Input::get('mode')=='Credit'){
+               DB::table('conferes')->where('type_conferes',Input::get('sec'))
+                   ->where('date',date('Y-m-d'))->update($data_array1);
+               $data['sms']= "<p>Successifully upded</p>";
+               return View::make('guests.conferencesView',$data);
+           }
+           }else{
+               if(Input::get('mode')=='Cash'){
+               DB::table('conferes')->insert($data_array);
+               $data['sms']= "<p>Successifully upded</p>";
+               return View::make('guests.conferencesView',$data);
+               }elseif(Input::get('mode')=='Credit'){
+               DB::table('conferes')->insert($data_array1);
+               $data['sms']= "<p>Successifully upded</p>";
+               return View::make('guests.conferencesView',$data);
+               }
+           }
+       }
+        }
+    function conferenceType(){
+        $res=DB::table('conferes')->get();
+        return $res;
+    }
+    function getTableContents($id){
+         $data['id']=$id;
+        return View::make('guests.tableBills',$data);
+    }
+    function payBillTableContents($id){
+        $data['id']=$id;
+        $input=Input::all();
+        $rules=array(
+            'pay'=>'required|numeric'
+        );
+        $validator=Validator::make($input,$rules);
+        if($validator->fails()){
+            return View::make('guests.tableBills',$data)->withErrors($validator);
+        }else{
+            $remain=Confere::where('id',$id)->first()->remain;
+            $amount=Confere::where('id',$id)->first()->amount;
+            if($remain>Input::get('pay')){
+                $data_array=array(
+                    'amount'=>Input::get('pay')+$amount,
+                    'remain'=>$amount-$remain,
+                    'status'=>'no'
+                );
+              DB::table('conferes')->where('id',$id)->update($data_array);
+              $data['sms']='<p class="alert alert-success"> Record updated</p>';
+              return View::make('guests.tableBills',$data);
+            }else{
+                $data_array=array(
+                    'amount'=>Input::get('pay')+$amount,
+                    'remain'=>$remain-Input::get('pay'),
+                    'status'=>'paid'
+                );
+                DB::table('conferes')->where('id',$id)->update($data_array);
+                $data['sms']='<p class="alert alert-success"> Record updated and Paid</p>';
+                return View::make('guests.tableBills',$data);
+           }
+        }
+    }
+}
+
         
         
 
