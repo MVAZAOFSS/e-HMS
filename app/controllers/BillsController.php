@@ -269,7 +269,7 @@ class BillsController extends BaseController {
 	}
 
 	public function updatebill(){
-		if(Auth::user()->role == 7){
+		if(Auth::user()->role == 8){
 				$id     	  = Input::get('g');
 				$amount  	  = Input::get('a');
 				$total   	  = Input::get('t');
@@ -297,7 +297,7 @@ class BillsController extends BaseController {
 					$bi           = Bill::find($id);
 					return View::make('bills.create', compact('bi'));
                                 }
-		}elseif (Auth::user()->role == 8) {
+		}elseif (Auth::user()->role == 7) {
                  $id     	  = Input::get('g');
 				$amount  	  = Input::get('a');
 				$total   	  = Input::get('t');
@@ -373,7 +373,7 @@ class BillsController extends BaseController {
 		$inputs  = Input::all();
 		
 		if(Auth::user()->role == 7){
-                                $g       = $inputs['g'];
+                $g       = $inputs['g'];
 				$f       = $inputs['f'];
 				$t       = $inputs['t'];
 			     $cost=Restaurant::where('name',$f)->first()->cost;
@@ -385,7 +385,7 @@ class BillsController extends BaseController {
 				$room    = substr($g, $start, $end);
 				
 				$roomid  = Room::where('name', $room)->first()->id;
-				$guest   = Guest::whereRaw('room_number = ? and checked = "no" ', array($roomid))->first();
+				$guest   = Guest::whereRaw('room_number = ? and checked = "no" and released ="no" and cancelled="no" ', array($roomid))->first();
 				
 				$gid     = $guest->id;
 				
@@ -487,7 +487,7 @@ class BillsController extends BaseController {
 				$room    = substr($g, $start, $end);
 				
 				$roomid  = Room::where('name', $room)->first()->id;
-				$guest   = Guest::whereRaw('room_number = ? and checked = "no" ', array($roomid))->first();
+				$guest   = Guest::whereRaw('room_number = ? and checked = "no" and released ="no" and cancelled="no" ', array($roomid))->first();
 				
 				$gid     = $guest->id;
 				

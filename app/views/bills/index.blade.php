@@ -269,6 +269,9 @@ $('#addbill').on('click', function(){
       source:  {{ $json2 }}
     });
  @elseif(Auth::user()->role ==8)
+$('#food').autocomplete({
+    source:  {{ $json2 }}
+});
   @else
   
     $('#drink').autocomplete({

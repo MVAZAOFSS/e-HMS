@@ -19,10 +19,18 @@
         </tr>
         <tr>
             <td>
-               Cost Payed 
+               Amount Payed
             </td>
             <td class="alert-success">
                 {{Bil::find($id)->amount}}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Amount remained
+            </td>
+            <td class="alert-success">
+                {{Bil::find($id)->remain}}
             </td>
         </tr>
         <tr>

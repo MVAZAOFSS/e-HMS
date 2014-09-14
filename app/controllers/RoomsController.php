@@ -256,7 +256,7 @@ class RoomsController extends BaseController {
               $res=DB::table('rooms')->select('*')
                       ->join('guests','guests.room_number', '=' ,'rooms.id')
                       ->where('cancelled','no')
-                      ->where('rooms.created_at','LIKE','%'.$date.'%')
+                      ->where('guests.created_at','LIKE','%'.$date.'%')
                       ->get();
                $data['git']=$res;
                return View::make('rooms.roomreport',$data);
@@ -265,7 +265,7 @@ class RoomsController extends BaseController {
                    ->join('guests','guests.room_number', '=' ,'rooms.id')
                    ->where('status','reserved')
                     ->where('cancelled','no')
-                    ->where('rooms.created_at','LIKE','%'.$date.'%')
+                    ->where('guests.created_at','LIKE','%'.$date.'%')
                     ->get();
             $data['git']=$res;
             return View::make('rooms.roomreport',$data);
@@ -274,7 +274,7 @@ class RoomsController extends BaseController {
                    ->join('guests','guests.room_number', '=' ,'rooms.id')
                    ->where('status','occupied')
                    ->where('cancelled','no')
-                   ->where('rooms.created_at','LIKE','%'.$date.'%')
+                   ->where('guests.created_at','LIKE','%'.$date.'%')
                     ->get();
             $data['git']=$res;
             return View::make('rooms.roomreport',$data);
@@ -282,7 +282,7 @@ class RoomsController extends BaseController {
             $res=DB::table('rooms')
                    ->join('guests','guests.room_number', '=' ,'rooms.id')
                     ->where('cancelled','no')
-                   ->where('rooms.created_at','LIKE','%'.$date.'%')
+                   ->where('guests.created_at','LIKE','%'.$date.'%')
                    ->get(array(
                         '*',
                         DB::raw('SUM(guests.totalcost) AS totalcost')
@@ -312,7 +312,7 @@ class RoomsController extends BaseController {
         }elseif ($guest=='income'&& $all_type=='reserved') {
             $res=DB::table('rooms')
                    ->join('guests','guests.room_number', '=' ,'rooms.id')
-                   ->where('rooms.created_at','LIKE','%'.$date.'%')
+                   ->where('guests.created_at','LIKE','%'.$date.'%')
                     ->where('status','reserved')
                     ->where('cancelled','no')
                    ->get(array(
@@ -343,7 +343,7 @@ class RoomsController extends BaseController {
         }elseif ($guest=='income'&& $all_type=='paid') {
             $res=DB::table('rooms')
                    ->join('guests','guests.room_number', '=' ,'rooms.id')
-                   ->where('rooms.created_at','LIKE','%'.$date.'%')
+                   ->where('guests.created_at','LIKE','%'.$date.'%')
                     ->where('status','occupied')
                     ->where('cancelled','no')
                    ->get(array(
@@ -379,7 +379,7 @@ class RoomsController extends BaseController {
             if($guest=='Guest'&& $all_type=='all'){
               $res=DB::table('rooms')->select('*')
                       ->join('guests','guests.room_number', '=' ,'rooms.id')
-                      ->whereBetween('checkin',array($start_date,$end_date))
+                      ->whereBetween('arrival_date',array($start_date,$end_date))
                       ->where('cancelled','no')
                       ->get();
                $data['git']=$res;
@@ -388,7 +388,7 @@ class RoomsController extends BaseController {
             $res=DB::table('rooms')->select('*')
                    ->join('guests','guests.room_number', '=' ,'rooms.id')
                    ->where('status','reserved')
-                   ->whereBetween('checkin',array($start_date,$end_date))
+                   ->whereBetween('arrival_date',array($start_date,$end_date))
                     ->where('cancelled','no')
                     ->get();
             $data['git']=$res;
@@ -397,7 +397,7 @@ class RoomsController extends BaseController {
             $res=DB::table('rooms')->select('*')
                    ->join('guests','guests.room_number', '=' ,'rooms.id')
                    ->where('status','occupied')
-                    ->whereBetween('checkin',array($start_date,$end_date))
+                    ->whereBetween('arrival_date',array($start_date,$end_date))
                     ->where('cancelled','no')
                     ->get();
             $data['git']=$res;
@@ -405,7 +405,7 @@ class RoomsController extends BaseController {
         }elseif ($guest=='income' && $all_type=='all') {
             $res=DB::table('rooms')
                    ->join('guests','guests.room_number', '=' ,'rooms.id')
-                   ->whereBetween('checkin',array($start_date,$end_date))
+                   ->whereBetween('arrival_date',array($start_date,$end_date))
                     ->where('cancelled','no')
                    ->get(array(
                         '*',
@@ -414,7 +414,7 @@ class RoomsController extends BaseController {
             foreach ($res as $money){
                 if($money->mode=='Cash'){
                     $cash=array(
-                        'cashcost'=>$money->ctotalcost,
+                        'cashcost'=>$money->totalcost,
                          'cashmode'=>$money->mode
                     );
                     return View::make('rooms.roomreportcost',$cash);   
@@ -436,7 +436,7 @@ class RoomsController extends BaseController {
         }elseif ($guest=='income'&& $all_type=='reserved') {
             $res=DB::table('rooms')
                    ->join('guests','guests.room_number', '=' ,'rooms.id')
-                   ->whereBetween('checkin',array($start_date,$end_date))
+                   ->whereBetween('arrival_date',array($start_date,$end_date))
                     ->where('status','reserved')
                     ->where('cancelled','no')
                    ->get(array(
@@ -467,7 +467,7 @@ class RoomsController extends BaseController {
         }elseif ($guest=='income'&& $all_type=='paid') {
             $res=DB::table('rooms')
                    ->join('guests','guests.room_number', '=' ,'rooms.id')
-                   ->whereBetween('checkin',array($start_date,$end_date))
+                   ->whereBetween('arrival_date',array($start_date,$end_date))
                     ->where('status','occupied')
                     ->where('cancelled','no')
                    ->get(array(
@@ -501,8 +501,8 @@ class RoomsController extends BaseController {
             if($guest=='Guest'&& $all_type=='all'){
               $res=DB::table('rooms')->select('*')
                       ->join('guests','guests.room_number', '=' ,'rooms.id')
-                      ->where('rooms.created_at','like','%'.$month.'%')
-                      ->where('rooms.created_at','LIKE','%'.$year.'%')
+                      ->where('guests.created_at','like','%'.$month.'%')
+                      ->where('guests.created_at','LIKE','%'.$year.'%')
                       ->where('cancelled','no')
                       ->get();
                $data['git']=$res;
@@ -510,8 +510,8 @@ class RoomsController extends BaseController {
             }elseif ($guest=='Guest'&& $all_type=='reserved') {
             $res=DB::table('rooms')->select('*')
                       ->join('guests','guests.room_number', '=' ,'rooms.id')
-                      ->where('rooms.created_at','like','%'.$month.'%')
-                      ->where('rooms.created_at','LIKE','%'.$year.'%')
+                      ->where('guests.created_at','like','%'.$month.'%')
+                      ->where('guests.created_at','LIKE','%'.$year.'%')
                       ->where('status','reserved')
                     ->where('cancelled','no')
                       ->get();
@@ -520,8 +520,8 @@ class RoomsController extends BaseController {
         }elseif ($guest=='Guest' && $all_type=='paid') {
             $res=DB::table('rooms')->select('*')
                      ->join('guests','guests.room_number', '=' ,'rooms.id')
-                      ->where('rooms.created_at','like','%'.$month.'%')
-                      ->where('rooms.created_at','LIKE','%'.$year.'%')
+                      ->where('guests.created_at','like','%'.$month.'%')
+                      ->where('guests.created_at','LIKE','%'.$year.'%')
                       ->where('status','occupied')
                     ->where('cancelled','no')
                       ->get();
@@ -530,8 +530,8 @@ class RoomsController extends BaseController {
         }elseif ($guest=='income' && $all_type=='all') {
             $res=DB::table('rooms')
                    ->join('guests','guests.room_number', '=' ,'rooms.id')
-                   ->where('rooms.created_at','like','%'.$month.'%')
-                   ->where('rooms.created_at','LIKE','%'.$year.'%')
+                   ->where('guests.created_at','like','%'.$month.'%')
+                   ->where('guests.created_at','LIKE','%'.$year.'%')
                     ->where('cancelled','no')
                    ->get(array(
                         '*',
@@ -562,8 +562,8 @@ class RoomsController extends BaseController {
         }elseif ($guest=='income'&& $all_type=='reserved') {
             $res=DB::table('rooms')
                    ->join('guests','guests.room_number', '=' ,'rooms.id')
-                   ->where('rooms.created_at','like','%'.$month.'%')
-                   ->where('rooms.created_at','LIKE','%'.$year.'%')
+                   ->where('guests.created_at','like','%'.$month.'%')
+                   ->where('guests.created_at','LIKE','%'.$year.'%')
                    ->where('status','reserved')
                     ->where('cancelled','no')
                    ->get(array(
@@ -594,8 +594,8 @@ class RoomsController extends BaseController {
         }elseif ($guest=='income'&& $all_type=='paid') {
             $res=DB::table('rooms')
                    ->join('guests','guests.room_number', '=' ,'rooms.id')
-                   ->where('rooms.created_at','like','%'.$month.'%')
-                   ->where('rooms.created_at','LIKE','%'.$year.'%')
+                   ->where('guests.created_at','like','%'.$month.'%')
+                   ->where('guests.created_at','LIKE','%'.$year.'%')
                     ->where('status','occupied')
                     ->where('cancelled','no')
                    ->get(array(
@@ -629,7 +629,7 @@ class RoomsController extends BaseController {
             if($guest=='Guest'&& $all_type=='all'){
               $res=DB::table('rooms')->select('*')
                       ->join('guests','guests.room_number', '=' ,'rooms.id')
-                      ->where('rooms.created_at','LIKE','%'.$year.'%')
+                      ->where('guests.created_at','LIKE','%'.$year.'%')
                       ->where('cancelled','no')
                       ->get();
                $data['git']=$res;
@@ -637,7 +637,7 @@ class RoomsController extends BaseController {
             }elseif ($guest=='Guest'&& $all_type=='reserved') {
             $res=DB::table('rooms')->select('*')
                       ->join('guests','guests.room_number', '=' ,'rooms.id')
-                      ->where('rooms.created_at','LIKE','%'.$year.'%')
+                      ->where('guests.created_at','LIKE','%'.$year.'%')
                       ->where('status','reserved')
                     ->where('cancelled','no')
                       ->get();
@@ -646,7 +646,7 @@ class RoomsController extends BaseController {
         }elseif ($guest=='Guest' && $all_type=='paid') {
             $res=DB::table('rooms')->select('*')
                      ->join('guests','guests.room_number', '=' ,'rooms.id')
-                      ->where('rooms.created_at','LIKE','%'.$year.'%')
+                      ->where('guests.created_at','LIKE','%'.$year.'%')
                       ->where('status','occupied')
                     ->where('cancelled','no')
                       ->get();
@@ -655,7 +655,7 @@ class RoomsController extends BaseController {
         }elseif ($guest=='income' && $all_type=='all') {
             $res=DB::table('rooms')
                    ->join('guests','guests.room_number', '=' ,'rooms.id')
-                   ->where('rooms.created_at','LIKE','%'.$year.'%')
+                   ->where('guests.created_at','LIKE','%'.$year.'%')
                     ->where('cancelled','no')
                    ->get(array(
                         '*',
@@ -685,7 +685,7 @@ class RoomsController extends BaseController {
         }elseif ($guest=='income'&& $all_type=='reserved') {
             $res=DB::table('rooms')
                    ->join('guests','guests.room_number', '=' ,'rooms.id')
-                   ->where('rooms.created_at','LIKE','%'.$year.'%')
+                   ->where('guests.created_at','LIKE','%'.$year.'%')
                    ->where('status','reserved')
                     ->where('cancelled','no')
                    ->get(array(
@@ -716,7 +716,7 @@ class RoomsController extends BaseController {
         }elseif ($guest=='income'&& $all_type=='paid') {
             $res=DB::table('rooms')
                    ->join('guests','guests.room_number', '=' ,'rooms.id')
-                    ->where('rooms.created_at','LIKE','%'.$year.'%')
+                    ->where('guests.created_at','LIKE','%'.$year.'%')
                     ->where('status','occupied')
                     ->where('cancelled','no')
                    ->get(array(

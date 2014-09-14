@@ -254,6 +254,10 @@ class GuestsController extends BaseController {
 	{
 		//
 	}
+    function view_customer($id){
+        $data['id']=$id;
+        return View::make('guests.view_customer',$data);
+    }
         function view_history($id){
              $data['id']=$id;
               return View::make('guests.details',$data);
@@ -375,9 +379,10 @@ class GuestsController extends BaseController {
                    'amount'=>Input::get('amount'),
                    'mode'=>Input::get('mode'),
                    'remain'=>Input::get('remain'),
-                   'date'=>date('Y-m-d')
+                   'date'=>date('Y-m-d'),
+                   'status'=>'no'
                );
-           $res=DB::table('conferes')->get();
+           $res=DB::table('conferes')->where('type_conferes',Input::get('sec'))->where('date',date('Y-m-d'))->get();
            if($res){
            if(Input::get('mode')=='Cash'){
                DB::table('conferes')->where('type_conferes',Input::get('sec'))
@@ -402,7 +407,7 @@ class GuestsController extends BaseController {
                }
            }
        }
-        }
+       }
     function conferenceType(){
         $res=DB::table('conferes')->get();
         return $res;

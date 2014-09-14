@@ -44,7 +44,7 @@
 		<img src="{{url("img/load.gif")}}" id="ajax5" style="width:52px;display:none;z-index:3000;position:absolute;margin-left: 230px; margin-top:120px">
 		          <div id="alrt" class="alert alert-success alert-dismissable" style="display:none;z-index:3000;position:absolute;margin-left: 160px; margin-top:50px">
 		            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-		            <strong>Successfully added! redirecting ....</strong> 
+		            <strong>Successfully added! redirecting ....</strong>
 		          </div>
 		<table class="table table-bordered" id="gt">
 			<tr style="background-color: #f5f5f5">
@@ -62,9 +62,9 @@
 				        <option value="4">Dinner</option>
 				        <option value="5">Neither</option>
 				        <option value="all"> bill history</option>
-				    <select>  
+				    <select>
 				</th>
-			</tr>	
+			</tr>
 			<?php $total = 0; ?>
 			@for($i=0; $i<$l; $i++)
 				<tr>
@@ -73,8 +73,8 @@
 					<td>{{Restaurant::where('name', $unique[$i])->first()->cost}} /=</td>
 					<td>{{(Bill::appears($unique[$i], $foods))*(Restaurant::where('name', $unique[$i])->first()->cost)}} /=</td>
 				</tr>
-			<?php $total = $total + ((Bill::appears($unique[$i], $foods))*(Restaurant::where('name', $unique[$i])->first()->cost)); ?>		
-			@endfor	
+			<?php $total = $total + ((Bill::appears($unique[$i], $foods))*(Restaurant::where('name', $unique[$i])->first()->cost)); ?>
+			@endfor
 			<tr style="background-color: #f5f5f5">
 				<td ></td>
 				<td></td>
@@ -90,11 +90,11 @@
 					<td><b>Amount paid </b></td>
 					<td>{{$bi->amount}}</td>
 					<td><b>served by</b> <br/>{{User::find($bi->added_by)->firstname}}{{User::find($bi->added_by)->lastname}}  </td>
-				</tr>	
+				</tr>
 				@if($bi->remain != 0)
 				<tr>
-				<td style="background-color: #f5f5f5"></td>	
-				<td style="background-color: #f5f5f5"></td>	
+				<td style="background-color: #f5f5f5"></td>
+				<td style="background-color: #f5f5f5"></td>
 				<td ><b>Enter Amount</b></td>
 					<td style="background-color: #f5f5f5">
 						<input type="text" class="form-control" id="amountb" value="" />
@@ -103,8 +103,8 @@
 					<input id="guestidb" value="{{$bi->id}}" type="hidden" />
 					<input id="gb" value="{{$bi->guestid}}" type="hidden" />
 					<input id="totalb" value="{{$total}}" type="hidden" />
-					<input id="servtb" value="{{$bi->servicetime}}" type="hidden" /> 
-					<button type="button" id="svb" class="btn btn-success">Update bill </button></td>	
+					<input id="servtb" value="{{$bi->servicetime}}" type="hidden" />
+					<button type="button" id="svb" class="btn btn-success">Update bill </button></td>
 				</tr>
 				@endif
 
@@ -114,14 +114,14 @@
 					<td>credit</td>
 					<td><b>Amount paid </b></td>
 					<td>{{$bi->amount}}</td>
-					<td><b>served by</b><br/> 
+					<td><b>served by</b><br/>
 						<input id="gb" value="{{$bi->guestid}}" type="hidden" />
 						{{User::find($bi->added_by)->firstname}} {{User::find($bi->added_by)->lastname}}  </td>
 				</tr>
 				@if($bi->amount == 0)
 				<tr>
-				<td style="background-color: #f5f5f5"></td>	
-				<td style="background-color: #f5f5f5"></td>	
+				<td style="background-color: #f5f5f5"></td>
+				<td style="background-color: #f5f5f5"></td>
 				<td ><b>Enter Amount</b></td>
 					<td style="background-color: #f5f5f5">
 						<input type="text" class="form-control" id="amountb" value="" />
@@ -130,14 +130,14 @@
 					<input id="guestidb" value="{{$bi->id}}" type="hidden" />
 					<input id="gb" value="{{$bi->guestid}}" type="hidden" />
 					<input id="totalb" value="{{$total}}" type="hidden" />
-					<input id="servtb" value="{{$bi->servicetime}}" type="hidden" /> 
-					<button type="button" id="svb" class="btn btn-success">Update bill </button></td>	
+					<input id="servtb" value="{{$bi->servicetime}}" type="hidden" />
+					<button type="button" id="svb" class="btn btn-success">Update bill </button></td>
 				</tr>
 				@else
 					@if($bi->remain != 0)
 					<tr>
-					<td style="background-color: #f5f5f5"></td>	
-					<td style="background-color: #f5f5f5"></td>	
+					<td style="background-color: #f5f5f5"></td>
+					<td style="background-color: #f5f5f5"></td>
 					<td ><b>Enter Amount</b></td>
 						<td style="background-color: #f5f5f5">
 							<input type="text" class="form-control" id="amountb" value="" />
@@ -146,12 +146,12 @@
 						<input id="guestidb" value="{{$bi->id}}" type="hidden" />
 						<input id="gb" value="{{$bi->guestid}}" type="hidden" />
 						<input id="totalb" value="{{$total}}" type="hidden" />
-						<input id="servtb" value="{{$bi->servicetime}}" type="hidden" /> 
-						<button type="button" id="svb" class="btn btn-success">Update bill </button></td>	
+						<input id="servtb" value="{{$bi->servicetime}}" type="hidden" />
+						<button type="button" id="svb" class="btn btn-success">Update bill </button></td>
 					</tr>
 					@endif
 				@endif
-			@endif	
+			@endif
 		</table>
 
 	@elseif(Auth::user()->role == 8)
@@ -277,7 +277,7 @@
 				@endif
 			@endif	
 		</table>
-        @else
+    @else
 	
 		<?php
 
@@ -399,8 +399,8 @@
 					</tr>
 					@endif
 				@endif
-			@endif	
-		</table>
+			@endif
+       </table>
 
 	@endif
 
@@ -422,6 +422,7 @@ $(document).ready(function(){
 	/////////////////////////////////////////////////////////
 
 	$('#svb').on('click', function(){
+        @if(Auth::user()->role == 7)
 		var a = $('#amountb').val();
 		var g = $('#guestidb').val();
 		var t = $('#totalb').val();
@@ -435,6 +436,35 @@ $(document).ready(function(){
 				$('#main').html(data);
 			});
 		}
+        @elseif(Auth::user()->role == 8)
+        var a = $('#amountb').val();
+        var g = $('#guestidb').val();
+        var t = $('#totalb').val();
+        var s = $('#servtb').val();
+        if(a==""){
+            alert("Please, fill the amount first !");
+        }else{
+            $('#gt').css('opacity', '0.2');
+            $('#ajax5').show();
+            $.post('bill/updatebill', {a:a,g:g,t:t,s:s}, function(data){
+                $('#main').html(data);
+            });
+        }
+        @else
+        var a = $('#amountb').val();
+        var g = $('#guestidb').val();
+        var t = $('#totalb').val();
+        var s = $('#servtb').val();
+        if(a==""){
+            alert("Please, fill the amount first !");
+        }else{
+            $('#gt').css('opacity', '0.2');
+            $('#ajax5').show();
+            $.post('bill/updatebill', {a:a,g:g,t:t,s:s}, function(data){
+                $('#main').html(data);
+            });
+        }
+        @endif
 	});
 
 	$('#md').on('change', function(){

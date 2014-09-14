@@ -154,7 +154,7 @@
 
      $json2 = json_encode($data2);
      
-  }elseif(Auth::user()->role == 8){ 
+  }elseif(Auth::user()->role == 8){
       $foods = Restaurant::all();
     $data2 = array();
     foreach($foods as $f){
@@ -196,7 +196,7 @@ $(document).ready(function(){
 <script type="text/javascript">
 $(document).ready(function(){
 
-@if(Auth::user()->role == 7)
+@if(Auth::user()->role ==7)
 $('#addbill').on('click', function(){
     
     var food      = $('#food').val();

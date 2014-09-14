@@ -106,19 +106,6 @@ $(document).ready(function (){
 });
 </script>
 <script>
-    function incompleteDetails(id){
-        var urlz="<?php echo url('view');?>";
-    $.get(urlz+'/'+id,function(data){
-        $('.main').html(data);
-    });
-}
-function incompleteRestaurant(id){
-    var urla="<?php echo url('restaurants');?>";
-    var urla2=urla+'/'+id;
-    $.get(urla2,function(data){
-        $('.main').html(data);
-    });
-}
 function ViewList(id){
     var url="<?php echo url('view_den');?>";
     var url2=url+'/'+id;
