@@ -254,6 +254,48 @@ class GuestsController extends BaseController {
 	{
 		//
 	}
+    function customerLaundry($id){
+       $data['id']=$id;
+        return View::make('guests.viewLaundry',$data);
+    }
+    function customerEditLaundry($id){
+       $data['id']=$id;
+       $input=Input::all();
+        $rules=array(
+            'cost'=>'required|numeric'
+        );
+        $validator=Validator::make($input,$rules);
+        if($validator->fails()){
+          return View::make('guests.viewLaundry',$data)->withErrors($validator);
+        }else{
+           $cost = Glist::find($id)->totalprice;
+           $remain = Glist::find($id)->remain;
+            $gid=Glist::find($id)->gid;
+             if(Input::get('cost')>=$remain){
+                $cost2=$cost+$remain;
+                $remain2=Input::get('cost')-$remain;
+                $data_array=array(
+                    'totalprice'=> $cost2,
+                    'remain'=>$remain2
+                );
+                Glist::where('id',$id)->update($data_array);
+                 DB::table('guests')->where('id',$gid)->update(array('llist'=>'yes'));
+                $data['sms']='<p class="alert alert-success">record update</p>';
+                return View::make('guests.viewLaundry',$data);
+             }else{
+                $data_array=array(
+                    'totalprice'=>$cost+$remain,
+                    'remain'=>$remain-Input::get('cost')
+
+                );
+                DB::table('laundrylist')->where('id',$id)->update($data_array);
+                DB::table('guests')->where('id',$gid)->update(array('llist'=>'no'));
+                $data['sms']='<p class="alert alert-success">record update</p>';
+                return View::make('guests.viewLaundry',$data);
+            }
+
+        }
+    }
     function view_customer($id){
         $data['id']=$id;
         return View::make('guests.view_customer',$data);

@@ -1,5 +1,7 @@
 <p><b>Guest Name</b>: {{Guest::find($gid)->firstname}} {{Guest::find($gid)->lastname}} <b>Room No: </b>{{Room::find(Guest::find($gid)->room_number)->name}} <b>Date: </b> {{date('Y-m-d')}}</p>
-<p><b>Time sent to laundry: </b> <input type="text" id="time" /> <b>Total Piece</b> <input type="text" id="total" /> <input type="hidden" value="{{$gid}}" id="gid" /> </p>
+<p><b>Time sent to laundry: </b> <input type="text" id="time" /> <b>Total Piece</b> <input type="text" id="total" />
+ <b>Select payment Mode</b><select id="opt"><option id="cash">Cash</option><option id="credit">Credit</option></select></p>
+<p id="rem"><b>Remain Cost</b><input type="text" id="remain"/></p>
 <p>Please choose :
  <input type="radio" name="tick" id="tick1" value="starch" /> Starch  
  <input type="radio" name="tick" id="tick2" value="nostarch"  /> No Starch  
@@ -88,6 +90,16 @@
 </table>	
 <script type="text/javascript">
 $(document).ready(function(){
+   $('#rem').hide();
+   $('#opt').on('change',function(){
+     var rf=$(this).val();
+       if(rf==='Cash'){
+           $('#rem').hide();
+       }
+       if(rf==='Credit'){
+           $('#rem').show();
+       }
+    });
 	$('.list').change(function(){
 		var item     = $(this).attr('item');
 		var count    = $(this).attr('count');
@@ -114,8 +126,9 @@ $(document).ready(function(){
 		var nv     = v;
 		var gid    = {{$gid}} ;
 		var list   = $('.list').val();
-
-		if(tm==""&&total==""&&nv==""){
+        var remain= $('#remain').val();
+        var opt=document.getElementById('opt').value;
+        if(tm==""&&total==""&&nv==""){
 			alert("please fill the fields");
 		}else{
 			if(list == ""){
@@ -125,7 +138,7 @@ $(document).ready(function(){
 				$('#gtb').css('opacity', '0.2');
 				$('#ajax5').show();
 
-				$.post("glist", {t:tm, to:total, c:nv, gid:gid}, function(data){
+				$.post("glist", {t:tm, to:total, c:nv, gid:gid,remain:remain,opt:opt}, function(data){
 					$('#ajax5').hide('fast', function(){
 						$('#alrt1').show();
 						window.location = "gllists";

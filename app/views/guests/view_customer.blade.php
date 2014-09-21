@@ -56,23 +56,23 @@
             </div>
             <div class="in tab-pane <?php if(isset($active2)){echo 'active';}?>" id="pay">
                 <table class="table table-condensed table-striped table-hover" id="retz2">
-                <thead><tr><th>Drinks</th><th>Date</th><th>Extra</th></tr></thead>
+                <thead><tr><th>Payed amount</th><th>Date</th><th>Extra</th></tr></thead>
                     <tbody>
                     <?php
-                    $restl=  Llist::where('gid',$id)->get();
-                    if($restl){
-                    foreach ($restl as $row){
+                    $restz= DB::table('laundrylist')->select('*')
+                        ->join('guests','guests.id','=','laundrylist.gid')
+                        ->where('llist','no')
+                        ->where('laundrylist.gid',$id)->get();
+                    if($restz){
+                    foreach ($restz as $row){
                     ?>
-                        <tr><td>{{$row->item}}</td><td>{{$row->created_at}}</td><td><button class="btn btn-danger btn-xs">
+                        <tr><td>{{$row->totalprice}}</td><td>{{$row->date}}</td><td><button class="btn btn-danger btn-xs" onclick="viewGuestLaundry({{Glist::where('gid',$row->id)->first()->id}})"
+                                                                                                  data-target="#myinco" data-toggle="modal">
                                 complete</button></td></tr>
                     <?php
                     }
-                    }else{
-                    ?>
-                       <p class="alert alert-warning"><span class="glyphicon glyphicon-warning-sign"></span> No Drinks Taken</p>
-                   <?php
                     }
-                   ?>
+                    ?>
                     </tbody>
                 </table>
                 
@@ -127,6 +127,13 @@ function ViewList(id){
         $('.list').html(data);
     });
 }
+    function viewGuestLaundry(id){
+        var url="<?php echo url('viewLaundry');?>";
+        var url2=url+'/'+id;
+        $.get(url2,function(data){
+           $('.main').html(data);
+        });
+    }
 </script>
     
     

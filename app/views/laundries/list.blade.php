@@ -29,9 +29,6 @@
 
 @include('sidebar')
 </nav>
-
-
-
 <div id="md" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
@@ -44,7 +41,6 @@
             <div id="loadlist" style="overflow:auto; height:480px"></div>
       </div>
       <div class="modal-footer">
-        
        <button type="button" class="btn btn-success" id="sv">Save changes</button>
       </div>
     </div>
@@ -54,7 +50,7 @@
 <div id="page-wrapper" style="background-color:#fff">
         <ol class="breadcrumb">
             <li><a href="{{ url('home') }}">Home</a></li>
-            <li><a href="{{ url('laundry/gllists') }}"> Guest Laundry Lists</a></li>
+            <li><a href="{{ url('laundry/gllists') }}">Guest Laundry Lists</a></li>
             <li class="active">Guest Laundry list</li>
         </ol>
         <form class="form-inline">
@@ -63,7 +59,7 @@
 </div>   
 </div>
 <?php 
-  $guests = Guest::whereRaw('checked = ? and llist = ? ',  array('no', 'no'))->get();
+  $guests = Guest::whereRaw('checked = ?  and released=? and cancelled =? ',  array('no','no','no'))->get();
 
   $data   = array();
   foreach($guests as $g){

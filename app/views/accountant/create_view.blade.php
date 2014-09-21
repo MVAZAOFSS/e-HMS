@@ -30,7 +30,7 @@
                        <div class=" alert alert-success alert-dismissable">
                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                            <strong>
-                               {{rg}}
+                               {{$rg}}
                            </strong>
                        </div>
                    </div>
@@ -62,7 +62,12 @@
                             </tbody>
                        </table>
                     </div>
-               </div>
+                   <div class="row">
+                       <br>
+                       <p class="alert alert-success">Amount Taken To Bank is {{$bank}}</p>
+                       <p class="alert alert-success">Balance remain {{$balance-$cost}} /=</p>
+                   </div>
+                 </div>
            </div>
 
        </div>

@@ -8,12 +8,13 @@ class AccountantController extends BaseController{
             $data4=  $this->bils($date);
             $data5=  $this->bills($date);
             $data6=  $this->food_sells($date);
-            $data7=$this->balanceCheck($date);
            $data8=$this->advancedConferencePayed($date);
            $data9=$this->advancedFunctionPayed($date);
            $data10=$this->conferencePayed($date);
            $data11=$this->getFunctionPayed($date);
-            $data=$data1+$data2+$data3+$data4+$data5+$data6+$data7+$data8+$data9+$data10+$data11;
+        $data12=$this->totalBankBalance();
+        $data13=$this->getTotalAmountUsed();
+            $data=$data1+$data2+$data3+$data4+$data5+$data6+$data8+$data9+$data10+$data11+$data12+$data13;
 	    return View::make('accountant.income',$data);
 	}
 	public function expenditure(){
@@ -487,24 +488,22 @@ class AccountantController extends BaseController{
         }
     }
     function laundry($date){
-        $res=DB::table('hotellogs')->select('*')
-                ->join('laundrylists','laundrylists.gid','=','hotellogs.guestid')
-                ->join('laundries','laundries.name','=','laundrylists.item')
-                ->where('hotellogs.date',$date)
+        $res=DB::table('laundrylist')->select('*')
+                ->where('date',$date)
                 ->get(array(
-                    'cost',
-                    DB::raw('SUM(laundries.cost) AS cost')
+                    'totalprice',
+                    DB::raw('SUM(totalprice) AS totalprice')
                 ));
         if($res){
                 foreach ($res as $row){
                     $data_array=array(
-                        'laundrycost'=>$row->cost
+                        'totalprice'=>$row->totalprice
                     );
                 }
                 return $data_array;
         }  else {
             $data_array=array(
-             'laundrycost'=>''
+             'totalprice'=>''
              );
             return $data_array;
         }
@@ -574,7 +573,11 @@ class AccountantController extends BaseController{
         }
     }
     function createBf(){
-        return View::make('accountant.create_view');
+        $data1=$this->totalBankAmount();
+        $data2=$this->totalBankBalance();
+        $data3=$this->getTotalAmountUsed();
+        $data=$data1+$data2+$data3;
+        return View::make('accountant.create_view',$data);
     }
     function submitBalanceAndRemain(){
         $input=Input::all();
@@ -710,6 +713,66 @@ class AccountantController extends BaseController{
                 'remain1'=>''
             );
             return $data_array;
+        }
+    }
+    function totalBankBalance(){
+        $res=DB::table('banks')->select('*')
+            ->get(array(
+                'balance',
+                DB::raw('SUM(balance) AS balance')
+            ));
+        if($res){
+        foreach($res as $row){
+            $data_set=array(
+                'balance'=>$row->balance
+            );
+        }
+            return $data_set;
+        }else{
+            $data_set=array(
+                'balance'=>''
+            );
+            return $data_set;
+        }
+    }
+    function totalBankAmount(){
+        $res=DB::table('banks')->select('*')
+            ->get(array(
+                'bank',
+                DB::raw('SUM(bank) AS bank')
+            ));
+        if($res){
+            foreach($res as $row){
+                $data_set=array(
+                    'bank'=>$row->bank
+                );
+            }
+            return $data_set;
+        }else{
+            $data_set=array(
+                'bank'=>''
+            );
+            return $data_set;
+        }
+    }
+    function getTotalAmountUsed(){
+        $res=DB::table('expenditures')->select('cost')
+            ->get(array(
+                '*',
+                DB::raw('SUM(cost) AS cost')
+            ));
+        if($res){
+            foreach($res as $row){
+                $data_set=array(
+                    'cost'=>$row->cost
+                );
+            }
+            return $data_set;
+        }else{
+            $data_set=array(
+                'cost'=>''
+            );
+            return $data_set;
         }
     }
 }

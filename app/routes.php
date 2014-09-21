@@ -77,12 +77,15 @@ Route::get('restaurant/edit/{id}', array('as'=>'editrestaurant', 'uses'=>'Restau
 Route::post('restaurant/edit/{id}', array('as'=>'editrestaurant1', 'uses'=>'RestaurantsController@update'));
 Route::post('restaurant_update/{id}', 'RestaurantsController@update_resta');
 Route::get('view_den/{id}', 'RestaurantsController@customer_list');
+Route::get('viewLaundry/{id}', 'GuestsController@customerLaundry');
+Route::post('laundryEditAction/{id}', 'GuestsController@customerEditLaundry');
 Route::post('barbills_update/{id}', 'GuestsController@update_barbills');
 //laundry codes
 Route::get('laundry/add', array('as'=>'addlaundry', 'uses'=>'LaundriesController@create'));
 Route::post('laundry/add', array('as'=>'addlaundry1', 'uses'=>'LaundriesController@store'));
 Route::get('laundry/list', array('as'=>'laundrylist', 'uses'=>'LaundriesController@listgl'));
 Route::post('laundry/glist', array('as'=>'laundrylistg', 'uses'=>'LaundriesController@glist'));
+Route::post('checkSum/{amount}/{id}',  'LaundriesController@checkEditSum');
 Route::post('laundry/llist', array('as'=>'laundrylist', 'uses'=>'LaundriesController@llist'));
 Route::post('laundry/viewlist', array('as'=>'viewlist', 'uses'=>'LaundriesController@viewlist'));
 Route::post('laundry/viewlist1', array('as'=>'viewlist1', 'uses'=>'LaundriesController@viewlist1'));
@@ -92,6 +95,8 @@ Route::post('laundry/delete/{id}', array('as'=>'listlaundry', 'uses'=>'Laundries
 Route::get('laundry/edit/{id}', array('as'=>'editlaundry', 'uses'=>'LaundriesController@edit'));
 Route::post('laundry/edit/{id}', array('as'=>'editlaundry1', 'uses'=>'LaundriesController@update'));
 Route::get('laundry/gllists', array('as'=>'gllists', 'uses'=>'LaundriesController@gllists'));
+Route::get('viewListLaundry/{id}', 'LaundriesController@laundryListView');
+Route::get('viewEditList/{id}', 'LaundriesController@laundryEditView');
 //guest codes
 Route::get('guest/add', array('as'=>'addguest', 'uses'=>'GuestsController@create'));
 Route::get('guest/list', array('as'=>'listguest', 'uses'=>'GuestsController@index'));
@@ -138,6 +143,7 @@ Route::get('goods/manage', 'StoresController@manage');
 Route::get('goods/report', 'StoresController@report');
 Route::post('goods/process_add', 'StoresController@process_add');
 Route::post('goods/process_reduce', 'StoresController@process_reduce');
+Route::get('storeReportSearch/{date}', 'StoresController@reportSearchAction');
 //Reports
 Route::get('reports/rooms', 'ReportsController@rooms');
 Route::post('reports/laundry', 'ReportsController@postlaundry');

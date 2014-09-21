@@ -44,8 +44,6 @@
             <div id="loadlist1" style="overflow:auto; height:480px"></div>
       </div>
       <div class="modal-footer">
-        
-       <button type="button" class="btn btn-success" id="sv">Update changes</button>
       </div>
     </div>
   </div>
@@ -80,8 +78,8 @@
 	                       <td>{{ Room::find(Guest::find($m->gid)->room_number)->name  }}</td>
                          <td>{{ $m->date }}</td>
 	                       <td id="{{ $m->id }}">
-	                            <button type="button" data-toggle="modal" data-target=".bs-example-modal-lg" class="btn btn-primary btn-xs viw"><span class="glyphicon glyphicon-eye-open"></span> View</button>
-                              <button type="button" data-toggle="modal" data-target=".bs-example-modal-lg1"  class="btn btn-success btn-xs viw1"><span class="glyphicon glyphicon-edit"></span> Edit list</button>
+	                            <button type="button" data-toggle="modal" data-target=".bs-example-modal-lg" class="btn btn-primary btn-xs" onclick="viewLaundryGuests('{{$m->id}}')"><span class="glyphicon glyphicon-eye-open"></span> View</button>
+                              <button type="button" data-toggle="modal" data-target=".bs-example-modal-lg1"  class="btn btn-success btn-xs" onclick="viewLaundryEditGuests('{{$m->id}}')"><span class="glyphicon glyphicon-edit"></span> Edit list</button>
 	                       </td>
 	                  </tr>
 	                  @endforeach
@@ -98,26 +96,7 @@ $(document).ready(function (){
             "bJQueryUI": true,
             "sPaginationType": "full_numbers",
            "fnDrawCallback": function( oSettings ) {
-              $(".viw").click(function(){
-                var id1 = $(this).parent().attr('id');
-                $('#ldr').show();
-                $('#loadlist').html("");
-                $.post('viewlist', {id:id1}, function(data){
-                  $('#ldr').fadeOut(2000, function(){
-                      $('#loadlist').html(data);
-                  });
-                });  
-              });
-              $(".viw1").click(function(){
-                var id1 = $(this).parent().attr('id');
-                $('#ldr1').show();
-                $('#loadlist1').html("");
-                $.post('viewlist1', {id:id1}, function(data){
-                  $('#ldr1').fadeOut(2000, function(){
-                      $('#loadlist1').html(data);
-                  });
-                });  
-              });
+
            }
        });
     $('input[type="text"]').addClass("form-control");
@@ -125,5 +104,25 @@ $(document).ready(function (){
     
     
 });
+    function viewLaundryGuests(id){
+        $('#ldr').show();
+        var url="<?php echo url('viewListLaundry');?>";
+        var url2=url+'/'+id;
+        $.get(url2,function(data){
+            $('#ldr').fadeOut(2000,function(){
+                $('#loadlist').html(data);
+            });
+        });
+    }
+    function viewLaundryEditGuests(id){
+        $('#ldr1').show();
+        var url="<?php echo url('viewEditList')?>";
+        var url2=url+'/'+id;
+        $.get(url2,function(data){
+            $('#ldr1').fadeOut(2000,function(){
+                $('#loadlist1').html(data);
+            });
+        });
+    }
 </script>
 @stop

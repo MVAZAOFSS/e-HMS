@@ -1,10 +1,10 @@
 <p><b>Guest Name</b>: {{Guest::find($gid)->firstname}} {{Guest::find($gid)->lastname}} <b>Room No: </b>{{Room::find(Guest::find($gid)->room_number)->name}} <b>Date: </b> {{date('Y-m-d')}}</p>
-<p><b>Time sent to laundry: </b> {{$list->timespent}} <b>Total Piece</b> {{$list->totalprice}}  </p>
+<p><b>Time sent to laundry: </b> {{$timespent}} <b>Total Piece</b> {{$totalprice}}  </p>
 <p>Please choose :
- <input type="radio" name="tick" id="tick1" value="starch" {{Laundrie::tick($list->choose, "starch")}} /> Starch  
- <input type="radio" name="tick" id="tick2" value="nostarch" {{Laundrie::tick($list->choose, "nostarch")}} /> No Starch  
- <input type="radio" name="tick" id="tick3" value="shirtfolder" {{Laundrie::tick($list->choose, "shirtfolder")}} /> Shirt folder  
- <input type="radio" name="tick" id="tick4" value="shirtonhanger" {{Laundrie::tick($list->choose, "shirtonhanger")}}  /> Shirt on hanger</p>
+ <input type="radio" name="tick" id="tick1" value="starch"  /> Starch
+ <input type="radio" name="tick" id="tick2" value="nostarch"  /> No Starch
+ <input type="radio" name="tick" id="tick3" value="shirtfolder" /> Shirt folder
+ <input type="radio" name="tick" id="tick4" value="shirtonhanger"/> Shirt on hanger</p>
 <hr/>
 
 <img src="{{url("img/load.gif")}}" id="ajax5" style="width:52px;display:none;z-index:3000;position:absolute;margin-left: 375px; margin-top:120px">
@@ -56,49 +56,49 @@
 		<td>{{$a}} <?php $a++; ?></td>
 		<td>{{$ls[$i]}}</td>
 		<td>
-			{{ Llist::whereRaw('gid = ? and counttype = ? and category = ?', array($gid, 'g', 1))->first()->cvalue }}
+			{{ Llist::whereRaw('gid = ? and counttype = ? and category = ?', array($guid, 'g', 1))->first()->cvalue }}
 		</td>
 		<td>
-			{{ Llist::whereRaw('gid = ? and counttype = ? and category = ?', array($gid, 'h', 1))->first()->cvalue }}
+			{{ Llist::whereRaw('gid = ? and counttype = ? and category = ?', array($guid, 'h', 1))->first()->cvalue }}
 		</td>
 		@if(Laundrie::whereRaw('category = ? and name = ?', array(1, $ls[$i]))->count() != 0)
-		<td>{{ (Llist::whereRaw('gid = ? and counttype = ? and category = ?', array($gid, 'g', 1))->first()->cvalue  * Laundrie::whereRaw('category = ? and name = ?', array(1, $ls[$i]))->first()->cost)  }}</td>
+		<td>{{ (Llist::whereRaw('gid = ? and counttype = ? and category = ?', array($guid, 'g', 1))->first()->cvalue  * Laundrie::whereRaw('category = ? and name = ?', array(1, $ls[$i]))->first()->cost)  }}</td>
 		@endif
 		
 		<td>
-			{{ Llist::whereRaw('gid = ? and counttype = ? and category = ?', array($gid, 'g', 2))->first()->cvalue }}
+			{{ Llist::whereRaw('gid = ? and counttype = ? and category = ?', array($guid, 'g', 2))->first()->cvalue }}
 		</td>
 		<td>
-			{{ Llist::whereRaw('gid = ? and counttype = ? and category = ?', array($gid, 'h', 2))->first()->cvalue }}
+			{{ Llist::whereRaw('gid = ? and counttype = ? and category = ?', array($guid, 'h', 2))->first()->cvalue }}
 		</td>
 		@if(Laundrie::whereRaw('category = ? and name = ?', array(2, $ls[$i]))->count() != 0)
 		<td>
 			{{
 				(Laundrie::whereRaw('category = ? and name = ?', array(2, $ls[$i]))->first()->cost
-				*  Llist::whereRaw('gid = ? and counttype = ? and category = ?', array($gid, 'g', 2))->first()->cvalue) 	
+				*  Llist::whereRaw('gid = ? and counttype = ? and category = ?', array($guid, 'g', 2))->first()->cvalue)
 			}}
 		</td>
 		@endif
 		<td>
-			{{ Llist::whereRaw('gid = ? and counttype = ? and category = ?', array($gid, 'g', 3))->first()->cvalue }}
+			{{ Llist::whereRaw('gid = ? and counttype = ? and category = ?', array($guid, 'g', 3))->first()->cvalue }}
 		</td>
 		<td>
-			{{ Llist::whereRaw('gid = ? and counttype = ? and category = ?', array($gid, 'h', 3))->first()->cvalue }}
+			{{ Llist::whereRaw('gid = ? and counttype = ? and category = ?', array($guid, 'h', 3))->first()->cvalue }}
 		</td>
 		@if(Laundrie::whereRaw('category = ? and name = ?', array(3, $ls[$i]))->count() != 0)
 		<td>{{
 
 			(Laundrie::whereRaw('category = ? and name = ?', array(3, $ls[$i]))->first()->cost
-				*  Llist::whereRaw('gid = ? and counttype = ? and category = ?', array($gid, 'g', 3))->first()->cvalue) 
+				*  Llist::whereRaw('gid = ? and counttype = ? and category = ?', array($guid, 'g', 3))->first()->cvalue)
 		}}</td>
 		@endif
 		<td></td>	
 	</tr>
 		<?php
 
-			$lauTC = (Llist::whereRaw('gid = ? and counttype = ? and category = ?', array($gid, 'g', 1))->first()->cvalue  * Laundrie::whereRaw('category = ? and name = ?', array(1, $ls[$i]))->first()->cost) + $lauTC;
-			$dryTC = (Llist::whereRaw('gid = ? and counttype = ? and category = ?', array($gid, 'g', 2))->first()->cvalue  * Laundrie::whereRaw('category = ? and name = ?', array(2, $ls[$i]))->first()->cost)  + $dryTC;
-			$preTC = (Llist::whereRaw('gid = ? and counttype = ? and category = ?', array($gid, 'g', 3))->first()->cvalue  * Laundrie::whereRaw('category = ? and name = ?', array(3, $ls[$i]))->first()->cost) + $preTC;
+			$lauTC = (Llist::whereRaw('gid = ? and counttype = ? and category = ?', array($guid, 'g', 1))->first()->cvalue  * Laundrie::whereRaw('category = ? and name = ?', array(1, $ls[$i]))->first()->cost) + $lauTC;
+			$dryTC = (Llist::whereRaw('gid = ? and counttype = ? and category = ?', array($guid, 'g', 2))->first()->cvalue  * Laundrie::whereRaw('category = ? and name = ?', array(2, $ls[$i]))->first()->cost)  + $dryTC;
+			$preTC = (Llist::whereRaw('gid = ? and counttype = ? and category = ?', array($guid, 'g', 3))->first()->cvalue  * Laundrie::whereRaw('category = ? and name = ?', array(3, $ls[$i]))->first()->cost) + $preTC;
 
 
 		?>

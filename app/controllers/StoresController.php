@@ -68,5 +68,83 @@ class StoresController extends BaseController{
 	public function manage(){
 		return View::make('stores.manage');
 	}
+    function reportSearchAction($date){
+       $data['date']=$date;
+        $res=DB::table('storegoodsinfo')->select('*')
+            ->join('storegoodstotal','storegoodstotal.id','=','storegoodsinfo.gId')
+            ->where('storegoodsinfo.date','LIKE','%'.$date.'%')
+            ->get();
+           $data['res']=$res;
+       return View::make('stores.getAllSearchResult',$data);
+    }
+    function totalUsedProduct($date){
+        $res=DB::table('storegoodsinfo')->select('*')
+            ->join('storegoodstotal','storegoodstotal.id','=','storegoodsinfo.gId')
+            ->where('storegoodsinfo.date','LIKE','%'.$date.'%')
+            ->get(array(
+                'used',
+               DB::raw('SUM(used) AS used')
+            ));
+        if($res){
+        foreach($res as $row){
+            if($row->gId==1){
+            $data_array=array(
+                'used'=>$row->used
+            );
+            }elseif($row->gId==2){
+                $data_array=array(
+                    'used1'=>$row->used
+                );
+            }elseif($row->gId==3){
+                $data_array=array(
+                    'used2'=>$row->used
+                );
+            }
+        }
+        return $data_array;
+        }else{
+            $data_array=array(
+                'used'=>'',
+                'used1'=>'',
+                'used2'=>''
+            );
+         return $data_array;
+        }
+
+    }
+    function totalAddedProduct($date){
+        $res=DB::table('storegoodsinfo')->select('*')
+            ->join('storegoodstotal','storegoodstotal.id','=','storegoodsinfo.gId')
+            ->where('storegoodsinfo.date','LIKE','%'.$date.'%')
+            ->get(array(
+                'added',
+                DB::raw('SUM(added) AS added')
+            ));
+        if($res){
+            foreach($res as $row){
+                if($row->gId==1){
+                    $data_array=array(
+                        'added'=>$row->added
+                    );
+                }elseif($row->gId==2){
+                    $data_array=array(
+                        'added1'=>$row->added
+                    );
+                }elseif($row->gId==3){
+                    $data_array=array(
+                        'added'=>$row->added
+                    );
+                }
+            }
+            return $data_array;
+        }else{
+            $data_array=array(
+                'added'=>'',
+                'added1'=>'',
+                'added2'=>''
+            );
+            return $data_array;
+        }
+    }
 
 }

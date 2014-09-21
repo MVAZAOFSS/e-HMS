@@ -30,9 +30,9 @@
                                      <option value="Cash">Cash</option>
                                      <option value="Credit">Credit</option>
                                  </select></td>
-                             <td id="amounts">Amount</td><td>{{$errors->first('amount','<span class="error">:message</span>')}}
+                             <td id="amounts">Amount Payed</td><td>{{$errors->first('amount','<span class="error">:message</span>')}}
                                  <input type="text" name="amount" class="amounts"></td>
-                             <td id="remains">Remain</td><td>
+                             <td id="remains">Amount Remain</td><td>
                                  <input type="text" name="remain" class="remains"></td>
                              <td><button class="btn btn-success btn-xs">Save</button></td></tr>
                      </table>

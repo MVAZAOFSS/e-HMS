@@ -43,29 +43,32 @@
             <hr/>
 
             <p id="loader" style="display:none"><img src="{{url("img/load.gif")}}" /> Loading ...</p>  
-            <div id="report"></div> 
+            <div id="report">
+
+            </div>
             
         </div>
 </div>  
 <script type="text/javascript">
   $(document).ready(function(){
-
-    function loadreport(date){
-
-        $('#report').html("");
-        $('#loader').show();
-        $.post('getreport',{d:date},function(data){
-            $('#loader').hide();
-            $('#report').html(data);
-        });
-    }
-
-    $('#tday').datepicker({ dateFormat: "yy-mm-dd"});
-
-    $('#go').on('click', function(){
+   $('#tday').datepicker({ dateFormat: "yy-mm-dd"});
+   $('#go').on('click', function(){
           var date = $('#tday').val();
-          alert(2)
-          //loadereport(date);
+          if(date===''){
+              alert('The search date cant be empty');
+              return false;
+          }else{
+              $('#loader').show();
+              var url="<?php echo url('storeReportSearch');?>";
+              var url2=url+'/'+date;
+              $.get(url2,function(data){
+                  setTimeout(function(){
+                  $('#loader').hide();
+                  $('#report').html(data);
+                  },2000);
+              });
+          }
+
     });
 
   });
