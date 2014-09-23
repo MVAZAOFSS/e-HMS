@@ -10,11 +10,11 @@
 	 <p>EMIS</p>
 </a>
 </div>
-
+@include('layout-setup')
 @include('sidebar')
 </nav>
 
-<div id="page-wrapper">
+    <div id="page-wrapper">
       @if(Auth::user()->role == 1)
      <div class="well well-sm">Welcome Administrator</div>
                    <div class="row">
@@ -293,7 +293,7 @@
      </div>
     @endif
     @if(Auth::user()->role == 8)
-     <div class="well well-sm">Welcome Point of Sales(Pos)!</div>
+     <div class="well well-sm">Welcome Restaurants Point of Sales(Pos)!</div>
      <div class="col-lg-12">
          <div class="panel panel-warning">
              <div class="panel-heading">

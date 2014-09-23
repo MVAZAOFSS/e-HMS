@@ -472,8 +472,8 @@ class BillsController extends BaseController {
 				$bi = Bill::whereRaw('guestid=? and servicetime=?', array($gid, $t))->first();
 
 				return View::make('bills.show', compact('bi'));
-                 
-                    
+
+
                 }else{
 
 				$g       = $inputs['g'];
@@ -503,7 +503,7 @@ class BillsController extends BaseController {
 										"servicetime"=>$t,
 										"added_by"=>$lg,
 										"date"=>date('Y-m-d'),
-                                                                                 "remain"=>$cost
+                                          "remain"=>$cost
 							   )); 
 					
 

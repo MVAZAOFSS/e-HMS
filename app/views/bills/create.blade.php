@@ -432,11 +432,25 @@ $(document).ready(function(){
 		}else{
 			$('#gt').css('opacity', '0.2');
 			$('#ajax5').show();
-			$.post('updatebill', {a:a,g:g,t:t,s:s}, function(data){
+			$.post('bill/updatebill', {a:a,g:g,t:t,s:s}, function(data){
 				$('#main').html(data);
 			});
 		}
         @elseif(Auth::user()->role == 8)
+        var a = $('#amountb').val();
+        var g = $('#guestidb').val();
+        var t = $('#totalb').val();
+        var s = $('#servtb').val();
+        if(a==""){
+            alert("Please, fill the amount first !");
+        }else{
+            $('#gt').css('opacity', '0.2');
+            $('#ajax5').show();
+            $.post('bill/updatebill', {a:a,g:g,t:t,s:s}, function(data){
+                $('#main').html(data);
+            });
+        }
+        @elseif(Auth::user()->role == 12)
         var a = $('#amountb').val();
         var g = $('#guestidb').val();
         var t = $('#totalb').val();

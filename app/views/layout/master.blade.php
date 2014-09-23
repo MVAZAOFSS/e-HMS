@@ -68,7 +68,7 @@
     </div>  
       
 
-    <script type="text/javascript">
+<script type="text/javascript">
 
       var m  = 0;
 var mx = 0;

@@ -25,7 +25,7 @@
             <li><a href="{{ url("bill/sales/add") }}">add restaurant sale </a></li>
             @else
           <li><a href="{{ url("bill/sales/add") }}">add bar sale </a></li>
-            
+
             @endif                            
 </ol>
       

@@ -182,7 +182,7 @@
         }  
 
         $json2 = json_encode($data2);
-  
+
   }else{
         $drinks = Bar::all();
         $data3  = array();
