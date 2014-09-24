@@ -1,0 +1,18 @@
+<?php
+
+class RestaurantsTableSeeder extends Seeder {
+
+	public function run()
+	{
+		// Uncomment the below to wipe the table clean before populating
+		// DB::table('restaurants')->truncate();
+
+		$restaurants = array(
+
+		);
+
+		// Uncomment the below to run the seeder
+		// DB::table('restaurants')->insert($restaurants);
+	}
+
+}
