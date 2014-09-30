@@ -43,7 +43,8 @@
             <p style="display:none" id="ldr1"><img src="{{url("img/load.gif")}}"> Loading list ....</p>
             <div id="loadlist1" style="overflow:auto; height:480px"></div>
       </div>
-      <div class="modal-footer">
+        <div class="modal-footer">
+            <button type="button" class="btn btn-success" id="sv">Save changes</button>
       </div>
     </div>
   </div>
@@ -78,8 +79,9 @@
 	                       <td>{{ Room::find(Guest::find($m->gid)->room_number)->name  }}</td>
                          <td>{{ $m->date }}</td>
 	                       <td id="{{ $m->id }}">
-	                            <button type="button" data-toggle="modal" data-target=".bs-example-modal-lg" class="btn btn-primary btn-xs" onclick="viewLaundryGuests('{{$m->id}}')"><span class="glyphicon glyphicon-eye-open"></span> View</button>
-                              <button type="button" data-toggle="modal" data-target=".bs-example-modal-lg1"  class="btn btn-success btn-xs" onclick="viewLaundryEditGuests('{{$m->id}}')"><span class="glyphicon glyphicon-edit"></span> Edit list</button>
+	                          <button type="button" data-toggle="modal" data-target=".bs-example-modal-lg" class="btn btn-primary btn-xs" onclick="viewLaundryGuests('{{$m->id}}/{{$m->date}}')"><span class="glyphicon glyphicon-eye-open"></span> View</button>
+                              <button type="button" data-toggle="modal" data-target=".bs-example-modal-lg1"  class="btn btn-success btn-xs" onclick="viewLaundryEditGuests('{{$m->id}}/{{$m->date}}')"><span class="glyphicon glyphicon-edit"></span> Edit list</button>
+
 	                       </td>
 	                  </tr>
 	                  @endforeach

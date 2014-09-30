@@ -47,6 +47,8 @@
         <li><a href="{{url("home")}}"><span class="glyphicon glyphicon-home"></span> Home</a></li>
         <li><a href="{{url("bill/add")}}"><span class="glyphicon glyphicon-book"></span> Guests Bills</a></li>
         <li><a href="{{url("bill/sales/add")}}"><span class="glyphicon glyphicon-cutlery"></span> Sales</a></li>
+        <li><a href="{{url("bill/addBoth")}}"><span class="glyphicon glyphicon-bookmark"></span> Guests Bar Bills</a></li>
+        <li><a href="{{url("bill/sales/addBoth")}}"><span class="glyphicon glyphicon-adjust"></span> Bar Sales</a></li>
         <li><a href="{{url("password")}}"><span class="glyphicon glyphicon-lock"></span> Password</a></li>
         <li><a href="{{url("logout")}}"><span class="glyphicon glyphicon-off"></span> Logout</a></li>
     </ul>
@@ -73,6 +75,7 @@
     <ul class="nav navbar-nav side-nav" id="side">
         <li><a href="{{url("home")}}"><span class="glyphicon glyphicon-home"></span> Home</a></li>
         <li><a href="{{url("laundry/list")}}"><span class="glyphicon glyphicon-trash"></span> Guest Laundry List</a></li>
+        <li><a href="{{url("laundry/saleslist")}}"><span class="glyphicon glyphicon-align-justify"></span> Sales Laundry List</a></li>
         <li><a href="{{url("password")}}"><span class="glyphicon glyphicon-lock"></span> Password</a></li>
         <li><a href="{{url("logout")}}"><span class="glyphicon glyphicon-off"></span> Logout</a></li>
     </ul>

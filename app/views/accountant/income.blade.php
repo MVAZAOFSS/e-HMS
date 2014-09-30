@@ -16,7 +16,7 @@
 </nav>
 
 <div id="page-wrapper">
-  <div class="well well-sm"> <i class="glyphicon glyphicon-import"></i> Daily Income: {{date('d/m/Y')}} </div>
+  <div class="well well-sm"> <i class="glyphicon glyphicon-import"></i> Daily Income: {{date('d/m/Y')}} <a class="btn btn-default btn-sm pull-right" href="{{url('dailyPdfExport/'.date('Y-m-d'))}}"><span class="glyphicon glyphicon-print pull-right"> Exportpdf</span></a></div>
   <div class="well well-sm">  <b>CASH BALANCE</b> B/F  <span class="text text-info"> {{$balance-$cost}} /=</span></div>
   <div class="well well-sm">  <center><b>CASH  COLLECTION OF {{date('d/m/Y')}}</b> </center> </div>
   <div class="well well-sm"> 

@@ -21,7 +21,7 @@
                  <div class="col-lg-10 col-lg-offset-0">
                      {{Form::open(array('url'=>'submitConferences','id'=>'sub'))}}
                      <table class="table table-striped">
-                         <tr><td>Select</td><td><select name="sec" id="choose">{{$errors->first('sec','<span class="error">:message</span>')}}
+                         <tr><td><input type="text" name="name" placeholder="Name of Customer" required></td><td>Select</td><td><select name="sec" id="choose">{{$errors->first('sec','<span class="error">:message</span>')}}
                                  <option value=""></option>
                                  <option value="Conference">Conference</option>
                                   <option value="Function">Function</option>
@@ -54,11 +54,11 @@
                         Records of Conference and Function Performed
                     </div>
                     <table class="table table-hover table-condensed" id="conf">
-                      <thead><tr><th>Type</th><th>AmountPaid</th><th>AmountRemained</th><th>Date</th><th>Action</th></tr></thead>
+                      <thead><tr><th>Name</th><th>Type</th><th>AmountPaid</th><th>AmountRemain</th><th>Date</th><th>Action</th></tr></thead>
                         <tbody>
                             @if(isset($ro))
                             @foreach($ro as $row)
-                            <tr><td>{{$row->type_conferes}}</td><td>{{$row->amount}}</td><td>{{$row->remain}}</td>
+                            <tr><td>{{$row->customerName}}</td><td>{{$row->type_conferes}}</td><td>{{$row->amount}}</td><td>{{$row->remain}}</td>
                                 <td>{{$row->date}}</td><td>
                                     @if($row->status=='paid')
                                     <button class="btn btn-success btn-xs">Cleared</button>

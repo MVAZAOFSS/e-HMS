@@ -1,6 +1,8 @@
-<p><b>Guest Name</b>: {{Guest::find($gid)->firstname}} {{Guest::find($gid)->lastname}} <b>Room No: </b>{{Room::find(Guest::find($gid)->room_number)->name}} <b>Date: </b> {{date('Y-m-d')}}</p>
+
+<p><b>Guest Name</b>: {{Guest::find($guid)->firstname}} {{Guest::find($guid)->lastname}} <b>Room No: </b>{{Room::find(Guest::find($guid)->room_number)->name}} <b>Date: </b> {{$date}} &nbsp;&nbsp;&nbsp;<b>Remain Amount  {{$remain}} /=</b></p>
 <p><b>Time sent to laundry: </b> <input type="text" value="{{$timespent}}" id="time" /> <b>Total Piece</b> <input type="text" id="total" value="{{$totalprice}}" /> <input  type="hidden" value="{{$gid}}" id="gid" />
-</p>
+   <b>Pay</b>&nbsp;&nbsp;&nbsp;<input type="text" id="remainz" name="remain" required>
+ </p>
 <hr/>
 
 <img src="{{url("img/load.gif")}}" id="ajax5" style="width:52px;display:none;z-index:3000;position:absolute;margin-left: 375px; margin-top:120px">
@@ -47,19 +49,19 @@
 	<tr>
 		<td>{{$a}} <?php $a++; ?></td>
 		<td>{{$ls[$i]}}</td>
-		<td><input type="text" class="form-control list" value="{{ Llist::whereRaw('gid = ? and counttype = ? and category = ?', array($guid, 'g', 1))->first()->cvalue }}" count="g" item="{{$ls[$i]}}" cate="1"  /></td>
-		<td><input type="text" class="form-control list" value="{{ Llist::whereRaw('gid = ? and counttype = ? and category = ?', array($guid, 'h', 1))->first()->cvalue }}" count="h" item="{{$ls[$i]}}" cate="1" /></td>
+		<td><input type="text" class="form-control list" value="{{ Llist::whereRaw('gid = ? and counttype = ? and category = ? and date =? and item =?', array($guid, 'g', 1,$date,$ls[$i]))->first()->cvalue }}" count="g" item="{{$ls[$i]}}" cate="1"  /></td>
+		<td><input type="text" class="form-control list" value="{{ Llist::whereRaw('gid = ? and counttype = ? and category = ? and date =? and item =?', array($guid, 'h', 1,$date,$ls[$i]))->first()->cvalue }}" count="h" item="{{$ls[$i]}}" cate="1" /></td>
 		@if(Laundrie::whereRaw('category = ? and name = ?', array(1, $ls[$i]))->count() != 0)
 		<td>{{Laundrie::whereRaw('category = ? and name = ?', array(1, $ls[$i]))->first()->cost}}</td>
 		@endif
 		
-		<td><input type="text" class="form-control list" value="{{ Llist::whereRaw('gid = ? and counttype = ? and category = ?', array($guid, 'g', 2))->first()->cvalue }}" count="g" item="{{$ls[$i]}}" cate="2"  /></td>
-		<td><input type="text" class="form-control list" value="{{ Llist::whereRaw('gid = ? and counttype = ? and category = ?', array($guid, 'h', 2))->first()->cvalue }}" count="h" item="{{$ls[$i]}}" cate="2" /></td>
+		<td><input type="text" class="form-control list" value="{{ Llist::whereRaw('gid = ? and counttype = ? and category = ? and date =? and item =?', array($guid, 'g', 2,$date,$ls[$i]))->first()->cvalue }}" count="g" item="{{$ls[$i]}}" cate="2"  /></td>
+		<td><input type="text" class="form-control list" value="{{ Llist::whereRaw('gid = ? and counttype = ? and category = ? and date =? and item =?', array($guid, 'h', 2,$date,$ls[$i]))->first()->cvalue }}" count="h" item="{{$ls[$i]}}" cate="2" /></td>
 		@if(Laundrie::whereRaw('category = ? and name = ?', array(2, $ls[$i]))->count() != 0)
 		<td>{{Laundrie::whereRaw('category = ? and name = ?', array(2, $ls[$i]))->first()->cost}}</td>
 		@endif
-		<td><input type="text" class="form-control list" value="{{ Llist::whereRaw('gid = ? and counttype = ? and category = ?', array($guid, 'g', 3))->first()->cvalue }}" count="g" item="{{$ls[$i]}}" cate="3" /></td>
-		<td><input type="text" class="form-control list" value="{{ Llist::whereRaw('gid = ? and counttype = ? and category = ?', array($guid, 'h', 3))->first()->cvalue }}" count="h" item="{{$ls[$i]}}" cate="3" /></td>
+		<td><input type="text" class="form-control list" value="{{ Llist::whereRaw('gid = ? and counttype = ? and category = ? and date =? and item =?', array($guid, 'g', 3,$date,$ls[$i]))->first()->cvalue }}" count="g" item="{{$ls[$i]}}" cate="3" /></td>
+		<td><input type="text" class="form-control list" value="{{ Llist::whereRaw('gid = ? and counttype = ? and category = ? and date =? and item =?', array($guid, 'h', 3,$date,$ls[$i]))->first()->cvalue }}" count="h" item="{{$ls[$i]}}" cate="3" /></td>
 		@if(Laundrie::whereRaw('category = ? and name = ?', array(3, $ls[$i]))->count() != 0)
 		<td>{{Laundrie::whereRaw('category = ? and name = ?', array(3, $ls[$i]))->first()->cost}}</td>
 		@endif
@@ -82,44 +84,33 @@
 		<td></td>	
 	</tr>		
 </table>
-      <p>
-          <form id="rep">
-    <p><b>Remain Amount  {{$remain}} /=</b> <b>Pay</b><input type="text" id="remainz" name="remain">
-    <button class="btn btn-success btn-xs">update changes</button>
-    </p>
-          </form>
-      </p>
 <script type="text/javascript">
-$(document).ready(function(){
-	$('.list').change(function(){
-		var item     = $(this).attr('item');
-		var count    = $(this).attr('count');
-		var cate     = $(this).attr('cate');
-		var cvalue   = $(this).val();
-		var gid      = {{$gid}} ;
-		 
-		$.post('llist', {i:item, gid:gid, c:count, cate:cate, cv:cvalue}, function(data){
-		
-		});
+    $('.list').change(function(){
+        var item     = $(this).attr('item');
+        var count    = $(this).attr('count');
+        var cate     = $(this).attr('cate');
+        var cvalue   = $(this).val();
+        var gid      = {{$gid}} ;
 
-	});
-});
-$('#rep').submit(function(e){
-    e.preventDefault();
-    var dat=$('#remainz').val();
-    if(dat===''){
-        alert('Amount cant be empty');
-        return false;
-    }else{
-        var url="<?php echo url('checkSum');?>";
-        var url2=url+'/'+dat;
-        var url3="<?php echo $gid;?>";
-        var url4=url2+'/'+url3;
-        $.post(url4,function(data){
+    $.post('llist', {i:item, gid:gid, c:count, cate:cate, cv:cvalue}, function(data){
+
+    });
+
+    });
+$('#sv').on('click', function(){
+var gid    = {{$gid}} ;
+var list   = $('.list').val();
+var remain= $('#remainz').val();
+    if(remain===''){
+ alert('Cant remain amount be empty');
+   }else{
+var url="<?php echo url('checkSum');?>";
+$.post(url, {gid:gid,remain:remain}, function(data){
             $('#ajax5').hide('fast', function(){
                 $('#alrt1').show();
                 window.location = "gllists";
             });
+
         });
     }
 });

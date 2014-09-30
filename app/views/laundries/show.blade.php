@@ -37,7 +37,7 @@
 		<td>Price</td>
 		<td></td>	
 	</tr>	
-	<?php 
+	<?php
 		$a       = 1;
 		$laundry = Laundrie::all();
 		$items   = array();

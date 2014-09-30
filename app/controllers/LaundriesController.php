@@ -28,9 +28,9 @@ class LaundriesController extends BaseController {
 		$gid    =  $id;
 		return View::make("laundries.shw1", compact('gid'))->with('list', $list);
 	}
-    function laundryListView($id){
+    function laundryListView($id,$date){
        $list=DB::table('laundrylist')->select('*')
-            ->where('id',$id)->get();
+            ->where('id',$id)->where('date',$date)->get();
         foreach($list as $row){
             $data=array(
                 'guid'=>$row->gid,
@@ -38,15 +38,16 @@ class LaundriesController extends BaseController {
                  'totalprice'=>$row->totalprice,
                  'roomID'=>$row->roomId,
                 'choose'=>$row->choose,
-                'remain'=>$row->remain
+                'remain'=>$row->remain,
+                'date'=>$row->date
             );
         }
           $data['gid']=$id;
         return View::make("laundries.shw",$data);
     }
-  function laundryEditView($id){
+  function laundryEditView($id,$date){
       $list=DB::table('laundrylist')->select('*')
-          ->where('id',$id)->get();
+          ->where('id',$id)->where('date',$date)->get();
       foreach($list as $row){
           $data=array(
               'guid'=>$row->gid,
@@ -54,12 +55,43 @@ class LaundriesController extends BaseController {
               'totalprice'=>$row->totalprice,
               'roomID'=>$row->roomId,
               'choose'=>$row->choose,
-              'remain'=>$row->remain
+              'remain'=>$row->remain,
+              'date'=>$row->date
           );
       }
       $data['gid']=$id;
       return View::make("laundries.shw1",$data);
   }
+    function laundryListViewSales($id,$date,$name){
+        $list=DB::table('customerCost')->select('*')
+            ->where('id',$id)->where('date',$date)->where('customerName',$name)->get();
+        foreach($list as $row){
+            $data=array(
+                'name'=>$row->customerName,
+                'timespent'=>$row->timespent,
+                'totalprice'=>$row->totalprice,
+                'date'=>$row->date
+            );
+        }
+        $data['gid']=$id;
+        return View::make("laundries.shwSales1",$data);
+    }
+
+    function laundryEditViewSales($id,$date,$name){
+        $list=DB::table('customerCost')->select('*')
+            ->where('id',$id)->where('date',$date)->where('customerName',$name)->get();
+        foreach($list as $row){
+            $data=array(
+                'name'=>$row->customerName,
+                'timespent'=>$row->timespent,
+                'totalprice'=>$row->totalprice,
+                'remain'=>$row->remain,
+                'date'=>$row->date
+            );
+        }
+        $data['gid']=$id;
+        return View::make("laundries.shwSales",$data);
+    }
 
 	public function gllists(){
 		return View::make('laundries.alix');
@@ -69,7 +101,7 @@ class LaundriesController extends BaseController {
 		$inputs = Input::all();
 		$n = Glist::where('gid', $inputs['gid'])
             ->where('date',date('Y-m-d'))->count();
-		if($n == 0){
+		if($n==0){
             if($inputs['opt']=='Credit'){
 			Glist::create(array(
 						"gid"=> $inputs['gid'],
@@ -108,7 +140,7 @@ class LaundriesController extends BaseController {
                 "roomId"=>Guest::find($inputs['gid'])->room_number,
                 "remain"=>$inputs['remain']
             );
-            Glist::where('gid',$inputs['gid'])->update($data_array);
+            Glist::where('gid',$inputs['gid'])->where('date',date('Y-m-d'))->update($data_array);
             $g = Guest::find($inputs['gid']);
             $g->llist  = "no";
             $g->save();
@@ -121,7 +153,7 @@ class LaundriesController extends BaseController {
                     "date"=>date('Y-m-d'),
                     "roomId"=>Guest::find($inputs['gid'])->room_number
                 );
-                Glist::where('gid',$inputs['gid'])->update($data_array);
+                Glist::where('gid',$inputs['gid'])->where('date',date('Y-m-d'))->update($data_array);
                 $g = Guest::find($inputs['gid']);
                 $g->llist  = "yes";
                 $g->save();
@@ -129,10 +161,13 @@ class LaundriesController extends BaseController {
             }
         }
 	}
-    function checkEditSum($amount,$id){
+    function checkEditSum(){
+        $input=Input::all();
+        $id=$input['gid'];
+        $amount=$input['remain'];
         $cost=Glist::find($id)->remain;
         $total=Glist::find($id)->totalprice;
-        if($amount>=$cost){
+        if($amount >=$cost){
             $data_array=array(
                 'totalprice'=>$total+$amount,
                  'remain'=>$amount-$cost
@@ -154,6 +189,29 @@ class LaundriesController extends BaseController {
             return "ok";
         }
 }
+    function checkEditSumSalesAction(){
+        $input=Input::all();
+        $id=$input['gid'];
+        $amount=$input['remain'];
+        $cost=Customer::find($id)->remain;
+        $total=Customer::find($id)->totalprice;
+        if($amount >=$cost){
+            $data_array=array(
+                'totalprice'=>$total+$amount,
+                'remain'=>$amount-$cost,
+                'status'=>'yes'
+            );
+            DB::table('customerCost')->where('id',$id)->update($data_array);
+            return "ok";
+        }else{
+            $data_array=array(
+                'totalprice'=>$total+$amount,
+                'remain'=>$cost-$amount
+            );
+            DB::table('customerCost')->where('id',$id)->update($data_array);
+            return "ok";
+        }
+    }
 
 	public function llist(){
 		$inputs = Input::all();
@@ -163,22 +221,97 @@ class LaundriesController extends BaseController {
 		$cvalue = $inputs['cv'];
 		$gid    = $inputs['gid'];
 
-		$l      = Llist::whereRaw('item = ? and counttype = ? and gid = ? and category = ?', array($item,$count,$gid,$cate))->count();
+		$l= Llist::whereRaw('item = ? and counttype = ? and gid = ? and category = ? and date =?', array($item,$count,$gid,$cate,date('Y-m-d')))->count();
 		if($l == 0){
-			$list   = Llist::create(array(
+			 Llist::create(array(
 						"gid"=>$gid,
 						"item"=>$item,
 						"counttype"=>$count,
 						"category"=>$cate,
-						"cvalue"=>$cvalue
+						"cvalue"=>$cvalue,
+                        "date"=>date('Y-m-d')
 				));
 		}else{
-			$ls          = Llist::whereRaw('item = ? and counttype = ? and gid = ? and category = ?', array($item,$count,$gid,$cate))->first();
+			$ls= Llist::whereRaw('item = ? and counttype = ? and gid = ? and category = ? and date =?', array($item,$count,$gid,$cate,date('Y-m-d')))->first();
 			$ls->cvalue  = $cvalue;
 			$ls->save();
 		}
 
 	}
+    public function customerListAction(){
+        $inputs = Input::all();
+        $item   = $inputs['i'];
+        $count  = $inputs['c'];
+        $cate   = $inputs['cate'];
+        $cvalue = $inputs['cv'];
+        $name   = $inputs['name'];
+
+        $l= CustomerList::whereRaw('item = ? and counttype = ? and name = ? and category = ? and date =?', array($item,$count,$name,$cate,date('Y-m-d')))->count();
+        if($l == 0){
+            CustomerList::create(array(
+                "name"=>$name,
+                "item"=>$item,
+                "counttype"=>$count,
+                "category"=>$cate,
+                "cvalue"=>$cvalue,
+                "date"=>date('Y-m-d')
+            ));
+        }else{
+            $ls= CustomerList::whereRaw('item = ? and counttype = ? and name = ? and category = ? and date =?', array($item,$count,$name,$cate,date('Y-m-d')))->first();
+            $ls->cvalue  = $cvalue;
+            $ls->save();
+        }
+
+    }
+    public function customersAction(){
+        $inputs = Input::all();
+        $n = Customer::where('customerName', $inputs['name'])
+            ->where('date',date('Y-m-d'))->count();
+        if($n==0){
+            if($inputs['opt']=='Credit'){
+                Customer::create(array(
+                    "customerName"=> $inputs['name'],
+                    "timespent"=>$inputs['t'],
+                    "totalprice"=>$inputs['to'],
+                    "date"=>date('Y-m-d'),
+                    "remain"=>$inputs['remain']
+                ));
+
+              }else{
+                Customer::create(array(
+                    "customerName"=> $inputs['name'],
+                    "timespent"=>$inputs['t'],
+                    "totalprice"=>$inputs['to'],
+                    "date"=>date('Y-m-d'),
+                    "status"=>'yes'
+                ));
+
+            }
+
+        }else{
+            if($inputs['opt']=='Credit'){
+                $data_array=array(
+                    "customerName"=> $inputs['name'],
+                    "timespent"=>$inputs['t'],
+                    "totalprice"=>$inputs['to'],
+                    "date"=>date('Y-m-d'),
+                    "remain"=>$inputs['remain']
+                );
+                Customer::where('customerName',$inputs['name'])->where('date',date('Y-m-d'))->update($data_array);
+
+            }else{
+                $data_array=array(
+                    "customerName"=> $inputs['name'],
+                    "timespent"=>$inputs['t'],
+                    "totalprice"=>$inputs['to'],
+                    "date"=>date('Y-m-d'),
+                    'status'=>'yes'
+                 );
+                Customer::where('customerName',$inputs['name'])->where('date',date('Y-m-d'))->update($data_array);
+
+            }
+        }
+    }
 
 	public function index()
 	{
@@ -189,7 +322,17 @@ class LaundriesController extends BaseController {
 	public function listgl(){
 		return View::make('laundries.list');
 	}
-
+    function listSalesLaundry(){
+        return View::make('laundries.listsales');
+    }
+    function getSalesLaundryAction(){
+      return View::make('laundries.allSalesLaundry');
+    }
+    function customerEditFormAction(){
+        $input=Input::all();
+        $data['name']=$input['name'];
+         return View::make('laundries.customerForm',$data);
+    }
 	public function plistgl(){
 		$inputs  = Input::all();
 		$g       = $inputs['g'];

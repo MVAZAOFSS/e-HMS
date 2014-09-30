@@ -401,6 +401,7 @@ class GuestsController extends BaseController {
            $data['ro']=$this->conferenceType();
            $input=Input::all();
            $rules=array(
+               'name'=>'required',
                'sec'=>'required',
                'amount'=>'required|numeric'
            );
@@ -409,6 +410,7 @@ class GuestsController extends BaseController {
                return View::make('guests.conferencesView',$data)->withErrors($validator);
            }else{
            $data_array=array(
+               'customerName'=>Input::get('name'),
                'type_conferes'=>Input::get('sec'),
                'amount'=>Input::get('amount'),
                'mode'=>Input::get('mode'),
@@ -417,6 +419,7 @@ class GuestsController extends BaseController {
                'status'=>'paid'
            );
                $data_array1=array(
+                   'customerName'=>Input::get('name'),
                    'type_conferes'=>Input::get('sec'),
                    'amount'=>Input::get('amount'),
                    'mode'=>Input::get('mode'),
@@ -424,15 +427,16 @@ class GuestsController extends BaseController {
                    'date'=>date('Y-m-d'),
                    'status'=>'no'
                );
-           $res=DB::table('conferes')->where('type_conferes',Input::get('sec'))->where('date',date('Y-m-d'))->get();
+           $res=DB::table('conferes')->where('type_conferes',Input::get('sec'))->where('date',date('Y-m-d'))
+               ->where('customerName',Input::get('name'))->get();
            if($res){
            if(Input::get('mode')=='Cash'){
-               DB::table('conferes')->where('type_conferes',Input::get('sec'))
+               DB::table('conferes')->where('costumerName',Input::get('name'))
                    ->where('date',date('Y-m-d'))->update($data_array);
                $data['sms']= "<p>Successifully upded</p>";
                return View::make('guests.conferencesView',$data);
            }elseif(Input::get('mode')=='Credit'){
-               DB::table('conferes')->where('type_conferes',Input::get('sec'))
+               DB::table('conferes')->where('costumerName',Input::get('name'))
                    ->where('date',date('Y-m-d'))->update($data_array1);
                $data['sms']= "<p>Successifully upded</p>";
                return View::make('guests.conferencesView',$data);
@@ -470,23 +474,17 @@ class GuestsController extends BaseController {
         }else{
             $remain=Confere::where('id',$id)->first()->remain;
             $amount=Confere::where('id',$id)->first()->amount;
-            if($remain>Input::get('pay')){
+            if($remain >=Input::get('pay')){
                 $data_array=array(
                     'amount'=>Input::get('pay')+$amount,
-                    'remain'=>$amount-$remain,
+                    'remain'=>$remain-Input::get('pay'),
                     'status'=>'no'
                 );
               DB::table('conferes')->where('id',$id)->update($data_array);
               $data['sms']='<p class="alert alert-success"> Record updated</p>';
               return View::make('guests.tableBills',$data);
             }else{
-                $data_array=array(
-                    'amount'=>Input::get('pay')+$amount,
-                    'remain'=>$remain-Input::get('pay'),
-                    'status'=>'paid'
-                );
-                DB::table('conferes')->where('id',$id)->update($data_array);
-                $data['sms']='<p class="alert alert-success"> Record updated and Paid</p>';
+                $data['sms']='<p class="alert alert-warning"> The amount paid is greater than amount to be paid</p>';
                 return View::make('guests.tableBills',$data);
            }
         }

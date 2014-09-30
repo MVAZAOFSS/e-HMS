@@ -17,7 +17,7 @@
 <div id="page-wrapper">
   <div class="well well-sm"> <i class="glyphicon glyphicon-export"></i> Expenses of  {{date('d/m/Y')}} </div>
 
-  <div class="well well-sm col-lg-5 col-lg-offset-2">
+  <div class="well well-sm col-lg-5 col-lg-offset-0">
       {{Form::open(array('url'=>'expenditure'))}}
       @if(isset($sms))
           {{$sms}}
@@ -50,20 +50,21 @@
       {{Form::token()}}
       {{Form::close()}}
   </div>
-  <div class="col-lg-5">
+  <div class="col-lg-7">
       <div class="panel panel-danger">
           <div class="panel-heading">
               <span class="glyphicon glyphicon-usd"></span> INCOME USED
           </div>
           <div class="panel-body">
               <table class="table table-condensed" id="tablez">
-                  <thead><tr><th>Cost</th><th>Expe.for</th><th>Date updated</th></tr></thead>
+                  <thead><tr><th>Cost</th><th>Expe.for</th><th>Date updated</th><th>Details</th></tr></thead>
                   <tbody>
                       <?php
                       $data=DB::table('expenditures')->get();
                       foreach($data as $row){
                       ?>
-                      <tr><td>{{$row->cost}}</td><td>{{$row->expenditure_name}}</td><td>{{$row->date}}</td></tr>
+                      <tr><td>{{$row->cost}}</td><td>{{$row->expenditure_name}}</td><td>{{$row->date}}</td>
+                      <td><button class="btn btn-success btn-xs" onclick="viewResourcesUsed('{{$row->id}}')" data-toggle="modal" data-target="#myresource"><span class="glyphicon glyphicon-eye-open"> Details</span></button></td></tr>
                       <?php
                       }?>
                   </tbody>
@@ -75,6 +76,24 @@
       </div>
   </div>
 </div>   
+</div>
+<div class="modal fade" id="myresource" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Expenses Details</h4>
+            </div>
+            <div class="modal-body" style="height: 420px; overflow:scroll">
+                <div id="main">
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
 </div>
 <script>
     $(document).ready(function(){
@@ -106,5 +125,13 @@
             "sPaginationType": "full_numbers"
       });
 });
+
+ function viewResourcesUsed(id){
+     var url="<?php echo url('resourcesDetails');?>";
+     var url2=url+'/'+id;
+     $.get(url2,function(data){
+          $('#main').html(data);
+     });
+ }
 </script>
 @stop

@@ -39,7 +39,7 @@
             $.post(url3,formz,function(data){
                 setTimeout(function(){
                 $('.menu').html(data);
-                    location.reload();
+                    //location.reload();
                 },2000);
             });
 
