@@ -29,15 +29,17 @@
     <select id="reportof" style="border: 1px solid #002;padding:2px">
         <option></option>
         <option value="Guest">Guest</option>
-        <option value="income">income</option>
+        <option value="noneguest">None-Guest</option>
+        <option value="income">Guest income</option>
+        <option value="noneguestincome">None-Guest income</option>
     </select>
     Laundry:     
     <select id="laundry" style="border: 1px solid #002;padding:2px">
         <option></option>
         <option value="all">all</option>
-        <option value="1">laundry</option>
-        <option value="2">dry cleaning</option>
-        <option value="3">pressing</option>
+        <option value="1" class="one">laundry</option>
+        <option value="2" class="two">dry cleaning</option>
+        <option value="3" class="three">pressing</option>
     </select>
     Report for: 
     <select id="reportfor" style="border: 1px solid #002;padding:2px">
@@ -131,6 +133,18 @@ $('#reportfor').on('change', function(){
             $('#weekly').hide();
             $('#yearly').hide();
             $('#monthly').fadeIn(1000);
+        }
+    });
+    $('#reportof').on('change',function(){
+     var laund=$(this).val();
+        if(laund ==='income'){
+            $('.one').hide();
+            $('.two').hide();
+            $('.three').hide();
+        }else if(laund ==='noneguestincome'){
+            $('.one').hide();
+            $('.two').hide();
+            $('.three').hide();
         }
     });
  $('#rep').submit(function(e){

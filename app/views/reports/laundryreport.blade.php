@@ -1,14 +1,8 @@
 <table class="table table-striped table-condensed" id="laud">
-    <thead><tr><th>Guest Name</th><th>Items</th><th>Category</th><th>Date</th></tr></thead>
+    <thead><tr><th>Guest Name</th><th>Room</th><th>Amount</th><th>Date</th></tr></thead>
     <tbody>
         @foreach($laud as $row)
-        @if($row->category==1)
-        <tr><td>{{$row->firstname}} {{$row->lastname}}</td><td>{{$row->item}}</td><td>Laundry</td><td>{{$row->arrival_date}}</td></tr>
-        @elseif($row->category==2)
-        <tr><td>{{$row->firstname}} {{$row->lastname}}</td><td>{{$row->item}}</td><td>Dry cleaning</td><td>{{$row->arrival_date}}</td></tr>
-        @elseif($row->category==3)
-        <tr><td>{{$row->firstname}} {{$row->lastname}}</td><td>{{$row->item}}</td><td>Pressing</td><td>{{$row->arrival_date}}</td></tr>
-        @endif
+         <tr><td>{{$row->firstname}} {{$row->lastname}}</td><td>{{Room::find($row->room_number)->name}}</td><td>{{$row->totalprice}}</td><td>{{$row->date}}</td></tr>
         @endforeach
     </tbody>
 </table>

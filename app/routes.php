@@ -90,6 +90,8 @@ Route::get('customerForm', 'LaundriesController@customerEditFormAction');
 Route::post('customers','LaundriesController@customersAction');
 Route::post('laundry/glist', array('as'=>'laundrylistg', 'uses'=>'LaundriesController@glist'));
 Route::post('checkSum',  'LaundriesController@checkEditSum');
+Route::post('confirmLaundry',  'LaundriesController@laundryConfirmation');
+Route::post('confirmLaundrySales',  'LaundriesController@laundryConfirmationSales');
 Route::post('checkSumSales',  'LaundriesController@checkEditSumSalesAction');
 Route::post('laundry/llist', array('as'=>'laundrylist', 'uses'=>'LaundriesController@llist'));
 Route::post('customerList','LaundriesController@customerListAction');
@@ -185,6 +187,7 @@ Route::get('year_laundry/{guest}/{laud}/{year}','ReportsController@laundry_year'
 Route::get('reports/notify', array('as'=>'notify', 'uses'=>'NotificationsController@notify'));
 //Accountant
 Route::get('accountant/income/{date}', 'AccountantController@income');
+Route::get('printpdf/{id}', 'AccountantController@incomeDownload');
 Route::get('conferences', 'GuestsController@conferencesHome');
 Route::get('tableContents/{id}', 'GuestsController@getTableContents');
 Route::post('payBillContents/{id}', 'GuestsController@payBillTableContents');

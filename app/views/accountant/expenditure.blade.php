@@ -64,7 +64,8 @@
                       foreach($data as $row){
                       ?>
                       <tr><td>{{$row->cost}}</td><td>{{$row->expenditure_name}}</td><td>{{$row->date}}</td>
-                      <td><button class="btn btn-success btn-xs" onclick="viewResourcesUsed('{{$row->id}}')" data-toggle="modal" data-target="#myresource"><span class="glyphicon glyphicon-eye-open"> Details</span></button></td></tr>
+                      <td><button class="btn btn-success btn-xs" onclick="viewResourcesUsed('{{$row->id}}')" data-toggle="modal" data-target="#myresource"><span class="glyphicon glyphicon-eye-open"> Details</span></button>
+                          <a class="btn btn-warning btn-xs" href="{{url('printpdf/'.$row->id)}}"><span class="glyphicon glyphicon-print"></span>Export pdf</a></td></tr>
                       <?php
                       }?>
                   </tbody>

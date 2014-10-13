@@ -272,7 +272,7 @@ class GuestsController extends BaseController {
            $remain = Glist::find($id)->remain;
             $gid=Glist::find($id)->gid;
              if(Input::get('cost')>=$remain){
-                $cost2=$cost+$remain;
+                $cost2=$cost+Input::get('cost');
                 $remain2=Input::get('cost')-$remain;
                 $data_array=array(
                     'totalprice'=> $cost2,
@@ -284,7 +284,7 @@ class GuestsController extends BaseController {
                 return View::make('guests.viewLaundry',$data);
              }else{
                 $data_array=array(
-                    'totalprice'=>$cost+$remain,
+                    'totalprice'=>$cost+Input::get('cost'),
                     'remain'=>$remain-Input::get('cost')
 
                 );
@@ -371,10 +371,11 @@ class GuestsController extends BaseController {
             }  else {
                 $remain= Bil::where('id',$id)->first();
                 $cost=$remain->remain;
+                $amount=Bil::find($id)->amount;
                 if(Input::get('amount') < $cost){
                     $costz=$cost-Input::get('amount');
                     $table_up=array(
-                    'amount'=>Input::get('amount'),
+                    'amount'=>$amount+Input::get('amount'),
                     'remain'=>$costz 
                 ); 
                 DB::table('barbills')->where('id',$id)->update($table_up);
@@ -383,7 +384,7 @@ class GuestsController extends BaseController {
                 }  else {
                  $costz=$cost-Input::get('amount');
                     $table_up=array(
-                    'amount'=>Input::get('amount'),
+                    'amount'=>$amount+Input::get('amount'),
                     'remain'=>$costz, 
                     'cleared'=>'yes'
                 ); 
@@ -431,12 +432,12 @@ class GuestsController extends BaseController {
                ->where('customerName',Input::get('name'))->get();
            if($res){
            if(Input::get('mode')=='Cash'){
-               DB::table('conferes')->where('costumerName',Input::get('name'))
+               DB::table('conferes')->where('customerName',Input::get('name'))
                    ->where('date',date('Y-m-d'))->update($data_array);
                $data['sms']= "<p>Successifully upded</p>";
                return View::make('guests.conferencesView',$data);
            }elseif(Input::get('mode')=='Credit'){
-               DB::table('conferes')->where('costumerName',Input::get('name'))
+               DB::table('conferes')->where('customerName',Input::get('name'))
                    ->where('date',date('Y-m-d'))->update($data_array1);
                $data['sms']= "<p>Successifully upded</p>";
                return View::make('guests.conferencesView',$data);
@@ -474,7 +475,7 @@ class GuestsController extends BaseController {
         }else{
             $remain=Confere::where('id',$id)->first()->remain;
             $amount=Confere::where('id',$id)->first()->amount;
-            if($remain >=Input::get('pay')){
+            if($remain > Input::get('pay')){
                 $data_array=array(
                     'amount'=>Input::get('pay')+$amount,
                     'remain'=>$remain-Input::get('pay'),
@@ -483,7 +484,16 @@ class GuestsController extends BaseController {
               DB::table('conferes')->where('id',$id)->update($data_array);
               $data['sms']='<p class="alert alert-success"> Record updated</p>';
               return View::make('guests.tableBills',$data);
-            }else{
+            }elseif($remain == Input::get('pay')){
+                $data_array=array(
+                    'amount'=>Input::get('pay')+$amount,
+                    'remain'=>$remain-Input::get('pay'),
+                    'status'=>'paid'
+                );
+                DB::table('conferes')->where('id',$id)->update($data_array);
+                $data['sms']='<p class="alert alert-success"> Record updated</p>';
+                return View::make('guests.tableBills',$data);
+               }else{
                 $data['sms']='<p class="alert alert-warning"> The amount paid is greater than amount to be paid</p>';
                 return View::make('guests.tableBills',$data);
            }

@@ -35,7 +35,7 @@ class LaundriesController extends BaseController {
             $data=array(
                 'guid'=>$row->gid,
                  'timespent'=>$row->timespent,
-                 'totalprice'=>$row->totalprice,
+                'totalpiece'=>$row->totalpiece,
                  'roomID'=>$row->roomId,
                 'choose'=>$row->choose,
                 'remain'=>$row->remain,
@@ -52,7 +52,7 @@ class LaundriesController extends BaseController {
           $data=array(
               'guid'=>$row->gid,
               'timespent'=>$row->timespent,
-              'totalprice'=>$row->totalprice,
+              'totalpiece'=>$row->totalpiece,
               'roomID'=>$row->roomId,
               'choose'=>$row->choose,
               'remain'=>$row->remain,
@@ -60,7 +60,7 @@ class LaundriesController extends BaseController {
           );
       }
       $data['gid']=$id;
-      return View::make("laundries.shw1",$data);
+      return View::make("laundries.laundryPay",$data);
   }
     function laundryListViewSales($id,$date,$name){
         $list=DB::table('customerCost')->select('*')
@@ -69,7 +69,8 @@ class LaundriesController extends BaseController {
             $data=array(
                 'name'=>$row->customerName,
                 'timespent'=>$row->timespent,
-                'totalprice'=>$row->totalprice,
+                'totalpiece'=>$row->totalpiece,
+                'choose'=>$row->choose,
                 'date'=>$row->date
             );
         }
@@ -84,8 +85,9 @@ class LaundriesController extends BaseController {
             $data=array(
                 'name'=>$row->customerName,
                 'timespent'=>$row->timespent,
-                'totalprice'=>$row->totalprice,
+                'totalpiece'=>$row->totalpiece,
                 'remain'=>$row->remain,
+                'choose'=>$row->choose,
                 'date'=>$row->date
             );
         }
@@ -106,8 +108,9 @@ class LaundriesController extends BaseController {
 			Glist::create(array(
 						"gid"=> $inputs['gid'],
 						"timespent"=>$inputs['t'],
-						"totalprice"=>$inputs['to'],
+						"totalpiece"=>$inputs['to'],
 						"date"=>date('Y-m-d'),
+                        "choose"=>$inputs['v'],
                         "roomId"=>Guest::find($inputs['gid'])->room_number,
                         "remain"=>$inputs['remain']
 				));
@@ -120,8 +123,9 @@ class LaundriesController extends BaseController {
                 Glist::create(array(
                     "gid"=> $inputs['gid'],
                     "timespent"=>$inputs['t'],
-                    "totalprice"=>$inputs['to'],
+                    "totalpiece"=>$inputs['to'],
                     "date"=>date('Y-m-d'),
+                    "choose"=>$inputs['v'],
                     "roomId"=>Guest::find($inputs['gid'])->room_number
                 ));
                 $g = Guest::find($inputs['gid']);
@@ -135,8 +139,9 @@ class LaundriesController extends BaseController {
             $data_array=array(
                 "gid"=> $inputs['gid'],
                 "timespent"=>$inputs['t'],
-                "totalprice"=>$inputs['to'],
+                "totalpiece"=>$inputs['to'],
                 "date"=>date('Y-m-d'),
+                "choose"=>$inputs['v'],
                 "roomId"=>Guest::find($inputs['gid'])->room_number,
                 "remain"=>$inputs['remain']
             );
@@ -149,8 +154,9 @@ class LaundriesController extends BaseController {
                   $data_array=array(
                     "gid"=> $inputs['gid'],
                     "timespent"=>$inputs['t'],
-                    "totalprice"=>$inputs['to'],
+                    "totalpiece"=>$inputs['to'],
                     "date"=>date('Y-m-d'),
+                    "choose"=>$inputs['v'],
                     "roomId"=>Guest::find($inputs['gid'])->room_number
                 );
                 Glist::where('gid',$inputs['gid'])->where('date',date('Y-m-d'))->update($data_array);
@@ -161,29 +167,56 @@ class LaundriesController extends BaseController {
             }
         }
 	}
+    function laundryConfirmation(){
+        $input=Input::all();
+        $amount=$input['amount'];
+        $gid=$input['gid'];
+        $res=DB::table('laundrylist')->select('*')
+            ->where('id',$gid)->get();
+        if($res){
+          DB::table('laundrylist')->where('id',$gid)->update(array('totalprice'=>$amount));
+             echo '<p class="alert alert-success"> Laundry confirmed</p>';
+
+        }
+    }
+    function laundryConfirmationSales(){
+        $input=Input::all();
+        $amount=$input['amount'];
+        $name=$input['name'];
+        $res=DB::table('customerCost')->select('*')
+            ->where('customerName',$name)->get();
+        if($res){
+            DB::table('customerCost')->where('customerName',$name)->update(array('totalprice'=>$amount));
+            echo '<p class="alert alert-success"> Laundry confirmed</p>';
+
+        }
+    }
     function checkEditSum(){
         $input=Input::all();
         $id=$input['gid'];
+        $guid=$input['guid'];
         $amount=$input['remain'];
         $cost=Glist::find($id)->remain;
         $total=Glist::find($id)->totalprice;
         if($amount >=$cost){
             $data_array=array(
                 'totalprice'=>$total+$amount,
-                 'remain'=>$amount-$cost
+                'remain'=>$amount-$cost,
+                'payment_mode'=>'paid'
             );
          DB::table('laundrylist')->where('id',$id)->update($data_array);
-         $g = Guest::find($id);
+         $g = Guest::find($guid);
          $g->llist  = "yes";
          $g->save();
          return "ok";
         }else{
             $data_array=array(
                 'totalprice'=>$total+$amount,
-                'remain'=>$amount-$cost
+                'remain'=>$cost-$amount,
+                'payment_mode'=>'no'
             );
             DB::table('laundrylist')->where('id',$id)->update($data_array);
-            $g = Guest::find($id);
+            $g = Guest::find($guid);
             $g->llist  = "no";
             $g->save();
             return "ok";
@@ -274,6 +307,7 @@ class LaundriesController extends BaseController {
                     "timespent"=>$inputs['t'],
                     "totalprice"=>$inputs['to'],
                     "date"=>date('Y-m-d'),
+                    "choose"=>$inputs['v'],
                     "remain"=>$inputs['remain']
                 ));
 
@@ -283,6 +317,7 @@ class LaundriesController extends BaseController {
                     "timespent"=>$inputs['t'],
                     "totalprice"=>$inputs['to'],
                     "date"=>date('Y-m-d'),
+                    "choose"=>$inputs['v'],
                     "status"=>'yes'
                 ));
 
@@ -295,6 +330,7 @@ class LaundriesController extends BaseController {
                     "timespent"=>$inputs['t'],
                     "totalprice"=>$inputs['to'],
                     "date"=>date('Y-m-d'),
+                    "choose"=>$inputs['v'],
                     "remain"=>$inputs['remain']
                 );
                 Customer::where('customerName',$inputs['name'])->where('date',date('Y-m-d'))->update($data_array);
@@ -305,6 +341,7 @@ class LaundriesController extends BaseController {
                     "timespent"=>$inputs['t'],
                     "totalprice"=>$inputs['to'],
                     "date"=>date('Y-m-d'),
+                    "choose"=>$inputs['v'],
                     'status'=>'yes'
                  );
                 Customer::where('customerName',$inputs['name'])->where('date',date('Y-m-d'))->update($data_array);

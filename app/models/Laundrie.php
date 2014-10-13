@@ -18,7 +18,10 @@ class Laundrie extends Eloquent {
 	public static function tick($c1, $c2){
 			if($c1 == $c2){
 				return "checked";
-			}
+			}else{
+                return " ";
+            }
 	}
+
 
 }

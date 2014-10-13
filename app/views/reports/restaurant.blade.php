@@ -35,7 +35,7 @@
     </select>
     Payment Mode:  
     <select id="restaurant1" style="border: 1px solid #002;padding:2px; display:none">
-        <option value="credit">credit</option>
+        <option value="cash">cash</option>
     </select>   
     <select id="restaurant" style="border: 1px solid #002;padding:2px">
         <option></option>
@@ -159,12 +159,12 @@ $(document).ready(function(){
         if(rpf ==="noneguest"){
             $('#restaurant').hide();
             $('#restaurant1').show();
-            $('#restaurant').val('credit');
+            $('#restaurant').val('cash');
             
         }else if(rpf==="noneguestincome"){
             $('#restaurant').hide();
             $('#restaurant1').show();
-            $('#restaurant').val('credit');
+            $('#restaurant').val('cash');
         }else{
             $('#restaurant').show();
             $('#restaurant1').hide();  

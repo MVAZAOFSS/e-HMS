@@ -62,11 +62,12 @@
                     $restz= DB::table('laundrylist')->select('*')
                         ->join('guests','guests.id','=','laundrylist.gid')
                         ->where('llist','no')
+                        ->where('payment_mode','no')
                         ->where('laundrylist.gid',$id)->get();
                     if($restz){
                     foreach ($restz as $row){
                     ?>
-                        <tr><td>{{$row->totalprice}}</td><td>{{$row->date}}</td><td><button class="btn btn-danger btn-xs" onclick="viewGuestLaundry({{Glist::where('gid',$row->id)->first()->id}})"
+                        <tr><td>{{$row->totalprice}}</td><td>{{$row->date}}</td><td><button class="btn btn-danger btn-xs" onclick="viewGuestLaundry({{Glist::where('gid',$row->id)->where('payment_mode','no')->first()->id}})"
                                                                                                   data-target="#myinco" data-toggle="modal">
                                 complete</button></td></tr>
                     <?php

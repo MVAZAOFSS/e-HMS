@@ -33,15 +33,15 @@
     </div>
 
     <div id="md" class="modal fade bs-example-modal-lg1" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
+        <div class="modal-dialog modal-md">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     <h4 class="modal-title" id="myModalLabel">Greenlight Hotel - SALES LAUNDRY LIST</h4>
                 </div>
-                <div class="modal-body" style="height: 470px">
+                <div class="modal-body">
                     <p style="display:none" id="ldr1"><img src="{{url("img/load.gif")}}"> Loading list ....</p>
-                    <div id="loadlist1" style="overflow:auto; height:480px"></div>
+                    <div id="loadlist1"></div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-success" id="sv">Save changes</button>
@@ -77,7 +77,11 @@
                     <td>{{ $m->customerName }}</td>
                     <td>{{ $m->date }}</td>
                     <td id="{{ $m->id }}">
+                        @if($m->totalprice==0)
+                        <button type="button" data-toggle="modal" data-target=".bs-example-modal-lg" class="btn btn-warning btn-xs" onclick="viewLaundrySales('{{$m->id}}/{{$m->date}}/{{$m->customerName}}')"><span class="glyphicon glyphicon-usd"></span> confirm</button>
+                        @else
                         <button type="button" data-toggle="modal" data-target=".bs-example-modal-lg" class="btn btn-primary btn-xs" onclick="viewLaundrySales('{{$m->id}}/{{$m->date}}/{{$m->customerName}}')"><span class="glyphicon glyphicon-eye-open"></span> View</button>
+                        @endif
                         <button type="button" data-toggle="modal" data-target=".bs-example-modal-lg1"  class="btn btn-success btn-xs" onclick="viewLaundryEditSales('{{$m->id}}/{{$m->date}}/{{$m->customerName}}')"><span class="glyphicon glyphicon-edit"></span> Edit list</button>
 
                     </td>

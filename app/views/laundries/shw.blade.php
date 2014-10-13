@@ -1,10 +1,32 @@
+@if(isset($sms))
+    {{$sms}}
+@endif
 <p><b>Guest Name</b>: {{Guest::find($guid)->firstname}} {{Guest::find($guid)->lastname}} <b>Room No: </b>{{Room::find(Guest::find($guid)->room_number)->name}} <b>Date: </b> {{date('Y-m-d')}}</p>
-<p><b>Time sent to laundry: </b> {{$timespent}} <b>Total Piece</b> {{$totalprice}}  </p>
+<p><b>Time sent to laundry: </b> {{$timespent}} <b>Total Piece</b> {{$totalpiece}}  </p>
 <p>Please choose :
- <input type="radio" name="tick" id="tick1" value="starch"  /> Starch
- <input type="radio" name="tick" id="tick2" value="nostarch"  /> No Starch
- <input type="radio" name="tick" id="tick3" value="shirtfolder" /> Shirt folder
- <input type="radio" name="tick" id="tick4" value="shirtonhanger"/> Shirt on hanger</p>
+ <input type="radio" name="tick" id="tick1" value="starch"  <?php
+ if($choose=='starch'){
+     echo 'checked';
+ }
+
+ ?> /> Starch
+ <input type="radio" name="tick" id="tick2" value="nostarch"   <?php
+ if($choose=='nostarch'){
+     echo 'checked';
+ }
+
+ ?>/> No Starch
+ <input type="radio" name="tick" id="tick3" value="shirtfolder"  <?php
+ if($choose=='shirtfolder'){
+     echo 'checked';
+ }
+
+ ?> /> Shirt folder
+ <input type="radio" name="tick" id="tick4" value="shirtonhanger" <?php
+ if($choose=='shirtonhanger'){
+     echo 'checked';
+ }
+?> /> Shirt on hanger</p>
 <hr/>
 
 <img src="{{url("img/load.gif")}}" id="ajax5" style="width:52px;display:none;z-index:3000;position:absolute;margin-left: 375px; margin-top:120px">
@@ -120,7 +142,19 @@
 	</tr>		
 </table>
 
-<?php  
-	//$totCost = $lauTC + $preTC + $dryTC;  
-	//$remain  = $totalprice - (integer)($list->totalprice);
-?>
+<p class="alert alert-info" > The Total amount is {{$lauTC + $preTC + $dryTC}} </p>
+<input type="hidden" name="amount" id="amount" value="{{$lauTC + $preTC + $dryTC}}">
+<script>
+
+    $(document).ready(function(){
+        var amount=$('#amount').val();
+        var gid="<?php echo $gid;?>";
+        var url="<?php echo url('confirmLaundry');?>";
+        $.post(url,{gid:gid,amount:amount},function(data){
+            setTimeout(function(){
+            window.location="gllists";
+            },6000);
+        });
+
+    });
+</script>

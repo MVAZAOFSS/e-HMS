@@ -1,10 +1,30 @@
 <p><b>Guest Name</b>: {{$name}} <b>Date: </b> {{date('Y-m-d')}}</p>
-<p><b>Time sent to laundry: </b> {{$timespent}} <b>Total Piece</b> {{$totalprice}}  </p>
+<p><b>Time sent to laundry: </b> {{$timespent}} <b>Total Piece</b> {{$totalpiece}}  </p>
 <p>Please choose :
-    <input type="radio" name="tick" id="tick1" value="starch"  /> Starch
-    <input type="radio" name="tick" id="tick2" value="nostarch"  /> No Starch
-    <input type="radio" name="tick" id="tick3" value="shirtfolder" /> Shirt folder
-    <input type="radio" name="tick" id="tick4" value="shirtonhanger"/> Shirt on hanger</p>
+    <input type="radio" name="tick" id="tick1" value="starch"  <?php
+    if(isset($choose)=='starch'){
+        echo 'checked';
+    }
+
+    ?> /> Starch
+    <input type="radio" name="tick" id="tick2" value="nostarch"   <?php
+    if(isset($choose)=='nostarch'){
+        echo 'checked';
+    }
+
+    ?>/> No Starch
+    <input type="radio" name="tick" id="tick3" value="shirtfolder"  <?php
+    if(isset($choose)=='shirtfolder'){
+        echo 'checked';
+    }
+
+    ?> /> Shirt folder
+    <input type="radio" name="tick" id="tick4" value="shirtonhanger" <?php
+    if(isset($choose)=='shirtonhanger'){
+        echo 'checked';
+    }
+
+    ?> /> Shirt on hanger</p>
 <hr/>
 
 <img src="{{asset("img/load.gif")}}" id="ajax5" style="width:52px;display:none;z-index:3000;position:absolute;margin-left: 375px; margin-top:120px">
@@ -119,8 +139,19 @@
         <td></td>
     </tr>
 </table>
+<p class="alert alert-info" > The Total amount is {{$lauTC + $preTC + $dryTC}} </p>
+<input type="hidden" name="amount" id="amount" value="{{$lauTC + $preTC + $dryTC}}">
+<script>
 
-<?php
-//$totCost = $lauTC + $preTC + $dryTC;
-//$remain  = $totalprice - (integer)($list->totalprice);
-?>
+    $(document).ready(function(){
+        var amount=$('#amount').val();
+        var name="<?php echo $name;?>";
+        var url="<?php echo url('confirmLaundrySales');?>";
+        $.post(url,{name:name,amount:amount},function(data){
+            setTimeout(function(){
+                window.location="salesEditAction";
+            },6000);
+        });
+
+    });
+</script>

@@ -1,6 +1,6 @@
 
 <p><b>Guest Name</b>: {{Guest::find($guid)->firstname}} {{Guest::find($guid)->lastname}} <b>Room No: </b>{{Room::find(Guest::find($guid)->room_number)->name}} <b>Date: </b> {{$date}} &nbsp;&nbsp;&nbsp;<b>Remain Amount  {{$remain}} /=</b></p>
-<p><b>Time sent to laundry: </b> <input type="text" value="{{$timespent}}" id="time" /> <b>Total Piece</b> <input type="text" id="total" value="{{$totalprice}}" /> <input  type="hidden" value="{{$gid}}" id="gid" />
+<p><b>Time sent to laundry: </b> <input type="text" value="{{$timespent}}" id="time" /> <b>Total Piece</b> <input type="text" id="total" value="{{$totalpiece}}" /> <input  type="hidden" value="{{$gid}}" id="gid" />
    <b>Pay</b>&nbsp;&nbsp;&nbsp;<input type="text" id="remainz" name="remain" required>
  </p>
 <hr/>

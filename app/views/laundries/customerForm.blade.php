@@ -143,7 +143,7 @@
             $('#ajax5').show();
             var name      ="<?php echo $name;?>";
             var url2="<?php echo url('customers');?>";
-            $.post(url2, {t:tm, to:total, c:nv, name:name,remain:remain,opt:opt}, function(data){
+            $.post(url2, {t:tm, to:total, c:nv, name:name,remain:remain,opt:opt,v:nv}, function(data){
                 $('#ajax5').hide('fast', function(){
                     $('#alrt1').show();
                     window.location = "salesEditAction";
