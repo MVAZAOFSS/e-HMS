@@ -305,7 +305,7 @@ class LaundriesController extends BaseController {
                 Customer::create(array(
                     "customerName"=> $inputs['name'],
                     "timespent"=>$inputs['t'],
-                    "totalprice"=>$inputs['to'],
+                    "totalpiece"=>$inputs['to'],
                     "date"=>date('Y-m-d'),
                     "choose"=>$inputs['v'],
                     "remain"=>$inputs['remain']
@@ -315,7 +315,7 @@ class LaundriesController extends BaseController {
                 Customer::create(array(
                     "customerName"=> $inputs['name'],
                     "timespent"=>$inputs['t'],
-                    "totalprice"=>$inputs['to'],
+                    "totalpiece"=>$inputs['to'],
                     "date"=>date('Y-m-d'),
                     "choose"=>$inputs['v'],
                     "status"=>'yes'
@@ -328,7 +328,7 @@ class LaundriesController extends BaseController {
                 $data_array=array(
                     "customerName"=> $inputs['name'],
                     "timespent"=>$inputs['t'],
-                    "totalprice"=>$inputs['to'],
+                    "totalpiece"=>$inputs['to'],
                     "date"=>date('Y-m-d'),
                     "choose"=>$inputs['v'],
                     "remain"=>$inputs['remain']
@@ -339,7 +339,7 @@ class LaundriesController extends BaseController {
                 $data_array=array(
                     "customerName"=> $inputs['name'],
                     "timespent"=>$inputs['t'],
-                    "totalprice"=>$inputs['to'],
+                    "totalpiece"=>$inputs['to'],
                     "date"=>date('Y-m-d'),
                     "choose"=>$inputs['v'],
                     'status'=>'yes'

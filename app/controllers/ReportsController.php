@@ -3173,7 +3173,7 @@ public function rooms(){
                         ->get();
                 $data['gz']=$res;
                 return View::make('reports.restaurantsreportsales',$data);
-        }elseif ($guest=='noneguest'&&$rest=='credit'&&$serv==1) {
+        }elseif ($guest=='noneguest'&&$rest=='cash'&&$serv==1) {
             $res=DB::table('drinksales')->select('*')
                         ->join('bars','bars.name', '=' ,'drinksales.drink')
                         ->where('date',$date)
@@ -3181,7 +3181,7 @@ public function rooms(){
                         ->get();
                 $data['gz']=$res;
                 return View::make('reports.restaurantsreportsalesd',$data);
-        }elseif ($guest=='noneguest'&&$rest=='credit'&&$serv==2) {
+        }elseif ($guest=='noneguest'&&$rest=='cash'&&$serv==2) {
             $res=DB::table('drinksales')->select('*')
                     ->join('bars','bars.name', '=' ,'drinksales.drink')
                         ->where('date',$date)
@@ -3189,7 +3189,7 @@ public function rooms(){
                         ->get();
                 $data['gz']=$res;
                 return View::make('reports.restaurantsreportsalesd',$data);
-        }elseif ($guest=='noneguest'&&$rest=='credit'&&$serv==3) {
+        }elseif ($guest=='noneguest'&&$rest=='cash'&&$serv==3) {
             $res=DB::table('drinksales')->select('*')
                     ->join('bars','bars.name', '=' ,'drinksales.drink')
                         ->where('date',$date)
@@ -3197,7 +3197,7 @@ public function rooms(){
                         ->get();
                 $data['gz']=$res;
                 return View::make('reports.restaurantsreportsalesd',$data);
-        }elseif ($guest=='noneguest'&&$rest=='credit'&&$serv==4) {
+        }elseif ($guest=='noneguest'&&$rest=='cash'&&$serv==4) {
             $res=DB::table('drinksales')->select('*')
                     ->join('bars','bars.name', '=' ,'drinksales.drink')
                         ->where('date',$date)
@@ -3205,7 +3205,7 @@ public function rooms(){
                         ->get();
                 $data['gz']=$res;
                 return View::make('reports.restaurantsreportsalesd',$data);
-        }elseif ($guest=='noneguest'&&$rest=='credit'&&$serv==5) {
+        }elseif ($guest=='noneguest'&&$rest=='cash'&&$serv==5) {
             $res=DB::table('drinksales')->select('*')
                     ->join('bars','bars.name', '=' ,'drinksales.drink')
                         ->where('date',$date)
@@ -3564,7 +3564,7 @@ public function rooms(){
                                 'amount'=>'No money collected'
                             );
                       return View::make('reports.restaurantsreportcostd',$data);
-        }elseif ($guest=='noneguestincome'&&$rest=='credit'&&$serv=='all') {
+        }elseif ($guest=='noneguestincome'&&$rest=='cash'&&$serv=='all') {
             $res=DB::table('drinksales')->select('*')
                         ->join('bars','bars.name', '=' ,'drinksales.drink')
                         ->where('date',$date)
@@ -3582,7 +3582,7 @@ public function rooms(){
                                 'amount'=>'No money collected'
                             );
                       return View::make('reports.restaurantsreportcostd',$data);
-        }elseif ($guest=='noneguestincome'&&$rest=='credit'&&$serv==1) {
+        }elseif ($guest=='noneguestincome'&&$rest=='cash'&&$serv==1) {
             $res=DB::table('drinksales')->select('*')
                         ->join('bars','bars.name', '=' ,'drinksales.drink')
                         ->where('date',$date)
@@ -3601,7 +3601,7 @@ public function rooms(){
                                 'amount'=>'No money collected'
                             );
                       return View::make('reports.restaurantsreportcostd',$data);
-        }elseif ($guest=='noneguestincome'&&$rest=='credit'&&$serv==2) {
+        }elseif ($guest=='noneguestincome'&&$rest=='cash'&&$serv==2) {
              $res=DB::table('drinksales')->select('*')
                         ->join('bars','bars.name', '=' ,'drinksales.drink')
                         ->where('date',$date)
@@ -3620,7 +3620,7 @@ public function rooms(){
                                 'amount'=>'No money collected'
                             );
                       return View::make('reports.restaurantsreportcostd',$data);
-        }elseif ($guest=='noneguestincome'&&$rest=='credit'&&$serv==3) {
+        }elseif ($guest=='noneguestincome'&&$rest=='cash'&&$serv==3) {
              $res=DB::table('drinksales')->select('*')
                         ->join('bars','bars.name', '=' ,'drinksales.drink')
                         ->where('date',$date)
@@ -3639,7 +3639,7 @@ public function rooms(){
                                 'amount'=>'No money collected'
                             );
                       return View::make('reports.restaurantsreportcostd',$data);
-        }elseif ($guest=='noneguestincome'&&$rest=='credit'&&$serv==4) {
+        }elseif ($guest=='noneguestincome'&&$rest=='cash'&&$serv==4) {
              $res=DB::table('drinksales')->select('*')
                         ->join('bars','bars.name', '=' ,'drinksales.drink')
                         ->where('date',$date)
@@ -3658,7 +3658,7 @@ public function rooms(){
                                 'amount'=>'No money collected'
                             );
                       return View::make('reports.restaurantsreportcostd',$data);
-        }elseif ($guest=='noneguestincome'&&$rest=='credit'&&$serv==5) {
+        }elseif ($guest=='noneguestincome'&&$rest=='cash'&&$serv==5) {
              $res=DB::table('drinksales')->select('*')
                         ->join('bars','bars.name', '=' ,'drinksales.drink')
                         ->where('date',$date)
@@ -3834,22 +3834,14 @@ public function rooms(){
                         ->get();
                 $data['gz']=$res;
                 return View::make('reports.restaurantsreportd',$data);
-        }elseif ($guest=='noneguest'&&$rest=='credit'&&$serv=='all') {
+        }elseif ($guest=='noneguest'&&$rest=='cash'&&$serv=='all') {
             $res=DB::table('drinksales')->select('*')
                         ->join('bars','bars.name', '=' ,'drinksale.drink')
                         ->whereBetween('date',array($start_date,$end_date))
                         ->get();
                 $data['gz']=$res;
                 return View::make('reports.restaurantsreportsalesd',$data);
-        }elseif ($guest=='noneguest'&&$rest=='credit'&&$serv==1) {
-            $res=DB::table('drinksales')->select('*')
-                        ->join('bars','bars.name', '=' ,'drinksale.drink')
-                        ->whereBetween('date',array($start_date,$end_date))
-                        ->where('service',$serv)
-                        ->get();
-                $data['gz']=$res;
-                return View::make('reports.restaurantsreportsalesd',$data);
-        }elseif ($guest=='noneguest'&&$rest=='credit'&&$serv==2) {
+        }elseif ($guest=='noneguest'&&$rest=='cash'&&$serv==1) {
             $res=DB::table('drinksales')->select('*')
                         ->join('bars','bars.name', '=' ,'drinksale.drink')
                         ->whereBetween('date',array($start_date,$end_date))
@@ -3857,7 +3849,7 @@ public function rooms(){
                         ->get();
                 $data['gz']=$res;
                 return View::make('reports.restaurantsreportsalesd',$data);
-        }elseif ($guest=='noneguest'&&$rest=='credit'&&$serv==3) {
+        }elseif ($guest=='noneguest'&&$rest=='cash'&&$serv==2) {
             $res=DB::table('drinksales')->select('*')
                         ->join('bars','bars.name', '=' ,'drinksale.drink')
                         ->whereBetween('date',array($start_date,$end_date))
@@ -3865,7 +3857,7 @@ public function rooms(){
                         ->get();
                 $data['gz']=$res;
                 return View::make('reports.restaurantsreportsalesd',$data);
-        }elseif ($guest=='noneguest'&&$rest=='credit'&&$serv==4) {
+        }elseif ($guest=='noneguest'&&$rest=='cash'&&$serv==3) {
             $res=DB::table('drinksales')->select('*')
                         ->join('bars','bars.name', '=' ,'drinksale.drink')
                         ->whereBetween('date',array($start_date,$end_date))
@@ -3873,7 +3865,15 @@ public function rooms(){
                         ->get();
                 $data['gz']=$res;
                 return View::make('reports.restaurantsreportsalesd',$data);
-        }elseif ($guest=='noneguest'&&$rest=='credit'&&$serv==5) {
+        }elseif ($guest=='noneguest'&&$rest=='cash'&&$serv==4) {
+            $res=DB::table('drinksales')->select('*')
+                        ->join('bars','bars.name', '=' ,'drinksale.drink')
+                        ->whereBetween('date',array($start_date,$end_date))
+                        ->where('service',$serv)
+                        ->get();
+                $data['gz']=$res;
+                return View::make('reports.restaurantsreportsalesd',$data);
+        }elseif ($guest=='noneguest'&&$rest=='cash'&&$serv==5) {
             $res=DB::table('drinksales')->select('*')
                         ->join('bars','bars.name', '=' ,'drinksale.drink')
                         ->whereBetween('date',array($start_date,$end_date))
@@ -4232,7 +4232,7 @@ public function rooms(){
                                 'amount'=>'No money collected'
                             );
                       return View::make('reports.restaurantsreportcostd',$data);
-        }elseif ($guest=='noneguestincome'&&$rest=='credit'&&$serv=='all') {
+        }elseif ($guest=='noneguestincome'&&$rest=='cash'&&$serv=='all') {
             $res=DB::table('drinksales')->select('*')
                         ->join('bars','bars.name', '=' ,'drinksales.drink')
                         ->whereBetween('date',array($start_date,$end_date))
@@ -4250,7 +4250,7 @@ public function rooms(){
                                 'amount'=>'No money collected'
                             );
                       return View::make('reports.restaurantsreportcostd',$data);
-        }elseif ($guest=='noneguestincome'&&$rest=='credit'&&$serv==1) {
+        }elseif ($guest=='noneguestincome'&&$rest=='cash'&&$serv==1) {
              $res=DB::table('drinksales')->select('*')
                         ->join('bars','bars.name', '=' ,'drinksales.drink')
                         ->whereBetween('date',array($start_date,$end_date))
@@ -4269,7 +4269,7 @@ public function rooms(){
                                 'amount'=>'No money collected'
                             );
                       return View::make('reports.restaurantsreportcostd',$data);
-        }elseif ($guest=='noneguestincome'&&$rest=='credit'&&$serv==2) {
+        }elseif ($guest=='noneguestincome'&&$rest=='cash'&&$serv==2) {
              $res=DB::table('drinksales')->select('*')
                         ->join('bars','bars.name', '=' ,'drinksales.drink')
                         ->whereBetween('date',array($start_date,$end_date))
@@ -4288,7 +4288,7 @@ public function rooms(){
                                 'amount'=>'No money collected'
                             );
                       return View::make('reports.restaurantsreportcostd',$data);
-        }elseif ($guest=='noneguestincome'&&$rest=='credit'&&$serv==3) {
+        }elseif ($guest=='noneguestincome'&&$rest=='cash'&&$serv==3) {
              $res=DB::table('drinksales')->select('*')
                         ->join('bars','bars.name', '=' ,'drinksales.drink')
                         ->whereBetween('date',array($start_date,$end_date))
@@ -4307,7 +4307,7 @@ public function rooms(){
                                 'amount'=>'No money collected'
                             );
                       return View::make('reports.restaurantsreportcostd',$data);
-        }elseif ($guest=='noneguestincome'&&$rest=='credit'&&$serv==4) {
+        }elseif ($guest=='noneguestincome'&&$rest=='cash'&&$serv==4) {
              $res=DB::table('drinksales')->select('*')
                         ->join('bars','bars.name', '=' ,'drinksales.drink')
                         ->whereBetween('date',array($start_date,$end_date))
@@ -4326,7 +4326,7 @@ public function rooms(){
                                 'amount'=>'No money collected'
                             );
                       return View::make('reports.restaurantsreportcostd',$data);
-        }elseif ($guest=='noneguestincome'&&$rest=='credit'&&$serv==5) {
+        }elseif ($guest=='noneguestincome'&&$rest=='cash'&&$serv==5) {
              $res=DB::table('drinksales')->select('*')
                         ->join('bars','bars.name', '=' ,'drinksales.drink')
                         ->whereBetween('date',array($start_date,$end_date))
@@ -4520,7 +4520,7 @@ public function rooms(){
                         ->get();
                 $data['gz']=$res;
                 return View::make('reports.restaurantsreportd',$data);
-        }elseif ($guest=='noneguest'&&$rest=='credit'&&$serv=='all') {
+        }elseif ($guest=='noneguest'&&$rest=='cash'&&$serv=='all') {
             $res=DB::table('drinksales')->select('*')
                         ->join('bars','bars.name', '=' ,'drinksales.drink')
                         ->where('date','like','%'.$month.'%')
@@ -4528,16 +4528,7 @@ public function rooms(){
                         ->get();
                 $data['gz']=$res;
                 return View::make('reports.restaurantsreportsalesd',$data);
-        }elseif ($guest=='noneguest'&&$rest=='credit'&&$serv==1) {
-            $res=DB::table('drinksales')->select('*')
-                        ->join('bars','bars.name', '=' ,'drinksales.drink')
-                        ->where('date','like','%'.$month.'%')
-                        ->where('date','LIKE','%'.$year.'%')
-                        ->where('service',$serv)
-                        ->get();
-                $data['gz']=$res;
-                return View::make('reports.restaurantsreportsalesd',$data);
-        }elseif ($guest=='noneguest'&&$rest=='credit'&&$serv==2) {
+        }elseif ($guest=='noneguest'&&$rest=='cash'&&$serv==1) {
             $res=DB::table('drinksales')->select('*')
                         ->join('bars','bars.name', '=' ,'drinksales.drink')
                         ->where('date','like','%'.$month.'%')
@@ -4546,7 +4537,16 @@ public function rooms(){
                         ->get();
                 $data['gz']=$res;
                 return View::make('reports.restaurantsreportsalesd',$data);
-        }elseif ($guest=='noneguest'&&$rest=='credit'&&$serv==3) {
+        }elseif ($guest=='noneguest'&&$rest=='cash'&&$serv==2) {
+            $res=DB::table('drinksales')->select('*')
+                        ->join('bars','bars.name', '=' ,'drinksales.drink')
+                        ->where('date','like','%'.$month.'%')
+                        ->where('date','LIKE','%'.$year.'%')
+                        ->where('service',$serv)
+                        ->get();
+                $data['gz']=$res;
+                return View::make('reports.restaurantsreportsalesd',$data);
+        }elseif ($guest=='noneguest'&&$rest=='cash'&&$serv==3) {
             $res=DB::table('drinksales')->select('*')
                         ->join('bars','bars.name', '=' ,'drinksales.drink')
                        ->where('date','like','%'.$month.'%')
@@ -4555,7 +4555,7 @@ public function rooms(){
                         ->get();
                 $data['gz']=$res;
                 return View::make('reports.restaurantsreportsalesd',$data);
-        }elseif ($guest=='noneguest'&&$rest=='credit'&&$serv==4) {
+        }elseif ($guest=='noneguest'&&$rest=='cash'&&$serv==4) {
             $res=DB::table('drinksales')->select('*')
                         ->join('bars','bars.name', '=' ,'drinksales.drink')
                         ->where('date','like','%'.$month.'%')
@@ -4564,7 +4564,7 @@ public function rooms(){
                         ->get();
                 $data['gz']=$res;
                 return View::make('reports.restaurantsreportsalesd',$data);
-        }elseif ($guest=='noneguest'&&$rest=='credit'&&$serv==5) {
+        }elseif ($guest=='noneguest'&&$rest=='cash'&&$serv==5) {
             $res=DB::table('drinksales')->select('*')
                         ->join('bars','bars.name', '=' ,'drinksales.drink')
                         ->where('date','like','%'.$month.'%')
@@ -4942,7 +4942,7 @@ public function rooms(){
                                 'amount'=>'No money collected'
                             );
                       return View::make('reports.restaurantsreportcostd',$data);
-        }elseif ($guest=='noneguestincome'&&$rest=='credit'&&$serv=='all') {
+        }elseif ($guest=='noneguestincome'&&$rest=='cash'&&$serv=='all') {
             $res=DB::table('drinksales')->select('*')
                         ->join('bars','bars.name', '=' ,'drinksales.drink')
                         ->where('date','like','%'.$month.'%')
@@ -4961,7 +4961,7 @@ public function rooms(){
                                 'amount'=>'No money collected'
                             );
                       return View::make('reports.restaurantsreportcostd',$data);
-        }elseif ($guest=='noneguestincome'&&$rest=='credit'&&$serv==1) {
+        }elseif ($guest=='noneguestincome'&&$rest=='cash'&&$serv==1) {
              $res=DB::table('drinksales')->select('*')
                         ->join('bars','bars.name', '=' ,'drinksales.drink')
                         ->where('date','like','%'.$month.'%')
@@ -4981,7 +4981,7 @@ public function rooms(){
                                 'amount'=>'No money collected'
                             );
                       return View::make('reports.restaurantsreportcostd',$data);
-        }elseif ($guest=='noneguestincome'&&$rest=='credit'&&$serv==2) {
+        }elseif ($guest=='noneguestincome'&&$rest=='cash'&&$serv==2) {
              $res=DB::table('drinksales')->select('*')
                         ->join('bars','bars.name', '=' ,'drinksales.drink')
                         ->where('date','like','%'.$month.'%')
@@ -5001,7 +5001,7 @@ public function rooms(){
                                 'amount'=>'No money collected'
                             );
                       return View::make('reports.restaurantsreportcostd',$data);
-        }elseif ($guest=='noneguestincome'&&$rest=='credit'&&$serv==3) {
+        }elseif ($guest=='noneguestincome'&&$rest=='cash'&&$serv==3) {
              $res=DB::table('drinksales')->select('*')
                         ->join('bars','bars.name', '=' ,'drinksales.drink')
                         ->where('date','like','%'.$month.'%')
@@ -5021,7 +5021,7 @@ public function rooms(){
                                 'amount'=>'No money collected'
                             );
                       return View::make('reports.restaurantsreportcostd',$data);
-        }elseif ($guest=='noneguestincome'&&$rest=='credit'&&$serv==4) {
+        }elseif ($guest=='noneguestincome'&&$rest=='cash'&&$serv==4) {
              $res=DB::table('drinksales')->select('*')
                         ->join('bars','bars.name', '=' ,'drinksales.drink')
                         ->where('date','like','%'.$month.'%')
@@ -5041,7 +5041,7 @@ public function rooms(){
                                 'amount'=>'No money collected'
                             );
                       return View::make('reports.restaurantsreportcostd',$data);
-        }elseif ($guest=='noneguestincome'&&$rest=='credit'&&$serv==5) {
+        }elseif ($guest=='noneguestincome'&&$rest=='cash'&&$serv==5) {
              $res=DB::table('drinksales')->select('*')
                         ->join('bars','bars.name', '=' ,'drinksales.drink')
                         ->where('date','like','%'.$month.'%')
@@ -5218,22 +5218,14 @@ public function rooms(){
                         ->get();
                 $data['gz']=$res;
                 return View::make('reports.restaurantsreportd',$data);
-        }elseif ($guest=='noneguest'&&$rest=='credit'&&$serv=='all') {
+        }elseif ($guest=='noneguest'&&$rest=='cash'&&$serv=='all') {
             $res=DB::table('drinksales')->select('*')
                         ->join('bars','bars.name', '=' ,'drinksales.drink')
                         ->where('date','LIKE','%'.$year.'%')
                         ->get();
                 $data['gz']=$res;
                 return View::make('reports.restaurantsreportsalesd',$data);
-        }elseif ($guest=='noneguest'&&$rest=='credit'&&$serv==1) {
-            $res=DB::table('drinksales')->select('*')
-                        ->join('bars','bars.name', '=' ,'drinksales.drink')
-                        ->where('date','LIKE','%'.$year.'%')
-                        ->where('service',$serv)
-                        ->get();
-                $data['gz']=$res;
-                return View::make('reports.restaurantsreportsalesd',$data);
-        }elseif ($guest=='noneguest'&&$rest=='credit'&&$serv==2) {
+        }elseif ($guest=='noneguest'&&$rest=='cash'&&$serv==1) {
             $res=DB::table('drinksales')->select('*')
                         ->join('bars','bars.name', '=' ,'drinksales.drink')
                         ->where('date','LIKE','%'.$year.'%')
@@ -5241,7 +5233,15 @@ public function rooms(){
                         ->get();
                 $data['gz']=$res;
                 return View::make('reports.restaurantsreportsalesd',$data);
-        }elseif ($guest=='noneguest'&&$rest=='credit'&&$serv==3) {
+        }elseif ($guest=='noneguest'&&$rest=='cash'&&$serv==2) {
+            $res=DB::table('drinksales')->select('*')
+                        ->join('bars','bars.name', '=' ,'drinksales.drink')
+                        ->where('date','LIKE','%'.$year.'%')
+                        ->where('service',$serv)
+                        ->get();
+                $data['gz']=$res;
+                return View::make('reports.restaurantsreportsalesd',$data);
+        }elseif ($guest=='noneguest'&&$rest=='cash'&&$serv==3) {
             $res=DB::table('drinksales')->select('*')
                         ->join('bars','bars.name', '=' ,'drinksales.drink')
                        ->where('date','LIKE','%'.$year.'%')
@@ -5249,7 +5249,7 @@ public function rooms(){
                         ->get();
                 $data['gz']=$res;
                 return View::make('reports.restaurantsreportsalesd',$data);
-        }elseif ($guest=='noneguest'&&$rest=='credit'&&$serv==4) {
+        }elseif ($guest=='noneguest'&&$rest=='cash'&&$serv==4) {
             $res=DB::table('drinksales')->select('*')
                         ->join('bars','bars.name', '=' ,'drinksales.drink')
                         ->where('date','LIKE','%'.$year.'%')
@@ -5257,7 +5257,7 @@ public function rooms(){
                         ->get();
                 $data['gz']=$res;
                 return View::make('reports.restaurantsreportsalesd',$data);
-        }elseif ($guest=='noneguest'&&$rest=='credit'&&$serv==5) {
+        }elseif ($guest=='noneguest'&&$rest=='cash'&&$serv==5) {
             $res=DB::table('drinksales')->select('*')
                         ->join('bars','bars.name', '=' ,'drinksales.drink')
                         ->where('date','LIKE','%'.$year.'%')
@@ -5616,7 +5616,7 @@ public function rooms(){
                                 'amount'=>'No money collected'
                             );
                       return View::make('reports.restaurantsreportcostd',$data);
-        }elseif ($guest=='noneguestincome'&&$rest=='credit'&&$serv=='all') {
+        }elseif ($guest=='noneguestincome'&&$rest=='cash'&&$serv=='all') {
             $res=DB::table('drinksales')->select('*')
                         ->join('bars','bars.name', '=' ,'drinksales.drink')
                        ->where('date','LIKE','%'.$year.'%')
@@ -5634,7 +5634,7 @@ public function rooms(){
                                 'amount'=>'No money collected'
                             );
                       return View::make('reports.restaurantsreportcostd',$data);
-        }elseif ($guest=='noneguestincome'&&$rest=='credit'&&$serv==1) {
+        }elseif ($guest=='noneguestincome'&&$rest=='cash'&&$serv==1) {
             $res=DB::table('drinksales')->select('*')
                         ->join('bars','bars.name', '=' ,'drinksales.drink')
                         ->where('date','LIKE','%'.$year.'%')
@@ -5653,7 +5653,7 @@ public function rooms(){
                                 'amount'=>'No money collected'
                             );
                       return View::make('reports.restaurantsreportcostd',$data);
-        }elseif ($guest=='noneguestincome'&&$rest=='credit'&&$serv==2) {
+        }elseif ($guest=='noneguestincome'&&$rest=='cash'&&$serv==2) {
             $res=DB::table('drinksales')->select('*')
                         ->join('bars','bars.name', '=' ,'drinksales.drink')
                         ->where('date','LIKE','%'.$year.'%')
@@ -5672,7 +5672,7 @@ public function rooms(){
                                 'amount'=>'No money collected'
                             );
                       return View::make('reports.restaurantsreportcostd',$data);
-        }elseif ($guest=='noneguestincome'&&$rest=='credit'&&$serv==3) {
+        }elseif ($guest=='noneguestincome'&&$rest=='cash'&&$serv==3) {
             $res=DB::table('drinksales')->select('*')
                         ->join('bars','bars.name', '=' ,'drinksales.drink')
                        ->where('date','LIKE','%'.$year.'%')
@@ -5691,7 +5691,7 @@ public function rooms(){
                                 'amount'=>'No money collected'
                             );
                       return View::make('reports.restaurantsreportcostd',$data);
-        }elseif ($guest=='noneguestincome'&&$rest=='credit'&&$serv==4) {
+        }elseif ($guest=='noneguestincome'&&$rest=='cash'&&$serv==4) {
             $res=DB::table('drinksales')->select('*')
                         ->join('bars','bars.name', '=' ,'drinksales.drink')
                         ->where('date','LIKE','%'.$year.'%')
@@ -5710,7 +5710,7 @@ public function rooms(){
                                 'amount'=>'No money collected'
                             );
                       return View::make('reports.restaurantsreportcostd',$data);
-        }elseif ($guest=='noneguestincome'&&$rest=='credit'&&$serv==5) {
+        }elseif ($guest=='noneguestincome'&&$rest=='cash'&&$serv==5) {
             $res=DB::table('drinksales')->select('*')
                         ->join('bars','bars.name', '=' ,'drinksales.drink')
                         ->where('date','LIKE','%'.$year.'%')
@@ -5807,7 +5807,7 @@ public function rooms(){
                              'totalprice'=>$row->totalprice
                          );
                      }
-               return View::make('reports.laundrycost',$data);
+                   return View::make('reports.laundrycost',$data);
                   }else{
                       $data=array(
                           'totalprice'=>''

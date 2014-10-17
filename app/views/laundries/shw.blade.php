@@ -84,7 +84,7 @@
 			{{ Llist::whereRaw('gid = ? and counttype = ? and category = ? and date = ? and item =?', array($guid, 'h', 1,$date,$ls[$i]))->first()->cvalue }}
 		</td>
 		@if(Laundrie::whereRaw('category = ? and name = ?', array(1, $ls[$i]))->count() != 0)
-		<td>{{ (Llist::whereRaw('gid = ? and counttype = ? and category = ? and date = ?', array($guid, 'g', 1,$date))->first()->cvalue  * Laundrie::whereRaw('category = ? and name = ?', array(1, $ls[$i]))->first()->cost)  }}</td>
+		<td>{{ (Llist::whereRaw('gid = ? and counttype = ? and category = ? and date = ? and item =?', array($guid, 'g', 1,$date,$ls[$i]))->first()->cvalue  * Laundrie::whereRaw('category = ? and name = ?', array(1, $ls[$i]))->first()->cost)  }}</td>
 		@endif
 		
 		<td>
@@ -97,7 +97,7 @@
 		<td>
 			{{
 				(Laundrie::whereRaw('category = ? and name = ?', array(2, $ls[$i]))->first()->cost
-				*  Llist::whereRaw('gid = ? and counttype = ? and category = ? and date = ? ', array($guid, 'g', 2,$date))->first()->cvalue)
+				*  Llist::whereRaw('gid = ? and counttype = ? and category = ? and date = ? and item =?', array($guid, 'g', 2,$date,$ls[$i]))->first()->cvalue)
 			}}
 		</td>
 		@endif
@@ -111,16 +111,16 @@
 		<td>{{
 
 			(Laundrie::whereRaw('category = ? and name = ?', array(3, $ls[$i]))->first()->cost
-				*  Llist::whereRaw('gid = ? and counttype = ? and category = ? and date = ?', array($guid, 'g', 3,$date))->first()->cvalue)
+				*  Llist::whereRaw('gid = ? and counttype = ? and category = ? and date = ? and item =?', array($guid, 'g', 3,$date,$ls[$i]))->first()->cvalue)
 		}}</td>
 		@endif
 		<td></td>	
 	</tr>
 		<?php
 
-			$lauTC = (Llist::whereRaw('gid = ? and counttype = ? and category = ? and date = ?', array($guid, 'g', 1,$date))->first()->cvalue  * Laundrie::whereRaw('category = ? and name = ?', array(1, $ls[$i]))->first()->cost) + $lauTC;
-			$dryTC = (Llist::whereRaw('gid = ? and counttype = ? and category = ? and date = ?', array($guid, 'g', 2,$date))->first()->cvalue  * Laundrie::whereRaw('category = ? and name = ?', array(2, $ls[$i]))->first()->cost)  + $dryTC;
-			$preTC = (Llist::whereRaw('gid = ? and counttype = ? and category = ? and date = ?', array($guid, 'g', 3,$date))->first()->cvalue  * Laundrie::whereRaw('category = ? and name = ?', array(3, $ls[$i]))->first()->cost) + $preTC;
+			$lauTC = (Llist::whereRaw('gid = ? and counttype = ? and category = ? and date = ? and item =?', array($guid, 'g', 1,$date,$ls[$i]))->first()->cvalue  * Laundrie::whereRaw('category = ? and name = ?', array(1, $ls[$i]))->first()->cost) + $lauTC;
+			$dryTC = (Llist::whereRaw('gid = ? and counttype = ? and category = ? and date = ? and item =?', array($guid, 'g', 2,$date,$ls[$i]))->first()->cvalue  * Laundrie::whereRaw('category = ? and name = ?', array(2, $ls[$i]))->first()->cost)  + $dryTC;
+			$preTC = (Llist::whereRaw('gid = ? and counttype = ? and category = ? and date = ? and item =?', array($guid, 'g', 3,$date,$ls[$i]))->first()->cvalue  * Laundrie::whereRaw('category = ? and name = ?', array(3, $ls[$i]))->first()->cost) + $preTC;
 
 
 		?>

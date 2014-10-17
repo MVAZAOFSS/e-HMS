@@ -35,7 +35,7 @@
     </select>
     Bar: 
     <select id="bar1" style="border: 1px solid #002;padding:2px; display:none">
-        <option value="credit">credit</option>
+        <option value="cash">cash</option>
     </select> 
     <select id="bar" style="border: 1px solid #002;padding:2px">
         <option></option>

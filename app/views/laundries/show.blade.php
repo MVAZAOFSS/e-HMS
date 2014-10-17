@@ -128,7 +128,7 @@ $(document).ready(function(){
 		var list   = $('.list').val();
         var remain= $('#remain').val();
         var opt=document.getElementById('opt').value;
-        if(tm==" "&&total==" "&&nv==" "){
+        if(tm==" " && total==" " && nv==" "){
 			alert("please fill the fields");
 		}else{
 			if(list == ""){
@@ -138,7 +138,7 @@ $(document).ready(function(){
 				$('#gtb').css('opacity', '0.2');
 				$('#ajax5').show();
 
-				$.post("glist", {t:tm, to:total, c:nv, gid:gid,remain:remain,opt:opt,v:nv}, function(data){
+				$.post("glist", {t:tm, to:total,gid:gid,remain:remain,opt:opt,v:nv}, function(data){
 					$('#ajax5').hide('fast', function(){
 						$('#alrt1').show();
 						window.location = "gllists";

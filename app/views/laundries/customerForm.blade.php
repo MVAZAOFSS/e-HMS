@@ -125,14 +125,13 @@
     });
 
     $('#sv').on('click', function(){
-        var tm     = $('#time').val();
-        var total  = $('#total').val();
-        var nv     = v;
-
+    var tm     = $('#time').val();
+    var total  = $('#total').val();
+    var nv     = v;
     var list   = $('.list').val();
     var remain= $('#remain').val();
     var opt=document.getElementById('opt').value;
-    if(tm==""&&total==""&&nv==""){
+    if(tm==" " &&total==" "&&nv==" "){
         alert("please fill the fields");
     }else{
         if(list == ""){
@@ -143,7 +142,7 @@
             $('#ajax5').show();
             var name      ="<?php echo $name;?>";
             var url2="<?php echo url('customers');?>";
-            $.post(url2, {t:tm, to:total, c:nv, name:name,remain:remain,opt:opt,v:nv}, function(data){
+            $.post(url2, {t:tm, to:total,name:name,remain:remain,opt:opt,v:nv}, function(data){
                 $('#ajax5').hide('fast', function(){
                     $('#alrt1').show();
                     window.location = "salesEditAction";
