@@ -256,7 +256,7 @@ class GuestsController extends BaseController {
 	}
     function customerLaundry($id){
        $data['id']=$id;
-        return View::make('guests.viewLaundry',$data);
+       return View::make('guests.viewLaundry',$data);
     }
     function customerEditLaundry($id){
        $data['id']=$id;
@@ -270,30 +270,22 @@ class GuestsController extends BaseController {
         }else{
            $cost = Glist::find($id)->totalprice;
            $remain = Glist::find($id)->remain;
-            $gid=Glist::find($id)->gid;
-             if(Input::get('cost')>=$remain){
-                $cost2=$cost+Input::get('cost');
-                $remain2=Input::get('cost')-$remain;
-                $data_array=array(
-                    'totalprice'=> $cost2,
-                    'remain'=>$remain2
-                );
-                Glist::where('id',$id)->update($data_array);
-                 DB::table('guests')->where('id',$gid)->update(array('llist'=>'yes'));
-                $data['sms']='<p class="alert alert-success">record update</p>';
-                return View::make('guests.viewLaundry',$data);
-             }else{
-                $data_array=array(
-                    'totalprice'=>$cost+Input::get('cost'),
-                    'remain'=>$remain-Input::get('cost')
-
-                );
-                DB::table('laundrylist')->where('id',$id)->update($data_array);
+           $gid=Glist::find($id)->gid;
+           $remain2=Input::get('cost')+$remain;
+           $data_array=array(
+                'remain'=>$remain2
+           );
+            DB::table('laundrylist')->where('id',$id)->update($data_array);
+             if($cost==$remain2){
+                DB::table('laundrylist')->where('id',$id)->update(array('payment_mode'=>'paid'));
+                DB::table('guests')->where('id',$gid)->update(array('llist'=>'yes'));
+                 $data['sms']='<p class="alert alert-success">record updated</p>';
+                 return View::make('guests.viewLaundry',$data);
+            }else{
                 DB::table('guests')->where('id',$gid)->update(array('llist'=>'no'));
-                $data['sms']='<p class="alert alert-success">record update</p>';
-                return View::make('guests.viewLaundry',$data);
+                 $data['sms']='<p class="alert alert-success">record updated</p>';
+                 return View::make('guests.viewLaundry',$data);
             }
-
         }
     }
     function view_customer($id){

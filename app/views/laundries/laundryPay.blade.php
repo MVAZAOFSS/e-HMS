@@ -6,14 +6,16 @@
     <tr><td>Room No: </td><td>{{Room::find(Guest::find($guid)->room_number)->name}} </td></tr>
     <tr><td>Date: </td><td> {{$date}}</td></tr>
     <tr><td>Total Piece</td><td> {{$totalpiece}}</td></tr>
+    <tr><td>Total Amount</td><td> {{$totalprice}}</td></tr>
+    <tr><td>Amount paid</td><td> {{$remain}}</td></tr>
     <?php
-    if($remain==''||$remain==0){
+    if($payment_mode=='paid'){
     ?>
     <tr><td><p class="label label-success">No amount remain unpaid</p></td><td></td></tr>
     <?php
     }else{
     ?>
-    <tr><td>Amount remained {{$remain}}</td><td><input type="text" id="remainz" name="remain" required></td></tr>
+    <tr><td>Amount remained </td><td><input type="text" id="remainz" name="remain" required></td></tr>
     <?php
     }?>
 </table>
@@ -25,7 +27,7 @@
 </div>
 <script type="text/javascript">
     <?php
-    if($remain !=0 ||$remain !=''){
+    if($payment_mode=='no'){
     ?>
     $('#sv').on('click', function(){
         var gid    = {{$gid}} ;

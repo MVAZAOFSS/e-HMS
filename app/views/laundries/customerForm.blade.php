@@ -3,7 +3,6 @@
 <p><b>Customer Name</b>:<b class="text-primary" id="pr"> {{$name}} </b><b>Date: </b> {{date('Y-m-d')}}</p>
 <p><b>Time sent to laundry: </b> <input type="text" id="time" /> <b>Total Piece</b> <input type="text" id="total" />
     <b>Select payment Mode</b><select id="opt"><option id="cash">Cash</option><option id="credit">Credit</option></select></p>
-<p id="rem"><b>Remain Cost</b><input type="text" id="remain"/></p>
 <p>Please choose :
     <input type="radio" name="tick" id="tick1" value="starch" /> Starch
     <input type="radio" name="tick" id="tick2" value="nostarch"  /> No Starch
@@ -129,7 +128,6 @@
     var total  = $('#total').val();
     var nv     = v;
     var list   = $('.list').val();
-    var remain= $('#remain').val();
     var opt=document.getElementById('opt').value;
     if(tm==" " &&total==" "&&nv==" "){
         alert("please fill the fields");
@@ -142,7 +140,7 @@
             $('#ajax5').show();
             var name      ="<?php echo $name;?>";
             var url2="<?php echo url('customers');?>";
-            $.post(url2, {t:tm, to:total,name:name,remain:remain,opt:opt,v:nv}, function(data){
+            $.post(url2, {t:tm, to:total,name:name,opt:opt,v:nv}, function(data){
                 $('#ajax5').hide('fast', function(){
                     $('#alrt1').show();
                     window.location = "salesEditAction";

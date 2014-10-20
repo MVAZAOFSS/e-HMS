@@ -12,9 +12,10 @@ class AccountantController extends BaseController{
            $data9=$this->advancedFunctionPayed($date);
            $data10=$this->conferencePayed($date);
            $data11=$this->getFunctionPayed($date);
-        $data12=$this->totalBankBalance();
-        $data13=$this->getTotalAmountUsed();
-            $data=$data1+$data2+$data3+$data4+$data5+$data6+$data8+$data9+$data10+$data11+$data12+$data13;
+           $data14=$this->laundrySales($date);
+           $data12=$this->totalBankBalance();
+           $data13=$this->getTotalAmountUsed();
+            $data=$data1+$data2+$data3+$data4+$data5+$data6+$data8+$data9+$data10+$data11+$data12+$data13+$data14;
 	    return View::make('accountant.income',$data);
 	}
     function dailyPdfExportAction($date){
@@ -29,9 +30,10 @@ class AccountantController extends BaseController{
         $data9=$this->advancedFunctionPayed($date);
         $data10=$this->conferencePayed($date);
         $data11=$this->getFunctionPayed($date);
+        $data14=$this->laundrySales($date);
         $data12=$this->totalBankBalance();
         $data13=$this->getTotalAmountUsed();
-        $data=$data1+$data2+$data3+$data4+$data5+$data6+$data8+$data9+$data10+$data11+$data12+$data13;
+        $data=$data1+$data2+$data3+$data4+$data5+$data6+$data8+$data9+$data10+$data11+$data12+$data13+$data14;
         $res=PDF::loadView('accountant.incomePdf',$data);
         return $res->stream();
       }
@@ -899,6 +901,10 @@ class AccountantController extends BaseController{
         return View::make('accountant.create_view',$data);
     }
     function submitBalanceAndRemain(){
+        $sms1=$this->totalBankAmount();
+        $sms2=$this->totalBankBalance();
+        $sms3=$this->getTotalAmountUsed();
+        $sms=$sms1+$sms2+$sms3;
         $input=Input::all();
         $rules=array(
             'benk'=>'required|numeric',

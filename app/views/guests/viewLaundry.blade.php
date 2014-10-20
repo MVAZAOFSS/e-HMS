@@ -1,11 +1,11 @@
 <form id="sub">
     <table class="table table-hover">
         <tr>
-            <td>Amount payed</td>
+            <td>Total Amount required</td>
             <td>{{Glist::find($id)->totalprice}}</td>
         </tr>
         <tr>
-            <td>Amount Remain</td>
+            <td>Amount payed</td>
             <td>{{Glist::find($id)->remain}}</td>
         </tr>
         <tr>

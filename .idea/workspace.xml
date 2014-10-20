@@ -2,14 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5ed2415c-7ae3-496a-bd5c-bdf80219ad0a" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/AccountantController.php" afterPath="$PROJECT_DIR$/app/controllers/AccountantController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/GuestsController.php" afterPath="$PROJECT_DIR$/app/controllers/GuestsController.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/LaundriesController.php" afterPath="$PROJECT_DIR$/app/controllers/LaundriesController.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/ReportsController.php" afterPath="$PROJECT_DIR$/app/controllers/ReportsController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/reports/bar.blade.php" afterPath="$PROJECT_DIR$/app/views/reports/bar.blade.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/laundries/customerForm.blade.php" afterPath="$PROJECT_DIR$/app/views/laundries/customerForm.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/bills/print_viewbar.blade.php" afterPath="$PROJECT_DIR$/app/views/bills/print_viewbar.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/accountant/income.blade.php" afterPath="$PROJECT_DIR$/app/views/accountant/income.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/accountant/incomePdf.blade.php" afterPath="$PROJECT_DIR$/app/views/accountant/incomePdf.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/laundries/laundryPay.blade.php" afterPath="$PROJECT_DIR$/app/views/laundries/laundryPay.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/reports/restaurantsreportsalesd.blade.php" afterPath="$PROJECT_DIR$/app/views/reports/restaurantsreportsalesd.blade.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/laundries/show.blade.php" afterPath="$PROJECT_DIR$/app/views/laundries/show.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/laundries/shw.blade.php" afterPath="$PROJECT_DIR$/app/views/laundries/shw.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/laundries/shwSales1.blade.php" afterPath="$PROJECT_DIR$/app/views/laundries/shwSales1.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/laundries/shwSales.blade.php" afterPath="$PROJECT_DIR$/app/views/laundries/shwSales.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/guests/viewLaundry.blade.php" afterPath="$PROJECT_DIR$/app/views/guests/viewLaundry.blade.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="gl_v2.iws" />
@@ -33,93 +37,93 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="shwSales.blade.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/laundries/shwSales.blade.php">
+      <file leaf-file-name="LaundriesController.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/controllers/LaundriesController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="52" column="7" selection-start="1865" selection-end="1865" vertical-scroll-proportion="0.0" vertical-offset="936" max-vertical-offset="1062">
+            <state line="75" column="58" selection-start="2405" selection-end="2405" vertical-scroll-proportion="0.0" vertical-offset="1062" max-vertical-offset="9756">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="shw.blade.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/laundries/shw.blade.php">
+      <file leaf-file-name="AccountantController.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/controllers/AccountantController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="147" column="0" selection-start="5488" selection-end="5488" vertical-scroll-proportion="0.0" vertical-offset="2442" max-vertical-offset="2970">
+            <state line="906" column="31" selection-start="34725" selection-end="34725" vertical-scroll-proportion="-3.3859649" vertical-offset="16115" max-vertical-offset="20124">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="bar.blade.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/reports/bar.blade.php">
+      <file leaf-file-name="checkouts.blade.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/guests/checkouts.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="37" column="33" selection-start="1520" selection-end="1520" vertical-scroll-proportion="0.0" vertical-offset="3024" max-vertical-offset="4302">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ReportsController.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/controllers/ReportsController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="5809" column="19" selection-start="374346" selection-end="374346" vertical-scroll-proportion="0.0" vertical-offset="105029" max-vertical-offset="159984">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="print_viewbar.blade.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/bills/print_viewbar.blade.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="3" column="94" selection-start="162" selection-end="162" vertical-scroll-proportion="0.0" vertical-offset="54" max-vertical-offset="270">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="allsalesBoth.blade.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/bills/allsalesBoth.blade.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1926">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="63.37037" vertical-offset="1711" max-vertical-offset="2214">
               <folding>
-                <marker date="1411642820535" expanded="false" signature="3635:3661" placeholder="..." />
+                <marker date="1411551481802" expanded="false" signature="3882:3908" placeholder="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="allsales.blade.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/bills/allsales.blade.php">
+      <file leaf-file-name="tableBills.blade.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/guests/tableBills.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="1668" max-vertical-offset="2304">
+            <state line="38" column="39" selection-start="1348" selection-end="1348" vertical-scroll-proportion="-23.333334" vertical-offset="54" max-vertical-offset="972">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="all.blade.php" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/views/bills/all.blade.php">
+      <file leaf-file-name="view_customer.blade.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/guests/view_customer.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="116" column="49" selection-start="5025" selection-end="5025" vertical-scroll-proportion="0.8863636" vertical-offset="1620" max-vertical-offset="2556">
+            <state line="67" column="45" selection-start="3620" selection-end="3620" vertical-scroll-proportion="-4.6666665" vertical-offset="1080" max-vertical-offset="3006">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="shw1.blade.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/laundries/shw1.blade.php">
+      <file leaf-file-name="viewLaundry.blade.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/guests/viewLaundry.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="14" column="17" selection-start="1142" selection-end="1142" vertical-scroll-proportion="0.0" vertical-offset="252" max-vertical-offset="2196">
+            <state line="7" column="28" selection-start="219" selection-end="219" vertical-scroll-proportion="-0.6666667" vertical-offset="108" max-vertical-offset="846">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="shwSales1.blade.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/laundries/shwSales1.blade.php">
+      <file leaf-file-name="GuestsController.php" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/controllers/GuestsController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="120" column="142" selection-start="5374" selection-end="5374" vertical-scroll-proportion="0.0" vertical-offset="1728" max-vertical-offset="2934">
+            <state line="287" column="12" selection-start="7702" selection-end="7702" vertical-scroll-proportion="0.49900597" vertical-offset="4915" max-vertical-offset="9090">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="create_view.blade.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/accountant/create_view.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="68" column="25" selection-start="3349" selection-end="3349" vertical-scroll-proportion="-13.333333" vertical-offset="864" max-vertical-offset="1584">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="income.blade.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/accountant/income.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="45" column="175" selection-start="3010" selection-end="3010" vertical-scroll-proportion="0.0" vertical-offset="810" max-vertical-offset="1008">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="incomePdf.blade.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/accountant/incomePdf.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="28" column="183" selection-start="2747" selection-end="2747" vertical-scroll-proportion="0.0" vertical-offset="504" max-vertical-offset="702">
               <folding />
             </state>
           </provider>
@@ -143,8 +147,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/app/views/accountant/report.blade.php" />
-        <option value="$PROJECT_DIR$/app/views/guests/tableBills.blade.php" />
         <option value="$PROJECT_DIR$/app/models/Llist.php" />
         <option value="$PROJECT_DIR$/app/views/layout-setup.blade.php" />
         <option value="$PROJECT_DIR$/app/views/bills/createBoth.blade.php" />
@@ -159,12 +161,10 @@
         <option value="$PROJECT_DIR$/app/views/bills/print_viewbarBoth.php" />
         <option value="$PROJECT_DIR$/app/controllers/BillsBothController.php" />
         <option value="$PROJECT_DIR$/app/views/guests/conferencesView.blade.php" />
-        <option value="$PROJECT_DIR$/app/views/accountant/incomePdf.blade.php" />
         <option value="$PROJECT_DIR$/app/views/sidebar.blade.php" />
         <option value="$PROJECT_DIR$/app/models/Customer.php" />
         <option value="$PROJECT_DIR$/app/models/CustomerList.php" />
         <option value="$PROJECT_DIR$/app/views/laundries/listsales.blade.php" />
-        <option value="$PROJECT_DIR$/app/views/accountant/income.blade.php" />
         <option value="$PROJECT_DIR$/app/views/accountant/create_view.blade.php" />
         <option value="$PROJECT_DIR$/app/views/accountant/expensesSummary.blade.php" />
         <option value="$PROJECT_DIR$/app/views/reports/laundryreport.blade.php" />
@@ -181,28 +181,32 @@
         <option value="$PROJECT_DIR$/app/views/accountant/reportincome.blade.php" />
         <option value="$PROJECT_DIR$/app/views/accountant/expenditure.blade.php" />
         <option value="$PROJECT_DIR$/app/routes.php" />
-        <option value="$PROJECT_DIR$/app/controllers/AccountantController.php" />
-        <option value="$PROJECT_DIR$/app/views/laundries/laundryPay.blade.php" />
-        <option value="$PROJECT_DIR$/app/views/laundries/shwSales.blade.php" />
         <option value="$PROJECT_DIR$/app/views/guests/view_customer.blade.php" />
-        <option value="$PROJECT_DIR$/app/controllers/GuestsController.php" />
-        <option value="$PROJECT_DIR$/app/views/laundries/show.blade.php" />
-        <option value="$PROJECT_DIR$/app/controllers/LaundriesController.php" />
-        <option value="$PROJECT_DIR$/app/views/laundries/customerForm.blade.php" />
         <option value="$PROJECT_DIR$/app/views/laundries/shwSales1.blade.php" />
         <option value="$PROJECT_DIR$/app/views/laundries/shw.blade.php" />
         <option value="$PROJECT_DIR$/app/views/reports/bar.blade.php" />
-        <option value="$PROJECT_DIR$/app/controllers/ReportsController.php" />
         <option value="$PROJECT_DIR$/app/views/bills/print_viewbar.blade.php" />
+        <option value="$PROJECT_DIR$/app/controllers/ReportsController.php" />
+        <option value="$PROJECT_DIR$/app/views/reports/restaurantsreportsalesd.blade.php" />
+        <option value="$PROJECT_DIR$/app/views/laundries/show.blade.php" />
+        <option value="$PROJECT_DIR$/app/views/laundries/laundryPay.blade.php" />
+        <option value="$PROJECT_DIR$/app/views/laundries/shwSales.blade.php" />
+        <option value="$PROJECT_DIR$/app/views/laundries/customerForm.blade.php" />
+        <option value="$PROJECT_DIR$/app/controllers/LaundriesController.php" />
+        <option value="$PROJECT_DIR$/app/views/accountant/income.blade.php" />
+        <option value="$PROJECT_DIR$/app/views/accountant/incomePdf.blade.php" />
+        <option value="$PROJECT_DIR$/app/controllers/AccountantController.php" />
+        <option value="$PROJECT_DIR$/app/views/guests/viewLaundry.blade.php" />
+        <option value="$PROJECT_DIR$/app/controllers/GuestsController.php" />
       </list>
     </option>
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
   <component name="ProjectFrameBounds">
     <option name="x" value="65" />
-    <option name="y" value="24" />
+    <option name="y" value="-4" />
     <option name="width" value="1301" />
-    <option name="height" value="744" />
+    <option name="height" value="772" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -460,7 +464,7 @@
     <property name="FullScreen" value="false" />
     <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Fountain_Gate_eSMS" />
     <property name="SearchEverywhereHistory" value="" />
   </component>
   <component name="RunManager">
@@ -531,7 +535,11 @@
       <created>1413233743675</created>
       <updated>1413233743675</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Changes made by Mahane">
+      <created>1413570447812</created>
+      <updated>1413570447812</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -555,7 +563,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="65" y="24" width="1301" height="744" extended-state="6" />
+    <frame x="65" y="-4" width="1301" height="772" extended-state="6" />
     <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3287037" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -563,7 +571,7 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3293718" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32908365" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.39681274" sideWeight="0.6706282" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.4183267" sideWeight="0.6706282" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -571,12 +579,12 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.030864198" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3287037" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -601,16 +609,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/models/Customer.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="36" selection-start="158" selection-end="158" vertical-scroll-proportion="0.0" vertical-offset="144" max-vertical-offset="306" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/CustomerList.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="38" selection-start="164" selection-end="164" vertical-scroll-proportion="-5.3333335" vertical-offset="0" max-vertical-offset="324" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/laundries/edit.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="24.0" vertical-offset="648" max-vertical-offset="1188" />
@@ -631,11 +629,6 @@
         <state line="102" column="46" selection-start="4837" selection-end="4850" vertical-scroll-proportion="-35.555557" vertical-offset="876" max-vertical-offset="2142" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/accountant/income.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="40" column="120" selection-start="2590" selection-end="2590" vertical-scroll-proportion="-10.222222" vertical-offset="444" max-vertical-offset="972" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/accountant/reportexpt.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="568" />
@@ -644,16 +637,6 @@
     <entry file="file://$PROJECT_DIR$/app/views/accountant/report.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3474" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/accountant/incomePdf.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="112" selection-start="429" selection-end="429" vertical-scroll-proportion="-0.0" vertical-offset="54" max-vertical-offset="666" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/accountant/create_view.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="68" column="25" selection-start="3349" selection-end="3349" vertical-scroll-proportion="0.0" vertical-offset="1224" max-vertical-offset="1584" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/BillsBothController.php">
@@ -746,34 +729,9 @@
         <state line="68" column="27" selection-start="3146" selection-end="3146" vertical-scroll-proportion="-9.333333" vertical-offset="972" max-vertical-offset="2574" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/AccountantController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1101" column="8" selection-start="40210" selection-end="40210" vertical-scroll-proportion="-12.222222" vertical-offset="19488" max-vertical-offset="20016" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/accountant/expensesSummary.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="9" column="18" selection-start="449" selection-end="449" vertical-scroll-proportion="-6.0" vertical-offset="0" max-vertical-offset="306" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/guests/checkouts.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="810" max-vertical-offset="2214" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/guests/tableBills.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="38" column="39" selection-start="1348" selection-end="1348" vertical-scroll-proportion="0.0" vertical-offset="444" max-vertical-offset="972" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/guests/view_customer.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="131" column="44" selection-start="5690" selection-end="5701" vertical-scroll-proportion="0.0" vertical-offset="2052" max-vertical-offset="3006" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/guests/viewLaundry.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="305" max-vertical-offset="846" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/routes.php">
@@ -781,34 +739,75 @@
         <state line="80" column="21" selection-start="4376" selection-end="4384" vertical-scroll-proportion="0.0" vertical-offset="1274" max-vertical-offset="4032" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/GuestsController.php">
+    <entry file="file://$PROJECT_DIR$/app/views/reports/bar.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="386" column="38" selection-start="11493" selection-end="11493" vertical-scroll-proportion="0.0" vertical-offset="6948" max-vertical-offset="9234" />
+        <state line="37" column="33" selection-start="1520" selection-end="1520" vertical-scroll-proportion="0.0" vertical-offset="3024" max-vertical-offset="4302" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/laundries/laundryPay.blade.php">
+    <entry file="file://$PROJECT_DIR$/app/views/bills/print_viewbar.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="42" column="0" selection-start="1744" selection-end="1744" vertical-scroll-proportion="0.0" vertical-offset="756" max-vertical-offset="1008" />
+        <state line="3" column="94" selection-start="162" selection-end="162" vertical-scroll-proportion="0.0" vertical-offset="54" max-vertical-offset="270" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/bills/allsalesBoth.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1926" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/bills/allsales.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="1668" max-vertical-offset="2304" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/bills/all.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="116" column="49" selection-start="5025" selection-end="5025" vertical-scroll-proportion="0.0" vertical-offset="1980" max-vertical-offset="2556" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/reports/restaurantsreportsales.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="555" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/ReportsController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="3180" column="32" selection-start="236836" selection-end="236836" vertical-scroll-proportion="0.0" vertical-offset="57143" max-vertical-offset="159984" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/reports/restaurantsreportsalesd.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4" column="29" selection-start="204" selection-end="204" vertical-scroll-proportion="-2.6666667" vertical-offset="0" max-vertical-offset="360" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/laundries/shw.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="147" column="0" selection-start="5488" selection-end="5488" vertical-scroll-proportion="-38.0" vertical-offset="1620" max-vertical-offset="2970" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/laundries/shw1.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="17" selection-start="1142" selection-end="1142" vertical-scroll-proportion="0.0" vertical-offset="252" max-vertical-offset="2196">
+          <folding />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/laundries/show.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="140" column="47" selection-start="4798" selection-end="4798" vertical-scroll-proportion="0.0" vertical-offset="2520" max-vertical-offset="2844" />
+        <state line="138" column="56" selection-start="4700" selection-end="4700" vertical-scroll-proportion="0.0" vertical-offset="972" max-vertical-offset="2808">
+          <folding />
+        </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/LaundriesController.php">
+    <entry file="file://$PROJECT_DIR$/app/views/laundries/laundryPay.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="341" column="48" selection-start="11569" selection-end="11569" vertical-scroll-proportion="0.0" vertical-offset="5826" max-vertical-offset="8946" />
+        <state line="29" column="26" selection-start="1353" selection-end="1372" vertical-scroll-proportion="0.0" vertical-offset="270" max-vertical-offset="1044">
+          <folding />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/laundries/customerForm.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="133" column="29" selection-start="5094" selection-end="5094" vertical-scroll-proportion="0.0" vertical-offset="2394" max-vertical-offset="2916" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/laundries/shwSales.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="52" column="7" selection-start="1865" selection-end="1865" vertical-scroll-proportion="0.0" vertical-offset="936" max-vertical-offset="1062">
+        <state line="20" column="19" selection-start="1305" selection-end="1305" vertical-scroll-proportion="0.0" vertical-offset="1783" max-vertical-offset="2880">
           <folding />
         </state>
       </provider>
@@ -820,60 +819,81 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/laundries/shw1.blade.php">
+    <entry file="file://$PROJECT_DIR$/app/views/laundries/shwSales.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="17" selection-start="1142" selection-end="1142" vertical-scroll-proportion="0.0" vertical-offset="252" max-vertical-offset="2196">
+        <state line="30" column="26" selection-start="1370" selection-end="1370" vertical-scroll-proportion="0.0" vertical-offset="540" max-vertical-offset="1098">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/laundries/shw.blade.php">
+    <entry file="file://$PROJECT_DIR$/app/controllers/LaundriesController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="147" column="0" selection-start="5488" selection-end="5488" vertical-scroll-proportion="0.0" vertical-offset="2442" max-vertical-offset="2970">
+        <state line="75" column="58" selection-start="2405" selection-end="2405" vertical-scroll-proportion="0.0" vertical-offset="1062" max-vertical-offset="9756">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/reports/bar.blade.php">
+    <entry file="file://$PROJECT_DIR$/app/views/accountant/income.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="37" column="33" selection-start="1520" selection-end="1520" vertical-scroll-proportion="0.0" vertical-offset="3024" max-vertical-offset="4302">
+        <state line="45" column="175" selection-start="3010" selection-end="3010" vertical-scroll-proportion="0.0" vertical-offset="810" max-vertical-offset="1008">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/ReportsController.php">
+    <entry file="file://$PROJECT_DIR$/app/views/accountant/incomePdf.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="5809" column="19" selection-start="374346" selection-end="374346" vertical-scroll-proportion="0.0" vertical-offset="105029" max-vertical-offset="159984">
+        <state line="28" column="183" selection-start="2747" selection-end="2747" vertical-scroll-proportion="0.0" vertical-offset="504" max-vertical-offset="702">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/bills/print_viewbar.blade.php">
+    <entry file="file://$PROJECT_DIR$/app/views/accountant/create_view.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="94" selection-start="162" selection-end="162" vertical-scroll-proportion="0.0" vertical-offset="54" max-vertical-offset="270">
+        <state line="68" column="25" selection-start="3349" selection-end="3349" vertical-scroll-proportion="-13.333333" vertical-offset="864" max-vertical-offset="1584">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/bills/allsalesBoth.blade.php">
+    <entry file="file://$PROJECT_DIR$/app/views/guests/viewLaundry.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1926">
+        <state line="7" column="28" selection-start="219" selection-end="219" vertical-scroll-proportion="-0.6666667" vertical-offset="108" max-vertical-offset="846">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/guests/checkouts.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="63.37037" vertical-offset="1711" max-vertical-offset="2214">
           <folding>
-            <marker date="1411642820535" expanded="false" signature="3635:3661" placeholder="..." />
+            <marker date="1411551481802" expanded="false" signature="3882:3908" placeholder="..." />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/bills/allsales.blade.php">
+    <entry file="file://$PROJECT_DIR$/app/views/guests/view_customer.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="1668" max-vertical-offset="2304">
+        <state line="67" column="45" selection-start="3620" selection-end="3620" vertical-scroll-proportion="-4.6666665" vertical-offset="1080" max-vertical-offset="3006">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/bills/all.blade.php">
+    <entry file="file://$PROJECT_DIR$/app/views/guests/tableBills.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="116" column="49" selection-start="5025" selection-end="5025" vertical-scroll-proportion="0.8863636" vertical-offset="1620" max-vertical-offset="2556">
+        <state line="38" column="39" selection-start="1348" selection-end="1348" vertical-scroll-proportion="-23.333334" vertical-offset="54" max-vertical-offset="972">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/AccountantController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="906" column="31" selection-start="34725" selection-end="34725" vertical-scroll-proportion="-3.3859649" vertical-offset="16115" max-vertical-offset="20124">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/GuestsController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="287" column="12" selection-start="7702" selection-end="7702" vertical-scroll-proportion="0.49900597" vertical-offset="4915" max-vertical-offset="9090">
           <folding />
         </state>
       </provider>

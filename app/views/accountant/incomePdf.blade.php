@@ -12,6 +12,8 @@
                 </b></p>
             <p><b>LAUNDRY .......................................................................................................
                     <span class=""> Tsh {{$totalprice}} /=</b></p>
+            <p><b>LAUNDRY .......................................................................................................
+                    <span class=""> Tsh {{$totalpricesales}} /=</b></p>
             <p><b>CONFERENCE .................................................................................................{{$amount+$remain}}</b></p>
             <p><b>FUNCTION ...................................................................................................{{$amount1+$remain1}}</b></p>
         </div>
@@ -24,7 +26,7 @@
             <p><b>ADVANCE PAYMENT FOR CONFERENCE ......................................................................{{$amount1}}</b></p>
         </div>
         <div class="well well-sm">
-            <p><b>TOTAL INCOME........................................................................... Tsh {{$roomcost+$barcost+$bilscost+$barbillscost+$totalprice+$msosicost+$amount+$remain+$amount1+$remain1}} /= </b></p>
+            <p><b>TOTAL INCOME........................................................................... Tsh {{$roomcost+$barcost+$bilscost+$barbillscost+$totalprice+$totalpricesales+$msosicost+$amount+$remain+$amount1+$remain1}} /= </b></p>
         </div>
 
     </div>

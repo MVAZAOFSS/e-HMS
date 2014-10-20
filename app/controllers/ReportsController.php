@@ -3172,7 +3172,7 @@ public function rooms(){
                         ->where('date',$date)
                         ->get();
                 $data['gz']=$res;
-                return View::make('reports.restaurantsreportsales',$data);
+                return View::make('reports.restaurantsreportsalesd',$data);
         }elseif ($guest=='noneguest'&&$rest=='cash'&&$serv==1) {
             $res=DB::table('drinksales')->select('*')
                         ->join('bars','bars.name', '=' ,'drinksales.drink')

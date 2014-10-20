@@ -1,7 +1,6 @@
 <p><b>Guest Name</b>: {{Guest::find($gid)->firstname}} {{Guest::find($gid)->lastname}} <b>Room No: </b>{{Room::find(Guest::find($gid)->room_number)->name}} <b>Date: </b> {{date('Y-m-d')}}</p>
 <p><b>Time sent to laundry: </b> <input type="text" id="time" /> <b>Total Piece</b> <input type="text" id="total" />
  <b>Select payment Mode</b><select id="opt"><option id="cash">Cash</option><option id="credit">Credit</option></select></p>
-<p id="rem"><b>Remain Cost</b><input type="text" id="remain"/></p>
 <p>Please choose :
  <input type="radio" name="tick" id="tick1" value="starch" /> Starch  
  <input type="radio" name="tick" id="tick2" value="nostarch"  /> No Starch  
@@ -126,7 +125,6 @@ $(document).ready(function(){
 		var nv     = v;
 		var gid    = {{$gid}} ;
 		var list   = $('.list').val();
-        var remain= $('#remain').val();
         var opt=document.getElementById('opt').value;
         if(tm==" " && total==" " && nv==" "){
 			alert("please fill the fields");
@@ -138,7 +136,7 @@ $(document).ready(function(){
 				$('#gtb').css('opacity', '0.2');
 				$('#ajax5').show();
 
-				$.post("glist", {t:tm, to:total,gid:gid,remain:remain,opt:opt,v:nv}, function(data){
+				$.post("glist", {t:tm, to:total,gid:gid,opt:opt,v:nv}, function(data){
 					$('#ajax5').hide('fast', function(){
 						$('#alrt1').show();
 						window.location = "gllists";
