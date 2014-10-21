@@ -2,12 +2,12 @@
 class AccountantController extends BaseController{
 	public function income($date){
             $data['date']=$date;
-            $data1=  $this->hotelsincome($date);
+            $data1=$this->rooms($date);
             $data2=  $this->drinksellls($date);
             $data3=  $this->laundry($date);
             $data4=  $this->bils($date);
             $data5=  $this->bills($date);
-            $data6=  $this->food_sells($date);
+           $data6=  $this->food_sells($date);
            $data8=$this->advancedConferencePayed($date);
            $data9=$this->advancedFunctionPayed($date);
            $data10=$this->conferencePayed($date);
@@ -742,31 +742,8 @@ class AccountantController extends BaseController{
                     return $data_array;
         }
     }
-    function hotelsincome($date){
-        $res=  DB::table('hotellogs')->select('*')
-                ->join('guests','guests.room_number','=','hotellogs.guestid')
-                ->join('rooms','rooms.id','=','guests.room_number')
-                ->where('hotellogs.date',$date)
-                ->get(array(
-                    'totalcost',
-                    DB::raw('SUM(rooms.totalcost) AS totalcost')
-                ));
-             if($res){
-                foreach ($res as $row){
-                    $data_array=array(
-                        'roomcost'=>$row->totalcost
-                    );
-                }
-                return $data_array;
-             }  else {
-               $data_array=array(
-                        'roomcost'=>''
-                    );
-                return $data_array;  
-             }
-    }
     function drinksellls($date){
-        $res=DB::table('drinksales')->select('*')
+        $res=DB::table('drinksales')
                 ->join('bars','bars.name','=','drinksales.drink')
                 ->where('date',$date)
                 ->get(array(
@@ -788,7 +765,7 @@ class AccountantController extends BaseController{
         }
     }
     function laundry($date){
-        $res=DB::table('laundrylist')->select('*')
+        $res=DB::table('laundrylist')
                 ->where('date',$date)
                 ->get(array(
                     'totalprice',
@@ -809,7 +786,7 @@ class AccountantController extends BaseController{
         }
     }
     function laundrySales($date){
-        $res=DB::table('customerCost')->select('*')
+        $res=DB::table('customerCost')
             ->where('date',$date)
             ->get(array(
                 'totalprice',
@@ -830,7 +807,7 @@ class AccountantController extends BaseController{
         }
     }
     function bils($date){
-        $res=DB::table('foodbills')->select('*')
+        $res=DB::table('foodbills')
                 ->where('date',$date)
                 ->get(array(
                     'amount',
@@ -851,7 +828,7 @@ class AccountantController extends BaseController{
         }
     }
     function bills($date){
-        $res=DB::table('barbills')->select('*')
+        $res=DB::table('barbills')
                 ->where('date',$date)
                 ->get(array(
                     'amount',
@@ -869,6 +846,29 @@ class AccountantController extends BaseController{
             'barbillscost'=>''
            );
        return $data_array;
+        }
+    }
+    function rooms($date){
+        $res=DB::table('guests')->select('*')
+            ->join('rooms','rooms.id','=','guests.room_number')
+            ->where('guests.created_at','LIKE','%'.$date.'%')
+           ->where('cancelled','no')
+            ->get(array(
+                'guests.totalcost',
+                DB::raw('SUM(guests.totalcost) AS totalcost')
+            ));
+        if($res){
+            foreach ($res as $row){
+                $data_array=array(
+                    'roomcost'=>$row->totalcost
+                );
+            }
+            return $data_array;
+        }  else {
+            $data_array=array(
+                'roomcost'=>''
+            );
+            return $data_array;
         }
     }
     function food_sells($date){
@@ -932,7 +932,7 @@ class AccountantController extends BaseController{
           }
     }
     function balanceCheck($date){
-        $res=DB::table('banks')->select('*')
+        $res=DB::table('banks')
                ->where('date',$date)
                ->get(array(
                      'balance',
@@ -953,7 +953,7 @@ class AccountantController extends BaseController{
     }
 }
     function advancedConferencePayed($date){
-        $res=DB::table('conferes')->select('*')
+        $res=DB::table('conferes')
             ->where('date',$date)
             ->where('type_conferes','Conference')
             ->get(array(
@@ -975,7 +975,7 @@ class AccountantController extends BaseController{
         }
     }
     function advancedFunctionPayed($date){
-        $res=DB::table('conferes')->select('*')
+        $res=DB::table('conferes')
             ->where('date',$date)
             ->where('type_conferes','Function')
             ->get(array(
@@ -997,7 +997,7 @@ class AccountantController extends BaseController{
         }
     }
     function conferencePayed($date){
-        $res=DB::table('conferes')->select('*')
+        $res=DB::table('conferes')
             ->where('date',$date)
             ->where('type_conferes','Conference')
             ->get(array(
@@ -1019,7 +1019,7 @@ class AccountantController extends BaseController{
         }
     }
     function getFunctionPayed($date){
-        $res=DB::table('conferes')->select('*')
+        $res=DB::table('conferes')
             ->where('date',$date)
             ->where('type_conferes','Function')
             ->get(array(
