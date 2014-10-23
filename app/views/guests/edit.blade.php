@@ -57,14 +57,28 @@
 <table class="table" id="gtable" style="font-size: 12px;display:none">
             <tr>
                <td>First Name</td>
-               <td>Last Name</td> 
-               <td>Mobile</td> 
+               <td>Last Name</td>
+                <td>Surname</td>
             </tr> 
             <tr>
                <td><input id="fname" name="fname" type="text" value="{{$g->firstname}}" required /></td>
                <td><input id="lname" name="lname" type="text" value="{{$g->lastname}}" required /></td>
-               <td><input id="mobile" name="mobile" type="text" value="{{$g->mobile}}" required /></td>
-            </tr> 
+               <td><input id="surname" name="sname" type="text" value="{{$g->surname}}"  required /></td>
+            </tr>
+    <tr>
+        <td>Sex</td>
+        <td>Arrival from</td>
+        <td>Next Destination</td>
+    </tr>
+    <tr>
+        <td><select id="sex" name="sex" required >
+                <option value="{{$g->sex}}">{{$g->sex}}</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+            </select></td>
+        <td><input id="arrival" name="arrival" type="text" value="{{$g->arrival_from}}" required /></td>
+        <td><input id="destination" name="destination" type="text" value="{{$g->destination_to}}" required /></td>
+    </tr>
             <tr>
                <td>Address</td>
                <td>Passport Number</td> 
@@ -91,13 +105,13 @@
             </tr> 
             <tr>
                <td>Telephone</td>
-               <td>Fax</td> 
-               <td>Job</td> 
+               <td>Fax</td>
+                <td>Mobile</td>
             </tr> 
             <tr>
                <td><input id="telophone" name="telephone" value="{{$g->telephone}}" type="text" /></td>
                <td><input id="fax" name="fax" value="{{$g->fax}}" type="text" /></td>
-               <td><input id="job" name="job" value="{{$g->job}}" type="text" /></td>
+                <td><input id="mobile" name="mobile" type="text" value="{{$g->mobile}}" required /></td>
             </tr>        
             <tr>
                <td>Nationality</td>
@@ -117,21 +131,33 @@
             <tr>
                <td><input id="adults" name="adults" value="{{$g->adults}}" type="text" /></td>
                <td><input id="children" name="children" value="{{$g->children}}" type="text" /></td>
-               <td rowspan="3">
+               <td rowspan="1">
                 <textarea name="allegy" id="allegy" class="form-control" rows="5">{{$g->allegy}}</textarea>
                </td>
             </tr>
             <tr>
+                <td>Job</td>
                <td>Discount</td>
                <td>Mode of Payment</td> 
             </tr> 
             <tr>
+               <td><input id="job" name="job" value="{{$g->job}}" type="text" /></td>
                <td><input id="reservation_number" name="discount" value="{{$g->discount}}" type="text" /></td>
                <td>
+                   @if($g->mode=='Cash')
                   <select id="mode" name="mode">
-                    <option>Cash</option>
-                    <option>Other</option>
+                     <option value="{{$g->mode}}">{{$g->mode}}</option>
+                    <option id="cash">Cash</option>
+                    <option id="other">Other</option>
                   </select>
+                   @elseif($g->mode=='Other')
+                   <select id="mode" name="mode">
+                       <option value="{{$g->mode}}">{{$g->mode}}</option>
+                       <option id="cash">Cash</option>
+                       <option id="other">Other</option>
+                   </select>
+                   <input type="text" id="prepaid" name="prepaid" value="{{$g->pre_paidcost}}">
+                    @endif
                </td>
             </tr>                                
             <tr>

@@ -28,14 +28,26 @@ class GuestsController extends BaseController {
 		$n = Guest::where('reserved', '!=', 'no')->count();
 		return $n;
 	}
-
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return Response
-	 */
-
-
+    function viewCustomerReservedOrderAction(){
+        $res=DB::table('guests')->select('*')
+            ->where('guests.cancelled','no')
+            ->where('guests.confirm','no')->where('reserved','yes')
+            ->get();
+        return View::make('guests.customerReservedOrder',compact('res'));
+    }
+    function reservedContentAction($id){
+        $detail=DB::table('guests')->select('*')
+            ->join('rooms','rooms.id','=','guests.room_number')
+            ->where('guests.id',$id)->get();
+        return View::make('guests.customerInformation',compact('detail'));
+    }
+    function managerReservedGuestRoomsAction(){
+        $res=DB::table('guests')->select('*')
+            ->where('guests.cancelled','no')
+            ->where('guests.confirm','no')->where('reserved','yes')
+            ->get();
+        return View::make('guests.managerReservedGuestRooms',compact('res'));
+    }
 
 	public function moredays(){
 
@@ -44,14 +56,14 @@ class GuestsController extends BaseController {
 		$room           = Room::find($inputs['rmid']);
 		$guest          = Guest::find($inputs['gid']);
 
-		$checkout      = $room->checkout;
-                $cost=$room->cost;
+		$checkout  = $room->checkout;
+        $cost=$room->cost;
 
 		$arrival       = $guest->arrival_date;
 		$departure     = $guest->departure_date;
-		
+		$children      = $guest->children;
 		$checkin       = $room->checkin;
-                $room->totalcost=$cost*(substr($checkout,8,6)-  substr($checkin, 8,6));
+
 
 		$arr1         = strtotime($checkout);
 		$arr2         = strtotime($departure);
@@ -66,7 +78,7 @@ class GuestsController extends BaseController {
 
 		$room->checkout = $newCheckout1;
 		$guest->departure_date = $newCheckout2;
-
+        $guest->totalcost=$cost*(substr($newCheckout2,8,6)-  substr($arrival, 8,6))+($cost*$children*0.2);
 		$guest->save();
 		$room->save();
 
@@ -128,17 +140,17 @@ class GuestsController extends BaseController {
 		$room      = Room::find($rmid);
 		$arrival   = $room->checkin;
 		$departure = $room->checkout;
-                $cost=$room->cost;
+        $cost=$room->cost;
 		$dates     = Guest::generateDays($arrival, $departure);
 
 		if($inputs['reservation_number'] == ""){
 			$room->status = "occupied";
-                        $room->totalcost=$cost*(substr($departure,8,6)-  substr($arrival, 8,6));
+            $room->totalcost=$cost*(substr($departure,8,6)-  substr($arrival, 8,6));
 			$room->save();
 			$reserved = "no";
 		}else{
 			$room->status = "reserved";
-                        $room->totalcost=$cost*(substr($departure,8,6)-  substr($arrival, 8,6));
+            $room->totalcost=$cost*(substr($departure,8,6)-  substr($arrival, 8,6));
 			$room->save();
 			$reserved = "yes";
 		}
@@ -146,6 +158,10 @@ class GuestsController extends BaseController {
 		$guest     = Guest::create(array(
 						"firstname"=>$inputs['fname'],
 						"lastname"=>$inputs['lname'],
+                        "surname"=>$inputs['sname'],
+                        "sex"=>$inputs['sex'],
+                        "arrival_from"=>$inputs['arrival'],
+                        "destination_to"=>$inputs['destination'],
 						"nationality"=>$inputs['nationality'],
 						"address"=>$inputs['address'],
 						"passport_number"=>$inputs['passport_number'],
@@ -167,7 +183,8 @@ class GuestsController extends BaseController {
 						"discount"=>$inputs['discount'],
 						"reservation_number"=>$inputs['reservation_number'],
 						"mode"=>$inputs['mode'],
-                                                "totalcost"=>$cost*(substr($departure,8,6)-  substr($arrival, 8,6)),
+                        "totalcost"=>($cost*(substr($departure,8,6)-  substr($arrival, 8,6)))+($cost*$inputs['children']*0.2),
+                        "pre_paidcost"=>$inputs['prepaid'],
 						"allegy"=>$inputs['allegy'],
 						"reserved"=>$reserved
 					));
@@ -231,6 +248,10 @@ class GuestsController extends BaseController {
 		$g =  Guest::find($id);
 		$g->firstname = $inputs['fname'];
 		$g->lastname  = $inputs['lname'];
+        $g->surname=$inputs['sname'];
+        $g->sex=$inputs['sex'];
+        $g->arrival_from=$inputs['arrival'];
+        $g->destination_to=$inputs['destination'];
 		$g->mobile    = $inputs['mobile'];
 		$g->address   = $inputs['address'];
 		$g->passport_number = $inputs['passport_number'];

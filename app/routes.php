@@ -80,6 +80,7 @@ Route::get('view_den/{id}', 'RestaurantsController@customer_list');
 Route::get('viewLaundry/{id}', 'GuestsController@customerLaundry');
 Route::post('laundryEditAction/{id}', 'GuestsController@customerEditLaundry');
 Route::post('barbills_update/{id}', 'GuestsController@update_barbills');
+Route::get('managerReservedGuestRooms', 'GuestsController@managerReservedGuestRoomsAction');
 //laundry codes
 Route::get('laundry/add', array('as'=>'addlaundry', 'uses'=>'LaundriesController@create'));
 Route::post('laundry/add', array('as'=>'addlaundry1', 'uses'=>'LaundriesController@store'));
@@ -109,6 +110,8 @@ Route::get('viewListLaundrySales/{id}/{date}/{name}', 'LaundriesController@laund
 Route::get('viewEditListSales/{id}/{date}/{name}', 'LaundriesController@laundryEditViewSales');
 //guest codes
 Route::get('guest/add', array('as'=>'addguest', 'uses'=>'GuestsController@create'));
+Route::get('viewCustomerReservedOrder',  'GuestsController@viewCustomerReservedOrderAction');
+Route::get('reservedContent/{id}',  'GuestsController@reservedContentAction');
 Route::get('guest/list', array('as'=>'listguest', 'uses'=>'GuestsController@index'));
 Route::post('guest/add', array('as'=>'addguest1', 'uses'=>'GuestsController@store'));
 Route::post('guest/rno', array('as'=>'addguest1', 'uses'=>'GuestsController@rno'));

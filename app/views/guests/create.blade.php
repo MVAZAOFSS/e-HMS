@@ -20,7 +20,8 @@
             <li><a href="{{ url('home') }}">Home</a></li>
             <li><a href="{{ url('guest') }}">Guests</a></li>
 
-            <li class="active">Guest register</li>                    
+            <li class="active">Guest register</li>
+            <li><a href="{{url('viewCustomerReservedOrder')}}">Reserved Guest Rooms</a></li>
         </ol>
  <!--response messages-->
          @if(isset($emsg))
@@ -126,14 +127,28 @@
             <tr>
                <td>First Name</td>
                <td>Last Name</td> 
-               <td>Mobile</td> 
+               <td>Surname</td>
             </tr> 
             <tr>
                <td><input id="fname" name="fname" type="text" required /></td>
                <td><input id="lname" name="lname" type="text" required /></td>
-               <td><input id="mobile" name="mobile" type="text" required /></td>
-            </tr> 
-            <tr>
+               <td><input id="surname" name="sname" type="text" required /></td>
+            </tr>
+              <tr>
+                  <td>Sex</td>
+                  <td>Arrival from</td>
+                  <td>Next Destination</td>
+              </tr>
+              <tr>
+                  <td><select id="sex" name="sex" required >
+                          <option value=" "></option>
+                          <option value="Male">Male</option>
+                          <option value="Female">Female</option>
+                  </select></td>
+                  <td><input id="arrival" name="arrival" type="text" required /></td>
+                  <td><input id="destination" name="destination" type="text" required /></td>
+              </tr>
+              <tr>
                <td>Address</td>
                <td>Passport Number</td> 
                <td>Country</td>
@@ -160,12 +175,12 @@
             <tr>
                <td>Telephone</td>
                <td>Fax</td> 
-               <td>Job</td> 
+               <td>Mobile</td>
             </tr> 
             <tr>
                <td><input id="telophone" name="telephone" type="text" /></td>
                <td><input id="fax" name="fax" type="text" /></td>
-               <td><input id="job" name="job" type="text" /></td>
+               <td><input id="mobile" name="mobile" type="text" /></td>
             </tr>        
             <tr>
                <td>Nationality</td>
@@ -184,22 +199,25 @@
             </tr> 
             <tr>
                <td><input id="adults" name="adults" type="text" /></td>
-               <td><input id="children" name="children" type="text" /></td>
-               <td rowspan="3">
-                <textarea name="allegy" id="allegy" class="form-control" rows="5"></textarea>
+               <td><input id="children" name="children" type="text" required /></td>
+               <td rowspan="1">
+                <textarea name="allegy" id="allegy" class="form-control" rows="3"></textarea>
                </td>
             </tr>
             <tr>
+              <td>Job</td>
                <td>Discount</td>
                <td>Mode of Payment</td> 
             </tr> 
             <tr>
+                <td><input id="job" name="job" type="text" /></td>
                <td><input id="discount" name="discount" type="text" /></td>
                <td>
                   <select id="mode" name="mode">
-                    <option>Cash</option>
-                    <option>Other</option>
+                    <option id="cash">Cash</option>
+                    <option id="other">Other</option>
                   </select>
+                   <input type="text" id="prepaid" name="prepaid" placeholder="pre-paid amount">
                </td>
             </tr>                                
           </table>  
@@ -214,7 +232,15 @@
 </div>
 
 <script>
-
+$('#prepaid').hide();
+$('#mode').on('change',function(){
+var opt=$(this).val();
+if(opt=='Cash'){
+    $('#prepaid').hide();
+}else if(opt=='Other'){
+    $('#prepaid').show();
+}
+});
 function checking(r_no){
   var t = r_no.value;
   if(t == ""){
@@ -245,8 +271,9 @@ $('#saveguest').click(function(){
       if(f == ""){
           alert('Please fill reservation number first');
       }else{
-        var al = $('#fname, #lname, #mobile').val();
-        if(al == ""){
+        var sex=document.getElementById('sex').value;
+        var al = $('#fname, #lname, #mobile ,#surname,#arrival,#destination,#children').val();
+        if(al == "" && sex==""){
             alert('Please fill the form');
         }else{
         var data = $('#guestform').serializeArray();
@@ -346,7 +373,7 @@ $(document).ready(function (){
                              'background-color': '#f5f5f5'
                             });
                        }else{
-                            $('#fdk').html('Room: <span style="color: blue">' + obj.room + '</span><br/> status: <span style="color: green"> available </span> <br/>Enter Reservation Number <br/><input type="text" name="r_no" id="r_no" onkeyup="checking(this)" /> <span style="display:none" id="fd"><img src="{{url("img/load.gif")}}" /></span><br/><span id="f"></span><hr/><button id="regguest" style="display:none" class="btn btn-xs btn-success" data-toggle="modal" data-target="#myModal">Register Guest</button>').css({
+                            $('#fdk').html('Room: <span style="color: blue">' + obj.room + '</span><br/> status: <span style="color: green"> available </span> <br/>Copy and Paste this Reservation Number: <i class="text-success">{{Str::quickRandom(5)}}</i> <br/><input type="text" name="r_no" id="r_no" onkeyup="checking(this)" placeholder="paste reservation number here.."/> <span style="display:none" id="fd"><img src="{{url("img/load.gif")}}" /></span><br/><span id="f"></span><hr/><button id="regguest" style="display:none" class="btn btn-xs btn-success" data-toggle="modal" data-target="#myModal">Register Guest</button>').css({
                              'color': 'black',
                              'padding': '6px',
                              'border': '1px solid #ccc',

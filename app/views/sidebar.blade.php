@@ -16,6 +16,7 @@
     <ul class="nav navbar-nav side-nav" id="side">
         <li><a href="{{url("home")}}"><span class="glyphicon glyphicon-home"></span> Home</a></li>
         <li><a href="{{url("guest/add")}}"><span class="glyphicon glyphicon-credit-card"></span> Guest register</a></li>
+        <li><a href="{{url('viewCustomerReservedOrder')}}"><span class="glyphicon glyphicon-hand-right"></span> Reserved Guest rooms</a></li>
         <li><a href="{{url("guest/messages")}}"><span class="glyphicon glyphicon-question-sign"></span> Checkin <span class="badge pull-right" id="msg">{{Guest::whereRaw('reserved != ? and confirm = ? and arrival_date <= ? and cancelled = ?' , array('no',  'no', date("Y-m-d", strtotime("+1 day")),'no'))->count()}}</span>  <img id="l" class="pull-right" style="display:none" src="{{url("img/load.gif")}}" /></a></li>
         <li><a href="{{url("guest/checkouts")}}"><span class="glyphicon glyphicon-check"></span> Checkout <span class="badge pull-right" id="msg2">{{Guest::where('departure_date', date("Y-m-d"))->count()}}</span>  <img id="l2" class="pull-right" style="display:none" src="{{url("img/load.gif")}}" /></a></li>
         <li><a href="{{url("conferences")}}"><span class="glyphicon glyphicon-ban-circle"></span> Conference & Function</a></li>
@@ -98,6 +99,7 @@
         <li><a id="popv" href="{{url("reports/restaurant")}}"><span class="glyphicon glyphicon-list-alt"></span> Restaurant Reports</a></li>
         <li><a href="{{url("reports/bar")}}"><span class="glyphicon glyphicon-list-alt"></span> Bar Reports</a></li>
         <li><a href="{{url("reports/laundry")}}"><span class="glyphicon glyphicon-list-alt"></span> Laundry Reports</a></li>
+        <li><a href="{{url("managerReservedGuestRooms")}}"><span class="glyphicon glyphicon-hand-right"></span> Reserved Guests Rooms</a></li>
         <li><a href="{{url("notifications")}}"><span class="glyphicon glyphicon-bell"></span> Notification <span class="badge pull-right" id="msg1">{{Notification::whereToAndReadAndRemoved('secretary', 'no', 'no')->count()}}</span>  <img id="l4" class="pull-right" style="display:none" src="{{url("img/load.gif")}}" /></a></a></li>
         <li><a href="{{url("password")}}"><span class="glyphicon glyphicon-lock"></span> Password</a></li>
         <li><a href="{{url("logout")}}"><span class="glyphicon glyphicon-off"></span> Logout</a></li>
@@ -119,6 +121,7 @@
         <li><a href="{{url("reports/restaurant")}}"><span class="glyphicon glyphicon-list-alt"></span> Restaurant Reports</a></li>
         <li><a href="{{url("reports/bar")}}"><span class="glyphicon glyphicon-list-alt"></span> Bar Reports</a></li>
         <li><a href="{{url("reports/laundry")}}"><span class="glyphicon glyphicon-list-alt"></span> Laundry Reports</a></li>
+        <li><a href="{{url("managerReservedGuestRooms")}}"><span class="glyphicon glyphicon-hand-right"></span> Reserved Guests Rooms</a></li>
         <li><a href="{{url("password")}}"><span class="glyphicon glyphicon-lock"></span> Password</a></li>
         <li><a href="{{url("logout")}}"><span class="glyphicon glyphicon-off"></span> Logout</a></li>
     </ul>
