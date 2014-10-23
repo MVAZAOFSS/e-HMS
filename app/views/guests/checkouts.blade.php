@@ -53,12 +53,14 @@
                    $guests = Guest::where('departure_date', date("Y-m-d"))->get(); ?>
                     @foreach($guests as $m)
                     <tr>
-                         <td>{{$m->firstname}} {{$m->middlename}} {{$m->lastname}}</td>
+                         <td>{{ $m->firstname}} {{$m->middlename}} {{$m->lastname}}</td>
                          <td>{{ $m->mobile }}</td>
                          <td>{{ Room::find($m->room_number)->name }}</td>
                          <td>{{ $m->arrival_date }}</td>
                          <td>{{ $m->departure_date }}</td>
-                         <td><a class="btn btn-success btn-xs" onclick="ViewList('{{$m->id}}')"><span class="glyphicon glyphicon-check"></span> Details</a></td>
+                         <td><a class="btn btn-success btn-xs" onclick="ViewList('{{$m->id}}')"><span class="glyphicon glyphicon-check"></span> Details</a>
+                             <a class="btn btn-warning btn-xs" onclick="ViewListDaily('{{$m->id}}/{{$m->arrival_date}}/{{$m->departure_date}}')" data-target="#general" data-toggle="modal"><span class="glyphicon glyphicon-adjust"></span> General summary</a>
+                         </td>
                     </tr>
                     @endforeach
                
@@ -66,6 +68,23 @@
  </table>   
 </div>
 </div>
+    <div class="modal fade" id="general" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">GUEST GENERAL INFORMATION</h4>
+                </div>
+                <div class="modal-body" style="height: 420px; overflow:scroll">
+                     <div class="contList"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
     <div class="col-lg-5">
         <div class="list">
             
@@ -111,6 +130,13 @@ function ViewList(id){
     var url2=url+'/'+id;
     $.get(url2,function(data){
         $('.list').html(data);
+    });
+}
+function ViewListDaily(id){
+    var url="<?php echo url('viewGeneral');?>";
+    var url2=url+'/'+id ;
+    $.get(url2,function(data){
+        $('.contList').html(data);
     });
 }
 </script>

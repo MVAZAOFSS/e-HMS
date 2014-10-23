@@ -81,6 +81,7 @@ Route::get('viewLaundry/{id}', 'GuestsController@customerLaundry');
 Route::post('laundryEditAction/{id}', 'GuestsController@customerEditLaundry');
 Route::post('barbills_update/{id}', 'GuestsController@update_barbills');
 Route::get('managerReservedGuestRooms', 'GuestsController@managerReservedGuestRoomsAction');
+Route::get('viewGeneral/{id}/{start_date}/{end_date}', 'GuestsController@viewGeneralAction');
 //laundry codes
 Route::get('laundry/add', array('as'=>'addlaundry', 'uses'=>'LaundriesController@create'));
 Route::post('laundry/add', array('as'=>'addlaundry1', 'uses'=>'LaundriesController@store'));

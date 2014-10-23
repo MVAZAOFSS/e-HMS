@@ -48,8 +48,95 @@ class GuestsController extends BaseController {
             ->get();
         return View::make('guests.managerReservedGuestRooms',compact('res'));
     }
+    function viewGeneralAction($id,$start_date,$end_date){
+        $data5=$this->viewGeneralLaundryCost($id,$start_date,$end_date);
+        $data6=$this->viewGeneralFoodBillCostAction($id,$start_date,$end_date);
+        $data7=$this->viewGeneralRestaurantCost($id,$start_date,$end_date);
+        $data=$data5+$data6+$data7;
+        $data['id']=$id;
+        $data['start_date']=$start_date;
+        $data['end_date']=$end_date;
+        return View::make('guests.guestsGeneral',$data);
+    }
+    function viewGeneralFoodBillAction($id,$start_date,$end_date){
+        $res=DB::table('foodbills')->select('*')
+               ->join('guests','guests.id','=','foodbills.guestid')
+                ->where('foodbills.guestid',$id)
+                ->whereBetween('foodbills.date',array($start_date,$end_date))
+                ->get();
+          return $res;
 
-	public function moredays(){
+          }
+    function viewGeneralRestaurant($id,$start_date,$end_date){
+        $restaurant=DB::table('barbills')->select('*')
+            ->join('guests','guests.id','=','barbills.guestid')
+            ->where('barbills.guestid',$id)
+            ->whereBetween('barbills.date',array($start_date,$end_date))
+            ->get();
+        return $restaurant;
+    }
+   function viewGeneralLaundry($id,$start_date,$end_date){
+       $laundry=DB::table('laundrylist')->select('*')
+           ->join('guests','guests.id','=','laundrylist.gid')
+           ->where('laundrylist.gid',$id)
+           ->whereBetween('laundrylist.date',array($start_date,$end_date))
+           ->get();
+       return $laundry;
+   }
+    function viewGeneralFoodBillCostAction($id,$start_date,$end_date){
+        $res=DB::table('foodbills')
+            ->join('guests','guests.id','=','foodbills.guestid')
+            ->where('foodbills.guestid',$id)
+            ->whereBetween('foodbills.date',array($start_date,$end_date))
+            ->get(array(
+                'amount',
+                DB::raw('SUM(amount)AS amount')
+            ));
+            foreach($res as $row){
+                $data_array=array(
+                    'foodbillscost'=>$row->amount
+                );
+
+            }
+        return  $data_array;
+
+    }
+    function viewGeneralRestaurantCost($id,$start_date,$end_date){
+        $restaurant=DB::table('barbills')
+            ->join('guests','guests.id','=','barbills.guestid')
+            ->where('barbills.guestid',$id)
+            ->whereBetween('barbills.date',array($start_date,$end_date))
+            ->get(array(
+                '*',
+                DB::raw('SUM(amount)AS amount')
+            ));
+        foreach($restaurant as $row){
+            $data_array=array(
+                  'barbillscost'=>$row->amount
+              );
+
+        }
+        return  $data_array;
+        }
+
+    function viewGeneralLaundryCost($id,$start_date,$end_date){
+        $laundry=DB::table('laundrylist')
+            ->join('guests','guests.id','=','laundrylist.gid')
+            ->where('laundrylist.gid',$id)
+            ->whereBetween('laundrylist.date',array($start_date,$end_date))
+            ->get(array(
+                '*',
+                DB::raw('SUM(totalprice)AS totalprice')
+            ));
+         foreach($laundry as $row){
+             $data_array=array(
+                 'laundrycost'=>$row->totalprice
+             );
+
+         }
+        return $data_array;
+    }
+ public function moredays(){
 
 		$inputs       = Input::all();
 
