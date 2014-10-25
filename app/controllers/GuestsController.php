@@ -145,8 +145,7 @@ class GuestsController extends BaseController {
 
 		$checkout  = $room->checkout;
         $cost=$room->cost;
-
-		$arrival       = $guest->arrival_date;
+        $arrival       = $guest->arrival_date;
 		$departure     = $guest->departure_date;
 		$children      = $guest->children;
 		$checkin       = $room->checkin;
@@ -162,10 +161,12 @@ class GuestsController extends BaseController {
 
 		$newCheckout1 = date('Y-m-d', $tm1);
 		$newCheckout2 = date('Y-m-d', $tm2);
-
+        $costguest=strtotime($newCheckout2);
+        $costarrival=strtotime($arrival);
+        $diff=$costguest-$costarrival;
 		$room->checkout = $newCheckout1;
 		$guest->departure_date = $newCheckout2;
-        $guest->totalcost=$cost*(substr($newCheckout2,8,6)-  substr($arrival, 8,6))+($cost*$children*0.2);
+        $guest->totalcost=$cost*(round($diff/86400))+($cost*$children*0.2);
 		$guest->save();
 		$room->save();
 
