@@ -2,9 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5ed2415c-7ae3-496a-bd5c-bdf80219ad0a" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/GuestsController.php" afterPath="$PROJECT_DIR$/app/controllers/GuestsController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/guests/checkouts.blade.php" afterPath="$PROJECT_DIR$/app/views/guests/checkouts.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/guests/customerInformation.blade.php" afterPath="$PROJECT_DIR$/app/views/guests/customerInformation.blade.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="gl_v2.iws" />
@@ -57,10 +54,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.blade.php" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="index.blade.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/guests/index.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-2.1464436" vertical-offset="1026" max-vertical-offset="3222">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="38.0" vertical-offset="1026" max-vertical-offset="3222">
               <folding />
             </state>
           </provider>
@@ -84,10 +81,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GuestsController.php" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="GuestsController.php" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/controllers/GuestsController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="436" column="60" selection-start="13711" selection-end="13711" vertical-scroll-proportion="-0.0" vertical-offset="7848" max-vertical-offset="11160">
+            <state line="163" column="8" selection-start="5553" selection-end="5553" vertical-scroll-proportion="0.5895197" vertical-offset="2664" max-vertical-offset="11178">
               <folding />
             </state>
           </provider>
@@ -569,7 +566,15 @@
       <created>1414059732060</created>
       <updated>1414059732060</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Added Improvement from client">
+      <created>1414240286718</created>
+      <updated>1414240286718</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Added Improvement from client">
+      <created>1414241258973</created>
+      <updated>1414241258973</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -596,6 +601,7 @@
     <frame x="65" y="24" width="1301" height="744" extended-state="6" />
     <editor active="false" />
     <layout>
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3287037" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3287037" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3293718" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3293718" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -606,12 +612,11 @@
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.030864198" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.030864198" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3287037" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -902,13 +907,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/GuestsController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="436" column="60" selection-start="13711" selection-end="13711" vertical-scroll-proportion="0.0" vertical-offset="7848" max-vertical-offset="11160">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/guests/customerInformation.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="20" column="29" selection-start="1184" selection-end="1184" vertical-scroll-proportion="0.0" vertical-offset="360" max-vertical-offset="540">
@@ -941,7 +939,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/guests/index.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-2.1464436" vertical-offset="1026" max-vertical-offset="3222">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="38.0" vertical-offset="1026" max-vertical-offset="3222">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/GuestsController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="163" column="8" selection-start="5553" selection-end="5553" vertical-scroll-proportion="0.5895197" vertical-offset="2664" max-vertical-offset="11178">
           <folding />
         </state>
       </provider>
