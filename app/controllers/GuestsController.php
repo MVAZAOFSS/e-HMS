@@ -425,9 +425,16 @@ class GuestsController extends BaseController {
           if($validator->fails()){
               return View::make('guests.view_form',$data)->withErrors($validator);
           }  else {
+
+              $time1=strtotime(Input::get('start'));
+              $time2=strtotime(Input::get('end'));
+              $diff=$time2-$time1;
+              $children=Guest::find($id)->children;
+              $roomcost=Room::find(Guest::find($id)->room_number)->cost;
               $data_array=array(
                   'arrival_date'=>Input::get('start'),
-                  'departure_date'=>Input::get('end')
+                  'departure_date'=>Input::get('end'),
+                  'totalcost'=>$roomcost*(round($diff/86400))+($roomcost*$children*0.2)
               );
               $data_array2=array(
                   'checkin'=>Input::get('start'),
@@ -438,7 +445,7 @@ class GuestsController extends BaseController {
                      ->where('guests.id',$id)->update($data_array2);
              $data['sms']='<p class="alert alert-success">Date squeezed</p>';
              return View::make('guests.view_form',$data);
-             
+
           }
         }
         function cancel_danger($id){
