@@ -230,7 +230,9 @@ class GuestsController extends BaseController {
 		$departure = $room->checkout;
         $cost=$room->cost;
 		$dates     = Guest::generateDays($arrival, $departure);
-
+        $newarrival=strtotime($arrival);
+        $newdeparture=strtotime($departure);
+        $diff=$newdeparture-$newarrival;
 		if($inputs['reservation_number'] == ""){
 			$room->status = "occupied";
             $room->totalcost=$cost*(substr($departure,8,6)-  substr($arrival, 8,6));
@@ -271,7 +273,7 @@ class GuestsController extends BaseController {
 						"discount"=>$inputs['discount'],
 						"reservation_number"=>$inputs['reservation_number'],
 						"mode"=>$inputs['mode'],
-                        "totalcost"=>($cost*(substr($departure,8,6)-  substr($arrival, 8,6)))+($cost*$inputs['children']*0.2),
+                        "totalcost"=>($cost*(round($diff/86400)))+($cost*$inputs['children']*0.2),
                         "pre_paidcost"=>$inputs['prepaid'],
 						"allegy"=>$inputs['allegy'],
 						"reserved"=>$reserved
@@ -354,7 +356,7 @@ class GuestsController extends BaseController {
 		$g->adults = $inputs['adults'];
 		$g->children = $inputs['children'];
 		$g->allegy   = $inputs['allegy'];
-		//$g->reservation_number = $inputs['reservation_number'];
+        $g->pre_paidcost=$inputs['prepaid'];
 		$g->mode  = $inputs['mode'];
 		$g->save();						
 	}

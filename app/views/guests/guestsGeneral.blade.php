@@ -12,6 +12,14 @@
             <tr><th>Arrival From</th><th>{{$row->arrival_from}}</th><th>Destination To</th><th>{{$row->destination_to}}</th><th>Address</th><th>{{$row->address}}</th></tr>
             <tr><th>Guest Room</th><th>{{Room::find($row->room_number)->name}}</th><th>Arrival Date</th><th>{{$row->arrival_date}}</th><th>Departure Date</th><th>{{$row->departure_date}}</th></tr>
             <tr><th>Room Cost</th><th>{{$row->totalcost}}</th><th>Pre-Paid Amount</th><th>{{$row->pre_paidcost}}</th><th>Sex</th><th>{{$row->sex}}</th></tr>
+            <tr><th>Days Spent</th><th>
+                    <?php
+                    $start=strtotime($row->arrival_date);
+                    $end=strtotime($row->departure_date);
+                    $diff=$end-$start;
+                    ?>
+
+                    {{round($diff/86400)}}</th><th> </th><th></th><th> </th><th> </th></tr>
             @endforeach
         </table>
     </div>
