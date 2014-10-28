@@ -166,7 +166,7 @@ class GuestsController extends BaseController {
         $diff=$costguest-$costarrival;
 		$room->checkout = $newCheckout1;
 		$guest->departure_date = $newCheckout2;
-        $guest->totalcost=$cost*(round($diff/86400))+($cost*$children*0.2);
+        $guest->totalcost=$cost*(round($diff/86400))+(round($diff/86400))*($cost*$children*0.2);
 		$guest->save();
 		$room->save();
 
@@ -273,7 +273,7 @@ class GuestsController extends BaseController {
 						"discount"=>$inputs['discount'],
 						"reservation_number"=>$inputs['reservation_number'],
 						"mode"=>$inputs['mode'],
-                        "totalcost"=>($cost*(round($diff/86400)))+($cost*$inputs['children']*0.2),
+                        "totalcost"=>($cost*(round($diff/86400)))+(round($diff/86400))*($cost*$inputs['children']*0.2),
                         "pre_paidcost"=>$inputs['prepaid'],
 						"allegy"=>$inputs['allegy'],
 						"reserved"=>$reserved
@@ -437,7 +437,7 @@ class GuestsController extends BaseController {
               $data_array=array(
                   'arrival_date'=>Input::get('start'),
                   'departure_date'=>Input::get('end'),
-                  'totalcost'=>$roomcost*(round($diff/86400))+($roomcost*$children*0.2)
+                  'totalcost'=>$roomcost*(round($diff/86400))+(round($diff/86400))*($roomcost*$children*0.2)
               );
               $data_array2=array(
                   'checkin'=>Input::get('start'),
