@@ -253,249 +253,222 @@ class RoomsController extends BaseController {
         }
         function report_display($guest,$all_type,$date){
                if($guest=='Guest'&& $all_type=='all'){
-              $res=DB::table('rooms')->select('*')
-                      ->join('guests','guests.room_number', '=' ,'rooms.id')
+              $res=DB::table('guests')->select('*')
+                  ->join('rooms','rooms.id', '=' ,'guests.room_number')
                       ->where('cancelled','no')
                       ->where('guests.created_at','LIKE','%'.$date.'%')
                       ->get();
                $data['git']=$res;
                return View::make('rooms.roomreport',$data);
             }elseif ($guest=='Guest'&& $all_type=='reserved') {
-            $res=DB::table('rooms')->select('*')
-                   ->join('guests','guests.room_number', '=' ,'rooms.id')
-                   ->where('status','reserved')
+            $res=DB::table('guests')->select('*')
+                    ->join('rooms','rooms.id', '=' ,'guests.room_number')
+                ->where('guests.reserved','yes')
                     ->where('cancelled','no')
                     ->where('guests.created_at','LIKE','%'.$date.'%')
                     ->get();
             $data['git']=$res;
             return View::make('rooms.roomreport',$data);
         }elseif ($guest=='Guest' && $all_type=='paid') {
-            $res=DB::table('rooms')->select('*')
-                   ->join('guests','guests.room_number', '=' ,'rooms.id')
-                   ->where('status','occupied')
+            $res=DB::table('guests')->select('*')
+                ->join('rooms','rooms.id', '=' ,'guests.room_number')
+                ->where('guests.reserved','no')
                    ->where('cancelled','no')
                    ->where('guests.created_at','LIKE','%'.$date.'%')
                     ->get();
             $data['git']=$res;
             return View::make('rooms.roomreport',$data);
         }elseif ($guest=='income' && $all_type=='all') {
-            $res=DB::table('rooms')
-                   ->join('guests','guests.room_number', '=' ,'rooms.id')
+            $res=DB::table('guests')->select('*')
+                ->join('rooms','rooms.id', '=','guests.room_number')
                     ->where('cancelled','no')
                    ->where('guests.created_at','LIKE','%'.$date.'%')
                    ->get(array(
-                        '*',
+                        'guests.totalcost',
                         DB::raw('SUM(guests.totalcost) AS totalcost')
                     ));
+                   if($res){
             foreach ($res as $money){
-                if($money->mode=='Cash'){
+
                     $cash=array(
                         'cashcost'=>$money->totalcost,
                          'cashmode'=>$money->mode
                     );
-                    return View::make('rooms.roomreportcost',$cash);   
-                }
-                elseif($money->mode =='Credit'){
-                    $cash=array(
-                        'cashcost'=>$money->totalcost,
-                        'cashmode'=>$money->mode
-                    );
-                    return View::make('rooms.roomreportcost',$cash);
-                }
-            }
+                   }
+                  return View::make('rooms.roomreportcost',$cash);
+                   }else{
             $cash=array(
                         'cashcost'=>'No Money',
                          'cashmode'=>''
                     );
                     return View::make('rooms.roomreportcost',$cash);
+                   }
             
         }elseif ($guest=='income'&& $all_type=='reserved') {
-            $res=DB::table('rooms')
-                   ->join('guests','guests.room_number', '=' ,'rooms.id')
+            $res=DB::table('guests')->select('*')
+                ->join('rooms','rooms.id', '=' ,'guests.room_number')
                    ->where('guests.created_at','LIKE','%'.$date.'%')
-                    ->where('status','reserved')
+                    ->where('guests.reserved','yes')
                     ->where('cancelled','no')
                    ->get(array(
-                        '*',
+                        'guests.totalcost',
                         DB::raw('SUM(guests.totalcost) AS totalcost')
                     ));
+                   if($res){
             foreach ($res as $money){
-                if($money->mode=='Cash'){
-                    $cash=array(
+                $cash=array(
                         'cashcost'=>$money->totalcost,
                          'cashmode'=>$money->mode
                     );
-                    return View::make('rooms.roomreportcost',$cash);   
                 }
-                elseif($money->mode =='Credit'){
-                    $cash=array(
-                        'cashcost'=>$money->totalcost,
-                        'cashmode'=>$money->mode
-                    );
-                    return View::make('rooms.roomreportcost',$cash);
-                }
-            }
+                   return View::make('rooms.roomreportcost',$cash);
+
+               }else{
             $cash=array(
                         'cashcost'=>'No Money',
                          'cashmode'=>''
                     );
                     return View::make('rooms.roomreportcost',$cash);
+                   }
         }elseif ($guest=='income'&& $all_type=='paid') {
-            $res=DB::table('rooms')
-                   ->join('guests','guests.room_number', '=' ,'rooms.id')
+                $res=DB::table('guests')
+                   ->join('rooms','rooms.id', '=' ,'guests.room_number')
                    ->where('guests.created_at','LIKE','%'.$date.'%')
-                    ->where('status','occupied')
+                    ->where('guests.reserved','no')
                     ->where('cancelled','no')
                    ->get(array(
                         '*',
                         DB::raw('SUM(guests.totalcost) AS totalcost')
                     ));
+                   if($res){
             foreach ($res as $money){
-                if($money->mode=='Cash'){
-                    $cash=array(
+                     $cash=array(
                         'cashcost'=>$money->totalcost,
                          'cashmode'=>$money->mode
                     );
-                    return View::make('rooms.roomreportcost',$cash);   
-                }
-                elseif($money->mode =='Credit'){
-                    $cash=array(
-                        'cashcost'=>$money->totalcost,
-                        'cashmode'=>$money->mode
-                    );
-                    return View::make('rooms.roomreportcost',$cash);
-                }
+                  }
+                       return View::make('rooms.roomreportcost',$cash);
+                   }else{
+                       $cash=array(
+                           'cashcost'=>'No Money',
+                           'cashmode'=>''
+                       );
+                       return View::make('rooms.roomreportcost',$cash);
+                   }
+
             }
-            $cash=array(
-                        'cashcost'=>'No Money',
-                         'cashmode'=>''
-                    );
-                    return View::make('rooms.roomreportcost',$cash);
-            
-        }
+
             
         }
         function report_weekly_display($guest,$all_type,$start_date,$end_date){
             if($guest=='Guest'&& $all_type=='all'){
-              $res=DB::table('rooms')->select('*')
-                      ->join('guests','guests.room_number', '=' ,'rooms.id')
+              $res=DB::table('guests')->select('*')
+                      ->join('rooms','rooms.id', '=' ,'guests.room_number')
                       ->whereBetween('arrival_date',array($start_date,$end_date))
                       ->where('cancelled','no')
                       ->get();
                $data['git']=$res;
                return View::make('rooms.roomreport',$data);
             }elseif ($guest=='Guest'&& $all_type=='reserved') {
-            $res=DB::table('rooms')->select('*')
-                   ->join('guests','guests.room_number', '=' ,'rooms.id')
-                   ->where('status','reserved')
+                $res=DB::table('guests')->select('*')
+                    ->join('rooms','rooms.id', '=' ,'guests.room_number')
+                   ->where('guests.reserved','yes')
                    ->whereBetween('arrival_date',array($start_date,$end_date))
                     ->where('cancelled','no')
                     ->get();
             $data['git']=$res;
             return View::make('rooms.roomreport',$data);
         }elseif ($guest=='Guest' && $all_type=='paid') {
-            $res=DB::table('rooms')->select('*')
-                   ->join('guests','guests.room_number', '=' ,'rooms.id')
-                   ->where('status','occupied')
+                $res=DB::table('guests')->select('*')
+                    ->join('rooms','rooms.id', '=' ,'guests.room_number')
+                   ->where('guests.reserved','no')
                     ->whereBetween('arrival_date',array($start_date,$end_date))
                     ->where('cancelled','no')
                     ->get();
             $data['git']=$res;
             return View::make('rooms.roomreport',$data);
         }elseif ($guest=='income' && $all_type=='all') {
-            $res=DB::table('rooms')
-                   ->join('guests','guests.room_number', '=' ,'rooms.id')
+                $res=DB::table('guests')
+                    ->join('rooms','rooms.id', '=' ,'guests.room_number')
                    ->whereBetween('arrival_date',array($start_date,$end_date))
                     ->where('cancelled','no')
                    ->get(array(
                         '*',
                         DB::raw('SUM(guests.totalcost) AS totalcost')
                     ));
+                if($res){
             foreach ($res as $money){
-                if($money->mode=='Cash'){
+
                     $cash=array(
                         'cashcost'=>$money->totalcost,
                          'cashmode'=>$money->mode
                     );
-                    return View::make('rooms.roomreportcost',$cash);   
-                }
-                elseif($money->mode =='Credit'){
+
+                    }
+                    return View::make('rooms.roomreportcost',$cash);
+                  }else{
                     $cash=array(
-                        'cashcost'=>$money->totalcost,
-                        'cashmode'=>$money->mode
+                        'cashcost'=>'No Money',
+                        'cashmode'=>''
                     );
                     return View::make('rooms.roomreportcost',$cash);
                 }
-            }
-            $cash=array(
-                        'cashcost'=>'No Money',
-                         'cashmode'=>''
-                    );
-                    return View::make('rooms.roomreportcost',$cash);
-            
-        }elseif ($guest=='income'&& $all_type=='reserved') {
-            $res=DB::table('rooms')
-                   ->join('guests','guests.room_number', '=' ,'rooms.id')
+
+             }elseif ($guest=='income'&& $all_type=='reserved') {
+                $res=DB::table('guests')
+                    ->join('rooms','rooms.id', '=' ,'guests.room_number')
                    ->whereBetween('arrival_date',array($start_date,$end_date))
-                    ->where('status','reserved')
+                    ->where('guests.reserved','yes')
                     ->where('cancelled','no')
                    ->get(array(
                         '*',
                         DB::raw('SUM(guests.totalcost) AS totalcost')
                     ));
+                if($res){
             foreach ($res as $money){
-                if($money->mode=='Cash'){
+
                     $cash=array(
                         'cashcost'=>$money->totalcost,
                          'cashmode'=>$money->mode
                     );
+                }
                     return View::make('rooms.roomreportcost',$cash);   
-                }
-                elseif($money->mode =='Credit'){
+                }else{
                     $cash=array(
-                        'cashcost'=>$money->totalcost,
-                        'cashmode'=>$money->mode
-                    );
-                    return View::make('rooms.roomreportcost',$cash);
-                }
-            }
-            $cash=array(
                         'cashcost'=>'No Money',
-                         'cashmode'=>''
+                        'cashmode'=>''
                     );
                     return View::make('rooms.roomreportcost',$cash);
+                    }
+
+
         }elseif ($guest=='income'&& $all_type=='paid') {
-            $res=DB::table('rooms')
-                   ->join('guests','guests.room_number', '=' ,'rooms.id')
+                $res=DB::table('guests')
+                    ->join('rooms','rooms.id', '=' ,'guests.room_number')
                    ->whereBetween('arrival_date',array($start_date,$end_date))
-                    ->where('status','occupied')
+                    ->where('guests.reserved','no')
                     ->where('cancelled','no')
                    ->get(array(
                         '*',
                         DB::raw('SUM(guests.totalcost) AS totalcost')
                     ));
+                if($res){
             foreach ($res as $money){
-                if($money->mode=='Cash'){
+
                     $cash=array(
                         'cashcost'=>$money->totalcost,
                          'cashmode'=>$money->mode
                     );
+                }
                     return View::make('rooms.roomreportcost',$cash);   
-                }
-                elseif($money->mode =='Credit'){
+                }else{
                     $cash=array(
-                        'cashcost'=>$money->totalcost,
-                        'cashmode'=>$money->mode
-                    );
-                    return View::make('rooms.roomreportcost',$cash);
-                }
-            }
-            $cash=array(
                         'cashcost'=>'No Money',
-                         'cashmode'=>''
+                        'cashmode'=>''
                     );
                     return View::make('rooms.roomreportcost',$cash);
-        }
+                    }
+            }
         }
         function report_monthly_display($guest,$all_type,$year ,$month){
             if($guest=='Guest'&& $all_type=='all'){
@@ -512,7 +485,7 @@ class RoomsController extends BaseController {
                       ->join('guests','guests.room_number', '=' ,'rooms.id')
                       ->where('guests.created_at','like','%'.$month.'%')
                       ->where('guests.created_at','LIKE','%'.$year.'%')
-                      ->where('status','reserved')
+                      ->where('guests.reserved','yes')
                     ->where('cancelled','no')
                       ->get();
             $data['git']=$res;
@@ -522,7 +495,7 @@ class RoomsController extends BaseController {
                      ->join('guests','guests.room_number', '=' ,'rooms.id')
                       ->where('guests.created_at','like','%'.$month.'%')
                       ->where('guests.created_at','LIKE','%'.$year.'%')
-                      ->where('status','occupied')
+                      ->where('guests.reserved','no')
                     ->where('cancelled','no')
                       ->get();
             $data['git']=$res;
@@ -537,92 +510,81 @@ class RoomsController extends BaseController {
                         '*',
                         DB::raw('SUM(guests.totalcost) AS totalcost')
                     ));
+                if($res){
             foreach ($res as $money){
-                if($money->mode=='Cash'){
+
                     $cash=array(
                         'cashcost'=>$money->totalcost,
                          'cashmode'=>$money->mode
                     );
+                }
                     return View::make('rooms.roomreportcost',$cash);   
-                }
-                elseif($money->mode =='Credit'){
+                }else{
                     $cash=array(
-                        'cashcost'=>$money->totalcost,
-                        'cashmode'=>$money->mode
-                    );
-                    return View::make('rooms.roomreportcost',$cash);
-                }
-            }
-            $cash=array(
                         'cashcost'=>'No Money',
-                         'cashmode'=>''
+                        'cashmode'=>''
                     );
                     return View::make('rooms.roomreportcost',$cash);
-            
+                    }
         }elseif ($guest=='income'&& $all_type=='reserved') {
             $res=DB::table('rooms')
                    ->join('guests','guests.room_number', '=' ,'rooms.id')
                    ->where('guests.created_at','like','%'.$month.'%')
                    ->where('guests.created_at','LIKE','%'.$year.'%')
-                   ->where('status','reserved')
+                   ->where('guests.reserved','yes')
                     ->where('cancelled','no')
                    ->get(array(
                         '*',
                         DB::raw('SUM(guests.totalcost) AS totalcost')
                     ));
+                if($res){
             foreach ($res as $money){
-                if($money->mode=='Cash'){
+
                     $cash=array(
                         'cashcost'=>$money->totalcost,
                          'cashmode'=>$money->mode
                     );
+                }
                     return View::make('rooms.roomreportcost',$cash);   
-                }
-                elseif($money->mode =='Credit'){
+                }else{
                     $cash=array(
-                        'cashcost'=>$money->totalcost,
-                        'cashmode'=>$money->mode
-                    );
-                    return View::make('rooms.roomreportcost',$cash);
-                }
-            }
-            $cash=array(
                         'cashcost'=>'No Money',
-                         'cashmode'=>''
+                        'cashmode'=>''
                     );
                     return View::make('rooms.roomreportcost',$cash);
+                    }
+
+
+
         }elseif ($guest=='income'&& $all_type=='paid') {
             $res=DB::table('rooms')
                    ->join('guests','guests.room_number', '=' ,'rooms.id')
                    ->where('guests.created_at','like','%'.$month.'%')
                    ->where('guests.created_at','LIKE','%'.$year.'%')
-                    ->where('status','occupied')
+                    ->where('guests.reserved','no')
                     ->where('cancelled','no')
                    ->get(array(
                         '*',
                         DB::raw('SUM(guests.totalcost) AS totalcost')
                     ));
+                if($res){
             foreach ($res as $money){
-                if($money->mode=='Cash'){
+
                     $cash=array(
                         'cashcost'=>$money->totalcost,
                          'cashmode'=>$money->mode
                     );
+                }
                     return View::make('rooms.roomreportcost',$cash);   
-                }
-                elseif($money->mode =='Credit'){
+                }else{
                     $cash=array(
-                        'cashcost'=>$money->totalcost,
-                        'cashmode'=>$money->mode
-                    );
-                    return View::make('rooms.roomreportcost',$cash);
-                }
-            }
-            $cash=array(
                         'cashcost'=>'No Money',
-                         'cashmode'=>''
+                        'cashmode'=>''
                     );
                     return View::make('rooms.roomreportcost',$cash);
+                    }
+
+
         }
         }
         function report_year_display($guest,$all_type,$year){
@@ -638,7 +600,7 @@ class RoomsController extends BaseController {
             $res=DB::table('rooms')->select('*')
                       ->join('guests','guests.room_number', '=' ,'rooms.id')
                       ->where('guests.created_at','LIKE','%'.$year.'%')
-                      ->where('status','reserved')
+                      ->where('guests.reserved','yes')
                     ->where('cancelled','no')
                       ->get();
             $data['git']=$res;
@@ -647,7 +609,7 @@ class RoomsController extends BaseController {
             $res=DB::table('rooms')->select('*')
                      ->join('guests','guests.room_number', '=' ,'rooms.id')
                       ->where('guests.created_at','LIKE','%'.$year.'%')
-                      ->where('status','occupied')
+                      ->where('guests.reserved','no')
                     ->where('cancelled','no')
                       ->get();
             $data['git']=$res;
@@ -661,89 +623,79 @@ class RoomsController extends BaseController {
                         '*',
                         DB::raw('SUM(guests.totalcost) AS totalcost')
                     ));
+                if($res){
             foreach ($res as $money){
-                if($money->mode=='Cash'){
+
                     $cash=array(
                         'cashcost'=>$money->totalcost,
                          'cashmode'=>$money->mode
                     );
+                }
                     return View::make('rooms.roomreportcost',$cash);   
-                }
-                elseif($money->mode =='Credit'){
+                }else{
                     $cash=array(
-                        'cashcost'=>$money->totalcost,
-                        'cashmode'=>$money->mode
-                    );
-                    return View::make('rooms.roomreportcost',$cash);
-                }
-            }
-            $cash=array(
                         'cashcost'=>'No Money',
-                         'cashmode'=>''
+                        'cashmode'=>''
                     );
                     return View::make('rooms.roomreportcost',$cash);
+                    }
+
+
         }elseif ($guest=='income'&& $all_type=='reserved') {
             $res=DB::table('rooms')
                    ->join('guests','guests.room_number', '=' ,'rooms.id')
                    ->where('guests.created_at','LIKE','%'.$year.'%')
-                   ->where('status','reserved')
+                   ->where('guests.reserved','yes')
                     ->where('cancelled','no')
                    ->get(array(
                         '*',
                         DB::raw('SUM(guests.totalcost) AS totalcost')
                     ));
+                if($res){
             foreach ($res as $money){
-                if($money->mode=='Cash'){
+
                     $cash=array(
                         'cashcost'=>$money->totalcost,
                          'cashmode'=>$money->mode
                     );
+                }
                     return View::make('rooms.roomreportcost',$cash);   
-                }
-                elseif($money->mode =='Credit'){
+                }else{
                     $cash=array(
-                        'cashcost'=>$money->totalcost,
-                        'cashmode'=>$money->mode
-                    );
-                    return View::make('rooms.roomreportcost',$cash);
-                }
-            }
-            $cash=array(
                         'cashcost'=>'No Money',
-                         'cashmode'=>''
+                        'cashmode'=>''
                     );
                     return View::make('rooms.roomreportcost',$cash);
+                    }
+
         }elseif ($guest=='income'&& $all_type=='paid') {
             $res=DB::table('rooms')
                    ->join('guests','guests.room_number', '=' ,'rooms.id')
                     ->where('guests.created_at','LIKE','%'.$year.'%')
-                    ->where('status','occupied')
+                    ->where('guests.reserved','no')
                     ->where('cancelled','no')
                    ->get(array(
                         '*',
                         DB::raw('SUM(guests.totalcost) AS totalcost')
                     ));
+                if($res){
             foreach ($res as $money){
-                if($money->mode=='Cash'){
+
                     $cash=array(
                         'cashcost'=>$money->totalcost,
                          'cashmode'=>$money->mode
                     );
+                }
                     return View::make('rooms.roomreportcost',$cash);   
-                }
-                elseif($money->mode =='Credit'){
+                }else{
                     $cash=array(
-                        'cashcost'=>$money->totalcost,
-                        'cashmode'=>$money->mode
-                    );
-                    return View::make('rooms.roomreportcost',$cash);
-                }
-            }
-            $cash=array(
                         'cashcost'=>'No Money',
-                         'cashmode'=>''
+                        'cashmode'=>''
                     );
                     return View::make('rooms.roomreportcost',$cash);
+                    }
+
+
         }
         }
 }
