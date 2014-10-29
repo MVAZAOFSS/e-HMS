@@ -145,7 +145,7 @@ $(document).ready(function(){
        var formx=document.getElementById('rooms').value;
        var report=document.getElementById('reportfor').value;
        if(report==='daily'){
-           var datez=$('#date').val();
+         var datez=$('#date').val();
          var url="<?php echo url('report_daily');?>";
          var url2=url+'/'+formdata1+'/'+formx+'/'+datez;
          $.get(url2,function(data){

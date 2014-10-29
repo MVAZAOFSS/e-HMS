@@ -52,7 +52,9 @@ class GuestsController extends BaseController {
         $data5=$this->viewGeneralLaundryCost($id,$start_date,$end_date);
         $data6=$this->viewGeneralFoodBillCostAction($id,$start_date,$end_date);
         $data7=$this->viewGeneralRestaurantCost($id,$start_date,$end_date);
-        $data=$data5+$data6+$data7;
+        $data8=$this->viewGeneralFoodBillCostRemainAction($id,$start_date,$end_date);
+        $data9=$this->viewGeneralRestaurantCostRemain($id,$start_date,$end_date);
+        $data=$data5+$data6+$data7+$data8+$data9;
         $data['id']=$id;
         $data['start_date']=$start_date;
         $data['end_date']=$end_date;
@@ -101,7 +103,42 @@ class GuestsController extends BaseController {
         return  $data_array;
 
     }
+    function viewGeneralFoodBillCostRemainAction($id,$start_date,$end_date){
+        $res=DB::table('foodbills')
+            ->join('guests','guests.id','=','foodbills.guestid')
+            ->where('foodbills.guestid',$id)
+            ->whereBetween('foodbills.date',array($start_date,$end_date))
+            ->get(array(
+                'remain',
+                DB::raw('SUM(remain)AS remain')
+            ));
+        foreach($res as $row){
+            $data_array=array(
+                'foodbillscostremain'=>$row->remain
+            );
+
+        }
+        return  $data_array;
+
+    }
     function viewGeneralRestaurantCost($id,$start_date,$end_date){
+        $restaurant=DB::table('barbills')
+            ->join('guests','guests.id','=','barbills.guestid')
+            ->where('barbills.guestid',$id)
+            ->whereBetween('barbills.date',array($start_date,$end_date))
+            ->get(array(
+                '*',
+                DB::raw('SUM(remain)AS remain')
+            ));
+        foreach($restaurant as $row){
+            $data_array=array(
+                  'barbillscostremain'=>$row->remain
+              );
+
+        }
+        return  $data_array;
+        }
+    function viewGeneralRestaurantCostRemain($id,$start_date,$end_date){
         $restaurant=DB::table('barbills')
             ->join('guests','guests.id','=','barbills.guestid')
             ->where('barbills.guestid',$id)
@@ -112,12 +149,12 @@ class GuestsController extends BaseController {
             ));
         foreach($restaurant as $row){
             $data_array=array(
-                  'barbillscost'=>$row->amount
-              );
+                'barbillscost'=>$row->amount
+            );
 
         }
         return  $data_array;
-        }
+    }
 
     function viewGeneralLaundryCost($id,$start_date,$end_date){
         $laundry=DB::table('laundrylist')

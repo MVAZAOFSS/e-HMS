@@ -279,7 +279,7 @@ class RoomsController extends BaseController {
             $data['git']=$res;
             return View::make('rooms.roomreport',$data);
         }elseif ($guest=='income' && $all_type=='all') {
-            $res=DB::table('guests')->select('*')
+            $res=DB::table('guests')
                 ->join('rooms','rooms.id', '=','guests.room_number')
                     ->where('cancelled','no')
                    ->where('guests.created_at','LIKE','%'.$date.'%')
@@ -288,18 +288,17 @@ class RoomsController extends BaseController {
                         DB::raw('SUM(guests.totalcost) AS totalcost')
                     ));
                    if($res){
-            foreach ($res as $money){
-
+                   foreach ($res as $money){
                     $cash=array(
                         'cashcost'=>$money->totalcost,
-                         'cashmode'=>$money->mode
+
                     );
                    }
                   return View::make('rooms.roomreportcost',$cash);
                    }else{
             $cash=array(
                         'cashcost'=>'No Money',
-                         'cashmode'=>''
+
                     );
                     return View::make('rooms.roomreportcost',$cash);
                    }
@@ -318,7 +317,7 @@ class RoomsController extends BaseController {
             foreach ($res as $money){
                 $cash=array(
                         'cashcost'=>$money->totalcost,
-                         'cashmode'=>$money->mode
+
                     );
                 }
                    return View::make('rooms.roomreportcost',$cash);
@@ -326,7 +325,7 @@ class RoomsController extends BaseController {
                }else{
             $cash=array(
                         'cashcost'=>'No Money',
-                         'cashmode'=>''
+
                     );
                     return View::make('rooms.roomreportcost',$cash);
                    }
@@ -344,14 +343,14 @@ class RoomsController extends BaseController {
             foreach ($res as $money){
                      $cash=array(
                         'cashcost'=>$money->totalcost,
-                         'cashmode'=>$money->mode
+
                     );
                   }
                        return View::make('rooms.roomreportcost',$cash);
                    }else{
                        $cash=array(
                            'cashcost'=>'No Money',
-                           'cashmode'=>''
+
                        );
                        return View::make('rooms.roomreportcost',$cash);
                    }

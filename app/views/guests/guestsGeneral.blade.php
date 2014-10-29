@@ -45,7 +45,13 @@
 
          </table>
             <div class="row">
-                <p class="alert alert-success">Total Amount of Food consumed {{$foodbillscost}}</p>
+                <p class="alert alert-success">Total Amount of Food paid {{$foodbillscost}}</p>
+            </div>
+            <div class="row">
+                <p class="alert alert-danger">Total Amount of Food unpaid {{$foodbillscostremain}}</p>
+            </div>
+            <div class="row">
+                <p class="alert alert-info">Total Amount of Food consumed {{$foodbillscost+$foodbillscostremain}}</p>
             </div>
         </div>
         <div class="col-md-4">
@@ -69,7 +75,13 @@
 
             </table>
             <div class="row">
-                <p class="alert alert-info">Total Amount of Drinks consumed {{$barbillscost}} /=</p>
+                <p class="alert alert-success">Total Amount of Drinks paid{{$barbillscost}} /=</p>
+            </div>
+            <div class="row">
+                <p class="alert alert-danger">Total Amount of Drinks unpaid {{$barbillscostremain}} /=</p>
+            </div>
+            <div class="row">
+                <p class="alert alert-info">Total Amount of Drinks consumed {{$barbillscost+$barbillscostremain}} /=</p>
             </div>
         </div>
         <div class="col-md-4">
@@ -97,8 +109,23 @@
             </div>
     </div>
     <div class="row">
-        <p>The General Total Amount used <b>{{$foodbillscost+$barbillscost+$laundrycost}} /=</b></p>
+        <p>The General Total Amount used <b>{{$foodbillscost+$foodbillscostremain+$barbillscost+$barbillscostremain+$laundrycost}} /=</b></p>
     </div>
+        <?php
+        $total=Guest::where('id',$id)->where('arrival_date',$start_date)->where('departure_date',$end_date)->first()->pre_paidcost;
+        $general=$foodbillscost+$foodbillscostremain+$barbillscost+$barbillscostremain+$laundrycost;
+        ?>
+     @if($total!=0)
+          @if($total>=$general)
+       <div class="row">
+        <p class="alert alert-warning">The Balance <b>{{Guest::where('id',$id)->where('arrival_date',$start_date)->where('departure_date',$end_date)->first()->pre_paidcost- ($foodbillscost+$foodbillscostremain+$barbillscost+$barbillscostremain+$laundrycost)}} /=</b></p>
+        </div>
+           @else
+    <div class="row">
+        <p class="alert alert-danger">The Amount remain unpaid <b>{{($foodbillscost+$foodbillscostremain+$barbillscost+$barbillscostremain+$laundrycost)-$total}} /=</b></p>
+    </div>
+           @endif
+    @endif
 </div>
 <script>
     $("#coltable1,#coltable2,#coltable3").dataTable({
