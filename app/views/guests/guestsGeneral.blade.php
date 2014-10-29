@@ -35,6 +35,7 @@
                 ->whereBetween('foodbills.date',array($start_date,$end_date))
                 ->get();
             ?>
+            <div class="well well-sm">
          <table class="table table-hover table-striped" id="coltable1">
              <thead><tr><th>Food</th><th>Cost</th><th>Date</th> </tr></thead>
              <tbody>
@@ -53,6 +54,7 @@
             <div class="row">
                 <p class="alert alert-info">Total Amount of Food consumed {{$foodbillscost+$foodbillscostremain}}</p>
             </div>
+            </div>
         </div>
         <div class="col-md-4">
             <div class="well well-sm">
@@ -65,6 +67,7 @@
                 ->whereBetween('barbills.date',array($start_date,$end_date))
                 ->get();
             ?>
+            <div class="well well-sm">
             <table class="table table-hover table-striped" id="coltable2">
                 <thead><tr><th>Drinks</th><th>Cost</th><th>Date</th> </tr></thead>
                 <tbody>
@@ -83,6 +86,7 @@
             <div class="row">
                 <p class="alert alert-info">Total Amount of Drinks consumed {{$barbillscost+$barbillscostremain}} /=</p>
             </div>
+            </div>
         </div>
         <div class="col-md-4">
             <div class="well well-sm">
@@ -95,6 +99,7 @@
                 ->whereBetween('laundrylist.date',array($start_date,$end_date))
                 ->get();
             ?>
+            <div class="well well-sm">
             <table class="table table-hover table-striped" id="coltable3">
                 <thead><tr><th>Total Piece</th><th>Cost</th><th>Date</th> </tr></thead>
                 <tbody>
@@ -106,6 +111,7 @@
             <div class="row">
             <p class="alert alert-warning">Total Amount of Laundry consumed {{$laundrycost}} /=</p>
              </div>
+            </div>
             </div>
     </div>
     <div class="row">
@@ -126,6 +132,7 @@
     </div>
            @endif
     @endif
+
 </div>
 <script>
     $("#coltable1,#coltable2,#coltable3").dataTable({
