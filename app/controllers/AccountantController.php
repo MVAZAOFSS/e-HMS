@@ -49,11 +49,12 @@ class AccountantController extends BaseController{
             $data2=  $this->foodSales($income, $date);
             $data3=  $this->guestsold($income, $date);
             $data4=  $this->drinksales($income, $date);
+            $data9=$this->GuestDrinks($income,$date);
             $data5=$this->conferenceTotalMoney($income,$date);
             $data6=$this->functionTotalMoney($income,$date);
             $data7=$this->laundryTotalMoney($income,$date);
             $data8=$this->laundrySalesTotalMoney($income,$date);
-            $data=$data1+$data2+$data3+$data4+$data5+$data6+$data7+$data8;
+            $data=$data1+$data2+$data3+$data4+$data5+$data6+$data7+$data8+$data9;
             return View::make('accountant.reportincome',$data);
         }elseif ($income=='expenditure') {
             $data=  $this->Total_expenditure($income, $date);
@@ -66,11 +67,12 @@ class AccountantController extends BaseController{
             $data2=  $this->foodSales1($income, $start_date,$end_date);
             $data3=  $this->guestsold1($income, $start_date,$end_date);
             $data4=  $this->drinksales1($income, $start_date,$end_date);
+            $data9= $this->GuestDrinks1($income,$start_date,$end_date);
             $data5=$this->conferenceTotalMoney1($income,$start_date,$end_date);
             $data6=$this->functionTotalMoney1($income,$start_date,$end_date);
             $data7=$this->laundryTotalMoney1($income,$start_date,$end_date);
             $data8=$this->laundryTotalSalesMoney1($income,$start_date,$end_date);
-            $data=$data1+$data2+$data3+$data4+$data5+$data6+$data7+$data8;
+            $data=$data1+$data2+$data3+$data4+$data5+$data6+$data7+$data8+$data9;
             return View::make('accountant.reportincome',$data);
         }elseif ($income=='expenditure') {
             $data=  $this->Total_expenditure1($income, $start_date,$end_date);
@@ -83,11 +85,12 @@ class AccountantController extends BaseController{
             $data2=  $this->foodSales2($income, $month,$year);
             $data3=  $this->guestsold2($income, $month,$year);
             $data4=  $this->drinksales2($income, $month,$year);
+            $data9= $this->GuestDrinks1($income,$month,$year);
             $data5=$this->conferenceTotalMoney2($income,$month,$year);
             $data6=$this->functionTotalMoney2($income,$month,$year);
             $data7=$this->laundryTotalMoney2($income,$month,$year);
             $data8=$this->laundryTotalSalesMoney2($income,$month,$year);
-            $data=$data1+$data2+$data3+$data4+$data5+$data6+$data7+$data8;
+            $data=$data1+$data2+$data3+$data4+$data5+$data6+$data7+$data8+$data9;
             return View::make('accountant.reportincome',$data);
         }elseif ($income=='expenditure') {
             $data=  $this->Total_expenditure2($income, $month,$year);
@@ -100,11 +103,12 @@ class AccountantController extends BaseController{
             $data2=  $this->foodSales3($income,$year);
             $data3=  $this->guestsold3($income,$year);
             $data4=  $this->drinksales3($income,$year);
+            $data9= $this->GuestDrinks3($income,$year);
             $data5=$this->conferenceTotalMoney3($income,$year);
             $data6=$this->functionTotalMoney($income,$year);
             $data7=$this->laundryTotalMoney3($income,$year);
             $data8=$this->laundryTotalSalesMoney3($income,$year);
-            $data=$data1+$data2+$data3+$data4+$data5+$data6+$data7+$data8;
+            $data=$data1+$data2+$data3+$data4+$data5+$data6+$data7+$data8+$data9;
             return View::make('accountant.reportincome',$data);
         }elseif ($income=='expenditure') {
             $data=  $this->Total_expenditure3($income,$year);
@@ -127,6 +131,22 @@ class AccountantController extends BaseController{
                    return $data_check;
         }
         }
+    function GuestDrinks($income,$date){
+        if($income=='income'){
+            $table=DB::table('barbills')
+                ->where('date',$date)
+                ->get(array(
+                    'amount',
+                    DB::raw('SUM(barbills.amount) AS amount')
+                ));
+            foreach ($table as $row){
+                $data_check=array(
+                    'baramount'=>$row->amount
+                );
+            }
+            return $data_check;
+        }
+    }
         function conferenceTotalMoney($income,$date){
             if($income=='income'){
                 $table=DB::table('conferes')
@@ -276,6 +296,22 @@ class AccountantController extends BaseController{
             return $data_check;
         }
     }
+    function GuestDrinks1($income,$start_date,$end_date){
+        if($income=='income'){
+            $table=DB::table('barbills')
+                ->whereBetween('date',array($start_date,$end_date))
+                ->get(array(
+                    'amount',
+                    DB::raw('SUM(barbills.amount) AS amount')
+                ));
+            foreach ($table as $row){
+                $data_check=array(
+                    'baramount'=>$row->amount
+                );
+            }
+            return $data_check;
+        }
+    }
     function laundryTotalMoney1($income,$start_date,$end_date){
         if($income=='income'){
             $table=DB::table('laundrylist')
@@ -404,6 +440,23 @@ class AccountantController extends BaseController{
             foreach ($table as $row){
                 $data_check=array(
                     'fu_amount'=>$row->amount
+                );
+            }
+            return $data_check;
+        }
+    }
+    function GuestDrinks2($income,$month,$year){
+        if($income=='income'){
+            $table=DB::table('barbills')
+                ->where('date','LIKE','%'.$month.'%')
+                ->where('date','LIKE','%'.$year.'%')
+                ->get(array(
+                    'amount',
+                    DB::raw('SUM(barbills.amount) AS amount')
+                ));
+            foreach ($table as $row){
+                $data_check=array(
+                    'baramount'=>$row->amount
                 );
             }
             return $data_check;
@@ -546,7 +599,22 @@ class AccountantController extends BaseController{
             return $data_check;
         }
     }
-
+    function GuestDrinks3($income,$year){
+        if($income=='income'){
+            $table=DB::table('barbills')
+                ->where('date','LIKE','%'.$year.'%')
+                ->get(array(
+                    'amount',
+                    DB::raw('SUM(barbills.amount) AS amount')
+                ));
+            foreach ($table as $row){
+                $data_check=array(
+                    'baramount'=>$row->amount
+                );
+            }
+            return $data_check;
+        }
+    }
     function laundryTotalMoney3($income,$year){
         if($income=='income'){
             $table=DB::table('laundrylist')
@@ -849,7 +917,7 @@ class AccountantController extends BaseController{
         }
     }
     function rooms($date){
-        $res=DB::table('guests')->select('*')
+        $res=DB::table('guests')
             ->join('rooms','rooms.id','=','guests.room_number')
             ->where('guests.created_at','LIKE','%'.$date.'%')
            ->where('cancelled','no')
@@ -872,7 +940,7 @@ class AccountantController extends BaseController{
         }
     }
     function food_sells($date){
-        $res=DB::table('foodsales')->select('*')
+        $res=DB::table('foodsales')
                 ->join('restaurants','restaurants.name','=','foodsales.food')
                 ->where('date',$date)
                 ->get(array(
