@@ -20,7 +20,7 @@ class AccountantController extends BaseController{
 	}
     function dailyPdfExportAction($date){
         $data['date']=$date;
-        $data1=  $this->hotelsincome($date);
+        $data1=$this->rooms($date);
         $data2=  $this->drinksellls($date);
         $data3=  $this->laundry($date);
         $data4=  $this->bils($date);
