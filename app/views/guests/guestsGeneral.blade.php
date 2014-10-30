@@ -101,16 +101,22 @@
             ?>
             <div class="well well-sm">
             <table class="table table-hover table-striped" id="coltable3">
-                <thead><tr><th>Total Piece</th><th>Cost</th><th>Date</th> </tr></thead>
+                <thead><tr><th>Total Piece</th><th>Cost</th><th>Date</th><th>Status</th></tr></thead>
                 <tbody>
                 @foreach($laundry as $laund)
-                <tr><td>{{$laund->totalpiece}}</td><td>{{$laund->totalprice}}</td><td>{{$laund->date}}</td></tr>
+                <tr><td>{{$laund->totalpiece}}</td><td>{{$laund->totalprice}}</td><td>{{$laund->date}}</td><td>{{$laund->money_mode}}</td></tr>
                 @endforeach
                 </tbody>
             </table>
             <div class="row">
-            <p class="alert alert-warning">Total Amount of Laundry consumed {{$laundrycost}} /=</p>
+            <p class="alert alert-warning">Total Amount of Laundry paid {{$laundrycost}} /=</p>
              </div>
+             <div class="row">
+              <p class="alert alert-danger">Total Amount of Laundry unpaid {{$laundrycostremain}} /=</p>
+             </div>
+                <div class="row">
+                    <p class="alert alert-success">Total Amount of Laundry consumed {{$laundrycost}} /=</p>
+                </div>
             </div>
             </div>
     </div>

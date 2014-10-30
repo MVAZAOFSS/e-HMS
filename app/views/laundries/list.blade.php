@@ -59,7 +59,7 @@
 </div>   
 </div>
 <?php 
-  $guests = Guest::whereRaw('checked = ?  and released=? and cancelled =? ',  array('no','no','no'))->get();
+  $guests = Guest::whereRaw('checked = ?  and released=? and cancelled =? and reserved=?',  array('no','no','no','no'))->get();
 
   $data   = array();
   foreach($guests as $g){

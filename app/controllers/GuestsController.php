@@ -54,7 +54,8 @@ class GuestsController extends BaseController {
         $data7=$this->viewGeneralRestaurantCost($id,$start_date,$end_date);
         $data8=$this->viewGeneralFoodBillCostRemainAction($id,$start_date,$end_date);
         $data9=$this->viewGeneralRestaurantCostRemain($id,$start_date,$end_date);
-        $data=$data5+$data6+$data7+$data8+$data9;
+        $data10=$this->viewGeneralLaundryCostRemainAction($id,$start_date,$end_date);
+        $data=$data5+$data6+$data7+$data8+$data9+$data10;
         $data['id']=$id;
         $data['start_date']=$start_date;
         $data['end_date']=$end_date;
@@ -101,6 +102,25 @@ class GuestsController extends BaseController {
 
             }
         return  $data_array;
+
+    }
+    function viewGeneralLaundryCostRemainAction($id,$start_date,$end_date){
+        $res=DB::table('laundrylist')
+            ->join('guests','guests.id','=','laundrylist.gid')
+            ->where('laundrylist.gid',$id)
+            ->where('payment_mode','no')
+            ->whereBetween('laundrylist.date',array($start_date,$end_date))
+            ->get(array(
+                '*',
+                DB::raw('SUM(remain)AS remain')
+            ));
+        foreach($res as $row){
+            $data_array=array(
+                'laundrycostremain'=>$row->remain
+            );
+
+        }
+        return $data_array;
 
     }
     function viewGeneralFoodBillCostRemainAction($id,$start_date,$end_date){
