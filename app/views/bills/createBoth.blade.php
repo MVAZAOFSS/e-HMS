@@ -37,6 +37,7 @@ $fds    = array_pop($foods);
 
 $unique = array_keys(array_count_values($foods));
 $l      = count($unique);
+$idadi  = $bi->no_drinks;
 
 ?>
 <p> Name: {{ Guest::find($bi->guestid)->firstname }} {{ Guest::find($bi->guestid)->lastname }} Room {{ Room::find(Guest::find($bi->guestid)->room_number)->name }} </p>
@@ -48,6 +49,7 @@ $l      = count($unique);
 <table class="table table-bordered" id="gt">
     <tr style="background-color: #f5f5f5">
         <th>Drink</th>
+        <th>No.Drinks</th>
         <th>Times</th>
         <th>Each cost</th>
         <th>Total cost</th>
@@ -68,13 +70,15 @@ $l      = count($unique);
     @for($i=0; $i<$l; $i++)
     <tr>
         <td>{{$unique[$i]}}</td>
+        <td>{{$idadi[$i]}}</td>
         <td>{{Bill::appears($unique[$i], $foods)}}</td>
         <td>{{Bar::where('name', $unique[$i])->first()->cost}} /=</td>
-        <td>{{(Bill::appears($unique[$i], $foods))*(Bar::where('name', $unique[$i])->first()->cost)}} /=</td>
+        <td>{{($idadi[$i])*(Bar::where('name', $unique[$i])->first()->cost)}} /=</td>
     </tr>
-    <?php $total = $total + ((Bill::appears($unique[$i], $foods))*(Bar::where('name', $unique[$i])->first()->cost)); ?>
+    <?php $total = $total + (($idadi[$i])*(Bar::where('name', $unique[$i])->first()->cost)); ?>
     @endfor
     <tr style="background-color: #f5f5f5">
+        <td></td>
         <td ></td>
         <td></td>
         <td><b>Total</b></td>
@@ -92,6 +96,7 @@ $l      = count($unique);
     </tr>
     @if($bi->remain != 0)
     <tr>
+        <td style="background-color: #f5f5f5"></td>
         <td style="background-color: #f5f5f5"></td>
         <td style="background-color: #f5f5f5"></td>
         <td ><b>Enter Amount</b></td>
@@ -121,6 +126,7 @@ $l      = count($unique);
     <tr>
         <td style="background-color: #f5f5f5"></td>
         <td style="background-color: #f5f5f5"></td>
+        <td style="background-color: #f5f5f5"></td>
         <td ><b>Enter Amount</b></td>
         <td style="background-color: #f5f5f5">
             <input type="text" class="form-control" id="amountb" value="" />
@@ -135,6 +141,7 @@ $l      = count($unique);
     @else
     @if($bi->remain != 0)
     <tr>
+        <td style="background-color: #f5f5f5"></td>
         <td style="background-color: #f5f5f5"></td>
         <td style="background-color: #f5f5f5"></td>
         <td ><b>Enter Amount</b></td>

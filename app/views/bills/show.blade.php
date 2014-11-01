@@ -136,6 +136,7 @@ $fds    = array_pop($foods);
 
 $unique = array_keys(array_count_values($foods));
 $l      = count($unique);
+$idadi  = $bi->no_drinks;
 
 ?>
 <img src="{{url("img/loader.gif")}}" id="ajax5" style="display:none;z-index:3000;position:absolute;margin-left: 230px; margin-top:50px">
@@ -146,7 +147,8 @@ $l      = count($unique);
 <table class="table table-bordered" id="gt">
 	<tr style="background-color: #f5f5f5">
 		<th>Drink</th>
-		<th>Times</th>
+        <th>No.Drink</th>
+        <th>Times</th>
 		<th>Each cost</th>
 		<th>Total cost</th>
 		<th>
@@ -157,14 +159,24 @@ $l      = count($unique);
 	</tr>	
 	<?php $total = 0; ?>
 	@for($i=0; $i < $l; $i++)
+
 		<tr>
 			<td>{{$unique[$i]}}</td>
-			<td>{{Bill::appears($unique[$i], $foods)}}</td>
+            <td>{{$idadi[$i]}}</td>
+            <td>{{Bill::appears($unique[$i], $foods)}}</td>
 			<td>{{Bar::where('name', $unique[$i])->first()->cost}} /=</td>
+              @if(isset($idadi[$i])=='')
 			<td>{{(Bill::appears($unique[$i], $foods))*(Bar::where('name', $unique[$i])->first()->cost)}} /=</td>
-		</tr>
+              @else
+            <td>{{($idadi[$i])*(Bar::where('name', $unique[$i])->first()->cost)}} /=</td>
+            @endif
+        </tr>
+    @if(isset($idadi[$i])=='')
 	<?php $total = $total + ((Bill::appears($unique[$i], $foods))*(Bar::where('name', $unique[$i])->first()->cost)); ?>		
-	@endfor	
+    @else
+    <?php $total = $total + (($idadi[$i])*(Bar::where('name', $unique[$i])->first()->cost)); ?>
+    @endif
+    @endfor
 	<tr style="background-color: #f5f5f5">
 		<td ></td>
 		<td></td>

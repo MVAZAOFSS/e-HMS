@@ -128,11 +128,13 @@ $fs = array();
 
 foreach($sales as $s){
 	$fs[] = $s->drink ;
+    $idadi[]  = $s->no_drinks;
 }
 
 
 $unique = array_keys(array_count_values($fs));
 $l      = count($unique);
+
 
 $newarr = array();
 foreach ($unique as $key => $value) {
@@ -167,11 +169,12 @@ foreach ($unique as $key => $value) {
 	@for($i=0; $i<$l; $i++)
 		<tr>
 			<td>{{$newarr[$i]}}</td>
+            <td>{{$idadi[$i]}}</td>
 			<td>{{Bill::appears($newarr[$i], $fs)}}</td>
 			<td>{{Bar::where('name', $newarr[$i])->first()->cost}} /=</td>
-			<td>{{(Bill::appears($newarr[$i], $fs))*(Bar::where('name', $newarr[$i])->first()->cost)}} /=</td>
+			<td>{{($idadi[$i])*(Bar::where('name', $newarr[$i])->first()->cost)}} /=</td>
 		</tr>
-	<?php $total = $total + ((Bill::appears($newarr[$i], $fs))*(Bar::where('name', $newarr	[$i])->first()->cost)); ?>		
+	<?php $total = $total + (($idadi[$i])*(Bar::where('name', $newarr[$i])->first()->cost)); ?>
 	@endfor	
 	<tr style="background-color: #f5f5f5">
 		<td ></td>

@@ -7,6 +7,7 @@ $fs = array();
 
 foreach($sales as $s){
     $fs[] = $s->drink ;
+    $idadi[]  = $s->no_drinks;
 }
 
 
@@ -26,6 +27,7 @@ foreach ($unique as $key => $value) {
 <table class="table table-bordered" id="gt">
     <tr style="background-color: #f5f5f5">
         <th>Drink</th>
+        <th>No Drinks</th>
         <th>Times</th>
         <th>Each cost</th>
         <th>Total cost</th>
@@ -46,13 +48,15 @@ foreach ($unique as $key => $value) {
     @for($i=0; $i<$l; $i++)
     <tr>
         <td>{{$newarr[$i]}}</td>
+        <td>{{$idadi[$i]}}</td>
         <td>{{Bill::appears($newarr[$i], $fs)}}</td>
         <td>{{Bar::where('name', $newarr[$i])->first()->cost}} /=</td>
-        <td>{{(Bill::appears($newarr[$i], $fs))*(Bar::where('name', $newarr[$i])->first()->cost)}} /=</td>
+        <td>{{($idadi[$i])*(Bar::where('name', $newarr[$i])->first()->cost)}} /=</td>
     </tr>
-    <?php $total = $total + ((Bill::appears($newarr[$i], $fs))*(Bar::where('name', $newarr	[$i])->first()->cost)); ?>
+    <?php $total = $total + (($idadi[$i])*(Bar::where('name', $newarr	[$i])->first()->cost)); ?>
     @endfor
     <tr style="background-color: #f5f5f5">
+        <td></td>
         <td ></td>
         <td></td>
         <td><b>Total</b></td>

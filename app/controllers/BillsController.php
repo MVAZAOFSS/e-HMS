@@ -38,7 +38,8 @@ class BillsController extends BaseController {
 				"drink"=>$inputs['d'],
 				"service"=>$inputs['t'],
 				"date"=>date('Y-m-d'),
-				"added_by"=>Auth::user()->id
+				"added_by"=>Auth::user()->id,
+                "no_drinks"=>$inputs['idadi']
 			));
 
 			$sales = DrinkSales::whereRaw('date = ? and service = ?', array(date('Y-m-d'), $inputs['t']))->get();
@@ -479,6 +480,7 @@ class BillsController extends BaseController {
 				$g       = $inputs['g'];
 				$d       = $inputs['d'];
 				$t       = $inputs['t'];
+                $idadi=  $inputs['idadi'];
 				$cost= Bar::where('name',$d)->first()->cost;
 				$drink    = $d . ",";
 
@@ -503,7 +505,8 @@ class BillsController extends BaseController {
 										"servicetime"=>$t,
 										"added_by"=>$lg,
 										"date"=>date('Y-m-d'),
-                                          "remain"=>$cost
+                                        "remain"=>$cost,
+                                        "no_drinks"=>$idadi
 							   )); 
 					
 
@@ -511,9 +514,11 @@ class BillsController extends BaseController {
 
 					$bil        = Bil::whereRaw('guestid=? and servicetime=? and date =? ', array($gid, $t, date('Y-m-d')))->first();
 					$drinks      = $bil->drinks;
+                    $idadis      =$bil->no_drinks;
 					$newdrinks   = $drinks . $drink ;
 					$bil->drinks = $newdrinks;
-                                        $bil->remain=  $bil->remain+$cost;
+                    $bil->no_drinks =$idadis+$idadi;
+                    $bil->remain=  $bil->remain+$cost;
 					$bil->save();
 
 					

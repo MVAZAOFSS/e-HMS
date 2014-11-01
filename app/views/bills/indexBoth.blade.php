@@ -63,6 +63,13 @@
                         <input class="form-control" type="text" id="drink" />
                     </td>
                 </tr>
+                <tr>
+                    <td>
+                        <table>
+                            <tr><td>Select no. Drinks:<input type="checkbox" id="checkboxed"></td><td id="checkid"><input type="text" id="idadi" name="idadi" placeholder="Enter no drinks."></td></tr>
+                        </table>
+                    </td>
+                </tr>
             </table>
             @endif
             <table class="table table-bordered">
@@ -134,19 +141,24 @@ $json = json_encode($data);
 ?>
 <script type="text/javascript">
     $(document).ready(function(){
+        $('#checkid').hide();
+        $('#checkboxed').click(function(){
+            $('#checkid').show();
+        });
 @if(Auth::user()->role== 8)
 
         $('#addbill').on('click', function(){
             var guestname = $('#guestname').val();
             var drink      = $('#drink').val();
             var t         = $('#time').val();
+            var idadi     =$('#idadi').val();
 
-            if(guestname=="" || drink == "" || t==""){
+            if(guestname=="" || drink == "" || t==""||idadi==""){
                 alert("Please fill the fields");
             }else{
                 $("#billform").css('opacity', '0.4');
                 $('#ajax, #ajax2').show();
-                $.post('submitBoth', {g:guestname,d:drink, t:t}, function(data){
+                $.post('submitBoth', {g:guestname,d:drink, t:t,idadi:idadi}, function(data){
                     $("#billform").css('opacity', '1');
                     $('#ajax, #ajax2').hide('fast', function(){$('#drink').val('');$('#time').val('');});
                     $('#infobill').html(data);

@@ -3,6 +3,7 @@
 
 $foods  = explode("," , $bi->drinks);
 $fds    = array_pop($foods);
+$idadi=$bi->no_drinks;
 
 $unique = array_keys(array_count_values($foods));
 $l      = count($unique);
@@ -16,6 +17,7 @@ $l      = count($unique);
 <table class="table table-bordered" id="gt">
     <tr style="background-color: #f5f5f5">
         <th>Drink</th>
+        <th>No.Drinks</th>
         <th>Times</th>
         <th>Each cost</th>
         <th>Total cost</th>
@@ -29,11 +31,12 @@ $l      = count($unique);
     @for($i=0; $i < $l; $i++)
     <tr>
         <td>{{$unique[$i]}}</td>
+        <td>{{$idadi[$i]}}</td>
         <td>{{Bill::appears($unique[$i], $foods)}}</td>
         <td>{{Bar::where('name', $unique[$i])->first()->cost}} /=</td>
-        <td>{{(Bill::appears($unique[$i], $foods))*(Bar::where('name', $unique[$i])->first()->cost)}} /=</td>
+        <td>{{($idadi[$i])*(Bar::where('name', $unique[$i])->first()->cost)}} /=</td>
     </tr>
-    <?php $total = $total + ((Bill::appears($unique[$i], $foods))*(Bar::where('name', $unique[$i])->first()->cost)); ?>
+    <?php $total = $total + (($idadi[$i])*(Bar::where('name', $unique[$i])->first()->cost)); ?>
     @endfor
     <tr style="background-color: #f5f5f5">
         <td ></td>
@@ -96,7 +99,7 @@ $l      = count($unique);
                     $.post('addBoth', {c:c, gid:gid, a:ai, t:t, s:s}, function(data){
                         $('#ajax5').hide('fast', function(){
                             $('#alrt').fadeIn(1000, function(){
-                                window.location = 'all';
+                                window.location = 'billBoth';
                             });
                         });
                     });
@@ -110,7 +113,7 @@ $l      = count($unique);
                             if(data == "ok"){
                                 $('#ajax5').hide('fast', function(){
                                     $('#alrt').fadeIn(1000, function(){
-                                        window.location = 'all';
+                                        window.location = 'billBoth';
                                     });
                                 });
                             }else{

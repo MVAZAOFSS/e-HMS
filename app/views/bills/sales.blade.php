@@ -84,7 +84,14 @@
   <td>
     <input class="form-control" type="text" id="drink" />
   </td>  
-</tr>  
+</tr>
+    <tr>
+        <td>
+            <table>
+                <tr><td>Select no. Drinks:<input type="checkbox" id="checkboxed"></td><td id="checkid"><input type="text" id="idadi" name="idadi" placeholder="Enter no drinks."></td></tr>
+            </table>
+        </td>
+    </tr>
 </table>
 @endif
 
@@ -195,7 +202,10 @@ $(document).ready(function(){
 
 <script type="text/javascript">
 $(document).ready(function(){
-
+      $('#checkid').hide();
+        $('#checkboxed').click(function(){
+            $('#checkid').show();
+        });
 @if(Auth::user()->role ==7)
 $('#addbill').on('click', function(){
     
@@ -249,14 +259,15 @@ $('#addbill').on('click', function(){
     
     var drink      = $('#drink').val();
     var t         = $('#time').val();
+    var idadi     =$('#idadi').val();
     
-    if(drink == "" || t==""){
+    if(drink == "" || t==""||idadi==""){
           alert("Please fill the fields");
     }else{
       $("#billform").css('opacity', '0.4');
       $('#ajax, #ajax2').show();
 
-      $.post('submitsale', {d:drink, t:t}, function(data){
+      $.post('submitsale', {d:drink, t:t,idadi:idadi}, function(data){
 
            $("#billform").css('opacity', '1');
            $('#ajax, #ajax2').hide('fast', function(){$('#drink').val('');$('#time').val('');});
