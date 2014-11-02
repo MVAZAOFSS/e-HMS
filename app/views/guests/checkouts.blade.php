@@ -41,7 +41,6 @@
               <thead>
                   <tr>
                       <th>  Full name   </th>
-                      <th>  Mobile      </th>
                       <th>  Room        </th>
                       <th>  Arrival date</th>
                       <th>  Departure date</th>
@@ -54,11 +53,11 @@
                     @foreach($guests as $m)
                     <tr>
                          <td>{{ $m->firstname}} {{$m->middlename}} {{$m->lastname}}</td>
-                         <td>{{ $m->mobile }}</td>
                          <td>{{ Room::find($m->room_number)->name }}</td>
                          <td>{{ $m->arrival_date }}</td>
                          <td>{{ $m->departure_date }}</td>
                          <td><a class="btn btn-success btn-xs" onclick="ViewList('{{$m->id}}')"><span class="glyphicon glyphicon-check"></span> Details</a>
+                             <a class="btn btn-info btn-xs"  href="{{url('viewGeneralPdf'.'/'.$m->id.'/'.$m->arrival_date.'/'.$m->departure_date )}}"><span class="glyphicon glyphicon-print"></span> Export pdf</a>
                              <a class="btn btn-warning btn-xs" onclick="ViewListDaily('{{$m->id}}/{{$m->arrival_date}}/{{$m->departure_date}}')" data-target="#general" data-toggle="modal"><span class="glyphicon glyphicon-adjust"></span> General summary</a>
                          </td>
                     </tr>
@@ -140,5 +139,12 @@ function ViewListDaily(id){
         $('.contList').html(data);
     });
 }
+    function ViewListDailyPdf(id){
+        var url="<?php echo url('viewGeneralPdf')?>";
+        var url2=url+'/'+id;
+        $.get(url2,function(data){
+
+        });
+    }
 </script>
 @stop

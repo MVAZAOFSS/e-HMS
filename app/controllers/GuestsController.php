@@ -62,6 +62,21 @@ class GuestsController extends BaseController {
         $data['end_date']=$end_date;
         return View::make('guests.guestsGeneral',$data);
     }
+    function viewGeneralPdfAction($id,$start_date,$end_date){
+        $data5=$this->viewGeneralLaundryCost($id,$start_date,$end_date);
+        $data6=$this->viewGeneralFoodBillCostAction($id,$start_date,$end_date);
+        $data7=$this->viewGeneralRestaurantCost($id,$start_date,$end_date);
+        $data8=$this->viewGeneralFoodBillCostRemainAction($id,$start_date,$end_date);
+        $data9=$this->viewGeneralRestaurantCostRemain($id,$start_date,$end_date);
+        $data10=$this->viewGeneralLaundryCostRemainAction($id,$start_date,$end_date);
+        $data11=$this->viewGeneralRoomBillCostAction($id,$start_date,$end_date);
+        $data=$data5+$data6+$data7+$data8+$data9+$data10+$data11;
+        $data['id']=$id;
+        $data['start_date']=$start_date;
+        $data['end_date']=$end_date;
+       $res=PDF::loadView('guests.guestsGeneralpdf',$data);
+        return $res->stream();
+    }
     function viewGeneralFoodBillAction($id,$start_date,$end_date){
         $res=DB::table('foodbills')->select('*')
                ->join('guests','guests.id','=','foodbills.guestid')
@@ -506,6 +521,7 @@ class GuestsController extends BaseController {
 
               $time1=strtotime(Input::get('start'));
               $time2=strtotime(Input::get('end'));
+              if($time2>=$time1){
               $diff=$time2-$time1;
               $children=Guest::find($id)->children;
               $roomcost=Room::find(Guest::find($id)->room_number)->cost;
@@ -523,7 +539,10 @@ class GuestsController extends BaseController {
                      ->where('guests.id',$id)->update($data_array2);
              $data['sms']='<p class="alert alert-success">Date squeezed</p>';
              return View::make('guests.view_form',$data);
-
+              }else{
+                  $data['sms1']='<p class="alert alert-danger">Start date cant be greater than end date</p>';
+                  return View::make('guests.view_form',$data);
+              }
           }
         }
         function cancel_danger($id){

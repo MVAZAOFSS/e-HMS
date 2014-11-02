@@ -1,6 +1,9 @@
 @if(isset($sms))
   {{$sms}}
 @endif
+@if(isset($sms1))
+{{$sms1}}
+@endif
 <form id="ed">
 <div class="panel panel-default">
     <div class="panel-heading">
@@ -51,7 +54,7 @@
         $.post(url3,forms,function(data){
             setTimeout(function(){
             $('.main').html(data);
-            location.reload();
+
             },2000);
         });
     });
