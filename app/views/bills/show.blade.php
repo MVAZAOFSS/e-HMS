@@ -165,19 +165,12 @@ $idadi  = $bi->no_drinks;
             <td>{{$idadi[$i]}}</td>
             <td>{{Bill::appears($unique[$i], $foods)}}</td>
 			<td>{{Bar::where('name', $unique[$i])->first()->cost}} /=</td>
-              @if(isset($idadi[$i])=='')
-			<td>{{(Bill::appears($unique[$i], $foods))*(Bar::where('name', $unique[$i])->first()->cost)}} /=</td>
-              @else
             <td>{{($idadi[$i])*(Bar::where('name', $unique[$i])->first()->cost)}} /=</td>
-            @endif
         </tr>
-    @if(isset($idadi[$i])=='')
-	<?php $total = $total + ((Bill::appears($unique[$i], $foods))*(Bar::where('name', $unique[$i])->first()->cost)); ?>		
-    @else
     <?php $total = $total + (($idadi[$i])*(Bar::where('name', $unique[$i])->first()->cost)); ?>
-    @endif
-    @endfor
+      @endfor
 	<tr style="background-color: #f5f5f5">
+        <td ></td>
 		<td ></td>
 		<td></td>
 		<td><b>Total</b></td>

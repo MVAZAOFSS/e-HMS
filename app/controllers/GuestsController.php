@@ -703,6 +703,25 @@ class GuestsController extends BaseController {
            }
         }
     }
+    function chartGeneratesAction(){
+          $res=Room::all();
+           $chartArray['chart']=array('type'=>'column');
+           $chartArray['title']=array('text'=>'Rooms Vs Amount');
+           $chartArray['credits']=array('enabled'=>'false');
+           $chartArray['navigation']=array('buttonOptions'=>array('align'=>'right'));
+           $chartArray['series']=array();
+           $chartArray['xAxis']=array('categories'=>array());
+           foreach($res as $row){
+               $categoryArray[]=$row->name;
+               $categoryCountArray[]=count($row->id);
+               if(count($row->id)!=0){
+                  $chartArray['series'][]=array('name'=>"Amount",'data'=>array(count($row->id)));
+               }
+           }
+          $chartArray['xAxis']=array('categories'=>$categoryArray);
+          $chartArray['yAxis']=array('title'=>array('text'=>'Total number'));
+         return View::make('guests.chartExample')->with('chartArray',$chartArray);
+    }
 }
 
         

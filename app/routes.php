@@ -221,3 +221,4 @@ Route::get('yearly_display/{guest}/{rest}/{serv}/{year}','ReportsController@repo
 Route::get('pdf', 'PrintController@index');
 Route::get('pdfz', 'PrintController@pdfz');
 Route::get('temedet', 'PrintController@temedet');
+Route::get('chartGenerates', 'GuestsController@chartGeneratesAction');

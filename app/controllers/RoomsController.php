@@ -107,14 +107,16 @@ class RoomsController extends BaseController {
 
                 $chk_time    = strtotime($checkin);
                 $today       = time();
+                $checkout    = $inputs['checkout'];
+                $chk_time2=strtotime($checkout);
 
-                if($today < $chk_time){
+                if($chk_time2 > $chk_time){
                         $rs = "ndio";
                 }else{
                         $rs = "sio";
                 }
 
-                $checkout    = $inputs['checkout'];
+
                 $rid         = $inputs['room'];
                 $room        = Room::find($rid);
                 $status      = $room->status;

@@ -67,7 +67,7 @@
                          <td>{{Restaurant::where('name',$s->food)->first()->cost}}</td>
                         @else
                         <td>{{$s->drink}}</td>
-                         <td>{{Bar::where('name',$s->drink)->first()->cost}}</td>
+                        <td>{{$s->no_drinks *(Bar::where('name',$s->drink)->first()->cost)}}</td>
                         @endif
                        
                         <td>{{Bill::tm($s->service)}}</td>

@@ -365,7 +365,7 @@ $(document).ready(function (){
                        
                        var bk = obj.res;
                        if(bk == "sio"){
-                            $('#fdk').html('Room: <span style="color: blue">' + obj.room + '</span><br/> status: <span style="color: green"> available </span> <br/> <hr/><button class="btn btn-xs btn-success" data-toggle="modal" data-target="#myModal">Register Guest</button>').css({
+                            $('#fdk').html('Room: <span style="color: blue">' + obj.room + '</span><br/> status: <span style="color: red"> invalid date Entered Try Again.. </span> <br/> <hr/><button class="btn btn-xs btn-success" data-toggle="modal" data-target="#myModal" disabled >Register Guest</button>').css({
                              'color': 'black',
                              'padding': '6px',
                              'border': '1px solid #ccc',
@@ -373,7 +373,7 @@ $(document).ready(function (){
                              'background-color': '#f5f5f5'
                             });
                        }else{
-                            $('#fdk').html('Room: <span style="color: blue">' + obj.room + '</span><br/> status: <span style="color: green"> available </span> <br/>Copy and Paste this Reservation Number: <i class="text-success">{{Str::quickRandom(5)}}</i> <br/><input type="text" name="r_no" id="r_no" onkeyup="checking(this)" placeholder="paste reservation number here.."/> <span style="display:none" id="fd"><img src="{{url("img/load.gif")}}" /></span><br/><span id="f"></span><hr/><button id="regguest" style="display:none" class="btn btn-xs btn-success" data-toggle="modal" data-target="#myModal">Register Guest</button>').css({
+                            $('#fdk').html('Room: <span style="color: blue">' + obj.room + '</span><br/> status: <span style="color: green"> available </span> <br/><br/><input type="text" value="{{str_pad(rand(0, 9999), 4, '0', STR_PAD_LEFT)}}" disabled/><input type="hidden" name="r_no" id="r_no" value="{{str_pad(rand(0, 9999), 4, '0', STR_PAD_LEFT)}}"/><hr/><button class="btn btn-xs btn-success" data-toggle="modal" data-target="#myModal">Register Guest</button>').css({
                              'color': 'black',
                              'padding': '6px',
                              'border': '1px solid #ccc',
@@ -385,7 +385,7 @@ $(document).ready(function (){
 
                         var bk = obj.res;
                         if(bk == "sio"){
-                            $('#fdk').html('Room: <span style="color: blue">' + obj.room + '</span><br/> status: <span style="color: orange"> reserved!  </span> <br/> <hr/><button class="btn btn-xs btn-success" data-toggle="modal" data-target="#myModal">Register Guest</button>').css({
+                            $('#fdk').html('Room: <span style="color: blue">' + obj.room + '</span><br/> status: <span style="color: red"> invalid date Entered Try Again.. </span><br/> <hr/><button class="btn btn-xs btn-success" data-toggle="modal" data-target="#myModal" disabled>Register Guest</button>').css({
                             'color': 'black',
                             'padding': '6px',
                             'border': '1px solid #ccc',
@@ -393,7 +393,7 @@ $(document).ready(function (){
                             'background-color': '#f5f5f5'
                           });
                         }else{
-                            $('#fdk').html('Room: <span style="color: blue">' + obj.room + '</span><br/> status: <span style="color: green"> reserved! </span> <br/>Enter Reservation Number <br/><input type="text" name="r_no" id="r_no" onkeyup="checking(this)" /> <span style="display:none" id="fd"><img src="{{url("img/load.gif")}}" /></span><br/><span id="f"></span><hr/><button id="regguest" style="display:none" class="btn btn-xs btn-success" data-toggle="modal" data-target="#myModal">Register Guest</button>').css({
+                            $('#fdk').html('Room: <span style="color: blue">' + obj.room + '</span><br/> status: <span style="color: green"> reserved! </span> <br/><br/><input type="text" value="{{str_pad(rand(0, 9999), 4, '0', STR_PAD_LEFT)}}" disabled/><input type="hidden" name="r_no" id="r_no" value="{{str_pad(rand(0, 9999), 4, '0', STR_PAD_LEFT)}}"/><hr/><hr/><button class="btn btn-xs btn-success" data-toggle="modal" data-target="#myModal">Register Guest</button>').css({
                              'color': 'black',
                              'padding': '6px',
                              'border': '1px solid #ccc',
