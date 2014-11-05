@@ -19,6 +19,7 @@
         <tr><td>Pre-paid Cost: {{$row->pre_paidcost}}</td></tr>
         <tr><td><h5 class="text-primary">Others</h5></td></tr>
         <tr><td>Room Reserved:  {{Room::find($row->room_number)->name}}</td></tr>
+        <tr><td>Reservation number:  {{$row->reservation_number}}</td></tr>
         @endforeach
     </table>
 
