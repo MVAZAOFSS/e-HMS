@@ -20,7 +20,7 @@
         <div class="well well-sm">
             <p><b>ADVANCE PAYMENT FOR ROOMS ....................................................................... <span class="">Tsh {{$roomcost}} /= </span></b></p>
             <p><b>ADVANCE PAYMENT FOOD & DRINKS ...................................................................
-                    <span class="">Tsh {{$barcost+$bilscost+$barbillscost+$msosicost}}  /= </span>
+                    <span class="">Tsh {{$no_drinks*$barcost+$bilscost+$barbillscost+$msosicost}}  /= </span>
                 </b></p>
             <p><b>ADVANCE PAYMENT FOR FUNCTIONS ......................................................................{{$amount}}</b></p>
             <p><b>ADVANCE PAYMENT FOR CONFERENCE ......................................................................{{$amount1}}</b></p>

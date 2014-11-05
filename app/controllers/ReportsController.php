@@ -3570,11 +3570,13 @@ public function rooms(){
                         ->where('date',$date)
                         ->get(array(
                             '*',
-                            DB::raw('SUM(bars.cost) AS cost')
+                            DB::raw('SUM(bars.cost) AS cost'),
+                            DB::raw('SUM(drinksales.no_drinks) AS no_drinks')
                         ));
                         foreach ($res as $row){
                             $data=array(
-                                'amount'=>$row->cost
+                                'amount'=>$row->cost,
+                                'no_drinks'=>$row->no_drinks
                             );
                      return View::make('reports.restaurantsreportcostd',$data);
                         }
@@ -3589,11 +3591,13 @@ public function rooms(){
                          ->where('service',$serv)
                         ->get(array(
                             '*',
-                            DB::raw('SUM(bars.cost) AS cost')
+                            DB::raw('SUM(bars.cost) AS cost'),
+                            DB::raw('SUM(drinksales.no_drinks) AS no_drinks')
                         ));
                         foreach ($res as $row){
                             $data=array(
-                                'amount'=>$row->cost
+                                'amount'=>$row->cost,
+                                'no_drinks'=>$row->no_drinks
                             );
                      return View::make('reports.restaurantsreportcostd',$data);
                         }
@@ -3608,11 +3612,13 @@ public function rooms(){
                          ->where('service',$serv)
                         ->get(array(
                             '*',
-                            DB::raw('SUM(bars.cost) AS cost')
+                            DB::raw('SUM(bars.cost) AS cost'),
+                     DB::raw('SUM(drinksales.no_drinks) AS no_drinks')
                         ));
                         foreach ($res as $row){
                             $data=array(
-                                'amount'=>$row->cost
+                                'amount'=>$row->cost,
+                                'no_drinks'=>$row->no_drinks
                             );
                      return View::make('reports.restaurantsreportcostd',$data);
                         }
@@ -3627,11 +3633,13 @@ public function rooms(){
                          ->where('service',$serv)
                         ->get(array(
                             '*',
-                            DB::raw('SUM(bars.cost) AS cost')
+                            DB::raw('SUM(bars.cost) AS cost'),
+                     DB::raw('SUM(drinksales.no_drinks) AS no_drinks')
                         ));
                         foreach ($res as $row){
                             $data=array(
-                                'amount'=>$row->cost
+                                'amount'=>$row->cost,
+                                'no_drinks'=>$row->no_drinks
                             );
                      return View::make('reports.restaurantsreportcostd',$data);
                         }
@@ -3646,11 +3654,13 @@ public function rooms(){
                          ->where('service',$serv)
                         ->get(array(
                             '*',
-                            DB::raw('SUM(bars.cost) AS cost')
+                            DB::raw('SUM(bars.cost) AS cost'),
+                     DB::raw('SUM(drinksales.no_drinks) AS no_drinks')
                         ));
                         foreach ($res as $row){
                             $data=array(
-                                'amount'=>$row->cost
+                                'amount'=>$row->cost,
+                                'no_drinks'=>$row->no_drinks
                             );
                      return View::make('reports.restaurantsreportcostd',$data);
                         }
@@ -3665,11 +3675,13 @@ public function rooms(){
                          ->where('service',$serv)
                         ->get(array(
                             '*',
-                            DB::raw('SUM(bars.cost) AS cost')
+                            DB::raw('SUM(bars.cost) AS cost'),
+                     DB::raw('SUM(drinksales.no_drinks) AS no_drinks')
                         ));
                         foreach ($res as $row){
                             $data=array(
-                                'amount'=>$row->cost
+                                'amount'=>$row->cost,
+                                'no_drinks'=>$row->no_drinks
                             );
                      return View::make('reports.restaurantsreportcostd',$data);
                         }
@@ -4238,11 +4250,13 @@ public function rooms(){
                         ->whereBetween('date',array($start_date,$end_date))
                         ->get(array(
                             '*',
-                            DB::raw('SUM(bars.cost) AS cost')
+                            DB::raw('SUM(bars.cost) AS cost'),
+                    DB::raw('SUM(drinksales.no_drinks) AS no_drinks')
                         ));
                         foreach ($res as $row){
                             $data=array(
-                                'amount'=>$row->cost
+                                'amount'=>$row->cost,
+                                'no_drinks'=>$row->no_drinks
                             );
                      return View::make('reports.restaurantsreportcostd',$data);
                         }
@@ -4261,7 +4275,8 @@ public function rooms(){
                         ));
                         foreach ($res as $row){
                             $data=array(
-                                'amount'=>$row->cost
+                                'amount'=>$row->cost,
+                                'no_drinks'=>$row->no_drinks
                             );
                      return View::make('reports.restaurantsreportcostd',$data);
                         }
@@ -4276,11 +4291,13 @@ public function rooms(){
                          ->where('service',$serv)
                         ->get(array(
                             '*',
-                            DB::raw('SUM(bars.cost) AS cost')
+                            DB::raw('SUM(bars.cost) AS cost'),
+                     DB::raw('SUM(drinksales.no_drinks) AS no_drinks')
                         ));
                         foreach ($res as $row){
                             $data=array(
-                                'amount'=>$row->cost
+                                'amount'=>$row->cost,
+                                'no_drinks'=>$row->no_drinks
                             );
                      return View::make('reports.restaurantsreportcostd',$data);
                         }
@@ -4295,11 +4312,13 @@ public function rooms(){
                          ->where('service',$serv)
                         ->get(array(
                             '*',
-                            DB::raw('SUM(bars.cost) AS cost')
+                            DB::raw('SUM(bars.cost) AS cost'),
+                     DB::raw('SUM(drinksales.no_drinks) AS no_drinks')
                         ));
                         foreach ($res as $row){
                             $data=array(
-                                'amount'=>$row->cost
+                                'amount'=>$row->cost,
+                                'no_drinks'=>$row->no_drinks
                             );
                      return View::make('reports.restaurantsreportcostd',$data);
                         }
@@ -4314,11 +4333,13 @@ public function rooms(){
                          ->where('service',$serv)
                         ->get(array(
                             '*',
-                            DB::raw('SUM(bars.cost) AS cost')
+                            DB::raw('SUM(bars.cost) AS cost'),
+                     DB::raw('SUM(drinksales.no_drinks) AS no_drinks')
                         ));
                         foreach ($res as $row){
                             $data=array(
-                                'amount'=>$row->cost
+                                'amount'=>$row->cost,
+                                'no_drinks'=>$row->no_drinks
                             );
                      return View::make('reports.restaurantsreportcostd',$data);
                         }
@@ -4333,11 +4354,13 @@ public function rooms(){
                          ->where('service',$serv)
                         ->get(array(
                             '*',
-                            DB::raw('SUM(bars.cost) AS cost')
+                            DB::raw('SUM(bars.cost) AS cost'),
+                     DB::raw('SUM(drinksales.no_drinks) AS no_drinks')
                         ));
                         foreach ($res as $row){
                             $data=array(
-                                'amount'=>$row->cost
+                                'amount'=>$row->cost,
+                                'no_drinks'=>$row->no_drinks
                             );
                      return View::make('reports.restaurantsreportcostd',$data);
                         }
@@ -4949,11 +4972,13 @@ public function rooms(){
                         ->where('date','LIKE','%'.$year.'%')
                         ->get(array(
                             '*',
-                            DB::raw('SUM(bars.cost) AS cost')
+                            DB::raw('SUM(bars.cost) AS cost'),
+                    DB::raw('SUM(drinksales.no_drinks) AS no_drinks')
                         ));
                         foreach ($res as $row){
                             $data=array(
-                                'amount'=>$row->cost
+                                'amount'=>$row->cost,
+                                'no_drinks'=>$row->no_drinks
                             );
                      return View::make('reports.restaurantsreportcostd',$data);
                         }
@@ -4969,11 +4994,13 @@ public function rooms(){
                          ->where('service',$serv)
                         ->get(array(
                             '*',
-                            DB::raw('SUM(bars.cost) AS cost')
+                            DB::raw('SUM(bars.cost) AS cost'),
+                     DB::raw('SUM(drinksales.no_drinks) AS no_drinks')
                         ));
                         foreach ($res as $row){
                             $data=array(
-                                'amount'=>$row->cost
+                                'amount'=>$row->cost,
+                                'no_drinks'=>$row->no_drinks
                             );
                      return View::make('reports.restaurantsreportcostd',$data);
                         }
@@ -4989,11 +5016,13 @@ public function rooms(){
                          ->where('service',$serv)
                         ->get(array(
                             '*',
-                            DB::raw('SUM(bars.cost) AS cost')
+                            DB::raw('SUM(bars.cost) AS cost'),
+                     DB::raw('SUM(drinksales.no_drinks) AS no_drinks')
                         ));
                         foreach ($res as $row){
                             $data=array(
-                                'amount'=>$row->cost
+                                'amount'=>$row->cost,
+                                'no_drinks'=>$row->no_drinks
                             );
                      return View::make('reports.restaurantsreportcostd',$data);
                         }
@@ -5009,11 +5038,13 @@ public function rooms(){
                          ->where('service',$serv)
                         ->get(array(
                             '*',
-                            DB::raw('SUM(bars.cost) AS cost')
+                            DB::raw('SUM(bars.cost) AS cost'),
+                     DB::raw('SUM(drinksales.no_drinks) AS no_drinks')
                         ));
                         foreach ($res as $row){
                             $data=array(
-                                'amount'=>$row->cost
+                                'amount'=>$row->cost,
+                                'no_drinks'=>$row->no_drinks
                             );
                      return View::make('reports.restaurantsreportcostd',$data);
                         }
@@ -5029,11 +5060,13 @@ public function rooms(){
                          ->where('service',$serv)
                         ->get(array(
                             '*',
-                            DB::raw('SUM(bars.cost) AS cost')
+                            DB::raw('SUM(bars.cost) AS cost'),
+                     DB::raw('SUM(drinksales.no_drinks) AS no_drinks')
                         ));
                         foreach ($res as $row){
                             $data=array(
-                                'amount'=>$row->cost
+                                'amount'=>$row->cost,
+                                'no_drinks'=>$row->no_drinks
                             );
                      return View::make('reports.restaurantsreportcostd',$data);
                         }
@@ -5049,11 +5082,13 @@ public function rooms(){
                          ->where('service',$serv)
                         ->get(array(
                             '*',
-                            DB::raw('SUM(bars.cost) AS cost')
+                            DB::raw('SUM(bars.cost) AS cost'),
+                     DB::raw('SUM(drinksales.no_drinks) AS no_drinks')
                         ));
                         foreach ($res as $row){
                             $data=array(
-                                'amount'=>$row->cost
+                                'amount'=>$row->cost,
+                                'no_drinks'=>$row->no_drinks
                             );
                      return View::make('reports.restaurantsreportcostd',$data);
                         }
@@ -5622,11 +5657,13 @@ public function rooms(){
                        ->where('date','LIKE','%'.$year.'%')
                         ->get(array(
                             '*',
-                            DB::raw('SUM(bars.cost) AS cost')
+                            DB::raw('SUM(bars.cost) AS cost'),
+                    DB::raw('SUM(drinksales.no_drinks) AS no_drinks')
                         ));
                         foreach ($res as $row){
                             $data=array(
-                                'amount'=>$row->cost
+                                'amount'=>$row->cost,
+                                'no_drinks'=>$row->no_drinks
                             );
                      return View::make('reports.restaurantsreportcostd',$data);
                         }
@@ -5641,11 +5678,13 @@ public function rooms(){
                          ->where('service',$serv)
                         ->get(array(
                             '*',
-                            DB::raw('SUM(bars.cost) AS cost')
+                            DB::raw('SUM(bars.cost) AS cost'),
+                    DB::raw('SUM(drinksales.no_drinks) AS no_drinks')
                         ));
                         foreach ($res as $row){
                             $data=array(
-                                'amount'=>$row->cost
+                                'amount'=>$row->cost,
+                                'no_drinks'=>$row->no_drinks
                             );
                      return View::make('reports.restaurantsreportcostd',$data);
                         }
@@ -5660,11 +5699,13 @@ public function rooms(){
                          ->where('service',$serv)
                         ->get(array(
                             '*',
-                            DB::raw('SUM(bars.cost) AS cost')
+                            DB::raw('SUM(bars.cost) AS cost'),
+                    DB::raw('SUM(drinksales.no_drinks) AS no_drinks')
                         ));
                         foreach ($res as $row){
                             $data=array(
-                                'amount'=>$row->cost
+                                'amount'=>$row->cost,
+                                'no_drinks'=>$row->no_drinks
                             );
                      return View::make('reports.restaurantsreportcostd',$data);
                         }
@@ -5679,11 +5720,13 @@ public function rooms(){
                          ->where('service',$serv)
                         ->get(array(
                             '*',
-                            DB::raw('SUM(bars.cost) AS cost')
+                            DB::raw('SUM(bars.cost) AS cost'),
+                    DB::raw('SUM(drinksales.no_drinks) AS no_drinks')
                         ));
                         foreach ($res as $row){
                             $data=array(
-                                'amount'=>$row->cost
+                                'amount'=>$row->cost,
+                                'no_drinks'=>$row->no_drinks
                             );
                      return View::make('reports.restaurantsreportcostd',$data);
                         }
@@ -5698,11 +5741,13 @@ public function rooms(){
                          ->where('service',$serv)
                         ->get(array(
                             '*',
-                            DB::raw('SUM(bars.cost) AS cost')
+                            DB::raw('SUM(bars.cost) AS cost'),
+                    DB::raw('SUM(drinksales.no_drinks) AS no_drinks')
                         ));
                         foreach ($res as $row){
                             $data=array(
-                                'amount'=>$row->cost
+                                'amount'=>$row->cost,
+                                'no_drinks'=>$row->no_drinks
                             );
                      return View::make('reports.restaurantsreportcostd',$data);
                         }
@@ -5717,11 +5762,13 @@ public function rooms(){
                          ->where('service',$serv)
                         ->get(array(
                             '*',
-                            DB::raw('SUM(bars.cost) AS cost')
+                            DB::raw('SUM(bars.cost) AS cost'),
+                    DB::raw('SUM(drinksales.no_drinks) AS no_drinks')
                         ));
                         foreach ($res as $row){
                             $data=array(
-                                'amount'=>$row->cost
+                                'amount'=>$row->cost,
+                                'no_drinks'=>$row->no_drinks
                             );
                      return View::make('reports.restaurantsreportcostd',$data);
                         }
@@ -5769,28 +5816,28 @@ public function rooms(){
                 return View::make('reports.laundryreport1',$data);
             }elseif($guest=='noneguest' && $laud=='all'){
                   $res=DB::table('salesLaundrylits')->select('*')
-                      ->join('customerCost','customerCost.customerName','=','salesLaundrylits.name')
-                       ->where('customerCost.date',$date)->get();
+                      ->join('customercost','customercost.customerName','=','salesLaundrylits.name')
+                       ->where('customercost.date',$date)->get();
                    $data['laud']=$res;
                 return View::make('reports.salesLaundryreport',$data);
             }elseif($guest=='noneguest' && $laud==1){
                 $res=DB::table('salesLaundrylits')->select('*')
-                    ->join('customerCost','customerCost.customerName','=','salesLaundrylits.name')
-                    ->where('customerCost.date',$date)
+                    ->join('customercost','customercost.customerName','=','salesLaundrylits.name')
+                    ->where('customercost.date',$date)
                     ->where('category',$laud)->get();
                 $data['laud']=$res;
                 return View::make('reports.salesLaundryreport',$data);
             }elseif($guest=='noneguest' && $laud==2){
                 $res=DB::table('salesLaundrylits')->select('*')
-                    ->join('customerCost','customerCost.customerName','=','salesLaundrylits.name')
-                    ->where('customerCost.date',$date)
+                    ->join('customercost','customercost.customerName','=','salesLaundrylits.name')
+                    ->where('customercost.date',$date)
                     ->where('category',$laud)->get();
                 $data['laud']=$res;
                 return View::make('reports.salesLaundryreport',$data);
             }elseif($guest=='noneguest' && $laud==2){
                 $res=DB::table('salesLaundrylits')->select('*')
-                    ->join('customerCost','customerCost.customerName','=','salesLaundrylits.name')
-                    ->where('customerCost.date',$date)
+                    ->join('customercost','customercost.customerName','=','salesLaundrylits.name')
+                    ->where('customercost.date',$date)
                     ->where('category',$laud)->get();
                 $data['laud']=$res;
                 return View::make('reports.salesLaundryreport',$data);
@@ -5815,7 +5862,7 @@ public function rooms(){
                return View::make('reports.laundrycost',$data);
                   }
              }elseif($guest=='noneguestincome'&& $laud=='all'){
-                $res=DB::table('customerCost')
+                $res=DB::table('customercost')
                         ->where('date',$date)
                         ->get(array(
                         '*',
@@ -5870,28 +5917,28 @@ public function rooms(){
                 return View::make('reports.laundryreport1',$data);
             }elseif($guest=='noneguest' && $laud=='all'){
                 $res=DB::table('salesLaundrylits')->select('*')
-                    ->join('customerCost','customerCost.customerName','=','salesLaundrylits.name')
-                    ->whereBetween('customerCost.date',array($start_date,$end_date))->get();
+                    ->join('customercost','customercost.customerName','=','salesLaundrylits.name')
+                    ->whereBetween('customercost.date',array($start_date,$end_date))->get();
                     $data['laud']=$res;
                 return View::make('reports.salesLaundryreport',$data);
             }elseif($guest=='noneguest' && $laud==1){
                 $res=DB::table('salesLaundrylits')->select('*')
-                ->join('customerCost','customerCost.customerName','=','salesLaundrylits.name')
-                    ->whereBetween('customerCost.date',array($start_date,$end_date))
+                ->join('customercost','customercost.customerName','=','salesLaundrylits.name')
+                    ->whereBetween('customercost.date',array($start_date,$end_date))
                     ->where('category',$laud)->get();
                 $data['laud']=$res;
                 return View::make('reports.salesLaundryreport',$data);
             }elseif($guest=='noneguest' && $laud==2){
                 $res=DB::table('salesLaundrylits')->select('*')
-                    ->join('customerCost','customerCost.customerName','=','salesLaundrylits.name')
-                    ->whereBetween('customerCost.date',array($start_date,$end_date))
+                    ->join('customercost','customercost.customerName','=','salesLaundrylits.name')
+                    ->whereBetween('customercost.date',array($start_date,$end_date))
                     ->where('category',$laud)->get();
                 $data['laud']=$res;
                 return View::make('reports.salesLaundryreport',$data);
             }elseif($guest=='noneguest' && $laud==3){
                 $res=DB::table('salesLaundrylits')->select('*')
-                    ->join('customerCost','customerCost.customerName','=','salesLaundrylits.name')
-                    ->whereBetween('customerCost.date',array($start_date,$end_date))
+                    ->join('customercost','customercost.customerName','=','salesLaundrylits.name')
+                    ->whereBetween('customercost.date',array($start_date,$end_date))
                     ->where('category',$laud)->get();
                 $data['laud']=$res;
                 return View::make('reports.salesLaundryreport',$data);
@@ -5916,7 +5963,7 @@ public function rooms(){
                     return View::make('reports.laundrycost',$data);
                 }
             }elseif($guest=='noneguestincome'&& $laud=='all'){
-                $res=DB::table('customerCost')
+                $res=DB::table('customercost')
                     ->whereBetween('date',array($start_date,$end_date))
                     ->get(array(
                         '*',
@@ -5975,35 +6022,35 @@ public function rooms(){
                 return View::make('reports.laundryreport1',$data);
             }elseif($guest=='noneguest' && $laud=='all'){
                 $res=DB::table('salesLaundrylits')->select('*')
-                    ->join('customerCost','customerCost.customerName','=','salesLaundrylits.name')
-                    ->where('customerCost.date','like','%'.$month.'%')
-                    ->where('customerCost.date','LIKE','%'.$year.'%')
+                    ->join('customercost','customercost.customerName','=','salesLaundrylits.name')
+                    ->where('customercost.date','like','%'.$month.'%')
+                    ->where('customercost.date','LIKE','%'.$year.'%')
                     ->get();
                 $data['laud']=$res;
                 return View::make('reports.salesLaundryreport',$data);
             }elseif($guest=='noneguest' && $laud==1){
                 $res=DB::table('salesLaundrylits')->select('*')
-                    ->join('customerCost','customerCost.customerName','=','salesLaundrylits.name')
-                    ->where('customerCost.date','like','%'.$month.'%')
-                    ->where('customerCost.date','LIKE','%'.$year.'%')
+                    ->join('customercost','customercost.customerName','=','salesLaundrylits.name')
+                    ->where('customercost.date','like','%'.$month.'%')
+                    ->where('customercost.date','LIKE','%'.$year.'%')
                     ->where('category',$laud)
                     ->get();
                 $data['laud']=$res;
                 return View::make('reports.salesLaundryreport',$data);
             }elseif($guest=='noneguest' && $laud==2){
                 $res=DB::table('salesLaundrylits')->select('*')
-                    ->join('customerCost','customerCost.customerName','=','salesLaundrylits.name')
-                    ->where('customerCost.date','like','%'.$month.'%')
-                    ->where('customerCost.date','LIKE','%'.$year.'%')
+                    ->join('customercost','customercost.customerName','=','salesLaundrylits.name')
+                    ->where('customercost.date','like','%'.$month.'%')
+                    ->where('customercost.date','LIKE','%'.$year.'%')
                     ->where('category',$laud)
                     ->get();
                 $data['laud']=$res;
                 return View::make('reports.salesLaundryreport',$data);
             }elseif($guest=='noneguest' && $laud==3){
                 $res=DB::table('salesLaundrylits')->select('*')
-                    ->join('customerCost','customerCost.customerName','=','salesLaundrylits.name')
-                    ->where('customerCost.date','like','%'.$month.'%')
-                    ->where('customerCost.date','LIKE','%'.$year.'%')
+                    ->join('customercost','customercost.customerName','=','salesLaundrylits.name')
+                    ->where('customercost.date','like','%'.$month.'%')
+                    ->where('customercost.date','LIKE','%'.$year.'%')
                     ->where('category',$laud)
                     ->get();
                 $data['laud']=$res;
@@ -6030,7 +6077,7 @@ public function rooms(){
                     return View::make('reports.laundrycost',$data);
                 }
             }elseif($guest=='noneguestincome'&& $laud=='all'){
-                $res=DB::table('customerCost')
+                $res=DB::table('customercost')
                         ->where(' date','like','%'.$month.'%')
                         ->where(' date','LIKE','%'.$year.'%')
                     ->get(array(
@@ -6086,31 +6133,31 @@ public function rooms(){
                 return View::make('reports.laundryreport1',$data);
             }elseif($guest=='noneguest' && $laud=='all'){
                 $res=DB::table('salesLaundrylits')->select('*')
-                    ->join('customerCost','customerCost.customerName','=','salesLaundrylits.name')
-                    ->where('customerCost.date','LIKE','%'.$year.'%')
+                    ->join('customercost','customercost.customerName','=','salesLaundrylits.name')
+                    ->where('customercost.date','LIKE','%'.$year.'%')
                     ->get();
                 $data['laud']=$res;
                 return View::make('reports.salesLaundryreport',$data);
             }elseif($guest=='noneguest' && $laud==1){
                 $res=DB::table('salesLaundrylits')->select('*')
-                    ->join('customerCost','customerCost.customerName','=','salesLaundrylits.name')
-                    ->where('customerCost.date','LIKE','%'.$year.'%')
+                    ->join('customercost','customercost.customerName','=','salesLaundrylits.name')
+                    ->where('customercost.date','LIKE','%'.$year.'%')
                     ->where('category',$laud)
                     ->get();
                 $data['laud']=$res;
                 return View::make('reports.salesLaundryreport',$data);
             }elseif($guest=='noneguest' && $laud==2){
                 $res=DB::table('salesLaundrylits')->select('*')
-                    ->join('customerCost','customerCost.customerName','=','salesLaundrylits.name')
-                    ->where('customerCost.date','LIKE','%'.$year.'%')
+                    ->join('customercost','customercost.customerName','=','salesLaundrylits.name')
+                    ->where('customercost.date','LIKE','%'.$year.'%')
                     ->where('category',$laud)
                     ->get();
                 $data['laud']=$res;
                 return View::make('reports.salesLaundryreport',$data);
             }elseif($guest=='noneguest' && $laud==2){
                 $res=DB::table('salesLaundrylits')->select('*')
-                    ->join('customerCost','customerCost.customerName','=','salesLaundrylits.name')
-                    ->where('customerCost.date','LIKE','%'.$year.'%')
+                    ->join('customercost','customercost.customerName','=','salesLaundrylits.name')
+                    ->where('customercost.date','LIKE','%'.$year.'%')
                     ->where('category',$laud)
                     ->get();
                 $data['laud']=$res;
@@ -6136,7 +6183,7 @@ public function rooms(){
                     return View::make('reports.laundrycost',$data);
                 }
             }elseif($guest=='noneguestincome'&& $laud=='all'){
-                $res=DB::table('customerCost')
+                $res=DB::table('customercost')
                     ->where(' date','LIKE','%'.$year.'%')
                     ->get(array(
                         '*',

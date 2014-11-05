@@ -158,12 +158,12 @@ $(document).ready(function(){
         if(rpf ==="noneguest"){
             $('#bar').hide();
             $('#bar1').show();
-            $('#bar').val('credit');
+            $('#bar').val('cash');
             
         }else if(rpf==="noneguestincome"){
             $('#bar').hide();
             $('#bar1').show();
-            $('#bar').val('credit');
+            $('#bar').val('cash');
         }else{
             $('#bar').show();
             $('#bar1').hide();  
