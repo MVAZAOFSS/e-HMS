@@ -38,6 +38,7 @@
 
 		$unique = array_keys(array_count_values($foods));
 		$l      = count($unique);
+        $idadi=$bi->no_foods;
 
 		?>
 		<p> Name: {{ Guest::find($bi->guestid)->firstname }} {{ Guest::find($bi->guestid)->lastname }} Room {{ Room::find(Guest::find($bi->guestid)->room_number)->name }} </p>
@@ -49,6 +50,7 @@
 		<table class="table table-bordered" id="gt">
 			<tr style="background-color: #f5f5f5">
 				<th>Food</th>
+                <th>No Foods</th>
 				<th>Times</th>
 				<th>Each cost</th>
 				<th>Total cost</th>
@@ -69,11 +71,12 @@
 			@for($i=0; $i<$l; $i++)
 				<tr>
 					<td>{{$unique[$i]}}</td>
+                    <td>{{$idadi[$i]}}</td>
 					<td>{{Bill::appears($unique[$i], $foods)}}</td>
 					<td>{{Restaurant::where('name', $unique[$i])->first()->cost}} /=</td>
-					<td>{{(Bill::appears($unique[$i], $foods))*(Restaurant::where('name', $unique[$i])->first()->cost)}} /=</td>
+					<td>{{($idadi[$i])*(Restaurant::where('name', $unique[$i])->first()->cost)}} /=</td>
 				</tr>
-			<?php $total = $total + ((Bill::appears($unique[$i], $foods))*(Restaurant::where('name', $unique[$i])->first()->cost)); ?>
+			<?php $total = $total + (($idadi[$i])*(Restaurant::where('name', $unique[$i])->first()->cost)); ?>
 			@endfor
 			<tr style="background-color: #f5f5f5">
 				<td ></td>
@@ -162,6 +165,7 @@
 
 		$unique = array_keys(array_count_values($foods));
 		$l      = count($unique);
+        $idadi=$bi->no_foods;
 
 		?>
 		<p> Name: {{ Guest::find($bi->guestid)->firstname }} {{ Guest::find($bi->guestid)->lastname }} Room {{ Room::find(Guest::find($bi->guestid)->room_number)->name }} </p>
@@ -173,6 +177,7 @@
 		<table class="table table-bordered" id="gt">
 			<tr style="background-color: #f5f5f5">
 				<th>Food</th>
+                <th>No Foods</th>
 				<th>Times</th>
 				<th>Each cost</th>
 				<th>Total cost</th>
@@ -193,14 +198,16 @@
 			@for($i=0; $i<$l; $i++)
 				<tr>
 					<td>{{$unique[$i]}}</td>
+                    <td>{{$idadi[$i]}}</td>
 					<td>{{Bill::appears($unique[$i], $foods)}}</td>
 					<td>{{Restaurant::where('name', $unique[$i])->first()->cost}} /=</td>
-					<td>{{(Bill::appears($unique[$i], $foods))*(Restaurant::where('name', $unique[$i])->first()->cost)}} /=</td>
+					<td>{{($idadi[$i])*(Restaurant::where('name', $unique[$i])->first()->cost)}} /=</td>
 				</tr>
-			<?php $total = $total + ((Bill::appears($unique[$i], $foods))*(Restaurant::where('name', $unique[$i])->first()->cost)); ?>		
+			<?php $total = $total + (($idadi[$i])*(Restaurant::where('name', $unique[$i])->first()->cost)); ?>
 			@endfor	
 			<tr style="background-color: #f5f5f5">
-				<td ></td>
+                <td></td>
+				<td></td>
 				<td></td>
 				<td><b>Total</b></td>
 				<td id="ttl">

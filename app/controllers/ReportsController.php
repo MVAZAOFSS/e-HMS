@@ -3270,7 +3270,7 @@ public function rooms(){
                             );
                       return View::make('reports.restaurantsreportcostd',$data);
         }elseif ($guest=='income'&&$rest=='all'&&$serv==3) {
-            $res=DB::table('barbills')
+                   $res=DB::table('barbills')
                         ->join('guests','guests.id', '=' ,'barbills.guestid')
                         ->where('date',$date)
                         ->where('servicetime',$serv)
@@ -6412,18 +6412,20 @@ public function rooms(){
                         ->where('date',$date)
                         ->get(array(
                             '*',
-                            DB::raw('SUM(foodbills.amount) AS amount')
+                            DB::raw('SUM(foodbills.amount) AS amount'),
+                            DB::raw('SUM(foodbills.no_foods) AS no_foods')
                         ));
                         foreach ($res as $row){
                             $data=array(
-                                'amount'=>$row->amount
+                                'amount'=>$row->amount,
+                                'nofoods'=>$row->no_foods
                             );
-                     return View::make('reports.restaurantsreportcost',$data);
+                     return View::make('reports.restaurantsreportcostd',$data);
                         }
                         $data=array(
                                 'amount'=>'No money collected'
                             );
-                      return View::make('reports.restaurantsreportcost',$data);
+                      return View::make('reports.restaurantsreportcosdt',$data);
         }elseif ($guest=='income'&&$rest=='all'&&$serv==1) {
             $res=DB::table('foodbills')
                         ->join('guests','guests.id', '=' ,'foodbills.guestid')
@@ -6431,18 +6433,20 @@ public function rooms(){
                         ->where('servicetime',$serv)
                         ->get(array(
                             '*',
-                            DB::raw('SUM(foodbills.amount) AS amount')
+                            DB::raw('SUM(foodbills.amount) AS amount'),
+                            DB::raw('SUM(foodbills.no_foods) AS no_foods')
                         ));
                         foreach ($res as $row){
                             $data=array(
-                                'amount'=>$row->amount
+                                'amount'=>$row->amount,
+                                'nofoods'=>$row->no_foods
                             );
-                     return View::make('reports.restaurantsreportcost',$data);
+                     return View::make('reports.restaurantsreportcostd',$data);
                         }
                         $data=array(
                                 'amount'=>'No money collected'
                             );
-                      return View::make('reports.restaurantsreportcost',$data);
+                      return View::make('reports.restaurantsreportcostd',$data);
         }elseif ($guest=='income'&&$rest=='all'&&$serv==2) {
             $res=DB::table('foodbills')
                         ->join('guests','guests.id', '=' ,'foodbills.guestid')
@@ -6450,18 +6454,20 @@ public function rooms(){
                         ->where('servicetime',$serv)
                         ->get(array(
                             '*',
-                            DB::raw('SUM(foodbills.amount) AS amount')
-                        ));
-                        foreach ($res as $row){
-                            $data=array(
-                                'amount'=>$row->amount
-                            );
-                     return View::make('reports.restaurantsreportcost',$data);
+                    DB::raw('SUM(foodbills.amount) AS amount'),
+                    DB::raw('SUM(foodbills.no_foods) AS no_foods')
+                ));
+                foreach ($res as $row){
+                    $data=array(
+                        'amount'=>$row->amount,
+                        'nofoods'=>$row->no_foods
+                    );
+                     return View::make('reports.restaurantsreportcostd',$data);
                         }
                         $data=array(
                                 'amount'=>'No money collected'
                             );
-                      return View::make('reports.restaurantsreportcost',$data);
+                      return View::make('reports.restaurantsreportcostd',$data);
         }elseif ($guest=='income'&&$rest=='all'&&$serv==3) {
             $res=DB::table('foodbills')
                         ->join('guests','guests.id', '=' ,'foodbills.guestid')
@@ -6469,18 +6475,20 @@ public function rooms(){
                         ->where('servicetime',$serv)
                         ->get(array(
                             '*',
-                            DB::raw('SUM(foodbills.amount) AS amount')
-                        ));
-                        foreach ($res as $row){
-                            $data=array(
-                                'amount'=>$row->amount
-                            );
-                     return View::make('reports.restaurantsreportcost',$data);
+                    DB::raw('SUM(foodbills.amount) AS amount'),
+                    DB::raw('SUM(foodbills.no_foods) AS no_foods')
+                ));
+                foreach ($res as $row){
+                    $data=array(
+                        'amount'=>$row->amount,
+                        'nofoods'=>$row->no_foods
+                    );
+                     return View::make('reports.restaurantsreportcostd',$data);
                         }
                         $data=array(
                                 'amount'=>'No money collected'
                             );
-                      return View::make('reports.restaurantsreportcost',$data);
+                      return View::make('reports.restaurantsreportcostd',$data);
         }elseif ($guest=='income'&&$rest=='all'&&$serv==4) {
             $res=DB::table('foodbills')
                         ->join('guests','guests.id', '=' ,'foodbills.guestid')
@@ -6488,18 +6496,20 @@ public function rooms(){
                         ->where('servicetime',$serv)
                         ->get(array(
                             '*',
-                            DB::raw('SUM(foodbills.amount) AS amount')
-                        ));
-                        foreach ($res as $row){
-                            $data=array(
-                                'amount'=>$row->amount
-                            );
-                     return View::make('reports.restaurantsreportcost',$data);
+                    DB::raw('SUM(foodbills.amount) AS amount'),
+                    DB::raw('SUM(foodbills.no_foods) AS no_foods')
+                ));
+                foreach ($res as $row){
+                    $data=array(
+                        'amount'=>$row->amount,
+                        'nofoods'=>$row->no_foods
+                    );
+                     return View::make('reports.restaurantsreportcostd',$data);
                         }
                         $data=array(
                                 'amount'=>'No money collected'
                             );
-                      return View::make('reports.restaurantsreportcost',$data);
+                      return View::make('reports.restaurantsreportcostd',$data);
         }elseif ($guest=='income'&&$rest=='all'&&$serv==5) {
             $res=DB::table('foodbills')
                         ->join('guests','guests.id', '=' ,'foodbills.guestid')
@@ -6507,18 +6517,20 @@ public function rooms(){
                         ->where('servicetime',$serv)
                         ->get(array(
                             '*',
-                            DB::raw('SUM(foodbills.amount) AS amount')
-                        ));
-                        foreach ($res as $row){
-                            $data=array(
-                                'amount'=>$row->amount
-                            );
-                     return View::make('reports.restaurantsreportcost',$data);
+                    DB::raw('SUM(foodbills.amount) AS amount'),
+                    DB::raw('SUM(foodbills.no_foods) AS no_foods')
+                ));
+                foreach ($res as $row){
+                    $data=array(
+                        'amount'=>$row->amount,
+                        'nofoods'=>$row->no_foods
+                    );
+                     return View::make('reports.restaurantsreportcostd',$data);
                         }
                         $data=array(
                                 'amount'=>'No money collected'
                             );
-                      return View::make('reports.restaurantsreportcost',$data);
+                      return View::make('reports.restaurantsreportcostd',$data);
         }elseif ($guest=='income'&&$rest=='cash'&&$serv=='all') {
             $res=DB::table('foodbills')
                         ->join('guests','guests.id', '=' ,'foodbills.guestid')
@@ -6526,18 +6538,20 @@ public function rooms(){
                         ->where('paymentmode',$rest)
                         ->get(array(
                             '*',
-                            DB::raw('SUM(foodbills.amount) AS amount')
-                        ));
-                        foreach ($res as $row){
-                            $data=array(
-                                'amount'=>$row->amount
-                            );
-                     return View::make('reports.restaurantsreportcost',$data);
+                    DB::raw('SUM(foodbills.amount) AS amount'),
+                    DB::raw('SUM(foodbills.no_foods) AS no_foods')
+                ));
+                foreach ($res as $row){
+                    $data=array(
+                        'amount'=>$row->amount,
+                        'nofoods'=>$row->no_foods
+                    );
+                     return View::make('reports.restaurantsreportcostd',$data);
                         }
                         $data=array(
                                 'amount'=>'No money collected'
                             );
-                      return View::make('reports.restaurantsreportcost',$data);
+                      return View::make('reports.restaurantsreportcostd',$data);
         }elseif ($guest=='income'&&$rest=='cash'&&$serv==1) {
             $res=DB::table('foodbills')
                         ->join('guests','guests.id', '=' ,'foodbills.guestid')
@@ -6546,18 +6560,20 @@ public function rooms(){
                         ->where('servicetime',$serv)
                         ->get(array(
                             '*',
-                            DB::raw('SUM(foodbills.amount) AS amount')
-                        ));
-                        foreach ($res as $row){
-                            $data=array(
-                                'amount'=>$row->amount
-                            );
-                     return View::make('reports.restaurantsreportcost',$data);
+                    DB::raw('SUM(foodbills.amount) AS amount'),
+                    DB::raw('SUM(foodbills.no_foods) AS no_foods')
+                ));
+                foreach ($res as $row){
+                    $data=array(
+                        'amount'=>$row->amount,
+                        'nofoods'=>$row->no_foods
+                    );
+                     return View::make('reports.restaurantsreportcostd',$data);
                         }
                         $data=array(
                                 'amount'=>'No money collected'
                             );
-                      return View::make('reports.restaurantsreportcost',$data);
+                      return View::make('reports.restaurantsreportcostd',$data);
         }elseif ($guest=='income'&&$rest=='cash'&&$serv==2) {
             $res=DB::table('foodbills')
                         ->join('guests','guests.id', '=' ,'foodbills.guestid')
@@ -6566,18 +6582,20 @@ public function rooms(){
                         ->where('servicetime',$serv)
                         ->get(array(
                             '*',
-                            DB::raw('SUM(foodbills.amount) AS amount')
-                        ));
-                        foreach ($res as $row){
-                            $data=array(
-                                'amount'=>$row->amount
-                            );
-                     return View::make('reports.restaurantsreportcost',$data);
+                    DB::raw('SUM(foodbills.amount) AS amount'),
+                    DB::raw('SUM(foodbills.no_foods) AS no_foods')
+                ));
+                foreach ($res as $row){
+                    $data=array(
+                        'amount'=>$row->amount,
+                        'nofoods'=>$row->no_foods
+                    );
+                     return View::make('reports.restaurantsreportcostd',$data);
                         }
                         $data=array(
                                 'amount'=>'No money collected'
                             );
-                      return View::make('reports.restaurantsreportcost',$data);
+                      return View::make('reports.restaurantsreportcostd',$data);
         }elseif ($guest=='income'&&$rest=='cash'&&$serv==3) {
             $res=DB::table('foodbills')
                         ->join('guests','guests.id', '=' ,'foodbills.guestid')
@@ -6586,18 +6604,20 @@ public function rooms(){
                         ->where('servicetime',$serv)
                         ->get(array(
                             '*',
-                            DB::raw('SUM(foodbills.amount) AS amount')
-                        ));
-                        foreach ($res as $row){
-                            $data=array(
-                                'amount'=>$row->amount
-                            );
-                     return View::make('reports.restaurantsreportcost',$data);
+                    DB::raw('SUM(foodbills.amount) AS amount'),
+                    DB::raw('SUM(foodbills.no_foods) AS no_foods')
+                ));
+                foreach ($res as $row){
+                    $data=array(
+                        'amount'=>$row->amount,
+                        'nofoods'=>$row->no_foods
+                    );
+                     return View::make('reports.restaurantsreportcostd',$data);
                         }
                         $data=array(
                                 'amount'=>'No money collected'
                             );
-                      return View::make('reports.restaurantsreportcost',$data);
+                      return View::make('reports.restaurantsreportcostd',$data);
         }elseif ($guest=='income'&&$rest=='cash'&&$serv==4) {
             $res=DB::table('foodbills')
                         ->join('guests','guests.id', '=' ,'foodbills.guestid')
@@ -6606,18 +6626,20 @@ public function rooms(){
                         ->where('servicetime',$serv)
                         ->get(array(
                             '*',
-                            DB::raw('SUM(foodbills.amount) AS amount')
-                        ));
-                        foreach ($res as $row){
-                            $data=array(
-                                'amount'=>$row->amount
-                            );
-                     return View::make('reports.restaurantsreportcost',$data);
+                    DB::raw('SUM(foodbills.amount) AS amount'),
+                    DB::raw('SUM(foodbills.no_foods) AS no_foods')
+                ));
+                foreach ($res as $row){
+                    $data=array(
+                        'amount'=>$row->amount,
+                        'nofoods'=>$row->no_foods
+                    );
+                     return View::make('reports.restaurantsreportcostd',$data);
                         }
                         $data=array(
                                 'amount'=>'No money collected'
                             );
-                      return View::make('reports.restaurantsreportcost',$data);
+                      return View::make('reports.restaurantsreportcostd',$data);
         }elseif ($guest=='income'&&$rest=='cash'&&$serv==5) {
             $res=DB::table('foodbills')
                         ->join('guests','guests.id', '=' ,'foodbills.guestid')
@@ -6626,18 +6648,20 @@ public function rooms(){
                         ->where('servicetime',$serv)
                         ->get(array(
                             '*',
-                            DB::raw('SUM(foodbills.amount) AS amount')
-                        ));
-                        foreach ($res as $row){
-                            $data=array(
-                                'amount'=>$row->amount
-                            );
-                     return View::make('reports.restaurantsreportcost',$data);
+                    DB::raw('SUM(foodbills.amount) AS amount'),
+                    DB::raw('SUM(foodbills.no_foods) AS no_foods')
+                ));
+                foreach ($res as $row){
+                    $data=array(
+                        'amount'=>$row->amount,
+                        'nofoods'=>$row->no_foods
+                    );
+                     return View::make('reports.restaurantsreportcostd',$data);
                         }
                         $data=array(
                                 'amount'=>'No money collected'
                             );
-                      return View::make('reports.restaurantsreportcost',$data);
+                      return View::make('reports.restaurantsreportcostd',$data);
         }elseif ($guest=='income'&&$rest=='credit'&&$serv=='all') {
             $res=DB::table('foodbills')
                         ->join('guests','guests.id', '=' ,'foodbills.guestid')
@@ -6645,18 +6669,20 @@ public function rooms(){
                         ->where('paymentmode',$rest)
                         ->get(array(
                             '*',
-                            DB::raw('SUM(foodbills.amount) AS amount')
-                        ));
-                        foreach ($res as $row){
-                            $data=array(
-                                'amount'=>$row->amount
-                            );
-                     return View::make('reports.restaurantsreportcost',$data);
+                    DB::raw('SUM(foodbills.amount) AS amount'),
+                    DB::raw('SUM(foodbills.no_foods) AS no_foods')
+                ));
+                foreach ($res as $row){
+                    $data=array(
+                        'amount'=>$row->amount,
+                        'nofoods'=>$row->no_foods
+                    );
+                     return View::make('reports.restaurantsreportcostd',$data);
                         }
                         $data=array(
                                 'amount'=>'No money collected'
                             );
-                      return View::make('reports.restaurantsreportcost',$data);
+                      return View::make('reports.restaurantsreportcostd',$data);
         }elseif ($guest=='income'&&$rest=='credit'&&$serv==1) {
             $res=DB::table('foodbills')
                         ->join('guests','guests.id', '=' ,'foodbills.guestid')
@@ -6665,18 +6691,20 @@ public function rooms(){
                         ->where('servicetime',$serv)
                         ->get(array(
                             '*',
-                            DB::raw('SUM(foodbills.amount) AS amount')
-                        ));
-                        foreach ($res as $row){
-                            $data=array(
-                                'amount'=>$row->amount
-                            );
-                     return View::make('reports.restaurantsreportcost',$data);
+                    DB::raw('SUM(foodbills.amount) AS amount'),
+                    DB::raw('SUM(foodbills.no_foods) AS no_foods')
+                ));
+                foreach ($res as $row){
+                    $data=array(
+                        'amount'=>$row->amount,
+                        'nofoods'=>$row->no_foods
+                    );
+                     return View::make('reports.restaurantsreportcostd',$data);
                         }
                         $data=array(
                                 'amount'=>'No money collected'
                             );
-                      return View::make('reports.restaurantsreportcost',$data);
+                      return View::make('reports.restaurantsreportcostd',$data);
         }elseif ($guest=='income'&&$rest=='credit'&&$serv==2) {
             $res=DB::table('foodbills')
                         ->join('guests','guests.id', '=' ,'foodbills.guestid')
@@ -6685,18 +6713,20 @@ public function rooms(){
                         ->where('servicetime',$serv)
                         ->get(array(
                             '*',
-                            DB::raw('SUM(foodbills.amount) AS amount')
-                        ));
-                        foreach ($res as $row){
-                            $data=array(
-                                'amount'=>$row->amount
-                            );
-                     return View::make('reports.restaurantsreportcost',$data);
+                    DB::raw('SUM(foodbills.amount) AS amount'),
+                    DB::raw('SUM(foodbills.no_foods) AS no_foods')
+                ));
+                foreach ($res as $row){
+                    $data=array(
+                        'amount'=>$row->amount,
+                        'nofoods'=>$row->no_foods
+                    );
+                     return View::make('reports.restaurantsreportcostd',$data);
                         }
                         $data=array(
                                 'amount'=>'No money collected'
                             );
-                      return View::make('reports.restaurantsreportcost',$data);
+                      return View::make('reports.restaurantsreportcostd',$data);
         }elseif ($guest=='income'&&$rest=='credit'&&$serv==3) {
             $res=DB::table('foodbills')
                         ->join('guests','guests.id', '=' ,'foodbills.guestid')
@@ -6705,18 +6735,20 @@ public function rooms(){
                         ->where('servicetime',$serv)
                         ->get(array(
                             '*',
-                            DB::raw('SUM(foodbills.amount) AS amount')
-                        ));
-                        foreach ($res as $row){
-                            $data=array(
-                                'amount'=>$row->amount
-                            );
-                     return View::make('reports.restaurantsreportcost',$data);
+                    DB::raw('SUM(foodbills.amount) AS amount'),
+                    DB::raw('SUM(foodbills.no_foods) AS no_foods')
+                ));
+                foreach ($res as $row){
+                    $data=array(
+                        'amount'=>$row->amount,
+                        'nofoods'=>$row->no_foods
+                    );
+                     return View::make('reports.restaurantsreportcostd',$data);
                         }
                         $data=array(
                                 'amount'=>'No money collected'
                             );
-                      return View::make('reports.restaurantsreportcost',$data);
+                      return View::make('reports.restaurantsreportcostd',$data);
         }elseif ($guest=='income'&&$rest=='credit'&&$serv==4) {
             $res=DB::table('foodbills')
                         ->join('guests','guests.id', '=' ,'foodbills.guestid')
@@ -6725,18 +6757,20 @@ public function rooms(){
                         ->where('servicetime',$serv)
                         ->get(array(
                             '*',
-                            DB::raw('SUM(foodbills.amount) AS amount')
-                        ));
-                        foreach ($res as $row){
-                            $data=array(
-                                'amount'=>$row->amount
-                            );
-                     return View::make('reports.restaurantsreportcost',$data);
+                    DB::raw('SUM(foodbills.amount) AS amount'),
+                    DB::raw('SUM(foodbills.no_foods) AS no_foods')
+                ));
+                foreach ($res as $row){
+                    $data=array(
+                        'amount'=>$row->amount,
+                        'nofoods'=>$row->no_foods
+                    );
+                     return View::make('reports.restaurantsreportcostd',$data);
                         }
                         $data=array(
                                 'amount'=>'No money collected'
                             );
-                      return View::make('reports.restaurantsreportcost',$data);
+                      return View::make('reports.restaurantsreportcostd',$data);
         }elseif ($guest=='income'&&$rest=='credit'&&$serv==5) {
             $res=DB::table('foodbills')
                         ->join('guests','guests.id', '=' ,'foodbills.guestid')
@@ -6745,29 +6779,33 @@ public function rooms(){
                         ->where('servicetime',$serv)
                         ->get(array(
                             '*',
-                            DB::raw('SUM(foodbills.amount) AS amount')
-                        ));
-                        foreach ($res as $row){
-                            $data=array(
-                                'amount'=>$row->amount
-                            );
-                     return View::make('reports.restaurantsreportcost',$data);
+                    DB::raw('SUM(foodbills.amount) AS amount'),
+                    DB::raw('SUM(foodbills.no_foods) AS no_foods')
+                ));
+                foreach ($res as $row){
+                    $data=array(
+                        'amount'=>$row->amount,
+                        'nofoods'=>$row->no_foods
+                    );
+                     return View::make('reports.restaurantsreportcostd',$data);
                         }
                         $data=array(
                                 'amount'=>'No money collected'
                             );
-                      return View::make('reports.restaurantsreportcost',$data);
+                      return View::make('reports.restaurantsreportcostd',$data);
         }elseif ($guest=='noneguestincome'&&$rest=='cash'&&$serv=='all') {
             $res=DB::table('foodsales')
                         ->join('restaurants','restaurants.name', '=' ,'foodsales.food')
                         ->where('date',$date)
                         ->get(array(
                             '*',
-                            DB::raw('SUM(restaurants.cost) AS cost')
+                            DB::raw('SUM(restaurants.cost) AS cost'),
+                            DB::raw('SUM(foodsales.no_foods) AS no_foods')
                         ));
                         foreach ($res as $row){
                             $data=array(
-                                'amount'=>$row->cost
+                                'amount'=>$row->cost,
+                                'nofoods'=>$row->no_foods
                             );
                      return View::make('reports.restaurantsreportcost',$data);
                         }
@@ -6782,11 +6820,13 @@ public function rooms(){
                          ->where('service',$serv)
                         ->get(array(
                             '*',
-                            DB::raw('SUM(restaurants.cost) AS cost')
+                        DB::raw('SUM(restaurants.cost) AS cost'),
+                        DB::raw('SUM(foodsales.no_foods) AS no_foods')
                         ));
                         foreach ($res as $row){
                             $data=array(
-                                'amount'=>$row->cost
+                                'amount'=>$row->cost,
+                                'nofoods'=>$row->no_foods
                             );
                      return View::make('reports.restaurantsreportcost',$data);
                         }
@@ -6801,12 +6841,14 @@ public function rooms(){
                          ->where('service',$serv)
                         ->get(array(
                             '*',
-                            DB::raw('SUM(restaurants.cost) AS cost')
-                        ));
-                        foreach ($res as $row){
-                            $data=array(
-                                'amount'=>$row->cost
-                            );
+                    DB::raw('SUM(restaurants.cost) AS cost'),
+                    DB::raw('SUM(foodsales.no_foods) AS no_foods')
+                ));
+                foreach ($res as $row){
+                    $data=array(
+                        'amount'=>$row->cost,
+                        'nofoods'=>$row->no_foods
+                    );
                      return View::make('reports.restaurantsreportcost',$data);
                         }
                         $data=array(
@@ -6820,12 +6862,14 @@ public function rooms(){
                          ->where('service',$serv)
                         ->get(array(
                             '*',
-                            DB::raw('SUM(restaurants.cost) AS cost')
-                        ));
-                        foreach ($res as $row){
-                            $data=array(
-                                'amount'=>$row->cost
-                            );
+                    DB::raw('SUM(restaurants.cost) AS cost'),
+                    DB::raw('SUM(foodsales.no_foods) AS no_foods')
+                ));
+                foreach ($res as $row){
+                    $data=array(
+                        'amount'=>$row->cost,
+                        'nofoods'=>$row->no_foods
+                    );
                      return View::make('reports.restaurantsreportcost',$data);
                         }
                         $data=array(
@@ -6839,12 +6883,14 @@ public function rooms(){
                          ->where('service',$serv)
                         ->get(array(
                             '*',
-                            DB::raw('SUM(restaurants.cost) AS cost')
-                        ));
-                        foreach ($res as $row){
-                            $data=array(
-                                'amount'=>$row->cost
-                            );
+                    DB::raw('SUM(restaurants.cost) AS cost'),
+                    DB::raw('SUM(foodsales.no_foods) AS no_foods')
+                ));
+                foreach ($res as $row){
+                    $data=array(
+                        'amount'=>$row->cost,
+                        'nofoods'=>$row->no_foods
+                    );
                      return View::make('reports.restaurantsreportcost',$data);
                         }
                         $data=array(
@@ -6858,12 +6904,14 @@ public function rooms(){
                          ->where('service',$serv)
                         ->get(array(
                             '*',
-                            DB::raw('SUM(restaurants.cost) AS cost')
-                        ));
-                        foreach ($res as $row){
-                            $data=array(
-                                'amount'=>$row->cost
-                            );
+                    DB::raw('SUM(restaurants.cost) AS cost'),
+                    DB::raw('SUM(foodsales.no_foods) AS no_foods')
+                ));
+                foreach ($res as $row){
+                    $data=array(
+                        'amount'=>$row->cost,
+                        'nofoods'=>$row->no_foods
+                    );
                      return View::make('reports.restaurantsreportcost',$data);
                         }
                         $data=array(
@@ -7080,18 +7128,20 @@ public function rooms(){
                         ->whereBetween('date',array($start_date,$end_date))
                         ->get(array(
                             '*',
-                            DB::raw('SUM(foodbills.amount) AS amount')
-                        ));
-                        foreach ($res as $row){
-                            $data=array(
-                                'amount'=>$row->amount
-                            );
-                     return View::make('reports.restaurantsreportcost',$data);
+                    DB::raw('SUM(foodbills.amount) AS amount'),
+                    DB::raw('SUM(foodbills.no_foods) AS no_foods')
+                ));
+               foreach ($res as $row){
+                   $data=array(
+                       'amount'=>$row->amount,
+                       'nofoods'=>$row->no_foods
+                   );
+                     return View::make('reports.restaurantsreportcostd',$data);
                         }
                         $data=array(
                                 'amount'=>'No money collected'
                             );
-                      return View::make('reports.restaurantsreportcost',$data);
+                      return View::make('reports.restaurantsreportcostd',$data);
         }elseif ($guest=='income'&&$rest=='all'&&$serv==1) {
             $res=DB::table('foodbills')
                         ->join('guests','guests.id', '=' ,'foodbills.guestid')
@@ -7099,18 +7149,20 @@ public function rooms(){
                         ->where('servicetime',$serv)
                         ->get(array(
                             '*',
-                            DB::raw('SUM(foodbills.amount) AS amount')
-                        ));
-                        foreach ($res as $row){
-                            $data=array(
-                                'amount'=>$row->amount
-                            );
-                     return View::make('reports.restaurantsreportcost',$data);
+                    DB::raw('SUM(foodbills.amount) AS amount'),
+                    DB::raw('SUM(foodbills.no_foods) AS no_foods')
+                ));
+               foreach ($res as $row){
+                   $data=array(
+                       'amount'=>$row->amount,
+                       'nofoods'=>$row->no_foods
+                   );
+                     return View::make('reports.restaurantsreportcostd',$data);
                         }
                         $data=array(
                                 'amount'=>'No money collected'
                             );
-                      return View::make('reports.restaurantsreportcost',$data);
+                      return View::make('reports.restaurantsreportcostd',$data);
         }elseif ($guest=='income'&&$rest=='all'&&$serv==2) {
             $res=DB::table('foodbills')
                         ->join('guests','guests.id', '=' ,'foodbills.guestid')
@@ -7118,18 +7170,20 @@ public function rooms(){
                         ->where('servicetime',$serv)
                         ->get(array(
                             '*',
-                            DB::raw('SUM(foodbills.amount) AS amount')
-                        ));
-                        foreach ($res as $row){
-                            $data=array(
-                                'amount'=>$row->amount
-                            );
-                     return View::make('reports.restaurantsreportcost',$data);
+                    DB::raw('SUM(foodbills.amount) AS amount'),
+                    DB::raw('SUM(foodbills.no_foods) AS no_foods')
+                ));
+               foreach ($res as $row){
+                   $data=array(
+                       'amount'=>$row->amount,
+                       'nofoods'=>$row->no_foods
+                   );
+                     return View::make('reports.restaurantsreportcostd',$data);
                         }
                         $data=array(
                                 'amount'=>'No money collected'
                             );
-                      return View::make('reports.restaurantsreportcost',$data);
+                      return View::make('reports.restaurantsreportcostd',$data);
         }elseif ($guest=='income'&&$rest=='all'&&$serv==3) {
             $res=DB::table('foodbills')
                         ->join('guests','guests.id', '=' ,'foodbills.guestid')
@@ -7137,18 +7191,20 @@ public function rooms(){
                         ->where('servicetime',$serv)
                         ->get(array(
                             '*',
-                            DB::raw('SUM(foodbills.amount) AS amount')
-                        ));
-                        foreach ($res as $row){
-                            $data=array(
-                                'amount'=>$row->amount
-                            );
-                     return View::make('reports.restaurantsreportcost',$data);
+                    DB::raw('SUM(foodbills.amount) AS amount'),
+                    DB::raw('SUM(foodbills.no_foods) AS no_foods')
+                ));
+               foreach ($res as $row){
+                   $data=array(
+                       'amount'=>$row->amount,
+                       'nofoods'=>$row->no_foods
+                   );
+                     return View::make('reports.restaurantsreportcostd',$data);
                         }
                         $data=array(
                                 'amount'=>'No money collected'
                             );
-                      return View::make('reports.restaurantsreportcost',$data);
+                      return View::make('reports.restaurantsreportcostd',$data);
         }elseif ($guest=='income'&&$rest=='all'&&$serv==4) {
             $res=DB::table('foodbills')
                         ->join('guests','guests.id', '=' ,'foodbills.guestid')
@@ -7156,18 +7212,20 @@ public function rooms(){
                         ->where('servicetime',$serv)
                         ->get(array(
                             '*',
-                            DB::raw('SUM(foodbills.amount) AS amount')
-                        ));
-                        foreach ($res as $row){
-                            $data=array(
-                                'amount'=>$row->amount
-                            );
-                     return View::make('reports.restaurantsreportcost',$data);
+                    DB::raw('SUM(foodbills.amount) AS amount'),
+                    DB::raw('SUM(foodbills.no_foods) AS no_foods')
+                ));
+               foreach ($res as $row){
+                   $data=array(
+                       'amount'=>$row->amount,
+                       'nofoods'=>$row->no_foods
+                   );
+                     return View::make('reports.restaurantsreportcostd',$data);
                         }
                         $data=array(
                                 'amount'=>'No money collected'
                             );
-                      return View::make('reports.restaurantsreportcost',$data);
+                      return View::make('reports.restaurantsreportcostd',$data);
         }elseif ($guest=='income'&&$rest=='all'&&$serv==5) {
             $res=DB::table('foodbills')
                         ->join('guests','guests.id', '=' ,'foodbills.guestid')
@@ -7175,18 +7233,20 @@ public function rooms(){
                         ->where('servicetime',$serv)
                         ->get(array(
                             '*',
-                            DB::raw('SUM(foodbills.amount) AS amount')
-                        ));
-                        foreach ($res as $row){
-                            $data=array(
-                                'amount'=>$row->amount
-                            );
-                     return View::make('reports.restaurantsreportcost',$data);
+                    DB::raw('SUM(foodbills.amount) AS amount'),
+                    DB::raw('SUM(foodbills.no_foods) AS no_foods')
+                ));
+               foreach ($res as $row){
+                   $data=array(
+                       'amount'=>$row->amount,
+                       'nofoods'=>$row->no_foods
+                   );
+                     return View::make('reports.restaurantsreportcostd',$data);
                         }
                         $data=array(
                                 'amount'=>'No money collected'
                             );
-                      return View::make('reports.restaurantsreportcost',$data);
+                      return View::make('reports.restaurantsreportcostd',$data);
         }elseif ($guest=='income'&&$rest=='cash'&&$serv=='all') {
             $res=DB::table('foodbills')
                         ->join('guests','guests.id', '=' ,'foodbills.guestid')
@@ -7194,18 +7254,20 @@ public function rooms(){
                         ->where('paymentmode',$rest)
                         ->get(array(
                             '*',
-                            DB::raw('SUM(foodbills.amount) AS amount')
-                        ));
-                        foreach ($res as $row){
-                            $data=array(
-                                'amount'=>$row->amount
-                            );
-                     return View::make('reports.restaurantsreportcost',$data);
+                    DB::raw('SUM(foodbills.amount) AS amount'),
+                    DB::raw('SUM(foodbills.no_foods) AS no_foods')
+                ));
+               foreach ($res as $row){
+                   $data=array(
+                       'amount'=>$row->amount,
+                       'nofoods'=>$row->no_foods
+                   );
+                     return View::make('reports.restaurantsreportcostd',$data);
                         }
                         $data=array(
                                 'amount'=>'No money collected'
                             );
-                      return View::make('reports.restaurantsreportcost',$data);
+                      return View::make('reports.restaurantsreportcostd',$data);
         }elseif ($guest=='income'&&$rest=='cash'&&$serv==1) {
             $res=DB::table('foodbills')
                         ->join('guests','guests.id', '=' ,'foodbills.guestid')
@@ -7214,18 +7276,20 @@ public function rooms(){
                         ->where('servicetime',$serv)
                         ->get(array(
                             '*',
-                            DB::raw('SUM(foodbills.amount) AS amount')
-                        ));
-                        foreach ($res as $row){
-                            $data=array(
-                                'amount'=>$row->amount
-                            );
-                     return View::make('reports.restaurantsreportcost',$data);
+                    DB::raw('SUM(foodbills.amount) AS amount'),
+                    DB::raw('SUM(foodbills.no_foods) AS no_foods')
+                ));
+               foreach ($res as $row){
+                   $data=array(
+                       'amount'=>$row->amount,
+                       'nofoods'=>$row->no_foods
+                   );
+                     return View::make('reports.restaurantsreportcostd',$data);
                         }
                         $data=array(
                                 'amount'=>'No money collected'
                             );
-                      return View::make('reports.restaurantsreportcost',$data);
+                      return View::make('reports.restaurantsreportcostd',$data);
         }elseif ($guest=='income'&&$rest=='cash'&&$serv==2) {
             $res=DB::table('foodbills')
                         ->join('guests','guests.id', '=' ,'foodbills.guestid')
@@ -7234,18 +7298,20 @@ public function rooms(){
                         ->where('servicetime',$serv)
                         ->get(array(
                             '*',
-                            DB::raw('SUM(foodbills.amount) AS amount')
-                        ));
-                        foreach ($res as $row){
-                            $data=array(
-                                'amount'=>$row->amount
-                            );
-                     return View::make('reports.restaurantsreportcost',$data);
+                    DB::raw('SUM(foodbills.amount) AS amount'),
+                    DB::raw('SUM(foodbills.no_foods) AS no_foods')
+                ));
+               foreach ($res as $row){
+                   $data=array(
+                       'amount'=>$row->amount,
+                       'nofoods'=>$row->no_foods
+                   );
+                     return View::make('reports.restaurantsreportcostd',$data);
                         }
                         $data=array(
                                 'amount'=>'No money collected'
                             );
-                      return View::make('reports.restaurantsreportcost',$data);
+                      return View::make('reports.restaurantsreportcostd',$data);
         }elseif ($guest=='income'&&$rest=='cash'&&$serv==3) {
             $res=DB::table('foodbills')
                         ->join('guests','guests.id', '=' ,'foodbills.guestid')
@@ -7254,18 +7320,20 @@ public function rooms(){
                         ->where('servicetime',$serv)
                         ->get(array(
                             '*',
-                            DB::raw('SUM(foodbills.amount) AS amount')
-                        ));
-                        foreach ($res as $row){
-                            $data=array(
-                                'amount'=>$row->amount
-                            );
-                     return View::make('reports.restaurantsreportcost',$data);
+                    DB::raw('SUM(foodbills.amount) AS amount'),
+                    DB::raw('SUM(foodbills.no_foods) AS no_foods')
+                ));
+               foreach ($res as $row){
+                   $data=array(
+                       'amount'=>$row->amount,
+                       'nofoods'=>$row->no_foods
+                   );
+                     return View::make('reports.restaurantsreportcostd',$data);
                         }
                         $data=array(
                                 'amount'=>'No money collected'
                             );
-                      return View::make('reports.restaurantsreportcost',$data);
+                      return View::make('reports.restaurantsreportcostd',$data);
         }elseif ($guest=='income'&&$rest=='cash'&&$serv==4) {
             $res=DB::table('foodbills')
                         ->join('guests','guests.id', '=' ,'foodbills.guestid')
@@ -7274,18 +7342,20 @@ public function rooms(){
                         ->where('servicetime',$serv)
                         ->get(array(
                             '*',
-                            DB::raw('SUM(foodbills.amount) AS amount')
-                        ));
-                        foreach ($res as $row){
-                            $data=array(
-                                'amount'=>$row->amount
-                            );
-                     return View::make('reports.restaurantsreportcost',$data);
+                    DB::raw('SUM(foodbills.amount) AS amount'),
+                    DB::raw('SUM(foodbills.no_foods) AS no_foods')
+                ));
+               foreach ($res as $row){
+                   $data=array(
+                       'amount'=>$row->amount,
+                       'nofoods'=>$row->no_foods
+                   );
+                     return View::make('reports.restaurantsreportcostd',$data);
                         }
                         $data=array(
                                 'amount'=>'No money collected'
                             );
-                      return View::make('reports.restaurantsreportcost',$data);
+                      return View::make('reports.restaurantsreportcostd',$data);
         }elseif ($guest=='income'&&$rest=='cash'&&$serv==5) {
             $res=DB::table('foodbills')
                         ->join('guests','guests.id', '=' ,'foodbills.guestid')
@@ -7294,18 +7364,20 @@ public function rooms(){
                         ->where('servicetime',$serv)
                         ->get(array(
                             '*',
-                            DB::raw('SUM(foodbills.amount) AS amount')
-                        ));
-                        foreach ($res as $row){
-                            $data=array(
-                                'amount'=>$row->amount
-                            );
-                     return View::make('reports.restaurantsreportcost',$data);
+                    DB::raw('SUM(foodbills.amount) AS amount'),
+                    DB::raw('SUM(foodbills.no_foods) AS no_foods')
+                ));
+               foreach ($res as $row){
+                   $data=array(
+                       'amount'=>$row->amount,
+                       'nofoods'=>$row->no_foods
+                   );
+                     return View::make('reports.restaurantsreportcostd',$data);
                         }
                         $data=array(
                                 'amount'=>'No money collected'
                             );
-                      return View::make('reports.restaurantsreportcost',$data);
+                      return View::make('reports.restaurantsreportcostd',$data);
         }elseif ($guest=='income'&&$rest=='credit'&&$serv=='all') {
             $res=DB::table('foodbills')
                         ->join('guests','guests.id', '=' ,'foodbills.guestid')
@@ -7313,18 +7385,20 @@ public function rooms(){
                         ->where('paymentmode',$rest)
                         ->get(array(
                             '*',
-                            DB::raw('SUM(foodbills.amount) AS amount')
-                        ));
-                        foreach ($res as $row){
-                            $data=array(
-                                'amount'=>$row->amount
-                            );
-                     return View::make('reports.restaurantsreportcost',$data);
+                    DB::raw('SUM(foodbills.amount) AS amount'),
+                    DB::raw('SUM(foodbills.no_foods) AS no_foods')
+                ));
+               foreach ($res as $row){
+                   $data=array(
+                       'amount'=>$row->amount,
+                       'nofoods'=>$row->no_foods
+                   );
+                     return View::make('reports.restaurantsreportcostd',$data);
                         }
                         $data=array(
                                 'amount'=>'No money collected'
                             );
-                      return View::make('reports.restaurantsreportcost',$data);
+                      return View::make('reports.restaurantsreportcostd',$data);
         }elseif ($guest=='income'&&$rest=='credit'&&$serv==1) {
             $res=DB::table('foodbills')
                         ->join('guests','guests.id', '=' ,'foodbills.guestid')
@@ -7333,18 +7407,20 @@ public function rooms(){
                         ->where('servicetime',$serv)
                         ->get(array(
                             '*',
-                            DB::raw('SUM(foodbills.amount) AS amount')
-                        ));
-                        foreach ($res as $row){
-                            $data=array(
-                                'amount'=>$row->amount
-                            );
-                     return View::make('reports.restaurantsreportcost',$data);
+                    DB::raw('SUM(foodbills.amount) AS amount'),
+                    DB::raw('SUM(foodbills.no_foods) AS no_foods')
+                ));
+               foreach ($res as $row){
+                   $data=array(
+                       'amount'=>$row->amount,
+                       'nofoods'=>$row->no_foods
+                   );
+                     return View::make('reports.restaurantsreportcostd',$data);
                         }
                         $data=array(
                                 'amount'=>'No money collected'
                             );
-                      return View::make('reports.restaurantsreportcost',$data);
+                      return View::make('reports.restaurantsreportcostd',$data);
         }elseif ($guest=='income'&&$rest=='credit'&&$serv==2) {
             $res=DB::table('foodbills')
                         ->join('guests','guests.id', '=' ,'foodbills.guestid')
@@ -7353,12 +7429,14 @@ public function rooms(){
                         ->where('servicetime',$serv)
                         ->get(array(
                             '*',
-                            DB::raw('SUM(foodbills.amount) AS amount')
-                        ));
-                        foreach ($res as $row){
-                            $data=array(
-                                'amount'=>$row->amount
-                            );
+                    DB::raw('SUM(foodbills.amount) AS amount'),
+                    DB::raw('SUM(foodbills.no_foods) AS no_foods')
+                ));
+               foreach ($res as $row){
+                   $data=array(
+                       'amount'=>$row->amount,
+                       'nofoods'=>$row->no_foods
+                   );
                      return View::make('reports.restaurantsreportcost',$data);
                         }
                         $data=array(
@@ -7373,18 +7451,20 @@ public function rooms(){
                         ->where('servicetime',$serv)
                         ->get(array(
                             '*',
-                            DB::raw('SUM(foodbills.amount) AS amount')
-                        ));
-                        foreach ($res as $row){
-                            $data=array(
-                                'amount'=>$row->amount
-                            );
-                     return View::make('reports.restaurantsreportcost',$data);
+                    DB::raw('SUM(foodbills.amount) AS amount'),
+                    DB::raw('SUM(foodbills.no_foods) AS no_foods')
+                ));
+               foreach ($res as $row){
+                   $data=array(
+                       'amount'=>$row->amount,
+                       'nofoods'=>$row->no_foods
+                   );
+                     return View::make('reports.restaurantsreportcostd',$data);
                         }
                         $data=array(
                                 'amount'=>'No money collected'
                             );
-                      return View::make('reports.restaurantsreportcost',$data);
+                      return View::make('reports.restaurantsreportcostd',$data);
         }elseif ($guest=='income'&&$rest=='credit'&&$serv==4) {
             $res=DB::table('foodbills')
                         ->join('guests','guests.id', '=' ,'foodbills.guestid')
@@ -7393,18 +7473,20 @@ public function rooms(){
                         ->where('servicetime',$serv)
                         ->get(array(
                             '*',
-                            DB::raw('SUM(foodbills.amount) AS amount')
-                        ));
-                        foreach ($res as $row){
-                            $data=array(
-                                'amount'=>$row->amount
-                            );
-                     return View::make('reports.restaurantsreportcost',$data);
+                    DB::raw('SUM(foodbills.amount) AS amount'),
+                    DB::raw('SUM(foodbills.no_foods) AS no_foods')
+                ));
+               foreach ($res as $row){
+                   $data=array(
+                       'amount'=>$row->amount,
+                       'nofoods'=>$row->no_foods
+                   );
+                     return View::make('reports.restaurantsreportcostd',$data);
                         }
                         $data=array(
                                 'amount'=>'No money collected'
                             );
-                      return View::make('reports.restaurantsreportcost',$data);
+                      return View::make('reports.restaurantsreportcostd',$data);
         }elseif ($guest=='income'&&$rest=='credit'&&$serv==5) {
             $res=DB::table('foodbills')
                         ->join('guests','guests.id', '=' ,'foodbills.guestid')
@@ -7413,12 +7495,14 @@ public function rooms(){
                         ->where('servicetime',$serv)
                         ->get(array(
                             '*',
-                            DB::raw('SUM(foodbills.amount) AS amount')
-                        ));
-                        foreach ($res as $row){
-                            $data=array(
-                                'amount'=>$row->amount
-                            );
+                    DB::raw('SUM(foodbills.amount) AS amount'),
+                    DB::raw('SUM(foodbills.no_foods) AS no_foods')
+                ));
+               foreach ($res as $row){
+                   $data=array(
+                       'amount'=>$row->amount,
+                       'nofoods'=>$row->no_foods
+                   );
                      return View::make('reports.restaurantsreportcost',$data);
                         }
                         $data=array(
@@ -7431,11 +7515,13 @@ public function rooms(){
                         ->whereBetween('date',array($start_date,$end_date))
                         ->get(array(
                             '*',
-                            DB::raw('SUM(restaurants.cost) AS cost')
+                            DB::raw('SUM(restaurants.cost) AS cost'),
+                            DB::raw('SUM(foodsales.no_foods) AS no_foods')
                         ));
                         foreach ($res as $row){
                             $data=array(
-                                'amount'=>$row->cost
+                                'amount'=>$row->cost,
+                                'nofoods'=>$row->no_foods
                             );
                      return View::make('reports.restaurantsreportcost',$data);
                         }
@@ -7450,12 +7536,14 @@ public function rooms(){
                          ->where('service',$serv)
                         ->get(array(
                             '*',
-                            DB::raw('SUM(restaurants.cost) AS cost')
-                        ));
-                        foreach ($res as $row){
-                            $data=array(
-                                'amount'=>$row->cost
-                            );
+                    DB::raw('SUM(restaurants.cost) AS cost'),
+                    DB::raw('SUM(foodsales.no_foods) AS no_foods')
+                ));
+               foreach ($res as $row){
+                   $data=array(
+                       'amount'=>$row->cost,
+                       'nofoods'=>$row->no_foods
+                   );
                      return View::make('reports.restaurantsreportcost',$data);
                         }
                         $data=array(
@@ -7469,12 +7557,14 @@ public function rooms(){
                          ->where('service',$serv)
                         ->get(array(
                             '*',
-                            DB::raw('SUM(restaurants.cost) AS cost')
-                        ));
-                        foreach ($res as $row){
-                            $data=array(
-                                'amount'=>$row->cost
-                            );
+                    DB::raw('SUM(restaurants.cost) AS cost'),
+                    DB::raw('SUM(foodsales.no_foods) AS no_foods')
+                ));
+               foreach ($res as $row){
+                   $data=array(
+                       'amount'=>$row->cost,
+                       'nofoods'=>$row->no_foods
+                   );
                      return View::make('reports.restaurantsreportcost',$data);
                         }
                         $data=array(
@@ -7488,12 +7578,14 @@ public function rooms(){
                          ->where('service',$serv)
                         ->get(array(
                             '*',
-                            DB::raw('SUM(restaurants.cost) AS cost')
-                        ));
-                        foreach ($res as $row){
-                            $data=array(
-                                'amount'=>$row->cost
-                            );
+                    DB::raw('SUM(restaurants.cost) AS cost'),
+                    DB::raw('SUM(foodsales.no_foods) AS no_foods')
+                ));
+               foreach ($res as $row){
+                   $data=array(
+                       'amount'=>$row->cost,
+                       'nofoods'=>$row->no_foods
+                   );
                      return View::make('reports.restaurantsreportcost',$data);
                         }
                         $data=array(
@@ -7507,12 +7599,14 @@ public function rooms(){
                          ->where('service',$serv)
                         ->get(array(
                             '*',
-                            DB::raw('SUM(restaurants.cost) AS cost')
-                        ));
-                        foreach ($res as $row){
-                            $data=array(
-                                'amount'=>$row->cost
-                            );
+                    DB::raw('SUM(restaurants.cost) AS cost'),
+                    DB::raw('SUM(foodsales.no_foods) AS no_foods')
+                ));
+               foreach ($res as $row){
+                   $data=array(
+                       'amount'=>$row->cost,
+                       'nofoods'=>$row->no_foods
+                   );
                      return View::make('reports.restaurantsreportcost',$data);
                         }
                         $data=array(
@@ -7526,12 +7620,14 @@ public function rooms(){
                          ->where('service',$serv)
                         ->get(array(
                             '*',
-                            DB::raw('SUM(restaurants.cost) AS cost')
-                        ));
-                        foreach ($res as $row){
-                            $data=array(
-                                'amount'=>$row->cost
-                            );
+                    DB::raw('SUM(restaurants.cost) AS cost'),
+                    DB::raw('SUM(foodsales.no_foods) AS no_foods')
+                ));
+               foreach ($res as $row){
+                   $data=array(
+                       'amount'=>$row->cost,
+                       'nofoods'=>$row->no_foods
+                   );
                      return View::make('reports.restaurantsreportcost',$data);
                         }
                         $data=array(
@@ -7773,18 +7869,20 @@ public function rooms(){
                         ->where('date','LIKE','%'.$year.'%')
                         ->get(array(
                             '*',
-                            DB::raw('SUM(foodbills.amount) AS amount')
+                            DB::raw('SUM(foodbills.amount) AS amount'),
+                            DB::raw('SUM(foodbills.no_foods) AS no_foods')
                         ));
                         foreach ($res as $row){
                             $data=array(
-                                'amount'=>$row->amount
+                                'amount'=>$row->amount,
+                                'nofoods'=>$row->no_foods
                             );
-                     return View::make('reports.restaurantsreportcost',$data);
+                     return View::make('reports.restaurantsreportcostd',$data);
                         }
                         $data=array(
                                 'amount'=>'No money collected'
                             );
-                      return View::make('reports.restaurantsreportcost',$data);
+                      return View::make('reports.restaurantsreportcostd',$data);
         }elseif ($guest=='income'&&$rest=='all'&&$serv==1) {
             $res=DB::table('foodbills')
                         ->join('guests','guests.id', '=' ,'foodbills.guestid')
@@ -7793,18 +7891,20 @@ public function rooms(){
                         ->where('servicetime',$serv)
                         ->get(array(
                             '*',
-                            DB::raw('SUM(foodbills.amount) AS amount')
-                        ));
-                        foreach ($res as $row){
-                            $data=array(
-                                'amount'=>$row->amount
-                            );
-                     return View::make('reports.restaurantsreportcost',$data);
+                    DB::raw('SUM(foodbills.amount) AS amount'),
+                    DB::raw('SUM(foodbills.no_foods) AS no_foods')
+                ));
+                foreach ($res as $row){
+                    $data=array(
+                        'amount'=>$row->amount,
+                        'nofoods'=>$row->no_foods
+                    );
+                     return View::make('reports.restaurantsreportcostd',$data);
                         }
                         $data=array(
                                 'amount'=>'No money collected'
                             );
-                      return View::make('reports.restaurantsreportcost',$data);
+                      return View::make('reports.restaurantsreportcostd',$data);
         }elseif ($guest=='income'&&$rest=='all'&&$serv==2) {
             $res=DB::table('foodbills')
                         ->join('guests','guests.id', '=' ,'foodbills.guestid')
@@ -7813,18 +7913,20 @@ public function rooms(){
                         ->where('servicetime',$serv)
                         ->get(array(
                             '*',
-                            DB::raw('SUM(foodbills.amount) AS amount')
-                        ));
-                        foreach ($res as $row){
-                            $data=array(
-                                'amount'=>$row->amount
-                            );
-                     return View::make('reports.restaurantsreportcost',$data);
+                    DB::raw('SUM(foodbills.amount) AS amount'),
+                    DB::raw('SUM(foodbills.no_foods) AS no_foods')
+                ));
+                foreach ($res as $row){
+                    $data=array(
+                        'amount'=>$row->amount,
+                        'nofoods'=>$row->no_foods
+                    );
+                     return View::make('reports.restaurantsreportcostd',$data);
                         }
                         $data=array(
                                 'amount'=>'No money collected'
                             );
-                      return View::make('reports.restaurantsreportcost',$data);
+                      return View::make('reports.restaurantsreportcostd',$data);
         }elseif ($guest=='income'&&$rest=='all'&&$serv==3) {
             $res=DB::table('foodbills')
                         ->join('guests','guests.id', '=' ,'foodbills.guestid')
@@ -7833,18 +7935,20 @@ public function rooms(){
                         ->where('servicetime',$serv)
                         ->get(array(
                             '*',
-                            DB::raw('SUM(foodbills.amount) AS amount')
-                        ));
-                        foreach ($res as $row){
-                            $data=array(
-                                'amount'=>$row->amount
-                            );
-                     return View::make('reports.restaurantsreportcost',$data);
+                    DB::raw('SUM(foodbills.amount) AS amount'),
+                    DB::raw('SUM(foodbills.no_foods) AS no_foods')
+                ));
+                foreach ($res as $row){
+                    $data=array(
+                        'amount'=>$row->amount,
+                        'nofoods'=>$row->no_foods
+                    );
+                     return View::make('reports.restaurantsreportcostd',$data);
                         }
                         $data=array(
                                 'amount'=>'No money collected'
                             );
-                      return View::make('reports.restaurantsreportcost',$data);
+                      return View::make('reports.restaurantsreportcostd',$data);
         }elseif ($guest=='income'&&$rest=='all'&&$serv==4) {
             $res=DB::table('foodbills')
                         ->join('guests','guests.id', '=' ,'foodbills.guestid')
@@ -7853,18 +7957,20 @@ public function rooms(){
                         ->where('servicetime',$serv)
                         ->get(array(
                             '*',
-                            DB::raw('SUM(foodbills.amount) AS amount')
-                        ));
-                        foreach ($res as $row){
-                            $data=array(
-                                'amount'=>$row->amount
-                            );
-                     return View::make('reports.restaurantsreportcost',$data);
+                    DB::raw('SUM(foodbills.amount) AS amount'),
+                    DB::raw('SUM(foodbills.no_foods) AS no_foods')
+                ));
+                foreach ($res as $row){
+                    $data=array(
+                        'amount'=>$row->amount,
+                        'nofoods'=>$row->no_foods
+                    );
+                     return View::make('reports.restaurantsreportcostd',$data);
                         }
                         $data=array(
                                 'amount'=>'No money collected'
                             );
-                      return View::make('reports.restaurantsreportcost',$data);
+                      return View::make('reports.restaurantsreportcostd',$data);
         }elseif ($guest=='income'&&$rest=='all'&&$serv==5) {
             $res=DB::table('foodbills')
                         ->join('guests','guests.id', '=' ,'foodbills.guestid')
@@ -7873,18 +7979,20 @@ public function rooms(){
                         ->where('servicetime',$serv)
                         ->get(array(
                             '*',
-                            DB::raw('SUM(foodbills.amount) AS amount')
-                        ));
-                        foreach ($res as $row){
-                            $data=array(
-                                'amount'=>$row->amount
-                            );
-                     return View::make('reports.restaurantsreportcost',$data);
+                    DB::raw('SUM(foodbills.amount) AS amount'),
+                    DB::raw('SUM(foodbills.no_foods) AS no_foods')
+                ));
+                foreach ($res as $row){
+                    $data=array(
+                        'amount'=>$row->amount,
+                        'nofoods'=>$row->no_foods
+                    );
+                     return View::make('reports.restaurantsreportcostd',$data);
                         }
                         $data=array(
                                 'amount'=>'No money collected'
                             );
-                      return View::make('reports.restaurantsreportcost',$data);
+                      return View::make('reports.restaurantsreportcostd',$data);
         }elseif ($guest=='income'&&$rest=='cash'&&$serv=='all') {
             $res=DB::table('foodbills')
                         ->join('guests','guests.id', '=' ,'foodbills.guestid')
@@ -7893,18 +8001,20 @@ public function rooms(){
                         ->where('paymentmode',$rest)
                         ->get(array(
                             '*',
-                            DB::raw('SUM(foodbills.amount) AS amount')
-                        ));
-                        foreach ($res as $row){
-                            $data=array(
-                                'amount'=>$row->amount
-                            );
-                     return View::make('reports.restaurantsreportcost',$data);
+                    DB::raw('SUM(foodbills.amount) AS amount'),
+                    DB::raw('SUM(foodbills.no_foods) AS no_foods')
+                ));
+                foreach ($res as $row){
+                    $data=array(
+                        'amount'=>$row->amount,
+                        'nofoods'=>$row->no_foods
+                    );
+                     return View::make('reports.restaurantsreportcostd',$data);
                         }
                         $data=array(
                                 'amount'=>'No money collected'
                             );
-                      return View::make('reports.restaurantsreportcost',$data);
+                      return View::make('reports.restaurantsreportcostd',$data);
         }elseif ($guest=='income'&&$rest=='cash'&&$serv==1) {
             $res=DB::table('foodbills')
                         ->join('guests','guests.id', '=' ,'foodbills.guestid')
@@ -7914,18 +8024,20 @@ public function rooms(){
                         ->where('servicetime',$serv)
                         ->get(array(
                             '*',
-                            DB::raw('SUM(foodbills.amount) AS amount')
-                        ));
-                        foreach ($res as $row){
-                            $data=array(
-                                'amount'=>$row->amount
-                            );
-                     return View::make('reports.restaurantsreportcost',$data);
+                    DB::raw('SUM(foodbills.amount) AS amount'),
+                    DB::raw('SUM(foodbills.no_foods) AS no_foods')
+                ));
+                foreach ($res as $row){
+                    $data=array(
+                        'amount'=>$row->amount,
+                        'nofoods'=>$row->no_foods
+                    );
+                     return View::make('reports.restaurantsreportcostd',$data);
                         }
                         $data=array(
                                 'amount'=>'No money collected'
                             );
-                      return View::make('reports.restaurantsreportcost',$data);
+                      return View::make('reports.restaurantsreportcostd',$data);
         }elseif ($guest=='income'&&$rest=='cash'&&$serv==2) {
             $res=DB::table('foodbills')
                         ->join('guests','guests.id', '=' ,'foodbills.guestid')
@@ -7935,18 +8047,20 @@ public function rooms(){
                         ->where('servicetime',$serv)
                         ->get(array(
                             '*',
-                            DB::raw('SUM(foodbills.amount) AS amount')
-                        ));
-                        foreach ($res as $row){
-                            $data=array(
-                                'amount'=>$row->amount
-                            );
-                     return View::make('reports.restaurantsreportcost',$data);
+                    DB::raw('SUM(foodbills.amount) AS amount'),
+                    DB::raw('SUM(foodbills.no_foods) AS no_foods')
+                ));
+                foreach ($res as $row){
+                    $data=array(
+                        'amount'=>$row->amount,
+                        'nofoods'=>$row->no_foods
+                    );
+                     return View::make('reports.restaurantsreportcostd',$data);
                         }
                         $data=array(
                                 'amount'=>'No money collected'
                             );
-                      return View::make('reports.restaurantsreportcost',$data);
+                      return View::make('reports.restaurantsreportcostd',$data);
         }elseif ($guest=='income'&&$rest=='cash'&&$serv==3) {
             $res=DB::table('foodbills')
                         ->join('guests','guests.id', '=' ,'foodbills.guestid')
@@ -7956,18 +8070,20 @@ public function rooms(){
                         ->where('servicetime',$serv)
                         ->get(array(
                             '*',
-                            DB::raw('SUM(foodbills.amount) AS amount')
-                        ));
-                        foreach ($res as $row){
-                            $data=array(
-                                'amount'=>$row->amount
-                            );
-                     return View::make('reports.restaurantsreportcost',$data);
+                    DB::raw('SUM(foodbills.amount) AS amount'),
+                    DB::raw('SUM(foodbills.no_foods) AS no_foods')
+                ));
+                foreach ($res as $row){
+                    $data=array(
+                        'amount'=>$row->amount,
+                        'nofoods'=>$row->no_foods
+                    );
+                     return View::make('reports.restaurantsreportcostd',$data);
                         }
                         $data=array(
                                 'amount'=>'No money collected'
                             );
-                      return View::make('reports.restaurantsreportcost',$data);
+                      return View::make('reports.restaurantsreportcostd',$data);
         }elseif ($guest=='income'&&$rest=='cash'&&$serv==4) {
             $res=DB::table('foodbills')
                         ->join('guests','guests.id', '=' ,'foodbills.guestid')
@@ -7977,18 +8093,20 @@ public function rooms(){
                         ->where('servicetime',$serv)
                         ->get(array(
                             '*',
-                            DB::raw('SUM(foodbills.amount) AS amount')
-                        ));
-                        foreach ($res as $row){
-                            $data=array(
-                                'amount'=>$row->amount
-                            );
-                     return View::make('reports.restaurantsreportcost',$data);
+                    DB::raw('SUM(foodbills.amount) AS amount'),
+                    DB::raw('SUM(foodbills.no_foods) AS no_foods')
+                ));
+                foreach ($res as $row){
+                    $data=array(
+                        'amount'=>$row->amount,
+                        'nofoods'=>$row->no_foods
+                    );
+                     return View::make('reports.restaurantsreportcostd',$data);
                         }
                         $data=array(
                                 'amount'=>'No money collected'
                             );
-                      return View::make('reports.restaurantsreportcost',$data);
+                      return View::make('reports.restaurantsreportcostd',$data);
         }elseif ($guest=='income'&&$rest=='cash'&&$serv==5) {
             $res=DB::table('foodbills')
                         ->join('guests','guests.id', '=' ,'foodbills.guestid')
@@ -7998,18 +8116,20 @@ public function rooms(){
                         ->where('servicetime',$serv)
                         ->get(array(
                             '*',
-                            DB::raw('SUM(foodbills.amount) AS amount')
-                        ));
-                        foreach ($res as $row){
-                            $data=array(
-                                'amount'=>$row->amount
-                            );
-                     return View::make('reports.restaurantsreportcost',$data);
+                    DB::raw('SUM(foodbills.amount) AS amount'),
+                    DB::raw('SUM(foodbills.no_foods) AS no_foods')
+                ));
+                foreach ($res as $row){
+                    $data=array(
+                        'amount'=>$row->amount,
+                        'nofoods'=>$row->no_foods
+                    );
+                     return View::make('reports.restaurantsreportcostd',$data);
                         }
                         $data=array(
                                 'amount'=>'No money collected'
                             );
-                      return View::make('reports.restaurantsreportcost',$data);
+                      return View::make('reports.restaurantsreportcostd',$data);
         }elseif ($guest=='income'&&$rest=='credit'&&$serv=='all') {
             $res=DB::table('foodbills')
                         ->join('guests','guests.id', '=' ,'foodbills.guestid')
@@ -8018,18 +8138,20 @@ public function rooms(){
                         ->where('paymentmode',$rest)
                         ->get(array(
                             '*',
-                            DB::raw('SUM(foodbills.amount) AS amount')
-                        ));
-                        foreach ($res as $row){
-                            $data=array(
-                                'amount'=>$row->amount
-                            );
-                     return View::make('reports.restaurantsreportcost',$data);
+                    DB::raw('SUM(foodbills.amount) AS amount'),
+                    DB::raw('SUM(foodbills.no_foods) AS no_foods')
+                ));
+                foreach ($res as $row){
+                    $data=array(
+                        'amount'=>$row->amount,
+                        'nofoods'=>$row->no_foods
+                    );
+                     return View::make('reports.restaurantsreportcostd',$data);
                         }
                         $data=array(
                                 'amount'=>'No money collected'
                             );
-                      return View::make('reports.restaurantsreportcost',$data);
+                      return View::make('reports.restaurantsreportcostd',$data);
         }elseif ($guest=='income'&&$rest=='credit'&&$serv==1) {
             $res=DB::table('foodbills')
                         ->join('guests','guests.id', '=' ,'foodbills.guestid')
@@ -8039,18 +8161,20 @@ public function rooms(){
                         ->where('servicetime',$serv)
                         ->get(array(
                             '*',
-                            DB::raw('SUM(foodbills.amount) AS amount')
-                        ));
-                        foreach ($res as $row){
-                            $data=array(
-                                'amount'=>$row->amount
-                            );
-                     return View::make('reports.restaurantsreportcost',$data);
+                    DB::raw('SUM(foodbills.amount) AS amount'),
+                    DB::raw('SUM(foodbills.no_foods) AS no_foods')
+                ));
+                foreach ($res as $row){
+                    $data=array(
+                        'amount'=>$row->amount,
+                        'nofoods'=>$row->no_foods
+                    );
+                     return View::make('reports.restaurantsreportcostd',$data);
                         }
                         $data=array(
                                 'amount'=>'No money collected'
                             );
-                      return View::make('reports.restaurantsreportcost',$data);
+                      return View::make('reports.restaurantsreportcostd',$data);
         }elseif ($guest=='income'&&$rest=='credit'&&$serv==2) {
             $res=DB::table('foodbills')
                         ->join('guests','guests.id', '=' ,'foodbills.guestid')
@@ -8060,18 +8184,20 @@ public function rooms(){
                         ->where('servicetime',$serv)
                         ->get(array(
                             '*',
-                            DB::raw('SUM(foodbills.amount) AS amount')
-                        ));
-                        foreach ($res as $row){
-                            $data=array(
-                                'amount'=>$row->amount
-                            );
-                     return View::make('reports.restaurantsreportcost',$data);
+                    DB::raw('SUM(foodbills.amount) AS amount'),
+                    DB::raw('SUM(foodbills.no_foods) AS no_foods')
+                ));
+                foreach ($res as $row){
+                    $data=array(
+                        'amount'=>$row->amount,
+                        'nofoods'=>$row->no_foods
+                    );
+                     return View::make('reports.restaurantsreportcostd',$data);
                         }
                         $data=array(
                                 'amount'=>'No money collected'
                             );
-                      return View::make('reports.restaurantsreportcost',$data);
+                      return View::make('reports.restaurantsreportcostd',$data);
         }elseif ($guest=='income'&&$rest=='credit'&&$serv==3) {
             $res=DB::table('foodbills')
                         ->join('guests','guests.id', '=' ,'foodbills.guestid')
@@ -8081,18 +8207,20 @@ public function rooms(){
                         ->where('servicetime',$serv)
                         ->get(array(
                             '*',
-                            DB::raw('SUM(foodbills.amount) AS amount')
-                        ));
-                        foreach ($res as $row){
-                            $data=array(
-                                'amount'=>$row->amount
-                            );
-                     return View::make('reports.restaurantsreportcost',$data);
+                    DB::raw('SUM(foodbills.amount) AS amount'),
+                    DB::raw('SUM(foodbills.no_foods) AS no_foods')
+                ));
+                foreach ($res as $row){
+                    $data=array(
+                        'amount'=>$row->amount,
+                        'nofoods'=>$row->no_foods
+                    );
+                     return View::make('reports.restaurantsreportcostd',$data);
                         }
                         $data=array(
                                 'amount'=>'No money collected'
                             );
-                      return View::make('reports.restaurantsreportcost',$data);
+                      return View::make('reports.restaurantsreportcostd',$data);
         }elseif ($guest=='income'&&$rest=='credit'&&$serv==4) {
             $res=DB::table('foodbills')
                         ->join('guests','guests.id', '=' ,'foodbills.guestid')
@@ -8102,18 +8230,20 @@ public function rooms(){
                         ->where('servicetime',$serv)
                         ->get(array(
                             '*',
-                            DB::raw('SUM(foodbills.amount) AS amount')
-                        ));
-                        foreach ($res as $row){
-                            $data=array(
-                                'amount'=>$row->amount
-                            );
-                     return View::make('reports.restaurantsreportcost',$data);
+                    DB::raw('SUM(foodbills.amount) AS amount'),
+                    DB::raw('SUM(foodbills.no_foods) AS no_foods')
+                ));
+                foreach ($res as $row){
+                    $data=array(
+                        'amount'=>$row->amount,
+                        'nofoods'=>$row->no_foods
+                    );
+                     return View::make('reports.restaurantsreportcostd',$data);
                         }
                         $data=array(
                                 'amount'=>'No money collected'
                             );
-                      return View::make('reports.restaurantsreportcost',$data);
+                      return View::make('reports.restaurantsreportcostd',$data);
         }elseif ($guest=='income'&&$rest=='credit'&&$serv==5) {
             $res=DB::table('foodbills')
                         ->join('guests','guests.id', '=' ,'foodbills.guestid')
@@ -8123,18 +8253,20 @@ public function rooms(){
                         ->where('servicetime',$serv)
                         ->get(array(
                             '*',
-                            DB::raw('SUM(foodbills.amount) AS amount')
-                        ));
-                        foreach ($res as $row){
-                            $data=array(
-                                'amount'=>$row->amount
-                            );
-                     return View::make('reports.restaurantsreportcost',$data);
+                    DB::raw('SUM(foodbills.amount) AS amount'),
+                    DB::raw('SUM(foodbills.no_foods) AS no_foods')
+                ));
+                foreach ($res as $row){
+                    $data=array(
+                        'amount'=>$row->amount,
+                        'nofoods'=>$row->no_foods
+                    );
+                     return View::make('reports.restaurantsreportcostd',$data);
                         }
                         $data=array(
                                 'amount'=>'No money collected'
                             );
-                      return View::make('reports.restaurantsreportcost',$data);
+                      return View::make('reports.restaurantsreportcostd',$data);
         }elseif ($guest=='noneguestincome'&&$rest=='cash'&&$serv=='all') {
             $res=DB::table('foodsales')
                         ->join('restaurants','restaurants.name', '=' ,'foodsales.food')
@@ -8142,11 +8274,14 @@ public function rooms(){
                         ->where('date','LIKE','%'.$year.'%')
                         ->get(array(
                             '*',
-                            DB::raw('SUM(restaurants.cost) AS cost')
+                            DB::raw('SUM(restaurants.cost) AS cost'),
+                            DB::raw('SUM(foodsales.no_foods) AS no_foods')
                         ));
                         foreach ($res as $row){
                             $data=array(
-                                'amount'=>$row->cost
+                                'amount'=>$row->cost,
+                                'nofoods'=>$row->no_foods
+
                             );
                      return View::make('reports.restaurantsreportcost',$data);
                         }
@@ -8162,12 +8297,15 @@ public function rooms(){
                          ->where('service',$serv)
                         ->get(array(
                             '*',
-                            DB::raw('SUM(restaurants.cost) AS cost')
-                        ));
-                        foreach ($res as $row){
-                            $data=array(
-                                'amount'=>$row->cost
-                            );
+                    DB::raw('SUM(restaurants.cost) AS cost'),
+                    DB::raw('SUM(foodsales.no_foods) AS no_foods')
+                ));
+                foreach ($res as $row){
+                    $data=array(
+                        'amount'=>$row->cost,
+                        'nofoods'=>$row->no_foods
+
+                    );
                      return View::make('reports.restaurantsreportcost',$data);
                         }
                         $data=array(
@@ -8182,12 +8320,15 @@ public function rooms(){
                          ->where('service',$serv)
                         ->get(array(
                             '*',
-                            DB::raw('SUM(restaurants.cost) AS cost')
-                        ));
-                        foreach ($res as $row){
-                            $data=array(
-                                'amount'=>$row->cost
-                            );
+                    DB::raw('SUM(restaurants.cost) AS cost'),
+                    DB::raw('SUM(foodsales.no_foods) AS no_foods')
+                ));
+                foreach ($res as $row){
+                    $data=array(
+                        'amount'=>$row->cost,
+                        'nofoods'=>$row->no_foods
+
+                    );
                      return View::make('reports.restaurantsreportcost',$data);
                         }
                         $data=array(
@@ -8202,12 +8343,15 @@ public function rooms(){
                          ->where('service',$serv)
                         ->get(array(
                             '*',
-                            DB::raw('SUM(restaurants.cost) AS cost')
-                        ));
-                        foreach ($res as $row){
-                            $data=array(
-                                'amount'=>$row->cost
-                            );
+                    DB::raw('SUM(restaurants.cost) AS cost'),
+                    DB::raw('SUM(foodsales.no_foods) AS no_foods')
+                ));
+                foreach ($res as $row){
+                    $data=array(
+                        'amount'=>$row->cost,
+                        'nofoods'=>$row->no_foods
+
+                    );
                      return View::make('reports.restaurantsreportcost',$data);
                         }
                         $data=array(
@@ -8222,12 +8366,15 @@ public function rooms(){
                          ->where('service',$serv)
                         ->get(array(
                             '*',
-                            DB::raw('SUM(restaurants.cost) AS cost')
-                        ));
-                        foreach ($res as $row){
-                            $data=array(
-                                'amount'=>$row->cost
-                            );
+                    DB::raw('SUM(restaurants.cost) AS cost'),
+                    DB::raw('SUM(foodsales.no_foods) AS no_foods')
+                ));
+                foreach ($res as $row){
+                    $data=array(
+                        'amount'=>$row->cost,
+                        'nofoods'=>$row->no_foods
+
+                    );
                      return View::make('reports.restaurantsreportcost',$data);
                         }
                         $data=array(
@@ -8242,12 +8389,15 @@ public function rooms(){
                          ->where('service',$serv)
                         ->get(array(
                             '*',
-                            DB::raw('SUM(restaurants.cost) AS cost')
-                        ));
-                        foreach ($res as $row){
-                            $data=array(
-                                'amount'=>$row->cost
-                            );
+                    DB::raw('SUM(restaurants.cost) AS cost'),
+                    DB::raw('SUM(foodsales.no_foods) AS no_foods')
+                ));
+                foreach ($res as $row){
+                    $data=array(
+                        'amount'=>$row->cost,
+                        'nofoods'=>$row->no_foods
+
+                    );
                      return View::make('reports.restaurantsreportcost',$data);
                         }
                         $data=array(
@@ -8464,18 +8614,20 @@ public function rooms(){
                         ->where('date','LIKE','%'.$year.'%')
                         ->get(array(
                             '*',
-                            DB::raw('SUM(foodbills.amount) AS amount')
+                            DB::raw('SUM(foodbills.amount) AS amount'),
+                             DB::raw('SUM(foodbills.no_foods) AS no_foods')
                         ));
                         foreach ($res as $row){
                             $data=array(
-                                'amount'=>$row->amount
+                                'amount'=>$row->amount,
+                                'nofoods'=>$row->no_foods
                             );
-                     return View::make('reports.restaurantsreportcost',$data);
+                     return View::make('reports.restaurantsreportcostd',$data);
                         }
                         $data=array(
                                 'amount'=>'No money collected'
                             );
-                      return View::make('reports.restaurantsreportcost',$data);
+                      return View::make('reports.restaurantsreportcostd',$data);
         }elseif ($guest=='income'&&$rest=='all'&&$serv==1) {
             $res=DB::table('foodbills')
                         ->join('guests','guests.id', '=' ,'foodbills.guestid')
@@ -8483,18 +8635,20 @@ public function rooms(){
                         ->where('servicetime',$serv)
                         ->get(array(
                             '*',
-                            DB::raw('SUM(foodbills.amount) AS amount')
-                        ));
-                        foreach ($res as $row){
-                            $data=array(
-                                'amount'=>$row->amount
-                            );
-                     return View::make('reports.restaurantsreportcost',$data);
+                    DB::raw('SUM(foodbills.amount) AS amount'),
+                    DB::raw('SUM(foodbills.no_foods) AS no_foods')
+                ));
+                foreach ($res as $row){
+                    $data=array(
+                        'amount'=>$row->amount,
+                        'nofoods'=>$row->no_foods
+                    );
+                     return View::make('reports.restaurantsreportcostd',$data);
                         }
                         $data=array(
                                 'amount'=>'No money collected'
                             );
-                      return View::make('reports.restaurantsreportcost',$data);
+                      return View::make('reports.restaurantsreportcostd',$data);
         }elseif ($guest=='income'&&$rest=='all'&&$serv==2) {
             $res=DB::table('foodbills')
                         ->join('guests','guests.id', '=' ,'foodbills.guestid')
@@ -8502,18 +8656,20 @@ public function rooms(){
                         ->where('servicetime',$serv)
                         ->get(array(
                             '*',
-                            DB::raw('SUM(foodbills.amount) AS amount')
-                        ));
-                        foreach ($res as $row){
-                            $data=array(
-                                'amount'=>$row->amount
-                            );
-                     return View::make('reports.restaurantsreportcost',$data);
+                    DB::raw('SUM(foodbills.amount) AS amount'),
+                    DB::raw('SUM(foodbills.no_foods) AS no_foods')
+                ));
+                foreach ($res as $row){
+                    $data=array(
+                        'amount'=>$row->amount,
+                        'nofoods'=>$row->no_foods
+                    );
+                     return View::make('reports.restaurantsreportcostd',$data);
                         }
                         $data=array(
                                 'amount'=>'No money collected'
                             );
-                      return View::make('reports.restaurantsreportcost',$data);
+                      return View::make('reports.restaurantsreportcostd',$data);
         }elseif ($guest=='income'&&$rest=='all'&&$serv==3) {
             $res=DB::table('foodbills')
                         ->join('guests','guests.id', '=' ,'foodbills.guestid')
@@ -8521,18 +8677,20 @@ public function rooms(){
                         ->where('servicetime',$serv)
                         ->get(array(
                             '*',
-                            DB::raw('SUM(foodbills.amount) AS amount')
-                        ));
-                        foreach ($res as $row){
-                            $data=array(
-                                'amount'=>$row->amount
-                            );
-                     return View::make('reports.restaurantsreportcost',$data);
+                    DB::raw('SUM(foodbills.amount) AS amount'),
+                    DB::raw('SUM(foodbills.no_foods) AS no_foods')
+                ));
+                foreach ($res as $row){
+                    $data=array(
+                        'amount'=>$row->amount,
+                        'nofoods'=>$row->no_foods
+                    );
+                     return View::make('reports.restaurantsreportcostd',$data);
                         }
                         $data=array(
                                 'amount'=>'No money collected'
                             );
-                      return View::make('reports.restaurantsreportcost',$data);
+                      return View::make('reports.restaurantsreportcostd',$data);
         }elseif ($guest=='income'&&$rest=='all'&&$serv==4) {
             $res=DB::table('foodbills')
                         ->join('guests','guests.id', '=' ,'foodbills.guestid')
@@ -8540,18 +8698,20 @@ public function rooms(){
                         ->where('servicetime',$serv)
                         ->get(array(
                             '*',
-                            DB::raw('SUM(foodbills.amount) AS amount')
-                        ));
-                        foreach ($res as $row){
-                            $data=array(
-                                'amount'=>$row->amount
-                            );
-                     return View::make('reports.restaurantsreportcost',$data);
+                    DB::raw('SUM(foodbills.amount) AS amount'),
+                    DB::raw('SUM(foodbills.no_foods) AS no_foods')
+                ));
+                foreach ($res as $row){
+                    $data=array(
+                        'amount'=>$row->amount,
+                        'nofoods'=>$row->no_foods
+                    );
+                     return View::make('reports.restaurantsreportcostd',$data);
                         }
                         $data=array(
                                 'amount'=>'No money collected'
                             );
-                      return View::make('reports.restaurantsreportcost',$data);
+                      return View::make('reports.restaurantsreportcostd',$data);
         }elseif ($guest=='income'&&$rest=='all'&&$serv==5) {
             $res=DB::table('foodbills')
                         ->join('guests','guests.id', '=' ,'foodbills.guestid')
@@ -8559,18 +8719,20 @@ public function rooms(){
                         ->where('servicetime',$serv)
                         ->get(array(
                             '*',
-                            DB::raw('SUM(foodbills.amount) AS amount')
-                        ));
-                        foreach ($res as $row){
-                            $data=array(
-                                'amount'=>$row->amount
-                            );
-                     return View::make('reports.restaurantsreportcost',$data);
+                    DB::raw('SUM(foodbills.amount) AS amount'),
+                    DB::raw('SUM(foodbills.no_foods) AS no_foods')
+                ));
+                foreach ($res as $row){
+                    $data=array(
+                        'amount'=>$row->amount,
+                        'nofoods'=>$row->no_foods
+                    );
+                     return View::make('reports.restaurantsreportcostd',$data);
                         }
                         $data=array(
                                 'amount'=>'No money collected'
                             );
-                      return View::make('reports.restaurantsreportcost',$data);
+                      return View::make('reports.restaurantsreportcostd',$data);
         }elseif ($guest=='income'&&$rest=='cash'&&$serv=='all') {
             $res=DB::table('foodbills')
                         ->join('guests','guests.id', '=' ,'foodbills.guestid')
@@ -8578,18 +8740,20 @@ public function rooms(){
                         ->where('paymentmode',$rest)
                         ->get(array(
                             '*',
-                            DB::raw('SUM(foodbills.amount) AS amount')
-                        ));
-                        foreach ($res as $row){
-                            $data=array(
-                                'amount'=>$row->amount
-                            );
-                     return View::make('reports.restaurantsreportcost',$data);
+                    DB::raw('SUM(foodbills.amount) AS amount'),
+                    DB::raw('SUM(foodbills.no_foods) AS no_foods')
+                ));
+                foreach ($res as $row){
+                    $data=array(
+                        'amount'=>$row->amount,
+                        'nofoods'=>$row->no_foods
+                    );
+                     return View::make('reports.restaurantsreportcostd',$data);
                         }
                         $data=array(
                                 'amount'=>'No money collected'
                             );
-                      return View::make('reports.restaurantsreportcost',$data);
+                      return View::make('reports.restaurantsreportcostd',$data);
         }elseif ($guest=='income'&&$rest=='cash'&&$serv==1) {
             $res=DB::table('foodbills')
                         ->join('guests','guests.id', '=' ,'foodbills.guestid')
@@ -8598,18 +8762,20 @@ public function rooms(){
                         ->where('servicetime',$serv)
                         ->get(array(
                             '*',
-                            DB::raw('SUM(foodbills.amount) AS amount')
-                        ));
-                        foreach ($res as $row){
-                            $data=array(
-                                'amount'=>$row->amount
-                            );
-                     return View::make('reports.restaurantsreportcost',$data);
+                    DB::raw('SUM(foodbills.amount) AS amount'),
+                    DB::raw('SUM(foodbills.no_foods) AS no_foods')
+                ));
+                foreach ($res as $row){
+                    $data=array(
+                        'amount'=>$row->amount,
+                        'nofoods'=>$row->no_foods
+                    );
+                     return View::make('reports.restaurantsreportcostd',$data);
                         }
                         $data=array(
                                 'amount'=>'No money collected'
                             );
-                      return View::make('reports.restaurantsreportcost',$data);
+                      return View::make('reports.restaurantsreportcostd',$data);
         }elseif ($guest=='income'&&$rest=='cash'&&$serv==2) {
             $res=DB::table('foodbills')
                         ->join('guests','guests.id', '=' ,'foodbills.guestid')
@@ -8618,18 +8784,20 @@ public function rooms(){
                         ->where('servicetime',$serv)
                         ->get(array(
                             '*',
-                            DB::raw('SUM(foodbills.amount) AS amount')
-                        ));
-                        foreach ($res as $row){
-                            $data=array(
-                                'amount'=>$row->amount
-                            );
-                     return View::make('reports.restaurantsreportcost',$data);
+                    DB::raw('SUM(foodbills.amount) AS amount'),
+                    DB::raw('SUM(foodbills.no_foods) AS no_foods')
+                ));
+                foreach ($res as $row){
+                    $data=array(
+                        'amount'=>$row->amount,
+                        'nofoods'=>$row->no_foods
+                    );
+                     return View::make('reports.restaurantsreportcostd',$data);
                         }
                         $data=array(
                                 'amount'=>'No money collected'
                             );
-                      return View::make('reports.restaurantsreportcost',$data);
+                      return View::make('reports.restaurantsreportcostd',$data);
         }elseif ($guest=='income'&&$rest=='cash'&&$serv==3) {
             $res=DB::table('foodbills')
                         ->join('guests','guests.id', '=' ,'foodbills.guestid')
@@ -8638,18 +8806,20 @@ public function rooms(){
                         ->where('servicetime',$serv)
                         ->get(array(
                             '*',
-                            DB::raw('SUM(foodbills.amount) AS amount')
-                        ));
-                        foreach ($res as $row){
-                            $data=array(
-                                'amount'=>$row->amount
-                            );
-                     return View::make('reports.restaurantsreportcost',$data);
+                    DB::raw('SUM(foodbills.amount) AS amount'),
+                    DB::raw('SUM(foodbills.no_foods) AS no_foods')
+                ));
+                foreach ($res as $row){
+                    $data=array(
+                        'amount'=>$row->amount,
+                        'nofoods'=>$row->no_foods
+                    );
+                     return View::make('reports.restaurantsreportcostd',$data);
                         }
                         $data=array(
                                 'amount'=>'No money collected'
                             );
-                      return View::make('reports.restaurantsreportcost',$data);
+                      return View::make('reports.restaurantsreportcostd',$data);
         }elseif ($guest=='income'&&$rest=='cash'&&$serv==4) {
             $res=DB::table('foodbills')
                         ->join('guests','guests.id', '=' ,'foodbills.guestid')
@@ -8658,18 +8828,20 @@ public function rooms(){
                         ->where('servicetime',$serv)
                         ->get(array(
                             '*',
-                            DB::raw('SUM(foodbills.amount) AS amount')
-                        ));
-                        foreach ($res as $row){
-                            $data=array(
-                                'amount'=>$row->amount
-                            );
-                     return View::make('reports.restaurantsreportcost',$data);
+                    DB::raw('SUM(foodbills.amount) AS amount'),
+                    DB::raw('SUM(foodbills.no_foods) AS no_foods')
+                ));
+                foreach ($res as $row){
+                    $data=array(
+                        'amount'=>$row->amount,
+                        'nofoods'=>$row->no_foods
+                    );
+                     return View::make('reports.restaurantsreportcostd',$data);
                         }
                         $data=array(
                                 'amount'=>'No money collected'
                             );
-                      return View::make('reports.restaurantsreportcost',$data);
+                      return View::make('reports.restaurantsreportcostd',$data);
         }elseif ($guest=='income'&&$rest=='cash'&&$serv==5) {
             $res=DB::table('foodbills')
                         ->join('guests','guests.id', '=' ,'foodbills.guestid')
@@ -8678,18 +8850,20 @@ public function rooms(){
                         ->where('servicetime',$serv)
                         ->get(array(
                             '*',
-                            DB::raw('SUM(foodbills.amount) AS amount')
-                        ));
-                        foreach ($res as $row){
-                            $data=array(
-                                'amount'=>$row->amount
-                            );
-                     return View::make('reports.restaurantsreportcost',$data);
+                    DB::raw('SUM(foodbills.amount) AS amount'),
+                    DB::raw('SUM(foodbills.no_foods) AS no_foods')
+                ));
+                foreach ($res as $row){
+                    $data=array(
+                        'amount'=>$row->amount,
+                        'nofoods'=>$row->no_foods
+                    );
+                     return View::make('reports.restaurantsreportcostd',$data);
                         }
                         $data=array(
                                 'amount'=>'No money collected'
                             );
-                      return View::make('reports.restaurantsreportcost',$data);
+                      return View::make('reports.restaurantsreportcostd',$data);
         }elseif ($guest=='income'&&$rest=='credit'&&$serv=='all') {
             $res=DB::table('foodbills')
                         ->join('guests','guests.id', '=' ,'foodbills.guestid')
@@ -8697,18 +8871,20 @@ public function rooms(){
                         ->where('paymentmode',$rest)
                         ->get(array(
                             '*',
-                            DB::raw('SUM(foodbills.amount) AS amount')
-                        ));
-                        foreach ($res as $row){
-                            $data=array(
-                                'amount'=>$row->amount
-                            );
-                     return View::make('reports.restaurantsreportcost',$data);
+                    DB::raw('SUM(foodbills.amount) AS amount'),
+                    DB::raw('SUM(foodbills.no_foods) AS no_foods')
+                ));
+                foreach ($res as $row){
+                    $data=array(
+                        'amount'=>$row->amount,
+                        'nofoods'=>$row->no_foods
+                    );
+                     return View::make('reports.restaurantsreportcostd',$data);
                         }
                         $data=array(
                                 'amount'=>'No money collected'
                             );
-                      return View::make('reports.restaurantsreportcost',$data);
+                      return View::make('reports.restaurantsreportcostd',$data);
         }elseif ($guest=='income'&&$rest=='credit'&&$serv==1) {
             $res=DB::table('foodbills')
                         ->join('guests','guests.id', '=' ,'foodbills.guestid')
@@ -8717,18 +8893,20 @@ public function rooms(){
                         ->where('servicetime',$serv)
                         ->get(array(
                             '*',
-                            DB::raw('SUM(foodbills.amount) AS amount')
-                        ));
-                        foreach ($res as $row){
-                            $data=array(
-                                'amount'=>$row->amount
-                            );
-                     return View::make('reports.restaurantsreportcost',$data);
+                    DB::raw('SUM(foodbills.amount) AS amount'),
+                    DB::raw('SUM(foodbills.no_foods) AS no_foods')
+                ));
+                foreach ($res as $row){
+                    $data=array(
+                        'amount'=>$row->amount,
+                        'nofoods'=>$row->no_foods
+                    );
+                     return View::make('reports.restaurantsreportcostd',$data);
                         }
                         $data=array(
                                 'amount'=>'No money collected'
                             );
-                      return View::make('reports.restaurantsreportcost',$data);
+                      return View::make('reports.restaurantsreportcostd',$data);
         }elseif ($guest=='income'&&$rest=='credit'&&$serv==2) {
             $res=DB::table('foodbills')
                         ->join('guests','guests.id', '=' ,'foodbills.guestid')
@@ -8737,18 +8915,20 @@ public function rooms(){
                         ->where('servicetime',$serv)
                         ->get(array(
                             '*',
-                            DB::raw('SUM(foodbills.amount) AS amount')
-                        ));
-                        foreach ($res as $row){
-                            $data=array(
-                                'amount'=>$row->amount
-                            );
-                     return View::make('reports.restaurantsreportcost',$data);
+                    DB::raw('SUM(foodbills.amount) AS amount'),
+                    DB::raw('SUM(foodbills.no_foods) AS no_foods')
+                ));
+                foreach ($res as $row){
+                    $data=array(
+                        'amount'=>$row->amount,
+                        'nofoods'=>$row->no_foods
+                    );
+                     return View::make('reports.restaurantsreportcostd',$data);
                         }
                         $data=array(
                                 'amount'=>'No money collected'
                             );
-                      return View::make('reports.restaurantsreportcost',$data);
+                      return View::make('reports.restaurantsreportcostd',$data);
         }elseif ($guest=='income'&&$rest=='credit'&&$serv==3) {
             $res=DB::table('foodbills')
                         ->join('guests','guests.id', '=' ,'foodbills.guestid')
@@ -8757,18 +8937,20 @@ public function rooms(){
                         ->where('servicetime',$serv)
                         ->get(array(
                             '*',
-                            DB::raw('SUM(foodbills.amount) AS amount')
-                        ));
-                        foreach ($res as $row){
-                            $data=array(
-                                'amount'=>$row->amount
-                            );
-                     return View::make('reports.restaurantsreportcost',$data);
+                    DB::raw('SUM(foodbills.amount) AS amount'),
+                    DB::raw('SUM(foodbills.no_foods) AS no_foods')
+                ));
+                foreach ($res as $row){
+                    $data=array(
+                        'amount'=>$row->amount,
+                        'nofoods'=>$row->no_foods
+                    );
+                     return View::make('reports.restaurantsreportcostd',$data);
                         }
                         $data=array(
                                 'amount'=>'No money collected'
                             );
-                      return View::make('reports.restaurantsreportcost',$data);
+                      return View::make('reports.restaurantsreportcostd',$data);
         }elseif ($guest=='income'&&$rest=='credit'&&$serv==4) {
             $res=DB::table('foodbills')
                         ->join('guests','guests.id', '=' ,'foodbills.guestid')
@@ -8777,18 +8959,20 @@ public function rooms(){
                         ->where('servicetime',$serv)
                         ->get(array(
                             '*',
-                            DB::raw('SUM(foodbills.amount) AS amount')
-                        ));
-                        foreach ($res as $row){
-                            $data=array(
-                                'amount'=>$row->amount
-                            );
-                     return View::make('reports.restaurantsreportcost',$data);
+                    DB::raw('SUM(foodbills.amount) AS amount'),
+                    DB::raw('SUM(foodbills.no_foods) AS no_foods')
+                ));
+                foreach ($res as $row){
+                    $data=array(
+                        'amount'=>$row->amount,
+                        'nofoods'=>$row->no_foods
+                    );
+                     return View::make('reports.restaurantsreportcostd',$data);
                         }
                         $data=array(
                                 'amount'=>'No money collected'
                             );
-                      return View::make('reports.restaurantsreportcost',$data);
+                      return View::make('reports.restaurantsreportcostd',$data);
         }elseif ($guest=='income'&&$rest=='credit'&&$serv==5) {
             $res=DB::table('foodbills')
                         ->join('guests','guests.id', '=' ,'foodbills.guestid')
@@ -8797,29 +8981,33 @@ public function rooms(){
                         ->where('servicetime',$serv)
                         ->get(array(
                             '*',
-                            DB::raw('SUM(foodbills.amount) AS amount')
-                        ));
-                        foreach ($res as $row){
-                            $data=array(
-                                'amount'=>$row->amount
-                            );
-                     return View::make('reports.restaurantsreportcost',$data);
+                    DB::raw('SUM(foodbills.amount) AS amount'),
+                    DB::raw('SUM(foodbills.no_foods) AS no_foods')
+                ));
+                foreach ($res as $row){
+                    $data=array(
+                        'amount'=>$row->amount,
+                        'nofoods'=>$row->no_foods
+                    );
+                     return View::make('reports.restaurantsreportcostd',$data);
                         }
                         $data=array(
                                 'amount'=>'No money collected'
                             );
-                      return View::make('reports.restaurantsreportcost',$data);
+                      return View::make('reports.restaurantsreportcostd',$data);
         }elseif ($guest=='noneguestincome'&&$rest=='cash'&&$serv=='all') {
             $res=DB::table('foodsales')
                         ->join('restaurants','restaurants.name', '=' ,'foodsales.food')
                        ->where('date','LIKE','%'.$year.'%')
                         ->get(array(
                             '*',
-                            DB::raw('SUM(restaurants.cost) AS cost')
+                            DB::raw('SUM(restaurants.cost) AS cost'),
+                            DB::raw('SUM(foodsales.no_foods) AS no_foods')
                         ));
                         foreach ($res as $row){
                             $data=array(
-                                'amount'=>$row->cost
+                                'amount'=>$row->cost,
+                                'nofoods'=>$row->no_foods
                             );
                      return View::make('reports.restaurantsreportcost',$data);
                         }
@@ -8834,12 +9022,14 @@ public function rooms(){
                          ->where('service',$serv)
                         ->get(array(
                             '*',
-                            DB::raw('SUM(restaurants.cost) AS cost')
-                        ));
-                        foreach ($res as $row){
-                            $data=array(
-                                'amount'=>$row->cost
-                            );
+                    DB::raw('SUM(restaurants.cost) AS cost'),
+                    DB::raw('SUM(foodsales.no_foods) AS no_foods')
+                ));
+                foreach ($res as $row){
+                    $data=array(
+                        'amount'=>$row->cost,
+                        'nofoods'=>$row->no_foods
+                    );
                      return View::make('reports.restaurantsreportcost',$data);
                         }
                         $data=array(
@@ -8853,12 +9043,14 @@ public function rooms(){
                          ->where('service',$serv)
                         ->get(array(
                             '*',
-                            DB::raw('SUM(restaurants.cost) AS cost')
-                        ));
-                        foreach ($res as $row){
-                            $data=array(
-                                'amount'=>$row->cost
-                            );
+                    DB::raw('SUM(restaurants.cost) AS cost'),
+                    DB::raw('SUM(foodsales.no_foods) AS no_foods')
+                ));
+                foreach ($res as $row){
+                    $data=array(
+                        'amount'=>$row->cost,
+                        'nofoods'=>$row->no_foods
+                    );
                      return View::make('reports.restaurantsreportcost',$data);
                         }
                         $data=array(
@@ -8872,12 +9064,14 @@ public function rooms(){
                          ->where('service',$serv)
                         ->get(array(
                             '*',
-                            DB::raw('SUM(restaurants.cost) AS cost')
-                        ));
-                        foreach ($res as $row){
-                            $data=array(
-                                'amount'=>$row->cost
-                            );
+                    DB::raw('SUM(restaurants.cost) AS cost'),
+                    DB::raw('SUM(foodsales.no_foods) AS no_foods')
+                ));
+                foreach ($res as $row){
+                    $data=array(
+                        'amount'=>$row->cost,
+                        'nofoods'=>$row->no_foods
+                    );
                      return View::make('reports.restaurantsreportcost',$data);
                         }
                         $data=array(
@@ -8891,12 +9085,14 @@ public function rooms(){
                          ->where('service',$serv)
                         ->get(array(
                             '*',
-                            DB::raw('SUM(restaurants.cost) AS cost')
-                        ));
-                        foreach ($res as $row){
-                            $data=array(
-                                'amount'=>$row->cost
-                            );
+                    DB::raw('SUM(restaurants.cost) AS cost'),
+                    DB::raw('SUM(foodsales.no_foods) AS no_foods')
+                ));
+                foreach ($res as $row){
+                    $data=array(
+                        'amount'=>$row->cost,
+                        'nofoods'=>$row->no_foods
+                    );
                      return View::make('reports.restaurantsreportcost',$data);
                         }
                         $data=array(
@@ -8910,12 +9106,14 @@ public function rooms(){
                          ->where('service',$serv)
                         ->get(array(
                             '*',
-                            DB::raw('SUM(restaurants.cost) AS cost')
-                        ));
-                        foreach ($res as $row){
-                            $data=array(
-                                'amount'=>$row->cost
-                            );
+                    DB::raw('SUM(restaurants.cost) AS cost'),
+                    DB::raw('SUM(foodsales.no_foods) AS no_foods')
+                ));
+                foreach ($res as $row){
+                    $data=array(
+                        'amount'=>$row->cost,
+                        'nofoods'=>$row->no_foods
+                    );
                      return View::make('reports.restaurantsreportcost',$data);
                         }
                         $data=array(

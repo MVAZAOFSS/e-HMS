@@ -63,7 +63,14 @@
   <td>
     <input class="form-control" type="text" id="food" />
   </td>  
-</tr>  
+</tr>
+    <tr>
+        <td>
+            <table>
+                <tr><td>Select no.Foods:<input type="checkbox" id="checkboxed"></td><td id="checkid"><input type="text" id="idadi" name="idadi" placeholder="Enter no drinks."></td></tr>
+            </table>
+        </td>
+    </tr>
 </table>
 @elseif(Auth::user()->role == 8)
 <table class="table table-bordered">
@@ -76,7 +83,14 @@
   <td>
     <input class="form-control" type="text" id="food" />
   </td>  
-</tr>  
+</tr>
+    <tr>
+        <td>
+            <table>
+                <tr><td>Select no.Foods:<input type="checkbox" id="checkboxed"></td><td id="checkid"><input type="text" id="idadi" name="idadi" placeholder="Enter no drinks."></td></tr>
+            </table>
+        </td>
+    </tr>
 </table>
 @endif
 
@@ -95,7 +109,7 @@
     <tr>
         <td>
             <table>
-                <tr><td>Select no. Drinks(option)<input type="checkbox" id="checkboxed"></td><td id="checkid"><input type="text" id="idadi" name="idadi" placeholder="Enter no drinks."></td></tr>
+                <tr><td>Select no. Drinks <input type="checkbox" id="checkboxed"></td><td id="checkid"><input type="text" id="idadi" name="idadi" placeholder="Enter no drinks."></td></tr>
             </table>
         </td>
     </tr>
@@ -219,14 +233,15 @@ $('#addbill').on('click', function(){
     var guestname = $('#guestname').val();
     var food      = $('#food').val();
     var t         = $('#time').val();
+    var idadi     =$('#idadi').val();
     
-    if(guestname=="" || food == "" || t==""){
+    if(guestname=="" || food == "" || t==""||idadi==""){
           alert("Please fill the fields");
     }else{
       $("#billform").css('opacity', '0.4');
       $('#ajax, #ajax2').show();
 
-      $.post('submit', {g:guestname,f:food, t:t}, function(data){
+      $.post('submit', {g:guestname,f:food, t:t,idadi:idadi}, function(data){
            $("#billform").css('opacity', '1');
            $('#ajax, #ajax2').hide('fast', function(){
               $('#food, #time').val('');
@@ -241,14 +256,15 @@ $('#addbill').on('click', function(){
     var guestname = $('#guestname').val();
     var food      = $('#food').val();
     var t         = $('#time').val();
+    var idadi     =$('#idadi').val();
     
-    if(guestname=="" || food == "" || t==""){
+    if(guestname=="" || food == "" || t==""||idadi==""){
           alert("Please fill the fields");
     }else{
       $("#billform").css('opacity', '0.4');
       $('#ajax, #ajax2').show();
 
-      $.post('submit', {g:guestname,f:food, t:t}, function(data){
+      $.post('submit', {g:guestname,f:food, t:t,idadi:idadi}, function(data){
            $("#billform").css('opacity', '1');
            $('#ajax, #ajax2').hide('fast', function(){
               $('#food, #time').val('');

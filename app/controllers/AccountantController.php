@@ -225,11 +225,13 @@ class AccountantController extends BaseController{
                         ->where('date',$date)
                         ->get(array(
                             'cost',
-                            DB::raw('SUM(restaurants.cost) AS cost')
+                            DB::raw('SUM(restaurants.cost) AS cost'),
+                        DB::raw('SUM(foodsales.no_foods) AS no_foods')
                         ));
                         foreach ($table as $row){
                             $data_array=array(
-                                'salescost'=>$row->cost    
+                                'salescost'=>$row->cost,
+                                'nofoodst'=>$row->no_foods
                             );
                         }
                         return $data_array;
@@ -389,11 +391,13 @@ class AccountantController extends BaseController{
                         ->whereBetween('date',array($start_date,$end_date))
                         ->get(array(
                             'cost',
-                            DB::raw('SUM(restaurants.cost) AS cost')
+                            DB::raw('SUM(restaurants.cost) AS cost'),
+                        DB::raw('SUM(foodsales.no_foods) AS no_foods')
                         ));
                         foreach ($table as $row){
                             $data_array=array(
-                                'salescost'=>$row->cost    
+                                'salescost'=>$row->cost,
+                                'nofoodst'=>$row->no_foods
                             );
                         }
                         return $data_array;
@@ -560,11 +564,13 @@ class AccountantController extends BaseController{
                         ->where('date','LIKE','%'.$year.'%')
                         ->get(array(
                             'cost',
-                            DB::raw('SUM(restaurants.cost) AS cost')
+                            DB::raw('SUM(restaurants.cost) AS cost'),
+                        DB::raw('SUM(foodsales.no_foods) AS no_foods')
                         ));
                         foreach ($table as $row){
                             $data_array=array(
-                                'salescost'=>$row->cost    
+                                'salescost'=>$row->cost,
+                                'nofoodst'=>$row->no_foods
                             );
                         }
                         return $data_array;
@@ -727,11 +733,13 @@ class AccountantController extends BaseController{
                         ->where('date','LIKE','%'.$year.'%')
                         ->get(array(
                             'cost',
-                            DB::raw('SUM(restaurants.cost) AS cost')
+                            DB::raw('SUM(restaurants.cost) AS cost'),
+                            DB::raw('SUM(foodsales.no_foods) AS no_foods')
                         ));
                         foreach ($table as $row){
                             $data_array=array(
-                                'salescost'=>$row->cost    
+                                'salescost'=>$row->cost,
+                                'nofoodst'=>$row->no_foods
                             );
                         }
                         return $data_array;
@@ -1041,12 +1049,14 @@ class AccountantController extends BaseController{
                 ->where('date',$date)
                 ->get(array(
                     'cost',
-                    DB::raw('SUM(restaurants.cost) AS cost')
+                    DB::raw('SUM(restaurants.cost) AS cost'),
+                DB::raw('SUM(foodsales.no_foods) AS no_foods')
                 ));
         if($res){
             foreach ($res as $row){
                 $data_array=array(
-                    'msosicost'=>$row->cost
+                    'msosicost'=>$row->cost,
+                    'nofoodst'=>$row->no_foods
                 );
             }
             return $data_array;

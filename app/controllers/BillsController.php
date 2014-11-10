@@ -16,7 +16,8 @@ class BillsController extends BaseController {
 				"food"=>$inputs['f'],
 				"service"=>$inputs['t'],
 				"date"=>date('Y-m-d'),
-				"added_by"=>Auth::user()->id
+				"added_by"=>Auth::user()->id,
+                "no_foods"=>$inputs['idadi']
 			));
 
 			$sales = FoodSales::whereRaw('date = ? and service = ?', array(date('Y-m-d'), $inputs['t']))->get();
@@ -27,7 +28,8 @@ class BillsController extends BaseController {
 				"food"=>$inputs['f'],
 				"service"=>$inputs['t'],
 				"date"=>date('Y-m-d'),
-				"added_by"=>Auth::user()->id
+				"added_by"=>Auth::user()->id,
+                "no_foods"=>$inputs['idadi']
 			));
 
 			$sales = FoodSales::whereRaw('date = ? and service = ?', array(date('Y-m-d'), $inputs['t']))->get();
@@ -377,6 +379,7 @@ class BillsController extends BaseController {
                 $g       = $inputs['g'];
 				$f       = $inputs['f'];
 				$t       = $inputs['t'];
+                $idadi =$inputs['idadi'];
 			     $cost=Restaurant::where('name',$f)->first()->cost;
 				
                                 $food    = $f . ",";
@@ -402,7 +405,8 @@ class BillsController extends BaseController {
                                         "servicetime"=>$t,
                                         "added_by"=>$lg,
                                         "date"=>date('Y-m-d'),
-                                        "remain"=>$cost
+                                        "remain"=>$cost,
+                                        "no_foods"=>$idadi
 				 )); 
 					
 
@@ -410,9 +414,11 @@ class BillsController extends BaseController {
 
 					$bil        = Bill::whereRaw('guestid=? and servicetime=? and date =? ', array($gid, $t, date('Y-m-d')))->first();
 					$foods      = $bil->foods;
+                    $idadis     =$bil->no_foods;
 					$newfoods   = $foods . $food ;
 					$bil->foods = $newfoods;
-                                        $bil->remain=$bil->remain+$cost;
+                    $bil->no_foods =$idadis+$idadi;
+                    $bil->remain=$bil->remain+$cost;
 					$bil->save();
 
 					
@@ -425,9 +431,10 @@ class BillsController extends BaseController {
                                 
 
 		}elseif (Auth::user()->role == 8) {
-                                $g       = $inputs['g'];
+                $g       = $inputs['g'];
 				$f       = $inputs['f'];
 				$t       = $inputs['t'];
+                $idadi =$inputs['idadi'];
 			     $cost=Restaurant::where('name',$f)->first()->cost;
 				
                                 $food    = $f . ",";
@@ -453,7 +460,8 @@ class BillsController extends BaseController {
                                         "servicetime"=>$t,
                                         "added_by"=>$lg,
                                         "date"=>date('Y-m-d'),
-                                        "remain"=>$cost
+                                        "remain"=>$cost,
+                                        "no_foods"=>$idadi
 				 )); 
 					
 
@@ -461,9 +469,11 @@ class BillsController extends BaseController {
 
 					$bil        = Bill::whereRaw('guestid=? and servicetime=? and date =? ', array($gid, $t, date('Y-m-d')))->first();
 					$foods      = $bil->foods;
+                    $idadis     =$bil->no_foods;
 					$newfoods   = $foods . $food ;
 					$bil->foods = $newfoods;
-                                        $bil->remain=$bil->remain+$cost;
+                    $bil->no_foods =$idadis+$idadi;
+                    $bil->remain=$bil->remain+$cost;
 					$bil->save();
 
 					

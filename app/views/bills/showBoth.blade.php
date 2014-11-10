@@ -99,7 +99,7 @@ $l      = count($unique);
                     $.post('addBoth', {c:c, gid:gid, a:ai, t:t, s:s}, function(data){
                         $('#ajax5').hide('fast', function(){
                             $('#alrt').fadeIn(1000, function(){
-                                window.location = 'billBoth';
+                                window.location = '<?php echo url('billBoth');?>';
                             });
                         });
                     });
@@ -113,7 +113,7 @@ $l      = count($unique);
                             if(data == "ok"){
                                 $('#ajax5').hide('fast', function(){
                                     $('#alrt').fadeIn(1000, function(){
-                                        window.location = 'billBoth';
+                                        window.location = '<?php echo url('billBoth');?>';
                                     });
                                 });
                             }else{

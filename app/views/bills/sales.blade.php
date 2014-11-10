@@ -58,7 +58,14 @@
   <td>
     <input class="form-control" type="text" id="food" />
   </td>  
-</tr>  
+</tr>
+    <tr>
+        <td>
+            <table>
+                <tr><td>Select no.Foods:<input type="checkbox" id="checkboxed"></td><td id="checkid"><input type="text" id="idadi" name="idadi" placeholder="Enter no drinks."></td></tr>
+            </table>
+        </td>
+    </tr>
 </table>
 @elseif(Auth::user()->role == 8)
 <table class="table table-bordered">
@@ -71,7 +78,14 @@
   <td>
     <input class="form-control" type="text" id="food" />
   </td>  
-</tr>  
+</tr>
+    <tr>
+        <td>
+            <table>
+                <tr><td>Select no.Foods:<input type="checkbox" id="checkboxed"></td><td id="checkid"><input type="text" id="idadi" name="idadi" placeholder="Enter no drinks."></td></tr>
+            </table>
+        </td>
+    </tr>
 </table>
 @else
 <table class="table table-bordered">
@@ -188,7 +202,7 @@ $(document).ready(function(){
     $('#time').on('change', function(){
     var stime = $(this).val();
 
-    alert($stime);
+    alert(stime);
     var g = $('#gb').val();
     $('#gt').css('opacity', '0.2');
     $('#ajax5').show();
@@ -211,14 +225,15 @@ $('#addbill').on('click', function(){
     
     var food      = $('#food').val();
     var t         = $('#time').val();
+    var idadi     =$('#idadi').val();
     
-    if(food == "" || t==""){
+    if(food == "" || t==""||idadi==""){
           alert("Please fill the fields");
     }else{
       $("#billform").css('opacity', '0.4');
       $('#ajax, #ajax2').show();
 
-      $.post('submitsale', {f:food, t:t}, function(data){
+      $.post('submitsale', {f:food, t:t,idadi:idadi}, function(data){
 
            $("#billform").css('opacity', '1');
            $('#ajax, #ajax2').hide('fast', function(){$('#food').val('');$('#time').val('');});
@@ -235,14 +250,15 @@ $('#addbill').on('click', function(){
     
     var food      = $('#food').val();
     var t         = $('#time').val();
+     var idadi     =$('#idadi').val();
     
-    if(food == "" || t==""){
+    if(food == "" || t==""||idadi==""){
           alert("Please fill the fields");
     }else{
       $("#billform").css('opacity', '0.4');
       $('#ajax, #ajax2').show();
 
-      $.post('submitsale', {f:food, t:t}, function(data){
+      $.post('submitsale', {f:food, t:t,idadi:idadi}, function(data){
 
            $("#billform").css('opacity', '1');
            $('#ajax, #ajax2').hide('fast', function(){$('#food').val('');$('#time').val('');});
