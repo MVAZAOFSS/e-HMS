@@ -373,7 +373,7 @@ $(document).ready(function (){
                              'background-color': '#f5f5f5'
                             });
                        }else if(bk == "sio2"){
-                           $('#fdk').html('Room: <span style="color: blue">' + obj.room + '</span><br/> status: <span style="color: orange"> reserved!  </span> <br/> <hr/><button class="btn btn-xs btn-success" data-toggle="modal" data-target="#myModal">Register Guest</button>').css({
+                           $('#fdk').html('Room: <span style="color: blue">' + obj.room + '</span><br/> status: <span style="color: orange"> available!  </span> <br/> <hr/><button class="btn btn-xs btn-success" data-toggle="modal" data-target="#myModal">Register Guest</button>').css({
                                'color': 'black',
                                'padding': '6px',
                                'border': '1px solid #ccc',
@@ -401,7 +401,7 @@ $(document).ready(function (){
                             'background-color': '#f5f5f5'
                           });
                         }else if(bk == "sio2"){
-                            $('#fdk').html('Room: <span style="color: blue">' + obj.room + '</span><br/> status: <span style="color: orange"> reserved!  </span> <br/> <hr/><button class="btn btn-xs btn-success" data-toggle="modal" data-target="#myModal">Register Guest</button>').css({
+                            $('#fdk').html('Room: <span style="color: blue">' + obj.room + '</span><br/> status: <span style="color: orange"> Available!  </span> <br/> <hr/><button class="btn btn-xs btn-success" data-toggle="modal" data-target="#myModal">Register Guest</button>').css({
                                 'color': 'black',
                                 'padding': '6px',
                                 'border': '1px solid #ccc',

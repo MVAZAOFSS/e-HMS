@@ -405,7 +405,7 @@ class BillsController extends BaseController {
                                         "servicetime"=>$t,
                                         "added_by"=>$lg,
                                         "date"=>date('Y-m-d'),
-                                        "remain"=>$cost,
+                                        "remain"=>$idadi * $cost,
                                         "no_foods"=>$idadi
 				 )); 
 					
@@ -418,7 +418,7 @@ class BillsController extends BaseController {
 					$newfoods   = $foods . $food ;
 					$bil->foods = $newfoods;
                     $bil->no_foods =$idadis+$idadi;
-                    $bil->remain=$bil->remain+$cost;
+                    $bil->remain=$bil->remain+( $idadis*$cost);
 					$bil->save();
 
 					
@@ -460,7 +460,7 @@ class BillsController extends BaseController {
                                         "servicetime"=>$t,
                                         "added_by"=>$lg,
                                         "date"=>date('Y-m-d'),
-                                        "remain"=>$cost,
+                                        "remain"=>$idadi * $cost,
                                         "no_foods"=>$idadi
 				 )); 
 					
@@ -473,7 +473,7 @@ class BillsController extends BaseController {
 					$newfoods   = $foods . $food ;
 					$bil->foods = $newfoods;
                     $bil->no_foods =$idadis+$idadi;
-                    $bil->remain=$bil->remain+$cost;
+                    $bil->remain=$bil->remain+($idadis*$cost);
 					$bil->save();
 
 					
@@ -515,7 +515,7 @@ class BillsController extends BaseController {
 										"servicetime"=>$t,
 										"added_by"=>$lg,
 										"date"=>date('Y-m-d'),
-                                        "remain"=>$cost,
+                                        "remain"=>$idadi * $cost,
                                         "no_drinks"=>$idadi
 							   )); 
 					
@@ -528,7 +528,7 @@ class BillsController extends BaseController {
 					$newdrinks   = $drinks . $drink ;
 					$bil->drinks = $newdrinks;
                     $bil->no_drinks =$idadis+$idadi;
-                    $bil->remain=  $bil->remain+$cost;
+                    $bil->remain=  $bil->remain+($idadis*$cost);
 					$bil->save();
 
 					

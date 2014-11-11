@@ -222,7 +222,7 @@ class BillsBothController extends BaseController {
                     "servicetime"=>$t,
                     "added_by"=>$lg,
                     "date"=>date('Y-m-d'),
-                    "remain"=>$cost,
+                    "remain"=>$idadi*$cost,
                     "no_drinks"=>$idadi
                 ));
 
@@ -235,7 +235,7 @@ class BillsBothController extends BaseController {
                 $newdrinks   = $drinks . $drink ;
                 $bil->drinks = $newdrinks;
                 $bil->no_drinks =$idadis+$idadi;
-                $bil->remain=  $bil->remain+$cost;
+                $bil->remain=  $bil->remain+($idadis*$cost);
                 $bil->save();
 
 
