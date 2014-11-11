@@ -106,14 +106,18 @@ class RoomsController extends BaseController {
                 $checkin     = $inputs['checkin'];
 
                 $chk_time    = strtotime($checkin);
-                $today       = time();
+                $today       =  time();
                 $checkout    = $inputs['checkout'];
                 $chk_time2=strtotime($checkout);
 
-                if($chk_time2 > $chk_time){
-                        $rs = "ndio";
-                }else{
-                        $rs = "sio";
+                if($chk_time2 >= $chk_time){
+                    if($today < $chk_time){
+                        $rs="ndio";
+                      }else{
+                        $rs = "sio2";
+                    }
+                 }else{
+                     $rs = "sio";
                 }
 
 

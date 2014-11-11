@@ -2,7 +2,7 @@
     <thead><tr><th>Drink</th><th>Cost</th><th>Date</th></tr></thead>
     <tbody>
         @foreach($gz as $row)
-        <tr><td>{{$row->drink}}</td><td>{{$row->cost}}</td><td>{{$row->date}}</td></tr>
+        <tr><td>{{$row->drink}}</td><td>{{$row->no_drinks*$row->cost}}</td><td>{{$row->date}}</td></tr>
         @endforeach
     </tbody>
     
