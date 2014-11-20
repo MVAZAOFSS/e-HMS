@@ -146,10 +146,9 @@
                <td>
                    @if($g->mode=='Cash')
                   <select id="mode" name="mode">
-                     <option value="{{$g->mode}}">{{$g->mode}}</option>
-                    <option id="cash">Cash</option>
-                    <option id="other">Other</option>
+                    <option value="{{$g->mode}}">{{$g->mode}}</option>
                   </select>
+                   <input type="hidden" id="prepaid" name="prepaid" value="{{$g->pre_paidcost}}">
                    @elseif($g->mode=='Other')
                    <select id="mode" name="mode">
                        <option value="{{$g->mode}}">{{$g->mode}}</option>

@@ -123,16 +123,18 @@
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
             <strong>Successfully added! ...Please wait</strong> 
           </div>
+          <form id="rep">
           <table class="table" id="gtable" style="font-size: 12px;">
             <tr>
+               <td>Surname</td>
                <td>First Name</td>
                <td>Last Name</td> 
-               <td>Surname</td>
-            </tr> 
+            </tr>
             <tr>
-               <td><input id="fname" name="fname" type="text" required /></td>
-               <td><input id="lname" name="lname" type="text" required /></td>
                <td><input id="surname" name="sname" type="text" required /></td>
+               <td><input id="fname" name="fname" type="text" required/></td>
+               <td><input id="lname" name="lname" type="text" required /></td>
+
             </tr>
               <tr>
                   <td>Sex</td>
@@ -151,19 +153,17 @@
               <tr>
                <td>Address</td>
                <td>Passport Number</td> 
-               <td>Country</td>
+               <td>Country of Residence</td>
             </tr>  
             <tr>
                <td><input id="address" name="address" type="text" /></td>
                <td><input id="passpost_number" name="passport_number" type="text" /></td>
                <td>
-                  <select id="country" name="country">
-                      <option value="Tanzania">Tanzania</option>
-                  </select>
+                  <input type="text" id="country" name="country" required>
                </td>
             </tr>
             <tr>
-               <td>Id Number</td>
+               <td>ID Number</td>
                <td>Professional</td> 
                <td>Company</td> 
             </tr> 
@@ -195,7 +195,7 @@
             <tr>
                <td>Adults</td>
                <td>Children</td>
-               <td>Allegy</td> 
+               <td>Remarks</td>
             </tr> 
             <tr>
                <td><input id="adults" name="adults" type="text" /></td>
@@ -206,7 +206,7 @@
             </tr>
             <tr>
               <td>Job</td>
-               <td>Discount</td>
+               <td>Deposit Paid</td>
                <td>Mode of Payment</td> 
             </tr> 
             <tr>
@@ -215,12 +215,14 @@
                <td>
                   <select id="mode" name="mode">
                     <option id="cash">Cash</option>
-                    <option id="other">Other</option>
+                    <option id="Credit Card">Credit Card</option>
+                    <option id="Cheque">Cheque</option>
                   </select>
-                   <input type="text" id="prepaid" name="prepaid" placeholder="pre-paid amount">
+                   <input type="text" id="prepaid" name="prepaid" placeholder="Paid amount">
                </td>
             </tr>                                
-          </table>  
+          </table>
+
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
@@ -237,7 +239,9 @@ $('#mode').on('change',function(){
 var opt=$(this).val();
 if(opt=='Cash'){
     $('#prepaid').hide();
-}else if(opt=='Other'){
+}else if(opt=='Credit Card'){
+    $('#prepaid').show();
+}else if(opt=='Cheque'){
     $('#prepaid').show();
 }
 });
@@ -283,7 +287,7 @@ $('#saveguest').click(function(){
 
         $('#gtable').css('opacity', '0.2');
         $('#ajax').show();
-        
+
         $.post('add', data, function(json){
            $('#ajax').hide();
            $('#alrt').fadeIn(300, function(){
