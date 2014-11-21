@@ -11,7 +11,7 @@
             <tr><th>Sex</th><th>{{$row->sex}}</th><th>No children</th><th>{{$row->children}}</th><th>Mobile</th><th>{{$row->mobile}}</th></tr>
             <tr><th>Arrival From</th><th>{{$row->arrival_from}}</th><th>Destination To</th><th>{{$row->destination_to}}</th><th>Address</th><th>{{$row->address}}</th></tr>
             <tr><th>Guest Room</th><th>{{Room::find($row->room_number)->name}}</th><th>Arrival Date</th><th>{{$row->arrival_date}}</th><th>Departure Date</th><th>{{$row->departure_date}}</th></tr>
-            <tr><th>Room Cost</th><th>{{$row->totalcost}}</th><th>Pre-Paid Amount</th><th>{{$row->pre_paidcost}}</th><th>Country</th><th>{{$row->country}}</th></tr>
+            <tr><th>Room Cost</th><th>{{$row->totalcost}}</th><th>Deposit Paid Amount</th><th>{{$row->discount}}</th><th>Country</th><th>{{$row->country}}</th></tr>
             <tr><th>Days Spent</th><th>
                     <?php
                     $start=strtotime($row->arrival_date);
@@ -114,7 +114,7 @@
         <p>The General Total Amount used <b>{{$foodbillscost+$foodbillscostremain+$barbillscost+$barbillscostremain+$laundrycost+$roomstotalcost}} /=</b></p>
     </div>
         <?php
-        $total=Guest::where('id',$id)->where('arrival_date',$start_date)->where('departure_date',$end_date)->first()->pre_paidcost;
+        $total=Guest::where('id',$id)->where('arrival_date',$start_date)->where('departure_date',$end_date)->first()->discount;
         $general=$foodbillscost+$foodbillscostremain+$barbillscost+$barbillscostremain+$laundrycost+$roomstotalcost;
         ?>
      @if($total!=0)

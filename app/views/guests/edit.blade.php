@@ -56,14 +56,16 @@
           </div>
 <table class="table" id="gtable" style="font-size: 12px;display:none">
             <tr>
+                <td>Surname</td>
                <td>First Name</td>
                <td>Last Name</td>
-                <td>Surname</td>
+
             </tr> 
             <tr>
+                <td><input id="surname" name="sname" type="text" value="{{$g->surname}}"  required /></td>
                <td><input id="fname" name="fname" type="text" value="{{$g->firstname}}" required /></td>
                <td><input id="lname" name="lname" type="text" value="{{$g->lastname}}" required /></td>
-               <td><input id="surname" name="sname" type="text" value="{{$g->surname}}"  required /></td>
+
             </tr>
     <tr>
         <td>Sex</td>
@@ -82,19 +84,18 @@
             <tr>
                <td>Address</td>
                <td>Passport Number</td> 
-               <td>Country</td>
+               <td>Country of Residence</td>
             </tr>  
             <tr>
                <td><input id="address" name="address" value="{{$g->address}}"  type="text" /></td>
                <td><input id="passpost_number" name="passport_number" value="{{$g->passport_number}}" type="text" /></td>
                <td>
-                  <select id="country" name="country">
-                      <option value="Tanzania" value="{{$g->country}}">Tanzania</option>
-                  </select>
+                  <input type="text" id="country" name="country" value="{{$g->country}}">
+
                </td>
             </tr>
             <tr>
-               <td>Id Number</td>
+               <td>ID Number</td>
                <td>Professional</td> 
                <td>Company</td> 
             </tr> 
@@ -126,7 +127,7 @@
             <tr>
                <td>Adults</td>
                <td>Children</td>
-              <td>Allegy</td> 
+              <td>Remarks</td>
             </tr> 
             <tr>
                <td><input id="adults" name="adults" value="{{$g->adults}}" type="text" /></td>
@@ -137,7 +138,7 @@
             </tr>
             <tr>
                 <td>Job</td>
-               <td>Discount</td>
+               <td>Deposit Paid</td>
                <td>Mode of Payment</td> 
             </tr> 
             <tr>
@@ -153,7 +154,8 @@
                    <select id="mode" name="mode">
                        <option value="{{$g->mode}}">{{$g->mode}}</option>
                        <option id="cash">Cash</option>
-                       <option id="other">Other</option>
+                       <option id="Credit Card">Credit Card</option>
+                       <option id="Cheque">Cheque</option>
                    </select>
                    <input type="text" id="prepaid" name="prepaid" value="{{$g->pre_paidcost}}">
                     @endif
