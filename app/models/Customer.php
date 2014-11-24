@@ -6,7 +6,7 @@
  * Time: 12:10 PM
  */
 class Customer extends Eloquent{
-    protected $table = "customerCost";
+    protected $table = "customercost";
 
     protected $guarded = array();
 }
