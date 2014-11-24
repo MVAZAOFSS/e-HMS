@@ -1,12 +1,12 @@
 <?php
 class AccountantController extends BaseController{
 	public function income($date){
-            $data['date']=$date;
-            $data1=$this->rooms($date);
-            $data2=  $this->drinksellls($date);
-            $data3=  $this->laundry($date);
-            $data4=  $this->bils($date);
-            $data5=  $this->bills($date);
+           $data['date']=$date;
+           $data1=$this->rooms($date);
+           $data2=  $this->drinksellls($date);
+           $data3=  $this->laundry($date);
+           $data4=  $this->bils($date);
+           $data5=  $this->bills($date);
            $data6=  $this->food_sells($date);
            $data8=$this->advancedConferencePayed($date);
            $data9=$this->advancedFunctionPayed($date);
@@ -16,7 +16,7 @@ class AccountantController extends BaseController{
            $data15=$this->drinkselllsNumber($date);
            $data12=$this->totalBankBalance();
            $data13=$this->getTotalAmountUsed();
-            $data=$data1+$data2+$data3+$data4+$data5+$data6+$data8+$data9+$data10+$data11+$data12+$data13+$data14+$data15;
+           $data=$data1+$data2+$data3+$data4+$data5+$data6+$data8+$data9+$data10+$data11+$data12+$data13+$data14+$data15;
 	    return View::make('accountant.income',$data);
 	}
     function dailyPdfExportAction($date){
@@ -32,9 +32,10 @@ class AccountantController extends BaseController{
         $data10=$this->conferencePayed($date);
         $data11=$this->getFunctionPayed($date);
         $data14=$this->laundrySales($date);
+        $data15=$this->drinkselllsNumber($date);
         $data12=$this->totalBankBalance();
         $data13=$this->getTotalAmountUsed();
-        $data=$data1+$data2+$data3+$data4+$data5+$data6+$data8+$data9+$data10+$data11+$data12+$data13+$data14;
+        $data=$data1+$data2+$data3+$data4+$data5+$data6+$data8+$data9+$data10+$data11+$data12+$data13+$data14+$data15;
         $res=PDF::loadView('accountant.incomePdf',$data);
         return $res->stream();
       }
