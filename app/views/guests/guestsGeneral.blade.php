@@ -100,13 +100,7 @@
             <table class="table table-striped table-bordered table-responsive">
                 <tr><th>Total Amount of Food paid</th><th>{{$foodbillscost}}</th><th>Total Amount of Food unpaid</th><th>{{$foodbillscostremain}}</th><th>Total Amount of Food consumed</th><th>{{$foodbillscost+$foodbillscostremain}}</th></tr>
                 <tr><th>Total Amount of Drinks paid</th><th>{{$barbillscost}}</th><th>Total Amount of Drinks unpaid</th><th>{{$barbillscostremain}}</th><th>Total Amount of Drinks consumed</th><th>{{$barbillscost+$barbillscostremain}}</th></tr>
-                @foreach($laundry as $laund)
-                   @if($laund->payment_mode=='no')
-                <tr><th>Total Amount of Laundry paid</th><th>0</th><th>Total Amount of Laundry unpaid</th><th>{{$laundrycost}}</th><th>Total Amount of Laundry consumed</th><th>{{$laundrycost}}</th></tr>
-                   @else
-                <tr><th>Total Amount of Laundry paid</th><th>{{$laundrycost}}</th><th>Total Amount of Laundry unpaid</th><th>{{$laundrycostremain}}</th><th>Total Amount of Laundry consumed</th><th>{{$laundrycost}}</th></tr>
-                  @endif
-                @endforeach
+                <tr><th>Total Amount of Laundry paid</th><th>{{$laundrycost-$laundrycostremain}}</th><th>Total Amount of Laundry unpaid</th><th>{{$laundrycostremain}}</th><th>Total Amount of Laundry consumed</th><th>{{$laundrycost}}</th></tr>
             </table>
         </div>
     </div>
